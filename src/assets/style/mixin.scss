@@ -1,0 +1,20 @@
+$dir : row;
+$wrap : nowrap;
+$justify : flex-start ;
+$align : center;
+$item : flex-start;
+@mixin flex-box(
+    $dir:$dir , 
+    $wrap:$wrap , 
+    $justify : $justify , 
+    $align :$align
+){
+  display: flex;
+  flex-flow: $dir $wrap;
+  justify-content: $justify;
+  align-items: $align;
+}
+
+@mixin self-item($item) {
+  align-self: $item;
+}

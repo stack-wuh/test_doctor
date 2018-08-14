@@ -1,0 +1,39 @@
+*{
+  margin:0;
+  padding:0;
+  box-sizing: border-box;
+}
+ul,ol,li{
+  list-style: none;
+}
+html , body , #app{
+  width:100%;
+  height:100%;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+a{
+  text-decoration: none;
+}
+#app{
+  .wrapper{
+    box-sizing: border-box;
+  }
+}
+.empty-flex{
+  flex:1;
+}
+.my-input-220{
+  min-width: 120px;
+  max-width:220px;
+}
+
+.father {
+  >.content{
+    width:100%;
+  }
+}
+.compnent_header{
+  height: 30px;
+  color: #999;
+}
