@@ -1,4 +1,11 @@
- const state = {
+import {
+  jump2Other , 
+  jump2Detail ,
+  jump2Add , 
+  jump2AddWithDialog ,
+} from './click'
+import { openDialog } from '../tables/click';
+const state = {
   list:[
     {
       name:'新增导出',
@@ -10,22 +17,58 @@
           type:'',
           size:'small',
           style:'',
+          click:jump2Add,
         },
         {
           text:'导出',
           type:'',
           size:'small',
           style:'',
+          click:jump2Detail,
         }
       ]
     },
     {
       name:'新增',
-      desc:'单独一个新增按钮',
-      params:['会员卡等级设置','检修项配置','专项检测配置'],
+      desc:'单独一个新增按钮,路由跳转到指定的页面',
+      params:['员工列表','检修项配置','专项检测配置'],
       btn:[
         {
           text:'新增',
+          type:'',
+          size:'small',
+          style:'',
+          click:jump2Add
+        }
+      ]
+    },{
+      name:'新增',
+      desc:'单独一个新增按钮,出现dialog对话框',
+      params:['部门管理','会员卡等级设置'],
+      btn:[
+        {
+          text:'新增',
+          type:'',
+          size:'small',
+          style:'',
+          click:jump2AddWithDialog
+        }
+      ]
+    },
+    {
+      name:'新增删除',
+      desc:'新增删除按钮组(表格顶部批量删除),弹出一个dialog对话框',
+      params:['会员充值设置','保养提醒设置','保险公司','快捷回复设置','配件大类管理','奖品卡券管理','抽奖模板设置','预约时间管理','养车知识','养车知识分类'],
+      btn:[
+        {
+          text:'新增',
+          type:'',
+          size:'small',
+          style:'',
+          click:openDialog
+        },
+        {
+          text:'删除',
           type:'',
           size:'small',
           style:'',
@@ -34,14 +77,15 @@
     },
     {
       name:'新增删除',
-      desc:'新增删除按钮组(表格顶部批量删除)',
-      params:['会员充值设置','保养提醒设置','自动回复配置','保险公司','快捷回复设置','汽车精品管理','配件大类管理','奖品卡券管理','抽奖模板设置','预约时间管理','养车知识','养车知识分类'],
+      desc:'新增删除按钮组(包括表格顶部批量删除),跳转到指定地址',
+      params:['自动回复配置','汽车精品管理'],
       btn:[
         {
           text:'新增',
           type:'',
           size:'small',
           style:'',
+          click:jump2Add
         },
         {
           text:'删除',
