@@ -26,6 +26,12 @@
  * 匹配条件换成params
  * 匹配内容扩大范围,可以为:[关键字,路由地址,路由别名]
  */
+
+ import {
+   openDialog , 
+   jump2Other ,
+  } from './click.js'
+// import { jump2Add } from '../button/click.js';
 const state = {
   data:[
     {
@@ -159,12 +165,14 @@ const state = {
             {
               text:'编辑',
               type:'text',
-              size:''
+              size:'',
+              click:openDialog
             },
             {
               text:'禁用',
               type:'text',
-              size:''
+              size:'',
+              click:openDialog
             }
           ]
         },
@@ -211,12 +219,14 @@ const state = {
             {
               text:'编辑',
               type:'text',
-              size:''
+              size:'',
+              click:openDialog,
             },
             {
               text:'权限设置',
               type:'text',
-              size:''
+              size:'',
+              click:jump2Other,
             }
           ]
         },
@@ -283,23 +293,33 @@ const state = {
           list:[
             {
               text:'客户转移',
-              type:'text'
+              type:'text',
+              size:'small',
+              click:'',
             },
             {
               text:'编辑',
               type:'text',
+              size:'small',
+              click:openDialog,
             },
             {
               text:'禁用',
               type:'text',
+              size:'small',
+              click:'',
             },
             {
               text:'重置密码',
               type:'text',
+              size:'small',
+              click:'',
             },
             {
               text:'删除',
               type:'text',
+              size:'small',
+              click:'',
             }
           ]
         },
@@ -402,6 +422,7 @@ const state = {
               text:'编辑',
               type:'text',
               size:'small',
+              click:openDialog
             },
             {
               text:"删除",
@@ -452,6 +473,7 @@ const state = {
               text:'编辑',
               type:'primary',
               size:'mini',
+              click:openDialog
             }
           ]
         },
@@ -491,6 +513,7 @@ const state = {
               text:'编辑',
               type:'primary',
               size:'mini',
+              click:openDialog
             }
           ]
         },
@@ -524,6 +547,7 @@ const state = {
               text:'编辑',
               type:'primary',
               size:'mini',
+              click:jump2Other
             },
             {
               text:'禁用',
@@ -568,6 +592,7 @@ const state = {
               text:'编辑',
               type:'primary',
               size:'mini',
+              click:openDialog
             },
           ]
         },
@@ -601,6 +626,7 @@ const state = {
               text:'编辑',
               type:'primary',
               size:'mini',
+              click:openDialog,
             },
           ]
         },
@@ -809,6 +835,7 @@ const state = {
               text:'编辑',
               type:'primary',
               size:'mini',
+              click:openDialog,
             },
           ]
         },
