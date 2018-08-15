@@ -57,7 +57,7 @@ const option = {
             name:'新增用户',
             type:'bar',
             barWidth: '50%',
-            data:[10, 52, 200, 334, 390, 330, 220,43 ,54 ,344 ,23 ,43]
+            data:[]
         },
        
     ]

@@ -22,14 +22,14 @@
         </el-table>
       </section>
       <section class="btn-area">
-          <!-- <bottom type="button" /> -->
+          <bottom type="button" />
       </section>
     </section>
   </section>
 </template>
 
 <script>
-// import Bottom from '@/components/common/bottom'
+import Bottom from '@/components/common/bottom'
 /**
  * 组件需要参数 route.query.child
  * 会员卡积分规则发布 
@@ -38,7 +38,7 @@
 export default {
   name: 'curbRule',
   components:{
-    // Bottom,
+    Bottom,
   },
   data () {
     return {
@@ -197,7 +197,10 @@ export default {
 
 <style scoped lang='scss' >
 .father{
+  height: 100%;
   .content{
+    // height: 100%;
+    background-color: #fff;
     section.form{
       margin:15px 0;
       .el-form{

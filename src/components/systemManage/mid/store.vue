@@ -8,6 +8,7 @@
             <my-button ></my-button>
         </div>
       </my-table>
+      <bottom />
     </section>
   </section>
 </template>
@@ -16,12 +17,14 @@
 import MyTable from '@/components/common/myTable'
 import Search from '@/components/common/search'
 import MyButton from '@/components/common/myButton'
+import Bottom from '@/components/common/bottom'
 export default {
   name: 'store',
   components:{
     MyTable , 
     Search ,
     MyButton ,
+    Bottom ,
   },
   data () {
     return {

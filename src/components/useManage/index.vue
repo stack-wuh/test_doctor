@@ -28,9 +28,13 @@ export default {
 
 <style scoped lang='scss' >
 .father{
+  height: 100%;
   header.header{
     height: 30px;
     color: #999;
+  }
+  >.content{
+    height: calc(100% - 30px);
   }
 }
 </style>

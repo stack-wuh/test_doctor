@@ -1,13 +1,17 @@
 <template>
   <section class="container">
     <router-view></router-view>
+    <my-dialog />
   </section>
 </template>
 
 <script>
+import MyDialog from  '@/components/common/myDialog';
 export default {
   name: 'container',
-
+  components:{
+    MyDialog ,
+  },
   data () {
     return {
     }
