@@ -15,9 +15,15 @@ const Index = resolve => require(['@/components/indexManage/index'],resolve)
 const SystemIndex = resolve => require(['@/components/systemManage/index'],resolve)
 const SystemStore = resolve => require(['@/components/systemManage/mid/store'],resolve)
 const SystemCurbRule = resolve => require(['@/components/systemManage/child/curbRule'],resolve)
+const SystemLimitSetting = resolve => require(['@/components/systemManage/child/limitSetting'],resolve)
+const SystemStorePub = resolve => require(['@/components/systemManage/child/storePub'],resolve)
+const SystemStoreReply = resolve => require(['@/components/systemManage/child/reply'],resolve)
+
 
 const UseIndex = resolve => require(['@/components/useManage/index'],resolve)
 const UseStore = resolve => require(['@/components/useManage/mid/store'],resolve)
+const UsePub = resolve => require(['@/components/useManage/child/usePub'],resolve)
+
 
 const MemberIndex = resolve => require(['@/components/memberManage/index'],resolve)
 const MemberStore = resolve => require(['@/components/memberManage/mid/list'],resolve)
@@ -89,6 +95,21 @@ export default new Router({
                   path:'/system/curb/pub',
                   name:'systemCurbPub',
                   component:SystemCurbRule
+                },
+                {
+                  path:'/system/limit/setting',
+                  name:'SystemLimitSetting',
+                  component:SystemLimitSetting,
+                },
+                {
+                  path:'/system/store/pub',
+                  name:'systemStorePub',
+                  component:SystemStorePub,
+                },
+                {
+                  path:'/system/store/reply',
+                  name:'systemStoreReply',
+                  component:SystemStoreReply,
                 }
               ]
             },
@@ -102,6 +123,11 @@ export default new Router({
                   path:'/use/store',
                   name:'useStore',
                   component:UseStore,
+                },
+                {
+                  path:'/use/pub',
+                  name:'usePub',
+                  component:UsePub,
                 }
               ]
             },
