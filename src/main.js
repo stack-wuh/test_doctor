@@ -7,6 +7,8 @@ import '../src/assets/style/base.scss'
 import '../src/assets/style/el-base.scss'
 import '../src/assets/style/font/iconfont.css'
 
+window.$route = router
+window.$store = store
 
 Vue.config.productionTip = false
 
