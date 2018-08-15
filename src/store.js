@@ -8,6 +8,8 @@ import {state,mutations,actions,getters} from '../src/vuex/index.js'
 import TableList from './vuex/tables/list'
 import SearchTypeList from './vuex/search/list'
 import Button from './vuex/button/button'
+import MyLog from './vuex/plugins/log'
+
 
 export default new Vuex.Store({
   state ,
@@ -18,5 +20,8 @@ export default new Vuex.Store({
     TableList , 
     SearchTypeList ,
     Button ,
-  }
+  },
+  plugin:[
+    MyLog
+  ]
 })
