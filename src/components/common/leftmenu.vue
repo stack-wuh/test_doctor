@@ -61,36 +61,40 @@ export default {
               path:"/system/store"
             },
             {
-              label: "角色管理",
+              // label: "角色管理",
+              label:'角色权限',
               mid_path: "/mid/container",
-              children: [
-                {
-                  label: "角色权限",
-                  mid_path: "/mid/container",
-                  path: "/system/store"
-                },
-                {
-                  label: "权限设置",
-                  mid_path: "/mid/container",
-                  path: "/system/store"
-                }
-              ]
+              path:'/system/store',
+              // children: [
+              //   {
+              //     label: "角色权限",
+              //     mid_path: "/mid/container",
+              //     path: "/system/store"
+              //   },
+              //   {
+              //     label: "权限设置",
+              //     mid_path: "/mid/container",
+              //     path: "/system/limit/setting"
+              //   }
+              // ]
             },
             {
-              label: "员工管理",
+              // label: "员工管理",
+              label:'员工列表',
               mid_path: "/mid/container",
-              children: [
-                {
-                  label: "员工列表",
-                  mid_path: "/mid/container",
-                  path: "/system/store"
-                },
-                {
-                  label: "新增员工",
-                  mid_path: "/mid/container",
-                  path: "/system/store"
-                }
-              ]
+              path:'/system/store',
+              // children: [
+              //   {
+              //     label: "员工列表",
+              //     mid_path: "/mid/container",
+              //     path: "/system/store"
+              //   },
+              //   {
+              //     label: "新增员工",
+              //     mid_path: "/mid/container",
+              //     path: "/system/store"
+              //   }
+              // ]
             },
             {
               label: "平台配置",
