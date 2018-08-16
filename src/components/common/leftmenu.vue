@@ -252,7 +252,7 @@ export default {
             {
               label: "用户佣金提现",
               mid_path: "/mid/container",
-              path: "/coupon/store",
+              path: "/coupon/userComm/pub",
             },
             {
               label: "用户提现记录",
