@@ -33,12 +33,21 @@ const MemberPay = resolve => require(['@/components/memberManage/child/memberPay
 
 const CouponIndex = resolve => require(['@/components/cuoponManage/index'],resolve)
 const CouponStore = resolve => require(['@/components/cuoponManage/mid/store'],resolve)
+const CouponPub = resolve => require(['@/components/cuoponManage/child/couponPub'],resolve)
+const CouponLottoPub = resolve => require(['@/components/cuoponManage/child/lottoPub'],resolve)
+const CouponUserCommPub = resolve => require(['@/components/cuoponManage/child/userCommPub'],resolve)
+
+
 
 const MarketIndex = resolve => require(['@/components/marketManage/index'],resolve)
 const MarketStore = resolve => require(['@/components/marketManage/mid/store'],resolve)
+const MarketActivePub = resolve => require(['@/components/marketManage/child/activePub'],resolve)
+const MarketShakePub = resolve => require(['@/components/marketManage/child/shakePub'],resolve)
 
 const ServeIndex = resolve => require(['@/components/serveManage/index'],resolve)
 const ServeStore = resolve => require(['@/components/serveManage/mid/store'],resolve)
+const ServeInsurePub = resolve => require(['@/components/serveManage/child/insurePub'],resolve)
+
 
 
 export default new Router({
@@ -167,6 +176,21 @@ export default new Router({
                   path:'/coupon/store',
                   name:'couponStore',
                   component:CouponStore,
+                },
+                {
+                  path:'/coupon/pub',
+                  name:'couponPub',
+                  component:CouponPub,
+                },
+                {
+                  path:'/coupon/lotto/pub',
+                  name:'couponLottoPub',
+                  component:CouponLottoPub,
+                },
+                {
+                  path:'/coupon/userComm/pub',
+                  name:'CouponUserCommPub',
+                  component:CouponUserCommPub,
                 }
               ]
             },
@@ -180,6 +204,16 @@ export default new Router({
                   path:'/market/store',
                   name:'marketStore',
                   component:MarketStore,
+                },
+                {
+                  path:'/market/active/pub',
+                  name:'marketActivePub',
+                  component:MarketActivePub
+                },
+                {
+                  path:'/market/shake/pub',
+                  name:'marketShakePub',
+                  component:MarketShakePub
                 }
               ]
             },
@@ -193,6 +227,11 @@ export default new Router({
                   path:'/serve/store',
                   name:'serveStore',
                   component:ServeStore
+                },
+                {
+                  path:'/serve/insure/pub',
+                  name:'serveInsurePub',
+                  component:ServeInsurePub,
                 }
               ],
             }
