@@ -188,7 +188,7 @@ export default {
             {
               label: "会员充值",
               mid_path: "/mid/container",
-              path: "/member/list"
+              path: "/member/pay"
             },
             {
               label: "充值明细",
