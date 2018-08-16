@@ -709,6 +709,7 @@ const state = {
               text:'编辑',
               type:'',
               size:'mini',
+              click:jump2Other
             },
             {
               text:'查看图片',
@@ -945,6 +946,18 @@ const state = {
           type:'default',
           prop:'account',
         },
+        {
+          key:'操作',
+          type:'button',
+          list:[
+            {
+              text:'编辑',
+              type:'text',
+              size:'small',
+              click:jump2Other,
+            }
+          ]
+        }
       ]
     },
     {
