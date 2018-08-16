@@ -131,12 +131,7 @@ const state = {
           type:'',
           size:'small',
           style:'',
-        },
-        {
-          text:'编辑',
-          type:'',
-          size:'small',
-          style:'',
+          click:jump2Add,
         },
         {
           text:'分配保养顾问',
