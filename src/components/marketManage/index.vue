@@ -27,5 +27,11 @@ export default {
 </script>
 
 <style scoped lang='scss' >
-
+.wrapper{
+  height: calc(100% - 30px);
+  .content{
+    height: 100%;
+    overflow: auto;
+  }
+}
 </style>

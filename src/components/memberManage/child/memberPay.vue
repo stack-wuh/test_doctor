@@ -100,7 +100,7 @@ export default {
         .inline-other{
           justify-content: flex-start;
           .box-item{
-            flex:.2;
+            flex:.5;
             .el-input ,
             .el-select{
               width:60%;
