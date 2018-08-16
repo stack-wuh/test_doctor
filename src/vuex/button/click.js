@@ -24,7 +24,9 @@ export const jump2Detail = params => {
           break ;
      case '汽车精品管理' : rootPath = '/use/pub' , child = '发布汽车精品'
           break ;  
-     default : '/index'
+     case '会员列表' : rootPath = '/member/pub' , child = '编辑会员信息'
+          break ;
+     default : rootPath = '/index'
    }
    window.$route.push({path:'/mid/container',query:{path:rootPath , menu , subMenu ,child}})
  }

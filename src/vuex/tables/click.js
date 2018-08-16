@@ -26,6 +26,10 @@ export const jump2Other = params => {
       break ;
     case '自动回复配置' : rootPath = '/system/store/reply'
       break ;
+    case '汽车精品管理' : rootPath = '/use/pub'
+      break ;
+    case '会员列表' : rootPath = '/member/pub'
+      break ;
     default : rootPath = '/index'
   }
   window.$route.push({path:'/mid/container',query:Object.assign(params,{path:rootPath})})
