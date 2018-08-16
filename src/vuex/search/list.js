@@ -318,6 +318,31 @@ const state = {
       ]
     }, 
     {
+      name:'会员充值',
+      type:'',
+      params:['会员充值'],
+      list:[
+        {
+          key:'会员姓名',
+          type:'input',
+          prop:'name',
+          value:'',
+        },
+        {
+          key:'联系电话',
+          type:'input',
+          prop:'name',
+          value:'',
+        },
+        {
+          key:'车牌号',
+          type:'input',
+          prop:'name',
+          value:'',
+        },
+      ]
+    },
+    {
       name:'车辆管理',
       type:'',
       params:['车辆管理'],
