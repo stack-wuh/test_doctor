@@ -1306,6 +1306,7 @@ const state = {
               text:'编辑',
               size:'small',
               type:'text',
+              click:jump2Other,
             },
             {
               text:'删除',
@@ -1344,10 +1345,44 @@ const state = {
               text:'设置奖项',
               size:'small',
               type:'default',
+              click:jump2Other,
             },
           ]
         }, 
       ]
+    },
+    {
+      name:'编辑抽奖模板',
+      path:'',
+      type:'编辑抽奖模板',
+      params:['编辑抽奖模板'],
+      list:[
+        {
+          key:'奖项',
+          type:'default',
+          prop:'',
+        },
+        {
+          key:'名称',
+          type:'default',
+          prop:'',
+        },
+        {
+          key:'奖品总数量',
+          type:'default',
+          prop:'',
+        },
+        {
+          key:'中奖概率',
+          type:'default',
+          prop:'',
+        },
+        {
+          key:'操作',
+          type:'default',
+          prop:'',
+        },
+      ],
     },
     {
       name:'用户卡券管理',
@@ -1436,9 +1471,10 @@ const state = {
           fix:'right',
           list:[
             {
-              text:'设置奖项',
+              text:'核销',
               size:'small',
               type:'default',
+              click:openDialog,
             },
           ]
         }, 
@@ -1807,6 +1843,7 @@ const state = {
               text:'编辑',
               type:'',
               size:'small',
+              click:jump2Other,
             },
             {
               text:'推送',
@@ -1822,15 +1859,137 @@ const state = {
               text:'精准获客',
               type:'',
               size:'small',
+              click:jump2Other,
             },
             {
               text:'报名查询',
               type:'',
               size:'small',
+              click:jump2Other,
             },
           ]
         },
       ]
+    },
+    {
+      name:'精准获客',
+      path:'',
+      params:['精准获客'],
+      colType:'select',
+      colValue:'selection',
+      colTitle:'',
+      list:[
+        {
+          key:'姓名',
+          type:'default',
+          prop:'',
+        },
+        {
+          key:'手机号',
+          type:'default',
+          prop:'',
+        },
+        {
+          key:'浏览次数',
+          type:'default',
+          prop:'',
+        },
+        {
+          key:'浏览时长',
+          type:'default',
+          prop:'',
+        },
+        {
+          key:'是否精准客户',
+          type:'default',
+          prop:'',
+        },
+        {
+          key:'是否转发',
+          type:'default',
+          prop:'',
+        },
+        {
+          key:'最近查看时间',
+          type:'default',
+          prop:'',
+        },
+        {
+          key:'关注内容',
+          type:'default',
+          prop:'',
+        },
+        {
+          key:'转发记录',
+          type:'default',
+          prop:'',
+        },
+      ],
+    },
+    {
+      name:'报名查询',
+      path:'',
+      params:['报名查询'],
+      colType:'select',
+      colValue:'selection',
+      colTitle:'',
+      list:[
+        {
+          key:'报名编号',
+          type:'default',
+          prop:'',
+        },
+        {
+          key:'参与人联系电话',
+          type:'default',
+          prop:'',
+        },
+        {
+          key:'参与人姓名',
+          type:'default',
+          prop:'',
+        },
+        {
+          key:'意向车型',
+          type:'default',
+          prop:'',
+        },
+        {
+          key:'是否支付',
+          type:'default',
+          prop:'',
+        },
+        {
+          key:'报名日期',
+          type:'default',
+          prop:'',
+        },
+        {
+          key:'推荐人',
+          type:'default',
+          prop:'',
+        },
+        {
+          key:'推荐人联系电话',
+          type:'default',
+          prop:'',
+        },
+        {
+          key:'是否有效',
+          type:'default',
+          prop:'',
+        },
+        {
+          key:'备注',
+          type:'default',
+          prop:'',
+        },
+        {
+          key:'操作',
+          type:'default',
+          prop:'',
+        },
+      ],
     },
     {
       name:'活动抽奖',
@@ -1905,8 +2064,66 @@ const state = {
               text:'中奖查询',
               type:'',
               size:'small',
+              click:jump2Other
             },
           ]
+        },
+      ]
+    },
+    {
+      name:'活动中奖',
+      path:'',
+      params:['活动中奖'],
+      colType:'select',
+      colValue:'selection',
+      colTitle:'',
+      list:[
+        {
+          key:'用户名',
+          type:'default',
+          prop:'',
+        },
+        {
+          key:'联系电话',
+          type:'default',
+          prop:'',
+        },
+        {
+          key:'奖品名称',
+          type:'default',
+          prop:'name',
+        },
+        {
+          key:'奖品数量',
+          type:'default',
+          prop:'name',
+        },
+        {
+          key:'奖项等级',
+          type:'default',
+          prop:'name',
+        },
+        {
+          key:'状态',
+          type:'default',
+          prop:'name',
+        },
+        {
+          key:'类型',
+          type:'default',
+          prop:'name',
+        },
+        {
+          key:'抽奖时间',
+          type:'default',
+          prop:'name',
+        },
+        {
+          key:'操作',
+          type:'button',
+          fix:'right',
+          width:'160px',
+          list:[]
         },
       ]
     },
@@ -2041,6 +2258,7 @@ const state = {
               text:'编辑',
               type:'',
               size:'small',
+              click:jump2Other
             },
             {
               text:'开启',
@@ -2051,8 +2269,66 @@ const state = {
               text:'中奖查询',
               type:'',
               size:'small',
+              click:jump2Other,
             },
           ]
+        },
+      ]
+    },
+    {
+      name:'摇一摇活动中奖',
+      path:'',
+      params:['摇一摇中奖'],
+      colType:'select',
+      colValue:'selection',
+      colTitle:'',
+      list:[
+        {
+          key:'名次',
+          type:'default',
+          prop:'',
+        },
+        {
+          key:'奖项',
+          type:'default',
+          prop:'',
+        },
+        {
+          key:'奖品名称',
+          type:'default',
+          prop:'name',
+        },
+        {
+          key:'用户名',
+          type:'default',
+          prop:'name',
+        },
+        {
+          key:'联系电话',
+          type:'default',
+          prop:'name',
+        },
+        {
+          key:'摇一摇积分',
+          type:'default',
+          prop:'name',
+        },
+        {
+          key:'参与时间',
+          type:'default',
+          prop:'name',
+        },
+        {
+          key:'状态',
+          type:'default',
+          prop:'name',
+        },
+        {
+          key:'操作',
+          type:'button',
+          fix:'right',
+          width:'160px',
+          list:[]
         },
       ]
     },
@@ -2177,6 +2453,7 @@ const state = {
               text:'编辑',
               type:'',
               size:'small',
+              click:openDialog
             },
           ]
         },
@@ -2255,6 +2532,7 @@ const state = {
               text:'报价',
               type:'',
               size:'small',
+              click:jump2Other,
             },
           ]
         },

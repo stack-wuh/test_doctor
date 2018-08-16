@@ -22,9 +22,15 @@ export const jump2Detail = params => {
           break ;
      case '自动回复配置' : rootPath = '/system/store/reply' 
           break ;
-     case '汽车精品管理' : rootPath = '/use/pub' , child = '发布汽车精品'
+     case '汽车精品管理' : rootPath = '/use/pub' , child = '编辑汽车精品信息'
           break ;  
      case '会员列表' : rootPath = '/member/pub' , child = '编辑会员信息'
+          break ;
+     case '抽奖模板设置' : rootPath = '/coupon/lotto/pub' , child = '编辑抽奖模板'
+          break ;
+     case '普通活动' : rootPath = '/market/active/pub' , child = '编辑活动详情'
+          break ;
+     case '摇一摇活动' : rootPath = '/market/shake/pub' , child = '编辑摇一摇活动'
           break ;
      default : rootPath = '/index'
    }
