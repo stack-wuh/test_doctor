@@ -13,7 +13,7 @@
       <el-table-column v-if="item.type === 'default'" align="center" v-for="(item,index) in tableList.list" :key="index" :label="item.key" :prop="item.prop"></el-table-column>
       <el-table-column v-if="item.type === 'button'" :fixed="item.fix" :width="item.width" align="center" v-for="(item,index) in tableList.list" :key="index" :label="item.key">
         <template slot-scope="scope">
-          <el-button v-for="(btn,bid) in item.list" v-on:click="btn.click(routers)" :type="btn.type || 'text'" :size="btn.size || 'mini'" :key="bid">{{btn.text}}</el-button>
+          <el-button v-for="(btn,bid) in item.list" v-on:click="btn.click(routers,btn.text)" :type="btn.type || 'text'" :size="btn.size || 'mini'" :key="bid">{{btn.text}}</el-button>
         </template>
       </el-table-column>
     </el-table>
