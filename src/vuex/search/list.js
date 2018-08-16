@@ -410,6 +410,50 @@ const state = {
       ]
     },
     {
+      name:'发布抽奖模板',
+      params:['编辑抽奖模板'],
+      type:'',
+      list:[
+        {
+          key:'模板名称',
+          type:'input',
+          prop:'',
+          value:'',
+        },
+        {
+          key:'简介',
+          type:'input',
+          prop:'',
+          value:'',
+        }
+      ]
+    },
+    {
+      name:'用户佣金提现',
+      params:['用户佣金提现'],
+      type:'',
+      list:[
+        {
+          key:'姓名',
+          type:'input',
+          prop:'',
+          value:'',
+        },
+        {
+          key:'联系电话',
+          type:'input',
+          prop:'',
+          value:'',
+        },
+        {
+          key:'车牌号',
+          type:'input',
+          prop:'',
+          value:'',
+        }
+      ],
+    },
+    {
       name:'积分管理',
       params:['积分管理'],
       type:'',
@@ -912,6 +956,90 @@ const state = {
       ],
     },
     {
+      name:'精准获客',
+      params:['精准获客'],
+      type:'',
+      list:[
+        {
+          key:'姓名',
+          value:'',
+          type:'default',
+        },
+        {
+          key:'联系电话',
+          value:'',
+          type:'date',
+        },
+        {
+          key:'是否精准客户',
+          value:'',
+          type:'date',
+        },
+        {
+          key:'是否转发',
+          value:'',
+          type:'date',
+        },
+        {
+          key:'活动开始日期',
+          value:'',
+          type:'date',
+        },
+        {
+          key:'活动结束日期',
+          value:'',
+          type:'select',
+        },
+      ],
+    },
+    {
+      name:'报名查询',
+      params:['报名查询'],
+      type:'',
+      list:[
+        {
+          key:'参与人姓名',
+          value:'',
+          type:'default',
+        },
+        {
+          key:'参与人联系电话',
+          value:'',
+          type:'default',
+        },
+        {
+          key:'推荐人姓名',
+          value:'',
+          type:'default',
+        },
+        {
+          key:'推荐人联系电话',
+          value:'',
+          type:'default',
+        },
+        {
+          key:'活动开始日期',
+          value:'',
+          type:'date',
+        },
+        {
+          key:'活动结束日期',
+          value:'',
+          type:'select',
+        },
+        {
+          key:'报名状态',
+          value:'',
+          type:'select',
+        },
+        {
+          key:'支付状态',
+          value:'',
+          type:'select',
+        },
+      ],
+    },
+    {
       name:'推荐有礼',
       params:['推荐有礼'],
       type:'',
@@ -973,6 +1101,23 @@ const state = {
           value:'',
           type:'select',
         }
+      ],
+    },
+    {
+      name:'摇一摇活动中奖查询',
+      params:['摇一摇中奖'],
+      type:'',
+      list:[
+        {
+          key:'参与人姓名',
+          value:'',
+          type:'default',
+        },
+        {
+          key:'参与人联系电话',
+          value:'',
+          type:'default',
+        },
       ],
     },
     {
@@ -1166,7 +1311,7 @@ const state = {
     },
     {
       name:'查询重置类别',
-      params:['员工列表','保险公司','快捷回复设置','汽车精品管理','精品订单管理','配件大类管理','会员列表','车辆管理','积分管理','充值明细','消费明细','奖品卡券管理','用户卡券管理','用户卡券发放','用户奖励','员工奖励','用户提现记录','普通活动','活动抽奖','推荐有礼','预约管理','意见反馈'],
+      params:['员工列表','保险公司','快捷回复设置','汽车精品管理','精品订单管理','配件大类管理','会员列表','车辆管理','积分管理','充值明细','消费明细','奖品卡券管理','用户卡券管理','用户卡券发放','用户奖励','员工奖励','用户提现记录','普通活动','精准获客','活动抽奖','推荐有礼','预约管理','意见反馈'],
       type:'',
       list:[
         {
