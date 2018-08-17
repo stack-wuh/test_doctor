@@ -18,6 +18,7 @@ import MyTable from '@/components/common/myTable'
 import Search from '@/components/common/search'
 import MyButton from '@/components/common/myButton'
 import Bottom from '@/components/common/bottom'
+import {mapActions} from 'vuex'
 export default {
   name: 'store',
   components:{
@@ -44,7 +45,15 @@ export default {
       })
     }
   },
-  methods: {}
+  methods: {
+    ...mapActions({
+      'getStoresList':'getStoresList'
+    }),
+  },
+  created(){
+    this.getStoresList()
+    // this.$store.dispatch('getStoresList')
+  }
 }
 </script>
 
