@@ -4,8 +4,8 @@
     <section class="main">
       <Leftmenu class="left" />
       <section class="main">
-        <transition name="fade">
-            <router-view />
+        <transition  name="fade">
+            <router-view v-loading="isShowLoading" />
         </transition>
       </section>
     </section>
@@ -14,7 +14,8 @@
 
 <script>
 import Leftmenu from '@/components/common/leftmenu'
-import MyHeader from '@/components/common/header';
+import MyHeader from '@/components/common/header'
+import {mapState} from 'vuex'
 export default {
   name: 'Home',
   components:{
@@ -25,13 +26,17 @@ export default {
     return {
     }
   },
+  computed:{
+    ...mapState({
+      'isShowLoading':'isShowLoading'
+    })
+  },
   watch:{
     '$route'(to,from){
       console.log(to,from)
     }
   },
   methods: {},
- 
 }
 </script>
 
