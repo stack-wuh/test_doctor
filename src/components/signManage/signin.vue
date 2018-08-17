@@ -12,7 +12,7 @@
         <span class="nav-title">用户登录</span>
         <el-form class="my-form" ref="myForm">
           <el-form-item v-for="(item,index) in list" :key="index">
-            <el-input class="my-input" v-if="item.type == 'input'" :placeholder="'请编辑'+item.name" :style="item.style"></el-input>
+            <el-input v-model="form[item.prop]" class="my-input" v-if="item.type == 'input'" :placeholder="'请编辑'+item.name" :style="item.style"></el-input>
             <span v-if="item.child" >this is code</span>
           </el-form-item>
         </el-form>
@@ -23,7 +23,7 @@
           <span class="item">去注册</span>
         </section>
         <section class="btn-area">
-          <el-button class="btn">登录</el-button>
+          <el-button class="btn" @click="signIn(form)">登录</el-button>
         </section>
       </section>
     </section>
@@ -31,8 +31,9 @@
 </template>
 
 <script>
+import {mapState , mapActions} from 'vuex'
 export default {
-  name: '',
+  name: 'signin',
 
   data () {
     return {
@@ -41,12 +42,14 @@ export default {
         {
           name:'用户名',
           type:'input',
+          prop:'username',
           style:'',
           child:false,
         },
         {
           name:'密码',
           type:'input',
+          prop:'password',
           style:'',
           child:false,
         },
@@ -59,8 +62,20 @@ export default {
       ]
     }
   },
+  computed:{
+    ...mapState({
+      'form':'form'
+    })
+  },
+  methods: {
+    ...mapActions({
+      'signIn':'signIn'
+    }),
+    handleSignIn(form){
+      _g.toastMsg()
+    }
+  },
 
-  methods: {}
 }
 </script>
 
