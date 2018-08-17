@@ -8,8 +8,8 @@ module.exports = {
     port:'10030',
     https:false,
     proxy:{
-      '/api':{
-        target:'http://v.juhe.cn/toutiao',
+      '/api/':{
+        target:'http://192.168.10.122:8080/car_doctor/',
         changeOrigin:true,
         pathRewrite:{
           '^/api' : ''
