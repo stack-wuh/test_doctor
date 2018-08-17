@@ -4,13 +4,14 @@
       <section class="title">车医生后台管理系统</section>
       <section class="btn-nav">
         <span class="my-icon-remind">消息中心</span>
-        <span class="my-icon-center">谁谁谁</span>
+        <span class="my-icon-dianyuan" @click="signOut">退出</span>
       </section>
     </header>
   </section>
 </template>
 
 <script>
+import {mapActions} from 'vuex'
 export default {
   name: 'myHeader',
 
@@ -19,7 +20,11 @@ export default {
     }
   },
 
-  methods: {}
+  methods: {
+    ...mapActions([
+      'signOut'
+    ])
+  }
 }
 </script>
 
