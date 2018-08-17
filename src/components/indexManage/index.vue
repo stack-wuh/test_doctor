@@ -102,21 +102,39 @@ export default {
 
   },
   methods: {
+    /**
+     * cdn引入echarts
+     * 初始化echarts
+     * 设置参数option
+     */
     chartsInit() {
       let myChart = echarts.init(document.getElementById("echarts"));
       myChart.setOption(option);
     },
+
+    /**
+     * 首页时钟
+     * 周期性定时器 
+     */
     clock(){
       setInterval(()=>{
         this.timer = new Date().toLocaleTimeString()
       },1000)
-    }
+    },
+    /**
+     * 
+     */
+    fetchData(){
+      this.$http.post('/index')
+      // this.$message('tishi')
+    },
   },
   created() {
     this.$nextTick(() => {
       this.chartsInit();
     });
     this.clock()
+    this.fetchData()
   }
 };
 </script>
