@@ -10,6 +10,10 @@ import SearchTypeList from './vuex/search/list'
 import Button from './vuex/button/button'
 import MyLog from './vuex/plugins/log'
 
+import Sign from './vuex/modules/sign'
+import System from './vuex/modules/system/store'
+
+
 
 export default new Vuex.Store({
   state ,
@@ -20,6 +24,8 @@ export default new Vuex.Store({
     TableList , 
     SearchTypeList ,
     Button ,
+    Sign ,
+    System , 
   },
   plugins:[MyLog]
 })
