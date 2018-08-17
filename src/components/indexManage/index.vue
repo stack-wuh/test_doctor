@@ -62,7 +62,7 @@ const option = {
        
     ]
 };
-
+import {mapActions} from 'vuex'
 export default {
   name: "index",
   data() {
@@ -125,8 +125,7 @@ export default {
      * 
      */
     fetchData(){
-      this.$http.post('/index')
-      // this.$message('tishi')
+      console.log(this.$store)
     },
   },
   created() {
