@@ -1,6 +1,6 @@
 import axios from 'axios'
-import _g  from './global'
-
+import {_g}  from './global'
+import qs  from 'qs'
 /**
  * 发起请求的拦截器
  */
@@ -9,7 +9,6 @@ axios.interceptors.request.use(config => {
    * 发起请求之前要做什么
    */
   window.$store.dispatch('changeShowLoading',{show:true})
-  _g.toastMsg({type:'success',msg:'已发起请求!'})
   return config
 },error =>{
   /**
@@ -34,6 +33,8 @@ axios.interceptors.response.use(response =>{
  */
 const checkStatus = response =>{
   if(response && (response.status === 200 || response.status === 304 || response.status === 400)){
+    let type = response.status == 0 ? 'success' : response.status == 1 ? 'error' : 'info'
+    _g.toastMsg({type,msg:response.data.msg})
     return response.data
   }
   return {
@@ -44,21 +45,23 @@ const checkStatus = response =>{
 
 const checkCode = res => {
   if(res.status == -404){
-    console.log('res is error')
+    _g.toastMsg({type:'error',msg:res.msg})
   }
-  if(res.data && (res.data.success)){
-    console.log(res,res.data.msg)
+  if(res.data && (res.data.status)){
+    return new Promise((resolve,reject)=>{
+      resolve(res)
+    })
   }
   return res
 }
 
 export default {
-  post(url,data){
+  post(url,data,cb){
     return axios({
       method:'post',
       baseURL:window.rootPath,
       url,
-      data,
+      data:qs.stringify(data),
       timeout:10000,
       headers:{
         'X-Requested-With':'XMLHttpRequest',
@@ -68,6 +71,11 @@ export default {
       return checkStatus(response)
     }).then(res=>{
       return checkCode(res)
+    }).then(res=>{
+        cb && cb(res)
+    }).catch(err=>{
+      window.$store.dispatch('changeShowLoading',{show:false})
+      _g.toastMsg()
     })
   }
 }
