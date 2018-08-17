@@ -2,6 +2,8 @@ export const state = {
   dialogVisible:false,
   dialogForm:{},
   isShowLoading:false,
+  form:{},
+  search:{}
 }
 
 export const mutations = {
