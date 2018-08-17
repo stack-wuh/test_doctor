@@ -3,3 +3,5 @@ const myLog = store => {
     console.log(mutation , state)
   })
 }
+
+export default myLog

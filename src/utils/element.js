@@ -22,6 +22,8 @@ import {
   Checkbox,
   RadioGroup,
   Radio,
+  Loading , 
+  Message , 
 } from 'element-ui'
 
 Vue.use(Button)
@@ -44,5 +46,9 @@ Vue.use(CheckboxGroup)
 Vue.use(Checkbox)
 Vue.use(Radio)
 Vue.use(RadioGroup)
+Vue.use(Loading)
+
 
 Vue.prototype.$ELEMENT = {size:'small',zIndex:90000}
+Vue.prototype.$message = Message
+window.$message = Message

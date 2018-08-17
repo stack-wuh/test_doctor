@@ -1,6 +1,7 @@
 export const state = {
   dialogVisible:false,
-  dialogForm:{}
+  dialogForm:{},
+  isShowLoading:false,
 }
 
 export const mutations = {
@@ -10,10 +11,16 @@ export const mutations = {
   handlehideDialog(state,params){
     state.dialogVisible = false
   },
+
+  showChange(state,params){
+    state.isShowLoading = params
+  }
 }
 
 export const actions = {
-
+  changeShowLoading({commit},params){
+    commit('showChange',params.show)
+  }
 }
 
 export const getters = {

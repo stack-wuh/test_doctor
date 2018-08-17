@@ -21,7 +21,5 @@ export default new Vuex.Store({
     SearchTypeList ,
     Button ,
   },
-  plugin:[
-    MyLog
-  ]
+  plugins:[MyLog]
 })
