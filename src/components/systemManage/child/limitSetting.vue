@@ -27,35 +27,35 @@
 
 <script>
 
-const baseObj = {
-          name:'名称',
-          checkAll:false,
-          isIndeterminate:true,
-          checks:[],
-          child:[
-            {
-              name:'查看',
-              prop:'read',
-              value:false,
-            },
-            {
-              name:'编辑',
-              prop:'update',
-              value:false,
-            },
-            {
-              name:'删除',
-              prop:'remove',
-              value:false,
-            },
-            {
-              name:'新增',
-              prop:'create',
-              value:false,
-            } 
-          ]
-}
-import {limit} from '../../../utils/limit.js'
+// const baseObj = {
+//           name:'名称',
+//           checkAll:false,
+//           isIndeterminate:true,
+//           checks:[],
+//           child:[
+//             {
+//               name:'查看',
+//               prop:'read',
+//               value:false,
+//             },
+//             {
+//               name:'编辑',
+//               prop:'update',
+//               value:false,
+//             },
+//             {
+//               name:'删除',
+//               prop:'remove',
+//               value:false,
+//             },
+//             {
+//               name:'新增',
+//               prop:'create',
+//               value:false,
+//             } 
+//           ]
+// }
+import {limit , baseObj} from '../../../utils/limit.js'
 import MyBottom from '@/components/common/bottom'
 export default {
   name: 'limitSetting',
@@ -90,7 +90,8 @@ export default {
           ]
         }
       ],
-      limit:limit,
+      limit ,
+      baseObj , 
       isFatherChange:true,
     }
   },
