@@ -5,16 +5,17 @@
             <el-form-item v-for="(item,index) in list" :key="index" :label="item.key" :prop="item.prop" :rules="item.rules" >
               <el-input class="my-input-320" v-if="item.type === 'input' || item.type == 'default' || !item.type " :placeholder="'请编辑'+item.key" v-model="myForm[item.prop]" ></el-input>
               <el-select class="my-input-320" v-if="item.type === 'select'" :placeholder="'请选择' + item.key" v-model="myForm[item.prop]" >
-                <el-option label="aaa" value="aaa"></el-option>
+                <el-option v-if="item.list" v-for="(list,lindex) in item.list" :key="lindex" :label="list.label" :value="list.value" ></el-option>
+                <el-option label="aaa" value="aaa" v-else ></el-option>
               </el-select>
-              <el-date-picker v-if="item.type == 'date'" v-model="myForm[item.prop]" ></el-date-picker>
+              <el-date-picker value-format="yyyy-MM-dd" v-if="item.type == 'date'" v-model="myForm[item.prop]" ></el-date-picker>
               <p v-if="item.tips"  class="c999" >{{item.tips}}</p>
             </el-form-item>
           </el-form>
-          {{list}} -- {{myForm}}
+          {{list}} -- {{myForm}} --- {{formList}}
           <div slot="footer">
             <el-button type="" @click="beforeClose">取消</el-button>
-            <el-button type="primary">确定</el-button>
+            <el-button type="primary" @click="handleSubmit" >确定</el-button>
           </div>
       </el-dialog>
   </section>
@@ -22,6 +23,7 @@
 
 <script>
 import {forms} from './utils/dialog.js'
+import {mapActions} from 'vuex'
 export default {
   name: 'myDialog',
   
@@ -38,13 +40,23 @@ export default {
     rootPath(){
       return this.$route.query.child || this.$route.query.subMenu
     },
+    formList(){
+      return this.$store.state.tableRow
+    }
   },
   watch:{
     rootPath(){
       this.getList()
+    },
+    formList(){
+      this.getList()
     }
   },
   methods: {
+    ...mapActions({
+      'handleSubmitDep':'depPubAndPut',
+      'handleSubmitStaff':'staffPubAndPut'
+    }),
     beforeClose(){
       this.$refs.myForm.resetFields()
       this.$store.commit('handlehideDialog')
@@ -52,8 +64,25 @@ export default {
     getList(){
       let data = forms.find(item => item.name === this.rootPath)
       this.list = data && data.list
-      this.myForm = data && data.myForm
-    }
+      this.myForm = this.formList ? this.formList : (data && data.myForm)
+    },
+    handleSubmit(){
+     this.$refs.myForm.validate(valid=>{
+       if(valid){
+        switch(this.rootPath){
+          case '部门管理' : this.handleSubmitDep({ path:this.rootPath , form : this.myForm })
+            break;
+          case '员工列表' : this.handleSubmitStaff({path:this.rootPath , form:this.myForm})
+            break;
+        }
+       }else{
+         _g.toastMsg({
+           type:'error',
+           msg:'请编辑必填项后提交',
+         })
+       }
+     })
+    },
   },
   created(){
     this.getList()

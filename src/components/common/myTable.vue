@@ -10,10 +10,15 @@
     <el-table :data="list" border  stripe>
       <el-table-column v-if="tableList && tableList.colType == 'select'" :fixed="tableList.fix || ''" :type="tableList.colValue || 'selection'" align="center" width="60px"></el-table-column>
       <el-table-column v-if="tableList && tableList.colType == 'index'" :type="tableList.colValue || 'index'" :label="tableList.colTitle" align="center" width="60px"></el-table-column>
-      <el-table-column v-if="item.type === 'default'" align="center" v-for="(item,index) in tableList.list" :key="index" :label="item.key" :prop="item.prop"></el-table-column>
+      <el-table-column v-if="item.type === 'default'" align="center" v-for="(item,index) in tableList.list" :key="index" :label="item.key" :prop="item.prop" :width="item.width || '' " ></el-table-column>
+      <el-table-column v-if="item.type === 'switch'" align="center" v-for="(item,index) in tableList.list" :key="index" :label="item.key" :prop="item.prop" :width="item.width || ''">
+        <template slot-scope="scope">
+          <el-switch v-model="scope.row.state" active-text="正常" inactive-text="禁用" inactive-color="#999999" :active-value="1" :inactive-value="0" ></el-switch>
+        </template>
+      </el-table-column>
       <el-table-column v-if="item.type === 'button'" :fixed="item.fix" :width="item.width" align="center" v-for="(item,index) in tableList.list" :key="index" :label="item.key">
         <template slot-scope="scope">
-          <el-button v-for="(btn,bid) in item.list" v-on:click="btn.click(routers,btn.text)" :type="btn.type || 'text'" :size="btn.size || 'mini'" :key="bid">{{btn.text}}</el-button>
+          <el-button v-for="(btn,bid) in item.list" v-on:click="btn.click(routers,btn.text,scope.row)" :type="btn.type || 'text'" :size="btn.size || 'mini'" :key="bid">{{btn.text}}</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -47,8 +52,8 @@ export default {
   },
   methods: {},
   created(){
-    console.log(this.params)
-    console.log(this.tableList , 'this is table')
+    // console.log(this.params)
+    // console.log(this.tableList , 'this is table')
   }
 }
 </script>
