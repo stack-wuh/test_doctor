@@ -33,7 +33,7 @@ axios.interceptors.response.use(response =>{
  */
 const checkStatus = response =>{
   if(response && (response.status === 200 || response.status === 304 || response.status === 400)){
-    let type = response.status == 0 ? 'success' : response.status == 1 ? 'error' : 'info'
+    let type = response.data.status == 0 ? 'success' : response.data.status == 1 ? 'error' : 'info'
     _g.toastMsg({type,msg:response.data.msg})
     return response.data
   }
@@ -44,12 +44,12 @@ const checkStatus = response =>{
 }
 
 const checkCode = res => {
+  console.log(res,res.data,'this is checkcode in axios')
   if(res.status == -404){
     _g.toastMsg({type:'error',msg:res.msg})
-  }
-  if(res.data && (res.data.status)){
+  }else if(res.data && (res.status == 0)){
     return new Promise((resolve,reject)=>{
-      resolve(res)
+      resolve(res.data)
     })
   }
   return res
@@ -70,12 +70,11 @@ export default {
     }).then(response => {
       return checkStatus(response)
     }).then(res=>{
-      return checkCode(res)
-    }).then(res=>{
+      return checkCode(res).then(()=>{
         cb && cb(res)
+      })
     }).catch(err=>{
       window.$store.dispatch('changeShowLoading',{show:false})
-      _g.toastMsg()
     })
   }
 }
