@@ -22,6 +22,8 @@ export const jump2Other = (params,types) => {
   let {menu , subMenu ,child , path} = params
   let rootPath = '' , other = ''
   switch(child || subMenu){
+    case '门店管理' : rootPath = '/system/store/pub' , child = '发布新店'
+      break ;
     case '角色权限' : rootPath = '/system/limit/setting' , child = '编辑角色权限'
       break ;
     case '自动回复配置' : rootPath = '/system/store/reply'  , child = '编辑自动回复配置'
