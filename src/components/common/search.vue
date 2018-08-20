@@ -5,17 +5,18 @@
         <span class="nav-title">条件查询</span>
         <section class="search-btn-list">
           <div class="btn-item" v-for="(item,index) in getBtnList" :key="index">
-            <el-button :size="item.size || 'mini'" :type="item.type || ''" >{{item.text}}</el-button>
+            <el-button :size="item.size || 'mini'" :type="item.type || ''" v-on:click="item.click({path})" >{{item.text}}</el-button>
           </div>
         </section>
       </section>
       <section class="list-box">
         <section class="list-item" v-for="(item,index) in SearchList">
-          <el-input clearable class="item" v-if="item.type == 'input' || item.type == 'default'" :placeholder="item.key" v-model="item.value"></el-input>
-          <el-select clearable class="item" v-if="item.type == 'select'" :placeholder="item.key" v-model="item.value">
-            <el-option label="aaa" value="bbb"></el-option>
+          <el-input @change="SearchValueChange" clearable class="item" v-if="item.type == 'input' || item.type == 'default'" :placeholder="item.key" v-model="form[item.prop]"></el-input>
+          <el-select @change="SearchValueChange" clearable class="item" v-if="item.type == 'select'" :placeholder="item.key" v-model="form[item.prop]">
+            <el-option v-if="item.list" v-for="(list,lindex) in item.list" :key="lindex" :label="list.label" :value="list.value" ></el-option>
+            <el-option v-else label="aaa" value="bbb"></el-option>
           </el-select>
-          <el-date-picker  class="item" v-if="item.type == 'date'" :placeholder="item.key" :type="item.type" v-model="item.value"></el-date-picker>
+          <el-date-picker @change="SearchValueChange"  class="item" v-if="item.type == 'date'" :placeholder="item.key" :type="item.type" v-model="item.value"></el-date-picker>
         </section>
       </section>
     </section>
@@ -23,7 +24,7 @@
 </template>
 
 <script>
-import mapGetters from 'vuex'
+import { mapState , mapGetters , mapActions} from 'vuex'
 export default {
   name: 'search',
   props:['name'],
@@ -40,14 +41,21 @@ export default {
     },
     getBtnList(){
       return this.$store.getters.getSearchBtnsByParams({name:this.name || this.$route.query.child || this.$route.query.subMenu}) || []
-    }
+    },
+    path(){
+      return this.$route.query.child || this.$route.query.subMenu
+    },
+    ...mapState({
+      'form':'search'
+    }),
   },
   methods: {
-
+    SearchValueChange(){
+      this.$emit('inputChange',this.form)
+    }
   },
   created(){
-    console.log(this.SearchList,'this is searchlist')
-    console.log(this.getBtnList,'this is getsearc')
+    
   }
 }
 </script>

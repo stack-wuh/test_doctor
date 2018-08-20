@@ -1,3 +1,6 @@
+import {
+  clearSearchForm ,
+} from './click'
 const state = {
   search:{
 
@@ -48,7 +51,7 @@ const state = {
         {
           key:'姓名',
           type:'input',
-          prop:'name',
+          prop:'realName',
           value:'',
         },
         {
@@ -59,14 +62,24 @@ const state = {
         },
         {
           key:'性别',
-          type:'input',
-          prop:'gender',
+          type:'select',
+          list:[
+            {
+              label:'男',
+              value:'男',
+            },
+            {
+              label:'女',
+              value:'女',
+            }
+          ],
+          prop:'sex',
           value:'',
         },
         {
           key:'微信昵称',
           type:'input',
-          prop:'nickName',
+          prop:'nickname',
           value:'',
         }
       ]
@@ -1299,7 +1312,7 @@ const state = {
           text:'重置',
           type:'default',
           size:'small',
-          click:'',
+          click:clearSearchForm,
         },
         {
           text:'当前机构',
@@ -1324,7 +1337,7 @@ const state = {
           text:'重置',
           type:'default',
           size:'small',
-          click:'',
+          click:clearSearchForm,
         }
       ]
     },
