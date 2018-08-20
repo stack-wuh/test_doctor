@@ -1,5 +1,5 @@
 export const  _g = {
-  toastMsg({type = 'error',msg:message = '服务连接错误,请稍后重试!'} = {}){
+  toastMsg({type = 'success',msg:message = '获取成功!'} = {}){
     window.$message({
       type ,
       message ,
