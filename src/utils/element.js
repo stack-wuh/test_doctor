@@ -24,6 +24,7 @@ import {
   Radio,
   Loading , 
   Message , 
+  Switch ,
 } from 'element-ui'
 
 Vue.use(Button)
@@ -47,6 +48,7 @@ Vue.use(Checkbox)
 Vue.use(Radio)
 Vue.use(RadioGroup)
 Vue.use(Loading)
+Vue.use(Switch)
 
 
 Vue.prototype.$ELEMENT = {size:'small',zIndex:90000}

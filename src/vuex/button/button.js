@@ -1,5 +1,4 @@
 import {
-  jump2Other , 
   jump2Detail ,
   jump2Add , 
   jump2AddWithDialog ,

@@ -18,7 +18,7 @@ export const jump2Detail = params => {
    switch( child || subMenu || menu){
      case '门店管理' : rootPath =  '/system/store/pub' , child = '发布新店'
           break ;
-     case '员工列表' : rootPath = '/system/store'  , child = '新增员工'
+     case '员工列表' : rootPath = '/system/store'  , child = '关注用户列表'
           break ;
      case '自动回复配置' : rootPath = '/system/store/reply' 
           break ;
@@ -41,6 +41,6 @@ export const jump2Detail = params => {
   * 点击新增按钮
   * 出现dialog对话框
   */
- export const jump2AddWithDialog = params => {
-   window.$store.commit('handleOpenDialog')
+ export const jump2AddWithDialog = (params ,text , row )=> {
+   window.$store.commit('handleOpenDialog',{params,text,row})
  }

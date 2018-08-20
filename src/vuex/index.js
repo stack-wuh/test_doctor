@@ -3,17 +3,25 @@ export const state = {
   dialogForm:{},
   isShowLoading:false,
   form:{},
-  search:{}
+  search:{} , 
+  tableRow:{},
 }
 
 export const mutations = {
-  handleOpenDialog(state,params){
+  /**
+   * 清空search表单
+   */
+  clearSearchForm(state){
+    state.search = {}
+  },
+  handleOpenDialog(state,{params , text , row}){
     state.dialogVisible = true
+    state.tableRow = row 
   },
   handlehideDialog(state,params){
     state.dialogVisible = false
+    state.tableRow = {}
   },
-
   showChange(state,params){
     state.isShowLoading = params
   }

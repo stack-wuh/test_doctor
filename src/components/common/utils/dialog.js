@@ -5,7 +5,7 @@ export const forms = [
       {
         key:'部门名称',
         type:'input',
-        prop:'name',
+        prop:'depName',
         rules:[
           {
             required:true,
@@ -18,19 +18,63 @@ export const forms = [
         key:'上级部门',
         type:'select',
         list:[],
-        prop:'dep',
+        prop:'parentId',
+        list:[
+          {
+            label:'总经办',
+            value:1,
+          },
+          {
+            label:'销售部',
+            value:2
+          },
+          {
+            label:'客服部',
+            value:3
+          },
+          {
+            label:'保险部',
+            value:4,
+          },
+          {
+            label:'市场部',
+            value:5
+          }
+        ],
         rules:[
           {
-            required:true,
+            required:false,
             message:'请选择上级部门',
             trigger:['blur','change']
           }
         ]
       },
       {
+        key:'状态',
+        type:'select',
+        prop:'state',
+        list:[
+          {
+            label:'正常',
+            value:1,
+          },
+          {
+            label:'禁用',
+            value:0,
+          }
+        ],
+        rules:[
+          {
+            required:true,
+            message:'请选择状态',
+            trigger:['change','blur'],
+          }
+        ]
+      },
+      {
         key:'描述',
         type:'input',
-        prop:'desc',
+        prop:'descInfo',
         rules:[
           {
             required:false,
@@ -41,9 +85,10 @@ export const forms = [
       }
     ],
     myForm:{
-      name:'',
-      dep:'',
-      desc:'',
+      depName:'',
+      parentId:'',
+      descInfo:'',
+      state:'',
     }
   },
   {
@@ -97,23 +142,45 @@ export const forms = [
     list:[
       {
         key:'所属部门',
-        type:'input',
-        prop:'dep',
+        type:'select',
+        prop:'departmentId',
+        list:[
+          {
+            value:'1',
+            label:'销售部',
+          }
+        ],
       },
       {
         key:'员工角色',
         type:'select',
-        prop:'port',
+        prop:'roleId',
+        list:[
+          {
+            value:'1',
+            label:'销售顾问',
+          }
+        ],
       },
       {
         key:'员工姓名',
         type:'input',
-        prop:'name',
+        prop:'realName',
       },
       {
         key:'员工性别',
         type:'select',
-        prop:'gender',
+        prop:'sex',
+        list:[
+          {
+            label:'男',
+            value:1,
+          },
+          {
+            label:'女',
+            value:0
+          }
+        ],
       },
       {
         key:'手机号码',
@@ -123,12 +190,17 @@ export const forms = [
       {
         key:'出生日期',
         type:'date',
-        prop:'birth',
+        prop:'birthday',
       },
       {
         key:'登录账号',
         type:'input',
-        prop:'account',
+        prop:'username',
+      },
+      {
+        key:'登录密码',
+        type:'input',
+        prop:'password',
       },
       {
         key:'电子邮箱',
@@ -138,25 +210,26 @@ export const forms = [
       {
         key:'身份证号',
         type:'input',
-        prop:'id',
+        prop:'idNum',
       },
       {
         key:'每日预约',
         type:'input',
-        prop:'count',
+        prop:'reservation',
       }
     ],
     myForm:{
-      dep:'',
-      port:'',
-      name:'',
-      gender:'',
+      departmentId:'',
+      roleId:'',
+      realName:'',
+      sex:'',
       phone:'',
-      birth:'',
-      account:'',
+      birthday:'',
+      username:'',
+      password:'',
       email:'',
-      id:'',
-      count:'',
+      idNum:'',
+      reservation:'',
     },
   },
   {
