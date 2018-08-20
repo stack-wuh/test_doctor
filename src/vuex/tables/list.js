@@ -29,7 +29,9 @@
 
  import {
    openDialog , 
-   jump2Other ,
+   jump2Other, 
+   staffResetPwd,
+   staffDelAndFresh,
   } from './click.js'
 // import { jump2Add } from '../button/click.js';
 const state = {
@@ -46,7 +48,7 @@ const state = {
         {
           key:'门店名称',
           value:'',
-          prop:'name',
+          prop:'storeName',
           type:'default',
         },
         {
@@ -58,19 +60,19 @@ const state = {
         {
           key:'简码',
           value:'',
-          prop:'code',
+          prop:'brevityCode',
           type:'default',
         },
         {
           key:'门店类型',
           value:'',
-          prop:'type',
+          prop:'storeType',
           type:'default',
         },
         {
           key:'联系电话',
           value:'',
-          prop:'phone',
+          prop:'telephone',
           type:'default',
         },
         {
@@ -82,7 +84,7 @@ const state = {
         {
           key:'状态',
           value:'',
-          prop:'state',
+          prop:'stateText',
           type:'default',
         },
         {
@@ -94,13 +96,37 @@ const state = {
         {
           key:'推荐人',
           value:'',
-          prop:'sender',
+          prop:'referee',
+          type:'default',
+        },
+        {
+          key:'销售热线',
+          value:'',
+          prop:'salesHotline',
+          type:'default',
+        },
+        {
+          key:'续保热线',
+          value:'',
+          prop:'renewHotline',
+          type:'default',
+        },
+        {
+          key:'救援热线',
+          value:'',
+          prop:'rescueHotline',
+          type:'default',
+        },
+        {
+          key:'售后热线',
+          value:'',
+          prop:'after',
           type:'default',
         },
         {
           key:'服务到期',
           value:'',
-          prop:'ontime',
+          prop:'serviceEnd',
           type:'default',
         },
         {
@@ -120,6 +146,7 @@ const state = {
               text:'编辑',
               type:'text',
               size:'small',
+              click:jump2Other
             },
             {
               text:"绑定公众号",
@@ -143,33 +170,28 @@ const state = {
           key:'部门名称',
           value:'',
           type:'default',
-          prop:'dname',
+          prop:'depName',
         },
         {
           key:'状态',
           value:'',
-          type:'default',
+          type:'switch',
           prop:'state',
         },
         {
           key:'描述',
           value:'',
           type:'default',
-          prop:'desc',
+          prop:'descInfo',
         },
         {
           key:'操作',
           value:'',
           type:'button',
+          width:'120px',
           list:[
             {
               text:'编辑',
-              type:'text',
-              size:'',
-              click:openDialog
-            },
-            {
-              text:'禁用',
               type:'text',
               size:'',
               click:openDialog
@@ -253,7 +275,7 @@ const state = {
         {
           key:'姓名',
           type:'default',
-          prop:'name',
+          prop:'realName',
         },
         {
           key:'联系电话',
@@ -263,7 +285,7 @@ const state = {
         {
           key:'性别',
           type:'default',
-          prop:'gender',
+          prop:'sex',
         },
         {
           key:'所在部门',
@@ -273,17 +295,23 @@ const state = {
         {
           key:'角色',
           type:'default',
-          prop:'port',
+          prop:'roleTitle',
         },
         {
           key:'每日预约',
           type:'default',
-          prop:'order',
+          prop:'reservation',
         },
         {
           key:'账号',
           type:'default',
-          prop:'account',
+          prop:'username',
+        },
+        {
+          key:'状态',
+          type:'switch',
+          prop:'state',
+          width:'140px',
         },
         {
           key:'操作',
@@ -303,23 +331,23 @@ const state = {
               size:'small',
               click:openDialog,
             },
-            {
-              text:'禁用',
-              type:'text',
-              size:'small',
-              click:'',
-            },
+            // {
+            //   text:'禁用',
+            //   type:'text',
+            //   size:'small',
+            //   click:'',
+            // },
             {
               text:'重置密码',
               type:'text',
               size:'small',
-              click:'',
+              click:staffResetPwd,
             },
             {
               text:'删除',
               type:'text',
               size:'small',
-              click:'',
+              click:staffDelAndFresh,
             }
           ]
         },
@@ -329,7 +357,7 @@ const state = {
       name:'新增员工列表',
       path:'/systemIndexStaffAdd',
       type:'',
-      params:['新增员工'],
+      params:['关注用户列表'],
       colType:'index',
       colValue:'index',
       colTitle:'序号',

@@ -8,8 +8,9 @@
  * params
  * 
  */
-export const openDialog = params => {
-   window.$store.commit('handleOpenDialog') 
+export const openDialog = (params,text,row) => {
+  console.log('this is clicked')
+   window.$store.commit('handleOpenDialog',{params,text,row}) 
 }
 
 /**
@@ -51,4 +52,23 @@ export const jump2Other = (params,types) => {
     default : rootPath = '/index'
   }
   window.$route.push({path:'/mid/container',query:Object.assign(params,{path:rootPath,child})})
+}
+
+/**
+ * staff -- 员工列表
+ * 重置员工列表密码
+ * params：id 员工id
+ */
+export const staffResetPwd = (params,types , row) => {
+  let {menu , subMenu , child , path} = {params}
+  window.$store.dispatch('staffResetPwd',{path , row})
+}
+/**
+ * staff -- 员工列表
+ * 删除员工
+ * params ，id 员工id
+ */
+export const staffDelAndFresh = (params , type , row) => {
+  let {path} = params
+  window.$store.dispatch('staffDelAndFresh',{path,row})
 }
