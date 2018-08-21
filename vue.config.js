@@ -8,11 +8,11 @@ module.exports = {
     port:'10030',
     https:false,
     proxy:{
-      '/api/':{
+      '/car_doctor/':{
         target:'http://192.168.10.122:8080/car_doctor/',
         changeOrigin:true,
         pathRewrite:{
-          '^/api' : ''
+          '^/car_doctor' : ''
         },
       }
     }

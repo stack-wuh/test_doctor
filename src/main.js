@@ -16,7 +16,7 @@ window._g = _g
 Vue.prototype.$http = $http
 Vue.config.productionTip = false
 
-window.rootPath = '/api'
+window.rootPath = '/car_doctor'
 
 new Vue({
   router,
