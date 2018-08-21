@@ -54,6 +54,10 @@ const actions = {
         break;
       case '会员充值设置' : _url = 'platform/getRechargeList.do'
         break;
+      case '保养提醒设置' : _url = 'platform/getRemindList.do'
+        break;
+      case '自动回复配置' : _url = 'platform/getAutoResponseList.do'
+        break;
     }
     $http.post(_url,search,(res)=>{
       commit('setStoreList',{params:res.data})
@@ -200,8 +204,64 @@ const actions = {
   },
 
   /**
-   * 
+   * 会员充值设置
+   * 会员充值新增/更新
    */
+  memberPayPubAndPut({dispatch} , {form , path , form:{id}} = {}){
+    let _url = id ? 'platform/updateRecharge.do' : 'platform/addRecharge.do'
+    $http.post( _url , form , res => {
+      setTimeout(()=>{
+        dispatch('asyncHideDialog')
+        dispatch('getStoresList' , {path})
+      },1000)
+    })
+  },
+  /**
+   * 会员充值设置
+   * 会员删除
+   */
+  memberDelAndFresh({dispatch} , {path , row:{id}} = {}){
+    let _url = ''
+    switch(path){
+      case '会员充值设置' : _url = 'platform/delRecharge.do'
+        break;
+      case '保养提醒设置' : _url = 'platform/delRemind.do'
+        break;
+      case '自动回复配置' : _url = 'platform/delAutoResponse.do'
+        break;
+    }
+    $http.post( _url, {ids:id} , res => {
+      setTimeout(()=>{
+        dispatch('asyncHideDialog')
+        dispatch('getStoresList' , {path})
+      },1000)
+    })
+  },
+  /**
+   * 保养提醒设置
+   * 新增 / 编辑
+   */
+  keepPubAndPut({dispatch} , {form , form:{id} , path} = {}){
+    let _url = id ? 'platform/updateRecharge.do' : 'platform/addRemind.do'
+    $http.post( _url , form , res => {
+      setTimeout(()=>{
+        dispatch('asyncHideDialog')
+        dispatch('getStoresList' , {path})
+      },1000)
+    })
+  },
+  /**
+   * 自动回复设置
+   * 编辑 / 发布
+   */
+  replyPubAndPut({dispatch} , {form , path , form:{id}}  = {}){
+    let _url = id ? 'platform/updateAutoResponse.do' : 'platform/addAutoResponse.do'
+    $http.post( _url , form , res => {
+      setTimeout(()=>{
+        window.$route.go(-2)
+      },1000)
+    })
+  }
 }
 
 const getters = {
@@ -214,13 +274,18 @@ const getters = {
 
   /**
    * 过滤数据
-   * 门店管理/部门管理 state过滤
+   * 门店管理/部门管理 / 自动回复 state过滤
    * state ： 0禁用 ， 1：正常
    */
   changeStateDataList(state,getters){ 
    return  (getters.formatStoreDataList) && (Array.isArray(getters.formatStoreDataList)) && getters.formatStoreDataList.map(item => {
-     if( item.storeName || item.depName){
+     let keys = Object.keys(item)
+     if( item.storeName || item.depName){  // 门店/部门过滤
        return {...item , stateText:item.state == 0 ? '禁用' : '正常'}
+     }else if(keys.includes('days') && keys.includes('content') && keys.includes('type') ){  // 保养提醒过滤
+       return {...item , typeText:item.type == 0 ? '未到店' : '已到店'}
+     }else if(keys.includes('keyword') && keys.includes('picture')){   // 自动回复
+      return {...item , stateText:item.type == 0 ? '禁用' : '正常'}
      }else {
        return {...item}
      }
