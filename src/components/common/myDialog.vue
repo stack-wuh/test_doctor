@@ -23,7 +23,7 @@
 
 <script>
 import {forms} from './utils/dialog.js'
-import {mapActions} from 'vuex'
+import {mapActions, mapMutations} from 'vuex'
 export default {
   name: 'myDialog',
   
@@ -57,6 +57,8 @@ export default {
       'handleSubmitDep':'depPubAndPut',
       'handleSubmitStaff':'staffPubAndPut',
       'handleSubmitCouponLevel' : 'couponLevelPubAndPut' ,
+      'handleSubmitMember' : 'memberPayPubAndPut',
+      'handleSubmitKepp':'keepPubAndPut'
     }),
     beforeClose(){
       this.$refs.myForm.resetFields()
@@ -76,6 +78,10 @@ export default {
           case '员工列表' : this.handleSubmitStaff({path:this.rootPath , form:this.myForm})
             break;
           case '会员卡等级设置' : this.handleSubmitCouponLevel({path: this.rootPath , form: this.myForm})
+            break;
+          case '会员充值设置' : this.handleSubmitMember({path : this.rootPath , form : this.myForm})
+            break;
+          case '保养提醒设置' : this.handleSubmitKepp({path: this.rootPath , form : this.myForm})
             break;
         }
         setTimeout(()=>{
