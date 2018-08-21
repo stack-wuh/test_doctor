@@ -33,7 +33,9 @@
    staffResetPwd,
    staffDelAndFresh,
    couponLevelDelAndFresh,
+   memberDelAndFresh ,
   } from './click.js'
+import { DelAndFreshWithAll } from '../button/click.js';
 const state = {
   data:[
     {
@@ -506,9 +508,15 @@ const state = {
           list:[
             {
               text:'编辑',
-              type:'primary',
+              type:'text',
               size:'mini',
               click:openDialog
+            },
+            {
+              text:'删除',
+              type:'text',
+              size:'mini',
+              click:memberDelAndFresh
             }
           ]
         },
@@ -525,19 +533,19 @@ const state = {
         {
           key:'提醒天数',
           value:'',
-          prop:'name',
+          prop:'days',
           type:'default',
         },
         {
           key:'提醒内容',
           value:'',
-          prop:'party',
+          prop:'content',
           type:'default',
         },
         {
           key:'类型',
           value:'',
-          prop:'code',
+          prop:'typeText',
           type:'default',
         },
         {
@@ -546,9 +554,15 @@ const state = {
           list:[
             {
               text:'编辑',
-              type:'primary',
+              type:'text',
               size:'mini',
               click:openDialog
+            },
+            {
+              text:'删除',
+              type:'text',
+              size:'mini',
+              click:memberDelAndFresh
             }
           ]
         },
@@ -563,16 +577,34 @@ const state = {
       colValue:'selection',
       list:[
         {
+          key:'图片',
+          value:'',
+          prop:'picture',
+          type:'image',
+        },
+        {
           key:'关键词',
           value:'',
-          prop:'name',
+          prop:'keyword',
           type:'default',
         },
         {
           key:'类型',
           value:'',
-          prop:'party',
+          prop:'type',
           type:'default',
+        },
+        {
+          key:'内容',
+          value:'',
+          prop:'content',
+          type:'default',
+        },
+        {
+          key:'状态',
+          value:'',
+          prop:'stateText',
+          type:'switch',
         },
         {
           key:'操作',
@@ -580,14 +612,15 @@ const state = {
           list:[
             {
               text:'编辑',
-              type:'primary',
+              type:'text',
               size:'mini',
               click:jump2Other
             },
             {
-              text:'禁用',
-              type:'danger',
+              text:'删除',
+              type:'text',
               size:'mini',
+              click:memberDelAndFresh
             }
           ]
         },

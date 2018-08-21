@@ -5,6 +5,7 @@ export const state = {
   form:{},
   search:{} , 
   tableRow:{},
+  choose:'',
 }
 
 export const mutations = {
@@ -14,7 +15,7 @@ export const mutations = {
   clearSearchForm(state){
     state.search = {}
   },
-  handleOpenDialog(state,{params , text , row}){
+  handleOpenDialog(state,{row}){
     state.dialogVisible = true
     state.tableRow = row && JSON.parse(JSON.stringify(row))
   },
@@ -24,7 +25,14 @@ export const mutations = {
   },
   showChange(state,params){
     state.isShowLoading = params
-  }
+  },
+
+  /**
+   * 获取表格勾选的数组
+   */
+  handelSelection(state , {params} = {}){
+      state.choose = params
+  },
 }
 
 export const actions = {

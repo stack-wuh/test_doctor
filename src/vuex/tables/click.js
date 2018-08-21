@@ -83,3 +83,24 @@ export const couponLevelDelAndFresh = (params , types , row) => {
   let path = child || subMenu
   window.$store.dispatch('couponLevelDel', {path , row})
 }
+
+/**
+ * 会员充值设置 , 保养提醒设置
+ * 删除会员列表 , 删除保养提醒列表
+ */
+export const memberDelAndFresh = (params , type , row) => {
+  let {subMenu , child} = params
+  let path = child || subMenu
+  window.$confirm('改操作将删除此条信息,是否继续?' , '提示' , {
+    confirmButtonText:'确定',
+    cancelButtonText:'取消',
+    type:'warning',
+  }).then(()=>{
+    window.$store.dispatch('memberDelAndFresh' , {path , row})
+  }).catch(()=>{
+    window.$message({
+      type:'info',
+      message:'操作已取消！'
+    })
+  })
+}

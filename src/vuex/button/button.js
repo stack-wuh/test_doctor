@@ -2,6 +2,7 @@ import {
   jump2Detail ,
   jump2Add , 
   jump2AddWithDialog ,
+  DelAndFreshWithAll ,
 } from './click'
 import { openDialog } from '../tables/click';
 const state = {
@@ -71,6 +72,7 @@ const state = {
           type:'',
           size:'small',
           style:'',
+          click:DelAndFreshWithAll,
         }
       ]
     },
