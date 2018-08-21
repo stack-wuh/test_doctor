@@ -238,47 +238,89 @@ export const forms = [
       {
         key:'等级',
         type:'input',
-        prop:'level',
+        prop:'grade',
         tips:'为保证系统使用正常,请保证会员等级从1开始递增',
+        rules:[
+          {
+            required:true,
+            message:'请编辑等级',
+            trigger:'blur',
+          }
+        ],
       },
       {
         key:'等级名称',
         type:'input',
-        prop:'levelName',
+        prop:'name',
         tips:'',
+        rules:[
+          {
+            required:true,
+            message:'请编辑等级名称',
+            trigger:'blur',
+          }
+        ],
       },
       {
         key:'折扣比例',
         type:'input',
-        prop:'rate',
+        prop:'discountRatio',
         tips:'注: 达到次等级时,所能享受的折扣率,如0.80表示八折,最大为1.00,最小为0.10',
+        rules:[
+          {
+            required:true,
+            message:'请编辑折扣比例',
+            trigger:'blur',
+          }
+        ],
       },
       {
         key:'充值金额',
         type:'input',
-        prop:'price',
+        prop:'amount',
         tips:'注: 达到此金额且为满足下一个金额数,会员卡自动升级到此级别',
+        rules:[
+          {
+            required:true,
+            message:'请编辑充值金额',
+            trigger:'blur',
+          }
+        ],
       },
       {
         key:'累计金额',
         type:'input',
-        prop:'total',
+        prop:'accumulativeMoney',
         tips:'累计总充值金额达到此值时,会等等级会提升到改等级',
+        rules:[
+          {
+            required:true,
+            message:'请编辑累计金额',
+            trigger:'blur',
+          }
+        ],
       },
       {
         key:'用户积分',
         type:'input',
-        prop:'interage',
+        prop:'achieveGiveIntegral',
         tips:'注: 用户积分达到此数值时,会员卡升至此级别,积分则不限时间,最大为99999999',
+        rules:[
+          {
+            required:true,
+            message:'请编辑用户积分',
+            trigger:'blur',
+          }
+        ],
       }
     ],
     myForm:{
-      level:'',
-      levelName:'',
-      rate:'',
-      price:'',
-      total:'',
-      interage:'',
+      grade:'',
+      name:'',
+      discountRatio:'',
+      amount:'',
+      accumulativeMoney:'',
+      achieveGiveIntegral:'',
     }
   },
   {
