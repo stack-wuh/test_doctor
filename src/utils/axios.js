@@ -44,13 +44,22 @@ const checkStatus = response =>{
 }
 
 const checkCode = res => {
-  console.log(res,res.data,'this is checkcode in axios')
   if(res.status == -404){
     _g.toastMsg({type:'error',msg:res.msg})
-  }else if(res.data && (res.status == 0)){
+  }
+  if(res.data && res.status == 0){
     return new Promise((resolve,reject)=>{
-      resolve(res.data)
+      resolve(res)
     })
+  }
+  if(res.status == 10){
+    _g.toastMsg({
+      type:'info',
+      msg:'请登录之后操作!'
+    })
+    setTimeout(() => {
+      window.$route.push({name:'signin'})
+    }, 1000);
   }
   return res
 }
@@ -70,10 +79,18 @@ export default {
     }).then(response => {
       return checkStatus(response)
     }).then(res=>{
-      return checkCode(res).then(()=>{
-        cb && cb(res)
-      })
+      // console.log(res ,'this is then' )
+      return checkCode(res)
+    }).then(res=>{
+      cb && cb(res)
+      // console.log('this is then callback')
     }).catch(err=>{
+      if(err){
+        _g.toastMsg({
+          type:'error',
+          msg:'网络异常,请稍后重试!',
+        })
+      }
       window.$store.dispatch('changeShowLoading',{show:false})
     })
   }
