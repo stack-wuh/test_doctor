@@ -16,9 +16,9 @@ export const mutations = {
   },
   handleOpenDialog(state,{params , text , row}){
     state.dialogVisible = true
-    state.tableRow = row 
+    state.tableRow = row && JSON.parse(JSON.stringify(row))
   },
-  handlehideDialog(state,params){
+  handlehideDialog(state){
     state.dialogVisible = false
     state.tableRow = {}
   },
@@ -28,8 +28,22 @@ export const mutations = {
 }
 
 export const actions = {
+  /**
+   * 配合指令 v-loading
+   * 输出 isShowloading
+   * @param {*} param0 
+   * @param {*} params 
+   */
   changeShowLoading({commit},params){
     commit('showChange',params.show)
+  } ,
+
+  /**
+   * dialog对话框
+   * 异步close 
+   */
+  asyncHideDialog({commit}){
+    commit('handlehideDialog')
   }
 }
 
