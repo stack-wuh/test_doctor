@@ -10,10 +10,10 @@
 </template>
 
 <script>
-import {mapState} from 'vuex'
+import {mapState , mapActions} from 'vuex'
 export default {
   name: 'myBottom',
-  props:['type' , 'total' , 'currentPage'],
+  props:['type' , 'total' , 'currentPage' , 'formData' ],
   data () {
     return {
       btnList:[
@@ -35,14 +35,26 @@ export default {
   computed:{
     ...mapState({
       form: state => state.form
-    })
+    }),
+    Path(){
+      return this.$route.query.child || this.$route.query.subMenu
+    }
   },
   methods: {
+    ...mapActions({
+      'handleSubmitStore' : 'pubStoreList' , 
+      'handleSubmitCoupon' : 'couponPubAndPut' , 
+    }),
     handleClickBackPrev(){
       this.$router.go(-2)
     },
     handleSubmit(){
-      this.$store.dispatch('pubStoreList')
+      switch(this.Path){
+        case '发布新店' : this.handleSubmitStore() , this.$emit('handleSubmit',{emit:pubStoreList})
+          break;
+        case '会员卡积分规则' : this.handleSubmitCoupon({form:this.formData})
+          break;
+      }
     },
   }
 }
