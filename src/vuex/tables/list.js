@@ -32,8 +32,8 @@
    jump2Other, 
    staffResetPwd,
    staffDelAndFresh,
+   couponLevelDelAndFresh,
   } from './click.js'
-// import { jump2Add } from '../button/click.js';
 const state = {
   data:[
     {
@@ -411,31 +411,37 @@ const state = {
         {
           key:'等级',
           value:'',
-          prop:'name',
+          prop:'grade',
           type:'default',
         },
         {
           key:'名称',
           value:'',
-          prop:'party',
+          prop:'name',
           type:'default',
         },
         {
           key:'折扣比例',
           value:'',
-          prop:'code',
+          prop:'discountRatio',
           type:'default',
         },
         {
           key:'累计金额',
           value:'',
-          prop:'type',
+          prop:'accumulativeMoney',
           type:'default',
         },
         {
           key:'累计积分',
           value:'',
-          prop:'phone',
+          prop:'achieveGiveIntegral',
+          type:'default',
+        },
+        {
+          key:'充值金额',
+          value:'',
+          prop:'amount',
           type:'default',
         },
         {
@@ -456,6 +462,7 @@ const state = {
               text:"删除",
               type:'text',
               size:'small',
+              click:couponLevelDelAndFresh
             }
           ]
         },
@@ -472,25 +479,25 @@ const state = {
         {
           key:'充值金额',
           value:'',
-          prop:'name',
+          prop:'rechargeAmount',
           type:'default',
         },
         {
           key:'赠送金额',
           value:'',
-          prop:'party',
+          prop:'donationAmount',
           type:'default',
         },
         {
           key:'赠送积分',
           value:'',
-          prop:'code',
+          prop:'giftIntegral',
           type:'default',
         },
         {
           key:'赠送卡券',
           value:'',
-          prop:'type',
+          prop:'couponId',
           type:'default',
         },
         {

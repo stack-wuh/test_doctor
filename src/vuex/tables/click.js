@@ -9,7 +9,6 @@
  * 
  */
 export const openDialog = (params,text,row) => {
-  console.log('this is clicked')
    window.$store.commit('handleOpenDialog',{params,text,row}) 
 }
 
@@ -60,7 +59,8 @@ export const jump2Other = (params,types) => {
  * params：id 员工id
  */
 export const staffResetPwd = (params,types , row) => {
-  let {menu , subMenu , child , path} = {params}
+  let {menu , subMenu , child} = params
+  let path = child || subMenu
   window.$store.dispatch('staffResetPwd',{path , row})
 }
 /**
@@ -68,7 +68,18 @@ export const staffResetPwd = (params,types , row) => {
  * 删除员工
  * params ，id 员工id
  */
-export const staffDelAndFresh = (params , type , row) => {
-  let {path} = params
-  window.$store.dispatch('staffDelAndFresh',{path,row})
+export const staffDelAndFresh = (params , types , row) => {
+  let { subMenu , child} = params
+  let path = child || subMenu
+  window.$store.dispatch('staffDelAndFresh',{path , row})
+}
+
+/**
+ * couponLevel -- 会员卡等级设置
+ * 删除会员卡等级列表
+ */
+export const couponLevelDelAndFresh = (params , types , row) => {
+  let {subMenu , child} = params
+  let path = child || subMenu
+  window.$store.dispatch('couponLevelDel', {path , row})
 }
