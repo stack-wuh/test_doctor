@@ -24,6 +24,7 @@ import {
   Radio,
   Loading , 
   Message , 
+  MessageBox ,
   Switch ,
 } from 'element-ui'
 
@@ -53,4 +54,6 @@ Vue.use(Switch)
 
 Vue.prototype.$ELEMENT = {size:'small',zIndex:90000}
 Vue.prototype.$message = Message
+Vue.prototype.$confirm = MessageBox.confirm
+window.$confirm = MessageBox.confirm
 window.$message = Message
