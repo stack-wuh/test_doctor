@@ -44,15 +44,18 @@ export default {
     ...mapActions({
       'handleSubmitStore' : 'pubStoreList' , 
       'handleSubmitCoupon' : 'couponPubAndPut' , 
+      'handleSubmitRelply' : 'replyPubAndPut'
     }),
     handleClickBackPrev(){
       this.$router.go(-2)
     },
     handleSubmit(){
       switch(this.Path){
-        case '发布新店' : this.handleSubmitStore() , this.$emit('handleSubmit',{emit:pubStoreList})
+        case '发布新店' : this.handleSubmitStore()
           break;
-        case '会员卡积分规则' : this.handleSubmitCoupon({form:this.formData})
+        case '会员卡积分规则' : this.handleSubmitCoupon({form: this.formData})
+          break;
+        case '自动回复配置' : this.handleSubmitRelply({form: this.formData , path: this.path})
           break;
       }
     },
