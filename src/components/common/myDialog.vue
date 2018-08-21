@@ -42,7 +42,7 @@ export default {
     },
     formList(){
       return this.$store.state.tableRow
-    }
+    },
   },
   watch:{
     rootPath(){
@@ -55,7 +55,8 @@ export default {
   methods: {
     ...mapActions({
       'handleSubmitDep':'depPubAndPut',
-      'handleSubmitStaff':'staffPubAndPut'
+      'handleSubmitStaff':'staffPubAndPut',
+      'handleSubmitCouponLevel' : 'couponLevelPubAndPut' ,
     }),
     beforeClose(){
       this.$refs.myForm.resetFields()
@@ -74,7 +75,12 @@ export default {
             break;
           case '员工列表' : this.handleSubmitStaff({path:this.rootPath , form:this.myForm})
             break;
+          case '会员卡等级设置' : this.handleSubmitCouponLevel({path: this.rootPath , form: this.myForm})
+            break;
         }
+        setTimeout(()=>{
+          this.$refs.myForm.resetFields()
+        },1000)
        }else{
          _g.toastMsg({
            type:'error',
