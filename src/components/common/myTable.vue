@@ -7,13 +7,18 @@
       </div>
       <slot name="right"></slot>
     </header>
-    <el-table :data="list" border  stripe>
+    <el-table :data="list" border  stripe @selection-change="handleSelectionChange" >
       <el-table-column v-if="tableList && tableList.colType == 'select'" :fixed="tableList.fix || ''" :type="tableList.colValue || 'selection'" align="center" width="60px"></el-table-column>
       <el-table-column v-if="tableList && tableList.colType == 'index'" :type="tableList.colValue || 'index'" :label="tableList.colTitle" align="center" width="60px"></el-table-column>
+      <el-table-column v-if="item.type === 'image'" align="center" v-for="(item,index) in tableList.list" :key="index" :label="item.key" :prop="item.prop" :width="item.width || ''">
+        <template slot-scope="scope">
+          <img :src="scope.row.picture" alt="logo" style="width:60px;height:60px;" >
+        </template>
+      </el-table-column>
       <el-table-column v-if="item.type === 'default'" align="center" v-for="(item,index) in tableList.list" :key="index" :label="item.key" :prop="item.prop" :width="item.width || '' " ></el-table-column>
       <el-table-column v-if="item.type === 'switch'" align="center" v-for="(item,index) in tableList.list" :key="index" :label="item.key" :prop="item.prop" :width="item.width || ''">
         <template slot-scope="scope">
-          <el-switch v-model="scope.row.state" active-text="正常" inactive-text="禁用" inactive-color="#999999" :active-value="1" :inactive-value="0" ></el-switch>
+          <el-switch v-model="scope.row.state" active-text="启用" inactive-text="禁用" inactive-color="#999999" :active-value="1" :inactive-value="0" ></el-switch>
         </template>
       </el-table-column>
       <el-table-column v-if="item.type === 'button'" :fixed="item.fix" :width="item.width" align="center" v-for="(item,index) in tableList.list" :key="index" :label="item.key">
@@ -26,17 +31,17 @@
 </template>
 
 <script>
+import {mapMutations} from 'vuex'
 export default {
   props:['list','params','header'],
   name: 'table1',
-
   data () {
     return {
       routers:{
        menu:this.$route.query.menu, 
        subMenu:this.$route.query.subMenu, 
        child:this.$route.query.child, 
-      }
+      },
     }
   },
   computed:{
@@ -48,13 +53,20 @@ export default {
     },
     tableList(){
       return this.$store.getters.getTableListByparams({path:this.params || this.$route.query.child || this.$route.query.subMenu || this.$route.path })
-    }
+    },
   },
-  methods: {},
-  created(){
-    // console.log(this.params)
-    // console.log(this.tableList , 'this is table')
-  }
+  methods: {
+    ...mapMutations({
+      'handelSelection':'handelSelection'
+    }),
+    handleSelectionChange(val){
+      let str = val && val.map(item => {
+        return item.id
+      }).toLocaleString()
+      this.handelSelection({params:str})
+    },
+  },
+  created(){}
 }
 </script>
 
