@@ -329,17 +329,56 @@ export const forms = [
       {
         key:'充值金额',
         type:'input',
-        prop:'price',
+        prop:'rechargeAmount',
+        rules:[
+          {
+            required:true,
+            message:'请编辑必填项',
+            trigger:'blur',
+          }
+        ],
       },
       {
         key:'赠送金额',
         type:'input',
-        prop:'send',
+        prop:'donationAmount',
+        rules:[
+          {
+            required:true,
+            message:'请编辑必填项',
+            trigger:'blur',
+          }
+        ],
+      },
+      {
+        key:'赠送积分',
+        type:'input',
+        prop:'giftIntegral',
+        rules:[
+          {
+            required:true,
+            message:'请编辑必填项',
+            trigger:'blur',
+          }
+        ],
       },
       {
         key:'赠送卡券',
         type:'select',
-        prop:'coupon'
+        prop:'couponId',
+        list:[
+          {
+            label:'普通卡券',
+            value:1,
+          }
+        ],
+        rules:[
+          {
+            required:true,
+            message:'请编辑必填项',
+            trigger:'blur',
+          }
+        ],
       }
     ],
     myForm:{
@@ -354,7 +393,7 @@ export const forms = [
       {
         key:'提醒天数',
         type:'input',
-        prop:'day',
+        prop:'days',
         rules:[
           {
             required:true,
@@ -377,8 +416,18 @@ export const forms = [
       },
       {
         key:'类型',
-        type:'input',
+        type:'select',
         prop:'type',
+        list:[
+          {
+            label:'已到店',
+            value:1,
+          },
+          {
+            label:'未到店',
+            value:0
+          }
+        ],
         rules:[
           {
             required:true,
@@ -389,7 +438,7 @@ export const forms = [
       }
     ],
     myForm:{
-      day:'',
+      days:'',
       content:'',
       type:'',
     }
