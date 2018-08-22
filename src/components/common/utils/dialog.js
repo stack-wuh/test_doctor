@@ -549,7 +549,7 @@ export const forms = [
       {
         key:'名称',
         type:'input',
-        prop:'name',
+        prop:'category',
         rules:[
           {
             required:true,
@@ -560,7 +560,7 @@ export const forms = [
       }
     ],
     myForm:{
-      name:'',
+      category:'',
     },
   },
   {
