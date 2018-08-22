@@ -19,15 +19,15 @@ export default {
   watch:{
     '$route'(to,from){
       if(to.query.path){
-        this.$router.push({path:to.query.path,query:{menu:to.query.menu , subMenu:to.query.subMenu , child:to.query.child}})
+        this.$router.push({path:to.query.path,query:{menu:to.query.menu , subMenu:to.query.subMenu , child:to.query.child , data:to.query.data}})
       }
     }
   },
   methods: {},
   created(){
-    let { path , menu , subMenu , child} = this.$route.query
+    let { path , menu , subMenu , child , data} = this.$route.query
     if(path){
-      this.$router.push({path:path,query:{menu , subMenu , child}})
+      this.$router.push({path:path,query:{menu , subMenu , child , data}})
     }
   }
 }
