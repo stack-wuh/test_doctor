@@ -72,6 +72,7 @@
 .avatar-uploader{
   width: 120px;
   height: 120px;
+  overflow: hidden;
   border:1px dashed #eee;
 }
 .avatar-uploader-icon {
@@ -87,7 +88,6 @@
   height: 178px;
   display: block;
 }
-
 .el-select-dropdown{
   span.span-item{
     display: inline-block;
