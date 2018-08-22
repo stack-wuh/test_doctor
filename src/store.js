@@ -12,7 +12,7 @@ import MyLog from './vuex/plugins/log'
 
 import Sign from './vuex/modules/sign'
 import System from './vuex/modules/system/store'
-
+import Use from './vuex/modules/use/store'
 
 
 export default new Vuex.Store({
@@ -26,6 +26,7 @@ export default new Vuex.Store({
     Button ,
     Sign ,
     System , 
+    Use ,
   },
   plugins:[MyLog]
 })
