@@ -16,7 +16,7 @@
             <el-option v-if="item.list" v-for="(list,lindex) in item.list" :key="lindex" :label="list.label" :value="list.value" ></el-option>
             <el-option v-else label="aaa" value="bbb"></el-option>
           </el-select>
-          <el-date-picker @change="SearchValueChange"  class="item" v-if="item.type == 'date'" :placeholder="item.key" :type="item.type" v-model="item.value"></el-date-picker>
+          <el-date-picker @change="SearchValueChange"  class="item" v-if="item.type == 'date'" :placeholder="item.key" :type="item.type" v-model="form[item.prop]" value-format="yyyy-MM-dd"></el-date-picker>
         </section>
       </section>
     </section>
