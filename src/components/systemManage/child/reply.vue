@@ -8,16 +8,16 @@
               </el-form-item>
               <el-form-item label="回复类型">
                 <el-select placeholder="请选择回复类型" v-model="form.type">
-                  <el-option label="文本" value="0"></el-option>
-                  <el-option label="图文" value="1"></el-option>
+                  <el-option label="文本" :value="0"></el-option>
+                  <el-option label="图文" :value="1"></el-option>
                 </el-select>
               </el-form-item>
             </section>
             <section class="inline-box">
               <el-form-item label="状态">
-                <el-select v-model="form.state" placeholder="请选择状态">
-                  <el-option label="禁用" value="0"></el-option>
-                  <el-option label="启用" value="1"></el-option>
+                <el-select v-model="form.status" placeholder="请选择状态">
+                  <el-option label="禁用" :value="0"></el-option>
+                  <el-option label="启用" :value="1"></el-option>
                 </el-select>
               </el-form-item>
             </section>
@@ -26,7 +26,7 @@
                 class="avatar-uploader"
                 :action="uploadUrl"
                 :show-file-list="false">
-                <img v-if="imageUrl" :src="imageUrl" class="avatar">
+                <img v-if="form.picture" :src="form.picture" class="avatar" style="width:100%;height:100%;" >
                 <i v-else class="el-icon-plus avatar-uploader-icon"></i>
               </el-upload>
             </el-form-item>
@@ -53,6 +53,7 @@ export default {
     return {
       uploadUrl:'',
       imageUrl:'',
+      type:0,
       form:{
         keyword:'',
         type:'',
@@ -63,7 +64,11 @@ export default {
     }
   },
 
-  methods: {}
+  methods: {},
+  created(){
+    let data =  this.$route.query.data && JSON.parse(this.$route.query.data)
+    this.form = Object.assign(this.form , data)
+  }
 }
 </script>
 

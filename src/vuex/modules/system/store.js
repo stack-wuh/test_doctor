@@ -58,6 +58,10 @@ const actions = {
         break;
       case '自动回复配置' : _url = 'platform/getAutoResponseList.do'
         break;
+      case '保险公司' : _url = 'platform/getInsuranceList.do'
+        break;
+      case '快捷回复设置' : _url = 'platform/getFastReplyList.do'
+        break;
     }
     $http.post(_url,search,(res)=>{
       commit('setStoreList',{params:res.data})
@@ -229,6 +233,10 @@ const actions = {
         break;
       case '自动回复配置' : _url = 'platform/delAutoResponse.do'
         break;
+      case '保险公司' : _url = 'platform/delInsurance.do'
+        break;
+      case '快捷回复设置' : _url = 'platform/delFastReply.do'
+        break;
     }
     $http.post( _url, {ids:id} , res => {
       setTimeout(()=>{
@@ -261,7 +269,33 @@ const actions = {
         window.$route.go(-2)
       },1000)
     })
-  }
+  },
+  /**
+   * 保险公司设置
+   * 新增 /编辑
+   */
+  companyPubAndPut({dispatch} , {form , path , form:{id}} = {}){
+    let _url = id ? 'platform/updateInsurance.do' : 'platform/addInsurance.do'
+    $http.post(_url ,form ,res => {
+      setTimeout(()=>{
+        dispatch('asyncHideDialog')
+        dispatch('getStoresList' ,{path })
+      },1000)
+    })
+  },
+  /**
+   * 快捷回复设置
+   * 编辑/新增
+   */
+  fastReplyPubAndPut({dispatch} , {form , path , form:{id}} = {}){
+    let _url = id ? 'platform/updateFastReply.do' : 'platform/addFastReply.do'
+    $http.post(_url ,form ,res => {
+      setTimeout(()=>{
+        dispatch('asyncHideDialog')
+        dispatch('getStoresList' ,{path })
+      },1000)
+    })
+  },
 }
 
 const getters = {
@@ -285,7 +319,7 @@ const getters = {
      }else if(keys.includes('days') && keys.includes('content') && keys.includes('type') ){  // 保养提醒过滤
        return {...item , typeText:item.type == 0 ? '未到店' : '已到店'}
      }else if(keys.includes('keyword') && keys.includes('picture')){   // 自动回复
-      return {...item , stateText:item.type == 0 ? '禁用' : '正常'}
+      return {...item , typeText:item.type == 0 ? '文本' : '图文'}
      }else {
        return {...item}
      }

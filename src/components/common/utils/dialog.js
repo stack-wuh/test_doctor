@@ -461,7 +461,7 @@ export const forms = [
       {
         key:'公司名称',
         type:'input',
-        prop:'compnay',
+        prop:'name',
         rules:[
           {
             required:true,
@@ -473,7 +473,8 @@ export const forms = [
       {
         key:'折扣率',
         type:'input',
-        prop:'rate',
+        prop:'discountRate',
+        tips:'请输入0~1之间的小数,如:0.25',
         rules:[
           {
             required:true,
@@ -493,21 +494,15 @@ export const forms = [
     name:'快捷回复设置',
     list:[
       {
-        key:'消息内容',
-        type:'input',
-        prop:'sort',
-        rules:[
+        key:'使用角色类型',
+        type:'select',
+        prop:'roleId',
+        list:[
           {
-            required:true,
-            message:'请编辑消息内容',
-            trigger:['blur'],
+            label:'销售顾问',
+            value:1,
           }
         ],
-      },
-      {
-        key:'使用角色类型',
-        type:'input',
-        prop:'compnay',
         rules:[
           {
             required:true,
@@ -517,9 +512,9 @@ export const forms = [
         ],
       },
       {
-        key:'排序',
+        key:'序列号',
         type:'input',
-        prop:'rate',
+        prop:'serialNum',
         rules:[
           {
             required:true,
@@ -527,7 +522,20 @@ export const forms = [
             trigger:['blur'],
           }
         ],
-      }
+      },
+      {
+        key:'消息内容',
+        type:'textarea',
+        rows:3,
+        prop:'messageContent',
+        rules:[
+          {
+            required:true,
+            message:'请编辑消息内容',
+            trigger:['blur'],
+          }
+        ],
+      },
     ],
     myForm:{
       content:'',

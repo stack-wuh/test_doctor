@@ -4,6 +4,7 @@
           <el-form :model="myForm" ref="myForm" label-width="120px">
             <el-form-item v-for="(item,index) in list" :key="index" :label="item.key" :prop="item.prop" :rules="item.rules" >
               <el-input class="my-input-320" v-if="item.type === 'input' || item.type == 'default' || !item.type " :placeholder="'请编辑'+item.key" v-model="myForm[item.prop]" ></el-input>
+              <el-input class="my-input-320" v-if="item.type == 'textarea'" :placeholder="'请编辑' + item.key" v-model="myForm[item.prop]" :type="item.type || 'textarea'" :rows="item.rows || 2" ></el-input>
               <el-select class="my-input-320" v-if="item.type === 'select'" :placeholder="'请选择' + item.key" v-model="myForm[item.prop]" >
                 <el-option v-if="item.list" v-for="(list,lindex) in item.list" :key="lindex" :label="list.label" :value="list.value" ></el-option>
                 <el-option label="aaa" value="aaa" v-else ></el-option>
@@ -58,8 +59,14 @@ export default {
       'handleSubmitStaff':'staffPubAndPut',
       'handleSubmitCouponLevel' : 'couponLevelPubAndPut' ,
       'handleSubmitMember' : 'memberPayPubAndPut',
-      'handleSubmitKepp':'keepPubAndPut'
+      'handleSubmitKepp':'keepPubAndPut' , 
+      'handleSubmitCompany' : 'companyPubAndPut',
+      'handleSubmitFaseReply' : 'fastReplyPubAndPut',
     }),
+    /**
+     * dialog对话框
+     * beforeclose钩子
+     */
     beforeClose(){
       this.$refs.myForm.resetFields()
       this.$store.commit('handlehideDialog')
@@ -73,15 +80,19 @@ export default {
      this.$refs.myForm.validate(valid=>{
        if(valid){
         switch(this.rootPath){
-          case '部门管理' : this.handleSubmitDep({ path:this.rootPath , form : this.myForm })
+          case '部门管理' : this.handleSubmitDep({ path: this.rootPath ,form: this.myForm })
             break;
-          case '员工列表' : this.handleSubmitStaff({path:this.rootPath , form:this.myForm})
+          case '员工列表' : this.handleSubmitStaff({path: this.rootPath ,form:this.myForm})
             break;
-          case '会员卡等级设置' : this.handleSubmitCouponLevel({path: this.rootPath , form: this.myForm})
+          case '会员卡等级设置' : this.handleSubmitCouponLevel({path: this.rootPath ,form: this.myForm})
             break;
-          case '会员充值设置' : this.handleSubmitMember({path : this.rootPath , form : this.myForm})
+          case '会员充值设置' : this.handleSubmitMember({path: this.rootPath ,form: this.myForm})
             break;
-          case '保养提醒设置' : this.handleSubmitKepp({path: this.rootPath , form : this.myForm})
+          case '保养提醒设置' : this.handleSubmitKepp({path: this.rootPath ,form: this.myForm})
+            break;
+          case '保险公司' : this.handleSubmitCompany({path: this.rootPath ,form: this.myForm})
+            break;
+          case '快捷回复设置' : this.handleSubmitFaseReply({path: this.rootPath ,form: this.myForm})
             break;
         }
         setTimeout(()=>{
