@@ -1,84 +1,113 @@
 <template>
   <section class="wrapper">
     <section class="content">
-      <el-form class="my-form" label-width="120px" :model="form">
+      <el-form class="my-form" ref="myForm" label-width="120px" :model="form" :rules="rules">
         <section class="inline-box">
-          <el-form-item label="精品名称">
-            <el-input placeholder="请编辑精品名称"></el-input>
+          <el-form-item label="精品名称" prop="name" >
+            <el-input placeholder="请编辑精品名称" v-model="form.name" ></el-input>
           </el-form-item>
-          <el-form-item label="库存数量">
-            <el-input placeholder="请编辑库存数量"></el-input>
+          <el-form-item label="库存数量" prop="stock">
+            <el-input placeholder="请编辑库存数量" v-model="form.stock" ></el-input>
           </el-form-item>
         </section>
         <section class="inline-box">
-          <el-form-item label="市场原价">
-            <el-input placeholder="请编辑市场原价"></el-input>
+          <el-form-item label="市场原价" prop="originalPrice">
+            <el-input placeholder="请编辑市场原价" v-model="form.originalPrice"></el-input>
           </el-form-item>
-          <el-form-item label="商城售价">
-            <el-input placeholder="请编辑商城售价"></el-input>
+          <el-form-item label="商城售价" prop="price">
+            <el-input placeholder="请编辑商城售价" v-model="form.price"></el-input>
           </el-form-item>
         </section>
         <section class="inline-box">
-          <el-form-item label="精品大类">
-            <el-select placeholder="请编辑精品大类">
-              <el-option label="aaa" value="aaa"></el-option>
+          <el-form-item label="精品大类" prop="categoryId">
+            <el-select placeholder="请选择精品大类" v-model="form.categoryId" >
+              <el-option label="aaa" value="1"></el-option>
             </el-select>
           </el-form-item>
-          <el-form-item label="商品状态">
-            <el-select placeholder="请编辑商品状态">
-              <el-option label="aaa" value="aaa"></el-option>
-            </el-select>
-          </el-form-item>
-        </section>
-        <section class="inline-box">
-          <el-form-item label="适用车型">
-            <el-input placeholder="请编辑使用车型"></el-input>
-          </el-form-item>
-          <el-form-item label="积分换购">
-            <el-select placeholder="请选择积分换购">
-              <el-option label="aaa" value="aaa"></el-option>
+          <el-form-item label="商品状态" prop="commodityState">
+            <el-select placeholder="请编辑商品状态" v-model="form.commodityState" >
+              <el-option label="在售" :value="1"></el-option>
+              <el-option label="停售" :value="0"></el-option>
             </el-select>
           </el-form-item>
         </section>
         <section class="inline-box">
-          <el-form-item label="换购积分">
-            <el-input placeholder="请编辑换购积分"></el-input>
+          <el-form-item label="适用车型" prop="applicableModel">
+            <el-input placeholder="请编辑使用车型" v-model="form.applicableModel" ></el-input>
           </el-form-item>
-          <el-form-item label="获得积分">
-            <el-input placeholder="请编辑获得积分"></el-input>
+          <el-form-item label="积分换购" prop="supportIntegralChange" >
+            <el-select placeholder="请选择积分换购" v-model="form.supportIntegralChange" >
+              <el-option label="是" :value="1"></el-option>
+              <el-option label="否" :value="2"></el-option>
+            </el-select>
           </el-form-item>
         </section>
         <section class="inline-box">
-          <el-form-item label="是否直降">
-            <el-select placeholder="请选择是否直降">
-              <el-option label="aaa " value="aaa"></el-option>
+          <el-form-item label="换购积分" prop="purchaseIntegral">
+            <el-input placeholder="请编辑换购积分" v-model="form.purchaseIntegral"></el-input>
+          </el-form-item>
+          <el-form-item label="获得积分" prop="obtainIntegral">
+            <el-input placeholder="请编辑获得积分" v-model="form.obtainIntegral" ></el-input>
+          </el-form-item>
+        </section>
+        <section class="inline-box">
+          <el-form-item label="是否直降" prop="whetherDrop" >
+            <el-select placeholder="请选择是否直降" v-model="form.whetherDrop" >
+              <el-option label="是" :value="1"></el-option>
+              <el-option label="否" :value="0"></el-option>
             </el-select>
           </el-form-item>
-          <el-form-item label="是否推荐">
-            <el-select placeholder="请选择是否推荐">
-              <el-option label="aaa " value="aaa"></el-option>
+          <el-form-item label="是否推荐" prop="recommend">
+            <el-select placeholder="请选择是否推荐" v-model="form.recommend" >
+              <el-option label="是" :value="1"></el-option>
+              <el-option label="否" :value="0"></el-option>
             </el-select>
           </el-form-item>
         </section>
         <section>
-          <el-form-item label="列表首图">
+          <el-form-item label="列表首图" prop="firstPicture" >
             <el-upload
               class="avatar-uploader"
               action="https://jsonplaceholder.typicode.com/posts/"
               :show-file-list="false">
-              <img v-if="imageUrl" :src="imageUrl" class="avatar">
+              <img v-if="form.firstPicture" :src="form.firstPicture" class="avatar">
               <i v-else class="el-icon-plus avatar-uploader-icon"></i>
             </el-upload>
           </el-form-item>
         </section>
+        <el-form-item label="简介" prop="descInfo">
+          <el-input v-model="form.descInfo" type="textarea" :rows="3" style="width:90%;"></el-input>
+        </el-form-item>
       </el-form>
-      <my-bottom type="button" />
+      <!-- <my-bottom type="button" /> -->
+      <section class="btn-area">
+        <el-button type="danger" @click="cancel" >取消</el-button>
+        <el-button type="success" @click="submit" >确定</el-button>
+      </section>
     </section>
   </section>
 </template>
 
 <script>
 import MyBottom from '@/components/common/bottom'
+import {mapState ,mapActions} from 'vuex'
+
+const rules = {
+  name:[{required:true,message:'请编辑精品名称',trigger:'blur'}],
+  stock:[{required:true,message:'请编辑库存数量',trigger:'blur'}],
+  originalPrice:[{required:true,message:'请编辑市场原价',trigger:'blur'}],
+  price:[{required:true,message:'请编辑市场售价',trigger:'blur'}],
+  categoryId:[{required:true,message:'请选择精品类别',trigger:['blur','change']}],
+  commodityState:[{required:true,message:'请选择商品状态',trigger:['blur','change']}],
+  applicableModel:[{required:true,message:'请编辑适用车型',trigger:['blur']}],
+  supportIntegralChange:[{required:true,message:'请选择积分换购',trigger:['blur']}],
+  purchaseIntegral:[{required:true,message:'请编辑积分换购',trigger:['blur']}],
+  obtainIntegral:[{required:true,message:'请编辑获得积分',trigger:['blur']}],
+  whetherDrop:[{required:true,message:'请选择直降类型',trigger:['blur']}],
+  recommend:[{required:true,message:'请选择推荐类型',trigger:['blur']}],
+  firstPicture:[{required:true,message:'请上传首图',trigger:['blur']}],
+  descInfo:[{required:true,message:'请编辑精品简介',trigger:['blur']}],
+}
 export default {
   name: 'usePub',
   components:{
@@ -86,12 +115,56 @@ export default {
   },
   data () {
     return {
-      imageUrl:'',
-      form:{},
+      rules,
+      form:{
+        firstPicture:'https://tse4.mm.bing.net/th?id=OIP.tYdRHM10gAENpc06EKLBjQHaE7&pid=Api',
+        categoryId:'',
+        name:'',
+        originalPrice:'',
+        price:'',
+        applicableModel:'',
+        recommend:'',
+        stock:'',
+        supportIntegralChange:'',
+        purchaseIntegral:'',
+        commodityState:'',
+        obtainIntegral:'',
+        whetherDrop:'',
+        descInfo:'',
+      },
     }
   },
-
-  methods: {}
+  computed:{
+  },
+  methods: {
+    ...mapActions({
+      'formPub':'highPubAndPut'
+    }),
+    cancel(){
+      this.$refs.myForm.resetFields()
+      setTimeout(()=>{
+        this.$router.go(-2)
+      },500)
+    },
+    submit(){
+      this.$refs.myForm.validate(valid => {
+        if(!valid){
+          this.formPub({form:this.form}).then(res => {
+            console.log(res)
+          })
+        }else{
+          _g.toastMsg({
+            type:'error',
+            msg:'请编辑必填项后提交'
+          })
+        }
+      })
+    }
+  },
+  created(){
+    let data =  (this.$route.query.data ) && JSON.parse(this.$route.query.data)
+    this.form = data
+  },
 }
 </script>
 
@@ -113,6 +186,9 @@ export default {
           width: 80%;
         }
       }
+    }
+    .btn-area{
+      text-align: center;
     }
   }
 }
