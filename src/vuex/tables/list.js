@@ -591,7 +591,7 @@ const state = {
         {
           key:'类型',
           value:'',
-          prop:'type',
+          prop:'typeText',
           type:'default',
         },
         {
@@ -637,19 +637,19 @@ const state = {
         {
           key:'排序',
           value:'',
-          prop:'name',
+          prop:'sort',
           type:'default',
         },
         {
           key:'保险公司名称',
           value:'',
-          prop:'party',
+          prop:'name',
           type:'default',
         },
         {
           key:'折扣率',
           value:'',
-          prop:'part',
+          prop:'discountRate',
           type:'default',
         },
         {
@@ -658,10 +658,16 @@ const state = {
           list:[
             {
               text:'编辑',
-              type:'primary',
+              type:'text',
               size:'mini',
               click:openDialog
             },
+            {
+              text:'删除',
+              type:'text',
+              size:'mini',
+              click:memberDelAndFresh
+            }
           ]
         },
       ]
@@ -675,15 +681,21 @@ const state = {
       colValue:'selection',
       list:[
         {
+          key:'序列号',
+          value:'',
+          prop:'serialNum',
+          type:'default',
+        },
+        {
           key:'消息内容',
           value:'',
-          prop:'name',
+          prop:'messageContent',
           type:'default',
         },
         {
           key:'使用角色类型',
           value:'',
-          prop:'party',
+          prop:'roleId',
           type:'default',
         },
         {
@@ -692,10 +704,16 @@ const state = {
           list:[
             {
               text:'编辑',
-              type:'primary',
+              type:'text',
               size:'mini',
               click:openDialog,
             },
+            {
+              text:'删除',
+              type:'text',
+              size:'mini',
+              click:memberDelAndFresh
+            }
           ]
         },
       ]

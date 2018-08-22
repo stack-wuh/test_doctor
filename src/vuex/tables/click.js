@@ -18,15 +18,15 @@ export const openDialog = (params,text,row) => {
  * params
  * 
  */
-export const jump2Other = (params,types) => {
+export const jump2Other = (params ,types ,row) => {
   let {menu , subMenu ,child , path} = params
-  let rootPath = '' , other = ''
+  let rootPath = '' , other = '' , data = ''
   switch(child || subMenu){
     case '门店管理' : rootPath = '/system/store/pub' , child = '发布新店'
       break ;
     case '角色权限' : rootPath = '/system/limit/setting' , child = '编辑角色权限'
       break ;
-    case '自动回复配置' : rootPath = '/system/store/reply'  , child = '编辑自动回复配置'
+    case '自动回复配置' : rootPath = '/system/store/reply'  , child = '自动回复配置' , data = JSON.stringify(row)
       break ;
     case '汽车精品管理' : rootPath = '/use/pub' , child = '编辑汽车精品信息'
       break ; 
@@ -50,7 +50,7 @@ export const jump2Other = (params,types) => {
       break ;
     default : rootPath = '/index'
   }
-  window.$route.push({path:'/mid/container',query:Object.assign(params,{path:rootPath,child})})
+  window.$route.push({path:'/mid/container',query:Object.assign(params,{path:rootPath ,child , data})})
 }
 
 /**
@@ -91,7 +91,7 @@ export const couponLevelDelAndFresh = (params , types , row) => {
 export const memberDelAndFresh = (params , type , row) => {
   let {subMenu , child} = params
   let path = child || subMenu
-  window.$confirm('改操作将删除此条信息,是否继续?' , '提示' , {
+  window.$confirm('该操作将删除此条信息,是否继续?' , '提示' , {
     confirmButtonText:'确定',
     cancelButtonText:'取消',
     type:'warning',
