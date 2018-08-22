@@ -154,20 +154,50 @@ const state = {
         {
           key:'是否推荐',
           type:'select',
-          prop:'start',
+          prop:'recommend',
           value:'',
+          list:[
+            {
+              label:'是',
+              value:1
+            },
+            {
+              label:'否',
+              value:0
+            }
+          ],
         },
         {
           key:'积分兑换',
           type:'select',
-          prop:'end',
+          prop:'supportIntegralChange',
           value:'',
+          list:[
+            {
+              label:'是',
+              value:1,
+            },
+            {
+              label:'否',
+              value:0
+            }
+          ]
         },
         {
-          key:'商品状态',
+          key:'是否直降',
           type:'select',
-          prop:'state',
+          prop:'whetherDrop',
           value:'',
+          list:[
+            {
+              label:'是',
+              value:1
+            },
+            {
+              label:'否',
+              value:0
+            }
+          ]
         }
       ]
     },
@@ -179,25 +209,25 @@ const state = {
         {
           key:'订单编号',
           type:'input',
-          prop:'name',
+          prop:'orderNum',
           value:'',
         },
         {
           key:'姓名',
           type:'input',
-          prop:'type',
+          prop:'name',
           value:'',
         },
         {
           key:'联系电话',
           type:'input',
-          prop:'start',
+          prop:'telephone',
           value:'',
         },
         {
           key:'配件名称',
           type:'input',
-          prop:'end',
+          prop:'commodityName',
           value:'',
         },
         {
@@ -205,30 +235,44 @@ const state = {
           type:'select',
           prop:'state',
           value:'',
+          list:[
+            {
+              label:'未支付',
+              value:'0'
+            },
+            {
+              label:'已支付',
+              value:1
+            },
+            {
+              label:'已提货',
+              value:2
+            }
+          ],
         },
         {
-          key:'下单开始日期',
+          key:'订单开始日期',
           type:'date',
           value:'',
-          prop:'',
+          prop:'orderDate',
         },
         {
-          key:'下单结束日期',
+          key:'订单结束日期',
           type:'date',
           value:'',
-          prop:'',
+          prop:'orderEnd',
         },
         {
           key:'提货开始日期',
           type:'date',
           value:'',
-          prop:'',
+          prop:'deliveryDate',
         },
         {
           key:'提货结束日期',
           type:'date',
           value:'',
-          prop:'',
+          prop:'deliveryEnd',
         }
       ]
     },
@@ -241,7 +285,7 @@ const state = {
           key:'精品大类名称',
           type:'input',
           value:'',
-          prop:'',
+          prop:'category',
         }
       ]
     },

@@ -34,8 +34,9 @@
    staffDelAndFresh,
    couponLevelDelAndFresh,
    memberDelAndFresh ,
+   handleTakeGood ,
+   useDelAndFresh ,
   } from './click.js'
-import { DelAndFreshWithAll } from '../button/click.js';
 const state = {
   data:[
     {
@@ -735,61 +736,80 @@ const state = {
         {
           key:'类别',
           value:'',
-          prop:'party',
+          prop:'categoryId',
           type:'default',
         },
         {
           key:'名称',
           value:'',
-          prop:'party',
+          prop:'name',
           type:'default',
         },
         {
           key:'原价',
           value:'',
-          prop:'party',
+          prop:'originalPrice',
           type:'default',
         },
         {
           key:'售价',
           value:'',
-          prop:'party',
+          prop:'price',
           type:'default',
         },
         {
           key:'是否推荐',
           value:'',
-          prop:'party',
+          prop:'pushText',
           type:'default',
         },
         {
-          key:'数量',
+          key:'库存数量',
           value:'',
-          prop:'party',
+          prop:'stock',
           type:'default',
         },
         {
           key:'积分换购',
           value:'',
-          prop:'party',
+          prop:'changeText',
           type:'default',
         },
         {
           key:'换购积分',
           value:'',
-          prop:'party',
+          prop:'purchaseIntegral',
           type:'default',
         },
         {
           key:'商品状态',
           value:'',
-          prop:'party',
+          prop:'saleText',
+          type:'default',
+        },
+        {
+          key:'获得积分',
+          value:'',
+          prop:'obtainIntegral',
+          type:'default',
+        },
+        {
+          key:'是否直降',
+          value:'',
+          prop:'dropText',
+          type:'default',
+        },
+        {
+          key:'简介',
+          value:'',
+          prop:'descInfo',
           type:'default',
         },
         {
           key:'操作',
           width:'140px',
           type:'button',
+          fix:'right',
           list:[
             {
               text:'编辑',
@@ -798,9 +818,10 @@ const state = {
               click:jump2Other
             },
             {
-              text:'查看图片',
+              text:'查看详情',
               type:'',
-              size:'mini'
+              size:'mini',
+              click:jump2Other
             }
           ]
         },
@@ -817,84 +838,91 @@ const state = {
         {
           key:'订单号',
           value:'',
-          prop:'',
+          prop:'orderNum',
           type:'default',
         },
         {
           key:'姓名',
           value:'',
-          prop:'party',
+          prop:'name',
           type:'default',
         },
         {
           key:'联系电话',
           value:'',
-          prop:'party',
+          prop:'telephone',
           type:'default',
         },
         {
           key:'商品名称',
           value:'',
-          prop:'party',
+          prop:'commodityName',
           type:'default',
         },
         {
           key:'商品单价',
           value:'',
-          prop:'party',
+          prop:'commodityPrice',
           type:'default',
         },
         {
           key:'数量',
           value:'',
-          prop:'party',
+          prop:'amount',
           type:'default',
         },
         {
           key:'支付金额',
           value:'',
-          prop:'party',
+          prop:'paymentMoney',
           type:'default',
         },
         {
           key:'扣除积分',
           value:'',
-          prop:'party',
+          prop:'deductionIntegral',
           type:'default',
         },
         {
           key:'下单日期',
           value:'',
-          prop:'party',
+          prop:'orderDate',
           type:'default',
         },
         {
           key:'提货日期',
           value:'',
-          prop:'party',
+          prop:'deliveryDate',
           type:'default',
         },
         {
           key:'操作人',
           value:'',
-          prop:'',
+          prop:'employeeId',
           type:'default'
         },
         {
           key:'状态',
           value:'',
-          prop:'',
+          prop:'stateText',
           type:'default'
         },
         {
           key:'操作',
           type:'button',
+          fix:'right',
+          width:'140px',
           list:[
             {
               text:'提货',
-              type:'',
+              elseText:'已提货',
+              type:'text',
+              valid:true,
               size:'mini',
-            }
+              value:2,
+              rules:'state',
+              click:handleTakeGood
+            },
           ]
         },
       ]
@@ -910,7 +938,7 @@ const state = {
         {
           key:'配件大类名称',
           value:'',
-          prop:'name',
+          prop:'category',
           type:'default',
         },
         {
@@ -920,10 +948,16 @@ const state = {
           list:[
             {
               text:'编辑',
-              type:'primary',
+              type:'text',
               size:'mini',
               click:openDialog,
             },
+            {
+              text:'删除',
+              type:'text',
+              size:'mini',
+              click:useDelAndFresh
+            }
           ]
         },
       ]

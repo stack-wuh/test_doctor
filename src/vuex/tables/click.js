@@ -1,4 +1,4 @@
-
+import { _g} from '../../utils/global'
 /**
  * 表格内按钮事件
  * 抽取页面组件按钮
@@ -28,7 +28,7 @@ export const jump2Other = (params ,types ,row) => {
       break ;
     case '自动回复配置' : rootPath = '/system/store/reply'  , child = '自动回复配置' , data = JSON.stringify(row)
       break ;
-    case '汽车精品管理' : rootPath = '/use/pub' , child = '编辑汽车精品信息'
+    case '汽车精品管理' : rootPath = types == '编辑' ? '/use/pub' : '' , child = types == '编辑' ? '编辑汽车精品信息' :'' , data = JSON.stringify(row)
       break ; 
     case '会员列表' : rootPath = '/member/pub' , child = '编辑会员信息'
       break ;
@@ -71,7 +71,18 @@ export const staffResetPwd = (params,types , row) => {
 export const staffDelAndFresh = (params , types , row) => {
   let { subMenu , child} = params
   let path = child || subMenu
-  window.$store.dispatch('staffDelAndFresh',{path , row})
+  window.$confirm('该操作将删除此条信息,是否继续?' ,'提示' ,{
+    confirmButtonText:'确定',
+    cancelButtonText:'取消',
+    type:'warning'
+  }).then(()=>{
+    window.$store.dispatch('staffDelAndFresh',{path , row})
+  }).catch(()=>{
+    _g.toastMsg({
+      type:'info',
+      msg:'操作已取消'
+    })
+  })
 }
 
 /**
@@ -81,7 +92,18 @@ export const staffDelAndFresh = (params , types , row) => {
 export const couponLevelDelAndFresh = (params , types , row) => {
   let {subMenu , child} = params
   let path = child || subMenu
-  window.$store.dispatch('couponLevelDel', {path , row})
+  window.$confirm('该操作将删除此条信息,是否继续?' ,'提示' ,{
+    confirmButtonText:'确定',
+    cancelButtonText:'取消',
+    type:'warning'
+  }).then(()=>{
+    window.$store.dispatch('couponLevelDel', {path , row})
+  }).catch(()=>{
+    _g.toastMsg({
+      type:'info',
+      msg:'操作已取消'
+    })
+  })
 }
 
 /**
@@ -97,6 +119,41 @@ export const memberDelAndFresh = (params , type , row) => {
     type:'warning',
   }).then(()=>{
     window.$store.dispatch('memberDelAndFresh' , {path , row})
+  }).catch(()=>{
+    window.$message({
+      type:'info',
+      message:'操作已取消！'
+    })
+  })
+}
+
+/**
+ * 用品管理 -- 精品订单管理 
+ * 表格按钮 提货事件
+ */
+export const handleTakeGood = (params ,type ,row) => {
+  if(type === '提货'){
+    window.$store.dispatch('handleTakeGood' , {row , path:params.child || params.subMenu})
+  }else{
+    _g.toastMsg({
+      type:'info',
+      msg:'不能重复提货!'
+    })
+    return 
+  }
+}
+/**
+ * 用品管理 -- 配件大类
+ * 表格按钮
+ * 删除事件
+ */
+export const useDelAndFresh = (params ,type ,row) => {
+  window.$confirm('该操作将删除此条信息,是否继续?' , '提示' , {
+    confirmButtonText:'确定',
+    cancelButtonText:'取消',
+    type:'warning',
+  }).then(()=>{
+    window.$store.dispatch('useDelAndFresh' , {path:params.child || params.subMenu , row})
   }).catch(()=>{
     window.$message({
       type:'info',

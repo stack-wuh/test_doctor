@@ -53,6 +53,7 @@ export const jump2Detail = params => {
   * 批量删除
   */
  export const DelAndFreshWithAll = ({params , choose} = {}) => {
+  let {menu ,subMenu ,child} = params
    if(!choose.length){
     _g.toastMsg({
       type:'error',
@@ -65,7 +66,13 @@ export const jump2Detail = params => {
      cancelButtonText:'删除',
      type:'warning',
    }).then(()=>{
-     window.$store.dispatch('memberDelAndFresh' , {path: params.child || params.subMenu , row:{id:choose}})
+     switch(menu){
+       case '系统管理' :  window.$store.dispatch('memberDelAndFresh' , {path: params.child || params.subMenu , row:{id:choose}})
+         break;
+       case '用品管理' : window.$store.dispatch('useDelAndFresh' , {path: params.child || params.subMenu , row:{id:choose}})
+         break;
+     }
+     
    }).catch(()=>{
      _g.toastMsg({
        type:'info',
