@@ -62,6 +62,7 @@ export default {
       'handleSubmitKepp':'keepPubAndPut' , 
       'handleSubmitCompany' : 'companyPubAndPut',
       'handleSubmitFaseReply' : 'fastReplyPubAndPut',
+      'handleSubmitParts' : 'partsPubAndPut'
     }),
     /**
      * dialog对话框
@@ -93,6 +94,8 @@ export default {
           case '保险公司' : this.handleSubmitCompany({path: this.rootPath ,form: this.myForm})
             break;
           case '快捷回复设置' : this.handleSubmitFaseReply({path: this.rootPath ,form: this.myForm})
+            break;
+          case '配件大类管理' : this.handleSubmitParts({path: this.rootPath ,form: this.myForm})
             break;
         }
         setTimeout(()=>{
