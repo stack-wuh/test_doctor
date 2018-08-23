@@ -233,6 +233,74 @@ export const forms = [
     },
   },
   {
+    name:'角色管理',
+    list:[
+      {
+        key:'角色名称',
+        value:'',
+        type:'input',
+        prop:'roleTitle',
+        rules:[
+          {
+            required:true,
+            message:'请编辑角色名称',
+            trigger:'blur',
+          }
+        ],
+      },
+      {
+        key:'角色类型',
+        value:'',
+        type:'select',
+        prop:'type',
+        list:[
+          {
+            label:'普通用户',
+            value:0,
+          },
+          {
+            label:'保养用户',
+            value:1
+          },
+          {
+            label:'续保顾问',
+            value:2
+          },
+          {
+            label:'保险顾问',
+            value:3
+          }
+        ],
+        rules:[
+          {
+            required:true,
+            message:'请选择角色类型',
+            trigger:['change','blur']
+          }
+        ]
+      },
+      {
+        key:'角色描述',
+        value:'',
+        type:'textarea',
+        rows:3,
+        prop:'description',
+        rules:[
+          {
+            required:true,
+            message:'请编辑角色描述',
+            trigger:'blur',
+          }
+        ]
+      },
+    ],
+    myForm:{
+      roleTitle:'',
+      type:'',
+      description:'',
+    }
+  },
+  {
     name:'会员卡等级设置',
     list:[
       {
