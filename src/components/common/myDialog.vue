@@ -2,7 +2,7 @@
   <section class="wrapper">
       <el-dialog :visible.sync="visibleDialog" ref="myDialog" :before-close="beforeClose" :title=" '编辑' + ($route.query.child || $route.query.subMenu)" >
           <el-form :model="myForm" ref="myForm" label-width="120px">
-            <el-form-item v-for="(item,index) in list" :key="index" :label="item.key" :prop="item.prop" :rules="item.rules" >
+            <el-form-item v-for="(item,index) in formatList" :key="index" :label="item.key" :prop="item.prop" :rules="item.rules" >
               <el-input class="my-input-320" v-if="item.type === 'input' || item.type == 'default' || !item.type " :placeholder="'请编辑'+item.key" v-model="myForm[item.prop]" ></el-input>
               <el-input class="my-input-320" v-if="item.type == 'textarea'" :placeholder="'请编辑' + item.key" v-model="myForm[item.prop]" :type="item.type || 'textarea'" :rows="item.rows || 2" ></el-input>
               <el-select class="my-input-320" v-if="item.type === 'select'" :placeholder="'请选择' + item.key" v-model="myForm[item.prop]" >
@@ -24,7 +24,7 @@
 
 <script>
 import {forms} from './utils/dialog.js'
-import {mapActions, mapMutations} from 'vuex'
+import {mapActions, mapMutations, mapGetters} from 'vuex'
 export default {
   name: 'myDialog',
   
@@ -35,6 +35,10 @@ export default {
     }
   },
   computed:{
+    ...mapGetters({
+      'departList':'formatDepList',
+      'roleList' : 'formatRoleList'
+    }),
     visibleDialog(){
       return this.$store.state.dialogVisible
     },
@@ -44,6 +48,17 @@ export default {
     formList(){
       return this.$store.state.tableRow
     },
+    formatList(){
+      return this.list && this.list.map(item => {
+        if(item.key == '上级部门'){
+          return {...item ,list: this.departList}
+        }else if(item.key == '角色类型'){
+          return {...item ,list: this.roleList}
+        }else{
+          return {...item}
+        }
+      })
+    }
   },
   watch:{
     rootPath(){
@@ -73,11 +88,13 @@ export default {
       this.$refs.myForm.resetFields()
       this.$store.commit('handlehideDialog')
     },
+
     getList(){
       let data = forms.find(item => item.name === this.rootPath)
       this.list = data && data.list
       this.myForm = this.formList ? this.formList : (data && data.myForm)
     },
+
     handleSubmit(){
      this.$refs.myForm.validate(valid=>{
        if(valid){
