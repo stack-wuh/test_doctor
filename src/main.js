@@ -18,6 +18,19 @@ Vue.config.productionTip = false
 
 window.rootPath = '/car_doctor'
 
+router.beforeEach((to, form, next) => {
+  if(to.name !== 'signin'){
+    $http.post('employee/checkLogin.do', {}, res=>{
+      if(res.status == 1){
+        router.push({name:'signin'})
+      }else{
+        next()
+      }
+    })
+  }
+  next()
+})
+
 new Vue({
   router,
   store,
