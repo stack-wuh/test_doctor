@@ -1,3 +1,4 @@
+import $http from '../utils/axios'
 export const state = {
   dialogVisible:false,
   dialogForm:{},
@@ -6,6 +7,8 @@ export const state = {
   search:{} , 
   tableRow:{},
   choose:'',
+  departmentList:[],
+  roleList:[]
 }
 
 export const mutations = {
@@ -33,6 +36,19 @@ export const mutations = {
   handelSelection(state , {params} = {}){
       state.choose = params
   },
+
+  /**
+   * 保存获取的部门列表
+   */
+  setDepartmentList(state ,{params} = {}){
+    state.departmentList = params && params
+  },
+  /**
+   * 保存获取的角色类型列表
+   */
+  setRoleList(state ,{params} ={}){
+    state.roleList = params && params
+  }
 }
 
 export const actions = {
@@ -52,9 +68,32 @@ export const actions = {
    */
   asyncHideDialog({commit}){
     commit('handlehideDialog')
+  },
+
+  /**
+   * select 上级部门列表
+   */
+  getDepartmentList({commit}){
+    $http.post('department/getSuperiorList.do', {} ,res => {
+      commit('setDepartmentList' ,{params:res.data})
+    })
+  },
+
+  /**
+   * seelct 角色类型列表
+   */
+  getRoleList({commit}){
+    $http.post('roleBackend/getRoleDrop.do' ,{} ,res => {
+      commit('setRoleList' ,{params:res.data})
+    })
   }
 }
 
 export const getters = {
-  
+  formatDepList(state){
+    return state.departmentList
+  },
+  formatRoleList(state){
+    return state.roleList
+  }
 }

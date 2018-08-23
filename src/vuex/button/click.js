@@ -45,7 +45,14 @@ export const jump2Detail = params => {
   * 出现dialog对话框
   */
  export const jump2AddWithDialog = (params ,text , row )=> {
+   let {subMenu ,child} = params.params
    window.$store.commit('handleOpenDialog',{params,text,row})
+    switch(child || subMenu){
+      case '部门管理' : window.$store.dispatch('getDepartmentList')
+        break;
+      case '角色管理' : window.$store.dispatch('getRoleList')
+        break;
+    }
  }
 
  /**
