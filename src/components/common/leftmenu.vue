@@ -62,7 +62,7 @@ export default {
             },
             {
               // label: "角色管理",
-              label:'角色权限',
+              label:'角色管理',
               mid_path: "/mid/container",
               path:'/system/store',
               // children: [
