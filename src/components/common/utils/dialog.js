@@ -17,7 +17,6 @@ export const forms = [
       {
         key:'上级部门',
         type:'select',
-        list:[],
         prop:'parentId',
         list:[
           {
@@ -55,7 +54,7 @@ export const forms = [
         prop:'state',
         list:[
           {
-            label:'正常',
+            label:'启用',
             value:1,
           },
           {
