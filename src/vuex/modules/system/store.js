@@ -88,7 +88,6 @@ const actions = {
    * dialog对话框编辑内容
    */
   depPubAndPut({commit ,dispatch},{form,path} = {}){
-    form = {...form , state:form.state === '正常' ? 1 : 0}
     $http.post('department/addDepartment.do',form,(res)=>{
       if(res.status == 0){
         setTimeout(()=>{
