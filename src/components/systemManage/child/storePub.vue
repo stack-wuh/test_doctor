@@ -90,18 +90,20 @@
           <el-form-item label="logo">
             <el-upload
               class="avatar-uploader"
-              action="https://jsonplaceholder.typicode.com/posts/"
-              :show-file-list="false">
-              <img v-if="imgUrl" :src="imgUrl" class="avatar">
+              :action="uploadUrl"
+              :show-file-list="false"
+              :on-success="handleUploadLogo"
+              name="upload_file">
+              <img v-if="form.logourl" :src="form.logourl" class="avatar">
               <i v-else class="el-icon-plus avatar-uploader-icon"></i>
             </el-upload>
           </el-form-item>
           <el-form-item label="二维码">
             <el-upload
               class="avatar-uploader"
-              action="https://jsonplaceholder.typicode.com/posts/"
+              :action="uploadUrl"
               :show-file-list="false">
-              <img v-if="imgUrl" :src="imgUrl" class="avatar">
+              <img v-if="form.qrCode" :src="form.qrCode" class="avatar">
               <i v-else class="el-icon-plus avatar-uploader-icon"></i>
             </el-upload>
           </el-form-item>
@@ -135,8 +137,10 @@ export default {
         lntegralProportion:'',
         wifiName:'',
         wifiPassword:'',
+        logourl:'',
+        qrCode:'',
       },
-      uploadUrl:'',
+      uploadUrl:rootPath + '/store/uploadPictures.do',
       imgUrl:'',
     }
   },
@@ -146,6 +150,9 @@ export default {
     })
   },
   methods: {
+    handleUploadLogo($event){
+      this.form.logourl = ($event.status == 0) && $event.data
+    }
   }
 }
 </script>
