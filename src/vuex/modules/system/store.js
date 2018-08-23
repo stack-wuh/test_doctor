@@ -50,6 +50,8 @@ const actions = {
         break;
       case '关注用户列表' : _url = ''
         break;
+      case '角色管理' : _url = 'roleBackend/getRoleList.do' 
+        break;
       case '会员卡等级设置' : _url = 'platform/getRankList.do'
         break;
       case '会员充值设置' : _url = 'platform/getRechargeList.do'
@@ -296,6 +298,19 @@ const actions = {
       },1000)
     })
   },
+  /**
+   * 系统管理 -- 角色管理
+   * 新增 / 编辑
+   */
+  RolePubAndPut({dispatch} , {form , path, form:{id}} = {}){
+    let _url = id ? 'roleBackend/updateRole.do' : 'roleBackend/addRole.do'
+    $http.post(_url ,form ,res => {
+      setTimeout(()=>{
+        dispatch('asyncHideDialog')
+        dispatch('getStoresList' ,{path})
+      },1000)
+    })
+  }
 }
 
 const getters = {
@@ -320,7 +335,9 @@ const getters = {
        return {...item , typeText:item.type == 0 ? '未到店' : '已到店'}
      }else if(keys.includes('keyword') && keys.includes('picture')){   // 自动回复
       return {...item , typeText:item.type == 0 ? '文本' : '图文'}
-     }else {
+     }else if(keys.includes('roleTitle') && keys.includes('type') && keys.includes('description')){
+      return {...item ,typeText:item.type == 0 ? '普通用户' : item.type == 1 ? '保养顾问' : item.type == 2 ? '续保顾问' : '保险顾问'}
+     }else{
        return {...item}
      }
    })
