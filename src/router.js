@@ -49,6 +49,8 @@ const ServeStore = resolve => require(['@/components/serveManage/mid/store'],res
 const ServeInsurePub = resolve => require(['@/components/serveManage/child/insurePub'],resolve)
 const ServeQuestionPub = resolve => require(['@/components/serveManage/child/questionPub'],resolve)
 
+const SellingStore = resolve => require(['@/components/sellingManage/mid/store'],resolve)
+
 
 export default new Router({
   mode: 'history',
@@ -237,6 +239,19 @@ export default new Router({
                   path:'/serve/question/pub',
                   name:'serveQuestionPub',
                   component:ServeQuestionPub
+                }
+              ],
+            },
+            {
+              path:'/system',
+              component:SystemIndex,
+              alias:'/selling',
+              redirect:'/selling/store',
+              children:[
+                {
+                  path:'/selling/store',
+                  name:'sellingStore',
+                  component:SellingStore
                 }
               ],
             }

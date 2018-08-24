@@ -467,19 +467,23 @@ export default {
               children: [
                 {
                   label: "业务开单",
-                  mid_path: "/container"
+                  mid_path: "/mid/container",
+                  path:'/selling/store',
                 },
                 {
                   label: "业务结算",
-                  mid_path: "/container"
+                  mid_path: "/mid/container",
+                  path:'/selling/store',
                 },
                 {
                   label: "业务出库",
-                  mid_path: "/container"
+                  mid_path: "/mid/container",
+                  path:'/selling/store',
                 },
                 {
                   label: "业务退货",
-                  mid_path: "/container"
+                  mid_path: "/mid/container",
+                  path:'/selling/store',
                 }
               ]
             },
@@ -488,15 +492,18 @@ export default {
               children: [
                 {
                   label: "套餐管理",
-                  mid_path: "/container"
+                  mid_path: "/mid/container",
+                  path:'/selling/store',
                 },
                 {
                   label: "套餐销售",
-                  mid_path: "/container"
+                  mid_path: "/mid/container",
+                  path:'/selling/store',
                 },
                 {
                   label: "会员套餐记录",
-                  mid_path: "/container"
+                  mid_path: "/mid/container",
+                  path:'/selling/store',
                 }
               ]
             },
@@ -505,15 +512,18 @@ export default {
               children: [
                 {
                   label: "采购订单",
-                  mid_path: "/container"
+                  mid_path: "/mid/container",
+                  path:'/selling/store',
                 },
                 {
                   label: "采购入库",
-                  mid_path: "/container"
+                  mid_path: "/mid/container",
+                  path:'/selling/store',
                 },
                 {
                   label: "采购退货",
-                  mid_path: "/container"
+                  mid_path: "/mid/container",
+                  path:'/selling/store',
                 }
               ]
             },
@@ -522,11 +532,13 @@ export default {
               children: [
                 {
                   label: "付款管理",
-                  mid_path: "/container"
+                  mid_path: "/mid/container",
+                  path:'/selling/store',
                 },
                 {
                   label: "挂账还款",
-                  mid_path: "/container"
+                  mid_path: "/mid/container",
+                  path:'/selling/store',
                 }
               ]
             },
@@ -535,16 +547,18 @@ export default {
               children: [
                 {
                   label: "调拨发起",
-                  mid_path: "/container",
-                  mid_path: "/container"
+                  mid_path: "/mid/container",
+                  path:'/selling/store',
                 },
                 {
                   label: "调拨接收",
-                  mid_path: "/container"
+                  mid_path: "/mid/container",
+                  path:'/selling/store',
                 },
                 {
                   label: "日常盘点",
-                  mid_path: "/container"
+                  mid_path: "/mid/container",
+                  path:'/selling/store',
                 }
               ]
             },
@@ -553,31 +567,38 @@ export default {
               children: [
                 {
                   label: "供应商设置",
-                  mid_path: "/container"
+                  mid_path: "/mid/container",
+                  path:'/selling/store',
                 },
                 {
                   label: "仓库设置",
-                  mid_path: "/container"
+                  mid_path: "/mid/container",
+                  path:'/selling/store',
                 },
                 {
                   label: "商品分类设置",
-                  mid_path: "/container"
+                  mid_path: "/mid/container",
+                  path:'/selling/store',
                 },
                 {
                   label: "项目分类设置",
-                  mid_path: "/container"
+                  mid_path: "/mid/container",
+                  path:'/selling/store',
                 },
                 {
                   label: "项目配置",
-                  mid_path: "/container"
+                  mid_path: "/mid/container",
+                  path:'/selling/store',
                 },
                 {
                   label: "物流公司配置",
-                  mid_path: "/container"
+                  mid_path: "/mid/container",
+                  path:'/selling/store',
                 },
                 {
                   label: "支付方式配置",
-                  mid_path: "/container"
+                  mid_path: "/mid/container",
+                  path:'/selling/store',
                 }
               ]
             },
@@ -586,59 +607,59 @@ export default {
               children: [
                 {
                   label: "库存报表",
-                  mid_path: "/container"
+                  mid_path: "/mid/container"
                 },
                 {
                   label: "出入库明细表",
-                  mid_path: "/container"
+                  mid_path: "/mid/container"
                 },
                 {
                   label: "盘点明细表",
-                  mid_path: "/container"
+                  mid_path: "/mid/container"
                 },
                 {
                   label: "日报月报",
-                  mid_path: "/container"
+                  mid_path: "/mid/container"
                 },
                 {
                   label: "员工绩效表",
-                  mid_path: "/container"
+                  mid_path: "/mid/container"
                 },
                 {
                   label: "销售统计表",
-                  mid_path: "/container"
+                  mid_path: "/mid/container"
                 },
                 {
                   label: "商品销售统计",
-                  mid_path: "/container"
+                  mid_path: "/mid/container"
                 },
                 {
                   label: "项目销售统计",
-                  mid_path: "/container"
+                  mid_path: "/mid/container"
                 },
                 {
                   label: "采购明细表",
-                  mid_path: "/container"
+                  mid_path: "/mid/container"
                 },
                 {
                   label: "挂账单据明细表",
-                  mid_path: "/container"
+                  mid_path: "/mid/container"
                 },
                 {
                   label: "挂账还款明细表",
-                  mid_path: "/container"
+                  mid_path: "/mid/container"
                 },
                 {
                   label: "营业额统计表",
-                  mid_path: "/container"
+                  mid_path: "/mid/container"
                 },
                 {
                   label: "收款统计",
-                  mid_path: "/container"
+                  mid_path: "/mid/container"
                 },
                 {
                   label: "付款统计",
-                  mid_path: "/container"
+                  mid_path: "/mid/container"
                 }
               ]
             }
