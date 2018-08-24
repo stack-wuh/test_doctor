@@ -9,7 +9,7 @@ const state = {
   list:[
     {
       name:'新增导出',
-      desc:'新增导出两大类别按钮组',
+      desc:'新增导出两大类别按钮组,跳转到指定页面',
       params:['门店管理'],
       btn:[
         {
@@ -18,6 +18,27 @@ const state = {
           size:'small',
           style:'',
           click:jump2Add,
+        },
+        {
+          text:'导出',
+          type:'',
+          size:'small',
+          style:'',
+          click:jump2Detail,
+        }
+      ]
+    },
+    {
+      name:'新增导出',
+      desc:'新增导出两大类别按钮组,打开一个dialog对话框',
+      params:['套餐销售'],
+      btn:[
+        {
+          text:'新增',
+          type:'',
+          size:'small',
+          style:'',
+          click:jump2AddWithDialog,
         },
         {
           text:'导出',
@@ -58,7 +79,7 @@ const state = {
     {
       name:'新增删除',
       desc:'新增删除按钮组(表格顶部批量删除),弹出一个dialog对话框',
-      params:['会员充值设置','保养提醒设置','保险公司','快捷回复设置','配件大类管理','奖品卡券管理','预约时间管理','养车知识','养车知识分类'],
+      params:['会员充值设置','保养提醒设置','保险公司','快捷回复设置','配件大类管理','奖品卡券管理','预约时间管理','养车知识','养车知识分类','套餐管理','采购订单','采购入库','采购退货','付款管理','调拨接收','调拨发起','日常盘点'],
       btn:[
         {
           text:'新增',
@@ -99,7 +120,7 @@ const state = {
     {
       name:'导出',
       desc:'单独导出按钮',
-      params:['精品订单管理','充值明细','消费明细','用户奖励','员工奖励','保险服务','检修记录'],
+      params:['精品订单管理','充值明细','消费明细','用户奖励','员工奖励','保险服务','检修记录','业务结算'],
       btn:[
         {
           text:'导出',
@@ -289,6 +310,62 @@ const state = {
           text:'下架',
           type:'',
           size:'small',
+          style:'',
+        }
+      ]
+    },
+    {
+      name:'开单导出删除',
+      desc:'业务开单模块定制模板',
+      params:['业务开单'],
+      btn:[
+        {
+          text:'开单',
+          type:'',
+          size:'',
+          style:'',
+        },
+        {
+          text:'快速开单',
+          type:'',
+          size:'',
+          style:'',
+        },
+        {
+          text:'导出',
+          type:'',
+          size:'',
+          style:'',
+        },
+        {
+          text:'删除',
+          type:'',
+          size:'',
+          style:'',
+        }
+      ],
+    },
+    {
+      name:'新增删除导出',
+      desc:'业务出库模块定制',
+      params:['业务出库','业务退货'],
+      btn:[
+        {
+          text:'新增',
+          type:'',
+          size:'',
+          style:'',
+        },
+        {
+          text:'删除',
+          type:'',
+          size:'',
+          style:'',
+        },
+        {
+          text:'导出',
+          type:'',
+          size:'',
           style:'',
         }
       ]
