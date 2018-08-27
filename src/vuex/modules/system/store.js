@@ -39,34 +39,35 @@ const actions = {
    * @param {*} param0 
    * @param {*} params 
    */
-  getStoresList({commit,rootState},{path , search} = {}){
+  getStoresList({commit,rootState},{path, search, currPageNo = 1} = {}){
     let _url ;
     switch(path){
-      case '门店管理' : _url = '/store/getStoreList.do'
+      case '门店管理' : _url = '/store/getStoreList.do' , search = {...rootState.search, currPageNo}
         break ;
-      case '部门管理' : _url = '/department/getDepartmentList.do'
+      case '部门管理' : _url = '/department/getDepartmentList.do', search = {...rootState.search, currPageNo}
         break ;
-      case '员工列表' : _url = 'employee/getEmployeeList.do' , search = {...rootState.search , search}
+      case '员工列表' : _url = 'employee/getEmployeeList.do' , search = {...rootState.search, search}
         break;
-      case '关注用户列表' : _url = ''
+      case '关注用户列表' : _url = 'user/getUserList.do', search = {...rootState.search, currPageNo}
         break;
       case '角色管理' : _url = 'roleBackend/getRoleList.do' 
         break;
-      case '会员卡等级设置' : _url = 'platform/getRankList.do'
+      case '会员卡等级设置' : _url = 'platform/getRankList.do', search = {currPageNo}
         break;
-      case '会员充值设置' : _url = 'platform/getRechargeList.do'
+      case '会员充值设置' : _url = 'platform/getRechargeList.do', search = {currPageNo}
         break;
-      case '保养提醒设置' : _url = 'platform/getRemindList.do'
+      case '保养提醒设置' : _url = 'platform/getRemindList.do', search = {currPageNo}
         break;
-      case '自动回复配置' : _url = 'platform/getAutoResponseList.do'
+      case '自动回复配置' : _url = 'platform/getAutoResponseList.do', search = {currPageNo}
         break;
-      case '保险公司' : _url = 'platform/getInsuranceList.do'
+      case '保险公司' : _url = 'platform/getInsuranceList.do', search = {...rootState.search, currPageNo}
         break;
-      case '快捷回复设置' : _url = 'platform/getFastReplyList.do'
+      case '快捷回复设置' : _url = 'platform/getFastReplyList.do', search = {...rootState.search, currPageNo}
         break;
     }
     $http.post(_url,search,(res)=>{
       commit('setStoreList',{params:res.data})
+      commit('handleClear')
     })
   },
 
@@ -98,7 +99,7 @@ const actions = {
     })
   },
   /**
-   * staff 员工列表
+   * staff 员工列表 -- 更新
    * dialog对话框编辑内容
    * @param {*} param0 
    * @param {*} param1 
@@ -111,6 +112,44 @@ const actions = {
           dispatch('getStoresList',{path})
         },1000)
       )
+    })
+  },
+  /**
+   * staff 员工列表 -- 添加新的员工
+   * dialog对话框
+   */
+  staffFirstPub({commit, dispatch}, {form:{
+    departmentId,
+    realName,
+    sex,
+    phone,
+    birthday,
+    username,
+    passwrod,
+    idNum,
+    email,
+    reservation,
+    userId,
+    roleId,
+  }, path} = {}){
+    $http.post('employee/addEmployee.do', {
+      departmentId,
+      realName,
+      sex,
+      phone,
+      birthday,
+      username,
+      passwrod,
+      idNum,
+      email,
+      reservation,
+      userId,
+      roleId,
+    }, res=>{
+      setTimeout(()=>{
+        dispatch('asyncHideDialog')
+        dispatch('getStoresList',{path})
+      },1000)
     })
   },
   /**
@@ -133,11 +172,9 @@ const actions = {
    */
   staffDelAndFresh({dispatch},{path , row:{id}} = {}){
     $http.post('employee/delEmployee.do',{id} , res=>{
-      res.status && (
         setTimeout(()=>{
           dispatch('getStoresList',{path})
         },1000)
-      )
     })
   },
 
@@ -212,9 +249,19 @@ const actions = {
    * 会员充值设置
    * 会员充值新增/更新
    */
-  memberPayPubAndPut({dispatch} , {form , path , form:{id}} = {}){
+  memberPayPubAndPut({dispatch} , {path , form:{
+    id, 
+    rechargeAmount,
+    donationAmount,
+    giftIntegral,
+    couponId,}} = {}){
     let _url = id ? 'platform/updateRecharge.do' : 'platform/addRecharge.do'
-    $http.post( _url , form , res => {
+    $http.post( _url , {
+      rechargeAmount,
+      donationAmount,
+      giftIntegral,
+      couponId:couponId.toString()
+    }, res => {
       setTimeout(()=>{
         dispatch('asyncHideDialog')
         dispatch('getStoresList' , {path})
@@ -309,6 +356,36 @@ const actions = {
         dispatch('getStoresList' ,{path})
       },1000)
     })
+  },
+  /**
+   * 系统管理 -- 关注后消息推送
+   */
+  pushPubAndPut({dispatch}, {form, path, form:{id}} = {}){
+    let list = {}
+    form.forEach(item => {
+      list[item.prop] = item.value
+      if(item.pushType != 0){
+        list.typeId = item.pushType
+      }
+    })
+    $http.post('platform/addMessagePush.do', list, res => {
+
+    })
+  },
+  /**
+   * 系统管理 -- 切换状态
+   */
+  handleChangeState({commit},{row:{id, state, status},path} = {}){
+    let _url = ''
+    switch(path){
+      case '部门管理' : _url = 'department/addDepartment.do' 
+        break;
+      case '员工列表' : _url = 'employee/bannedEmployee.do'
+        break;
+      case '自动回复配置' : _url = 'platform/updateAutoResponse.do'
+        break;
+    }
+    $http.post(_url, {id, state, status})
   }
 }
 
@@ -328,8 +405,10 @@ const getters = {
   changeStateDataList(state,getters){ 
    return  (getters.formatStoreDataList) && (Array.isArray(getters.formatStoreDataList)) && getters.formatStoreDataList.map(item => {
      let keys = Object.keys(item)
-     if( item.storeName || item.depName){  // 门店/部门过滤
+     if(item.depName){  // 门店/部门过滤
        return {...item , stateText:item.state == 0 ? '禁用' : '正常'}
+     }else if(keys.includes('storeName')){
+       return {...item, stateText:item.state == 0 ? '禁用' : '正常', typeText:item.type == 0 ? '集团' : item.type == 1 ? '4s店' : '维修店'}
      }else if(keys.includes('days') && keys.includes('content') && keys.includes('type') ){  // 保养提醒过滤
        return {...item , typeText:item.type == 0 ? '未到店' : '已到店'}
      }else if(keys.includes('keyword') && keys.includes('picture')){   // 自动回复
