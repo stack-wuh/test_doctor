@@ -36,6 +36,7 @@
    memberDelAndFresh ,
    handleTakeGood ,
    useDelAndFresh ,
+   handleSwitchChange,
   } from './click.js'
 const state = {
   data:[
@@ -69,7 +70,7 @@ const state = {
         {
           key:'门店类型',
           value:'',
-          prop:'storeType',
+          prop:'typeText',
           type:'default',
         },
         {
@@ -140,11 +141,11 @@ const state = {
           fix:'right',
           width:'180px',
           list:[
-            {
-              text:'查看',
-              type:'text',
-              size:'small',
-            },
+            // {
+            //   text:'查看',
+            //   type:'text',
+            //   size:'small',
+            // },
             {
               text:'编辑',
               type:'text',
@@ -180,6 +181,7 @@ const state = {
           value:'',
           type:'switch',
           prop:'state',
+          change:handleSwitchChange,
         },
         {
           key:'描述',
@@ -273,7 +275,7 @@ const state = {
         {
           key:'微信昵称',
           type:'default',
-          prop:'nickName',
+          prop:'nickname',
         },
         {
           key:'姓名',
@@ -293,7 +295,7 @@ const state = {
         {
           key:'所在部门',
           type:'default',
-          prop:'dpt',
+          prop:'depName',
         },
         {
           key:'角色',
@@ -315,6 +317,7 @@ const state = {
           type:'switch',
           prop:'state',
           width:'140px',
+          change:handleSwitchChange
         },
         {
           key:'操作',
@@ -368,22 +371,22 @@ const state = {
         {
           key:'微信昵称',
           type:'default',
-          prop:'nickName',
+          prop:'nickname',
         },
         {
           key:'姓名',
           type:'default',
-          prop:'name',
+          prop:'realName',
         },
         {
           key:'性别',
           type:'default',
-          prop:'gender',
+          prop:'sex',
         },
         {
           key:'出生日期',
           type:'default',
-          prop:'birth',
+          prop:'birthday',
         },
         {
           key:'联系电话',
@@ -398,6 +401,7 @@ const state = {
               text:'设为员工',
               type:'primary',
               size:'mini',
+              click:openDialog
             }
           ]
         }
@@ -606,6 +610,7 @@ const state = {
           value:'',
           prop:'stateText',
           type:'switch',
+          change:handleSwitchChange
         },
         {
           key:'操作',
