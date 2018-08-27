@@ -52,6 +52,8 @@ export const jump2Detail = params => {
         break;
       case '角色管理' : window.$store.dispatch('getRoleList')
         break;
+      case '会员充值设置' : window.$store.dispatch('getCouponList')
+        break;
     }
  }
 
@@ -70,7 +72,7 @@ export const jump2Detail = params => {
    }
    window.$confirm('该操作将删除多条信息,确认继续?' , '提示' , {
      confirmButtonText:'确定',
-     cancelButtonText:'删除',
+     cancelButtonText:'取消',
      type:'warning',
    }).then(()=>{
      switch(menu){
@@ -86,4 +88,16 @@ export const jump2Detail = params => {
        msg:'操作已取消',
      })
    })
+ }
+
+ /**
+  * 导出数据为表格
+  * JSON2Excel
+  */
+ export const export2Excel = ({params}) => {
+   let {menu, subMenu, child} = params
+   switch(child || subMenu){
+     case '门店管理' : return location.href = window.rootPath + '/store/outStore.do' ;
+     case '精品订单管理' : return location.href = window.rootPath + 'quality/outQulity.do'
+   }
  }
