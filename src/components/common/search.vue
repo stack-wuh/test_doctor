@@ -14,7 +14,6 @@
           <el-input @change="SearchValueChange" clearable class="item" v-if="item.type == 'input' || item.type == 'default'" :placeholder="item.key" v-model="form[item.prop]"></el-input>
           <el-select @change="SearchValueChange" clearable class="item" v-if="item.type == 'select'" :placeholder="item.key" v-model="form[item.prop]">
             <el-option v-if="item.list" v-for="(list,lindex) in item.list" :key="lindex" :label="list.label" :value="list.value" ></el-option>
-            <el-option v-else label="aaa" value="bbb"></el-option>
           </el-select>
           <el-date-picker @change="SearchValueChange"  class="item" v-if="item.type == 'date'" :placeholder="item.key" :type="item.type" v-model="form[item.prop]" value-format="yyyy-MM-dd"></el-date-picker>
         </section>
@@ -90,15 +89,16 @@ export default {
     .list-box{
       @include flex-box(row,wrap,flex-start,flex-start);
       width: 100%;
-      // min-height: 80px;
       padding: 15px;
       padding-bottom: 0;
       background-color: #fff;
       box-sizing: border-box;
-      .list-item , .item{
-        width: 220px;
-        margin-right: 15px;
+      .list-item{
+        width:25%;
         margin-bottom: 10px;
+        .item{
+          width:80%;
+        }
       }
     }
   }
