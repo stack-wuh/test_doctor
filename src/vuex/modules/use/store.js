@@ -9,10 +9,10 @@ const actions = {
   /**
    * 获取用品管理模块表格数据
    */
-  getUseStore({commit ,rootState} , {path ,search } = {}){
+  getUseStore({commit ,rootState, dispatch} , {path ,search } = {}){
     let _url = ''
     switch(path){
-      case '汽车精品管理' : _url = 'quality/getQualityList.do' , search = {...rootState.search ,search}
+      case '汽车精品管理' : _url = 'quality/getQualityList.do' , search = {...rootState.search ,search}, dispatch('getCarTypeList')
         break; 
       case '精品订单管理' : _url = 'quality/getOrderList.do' , search = {...rootState.search ,search}
         break;
