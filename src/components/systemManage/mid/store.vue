@@ -8,7 +8,7 @@
             <my-button  ></my-button>
         </div>
       </my-table>
-      <bottom :total="total" :currentPage="currentPage" />
+      <bottom @getCurrent="getCurrent" :total="total" :currentPage="currentPage" />
     </section>
   </section>
 </template>
@@ -62,6 +62,9 @@ export default {
     }),
     inputChange(e){
       console.log(e)
+    },
+    getCurrent(value){
+      this.getStoresList({path: this.pathChange, currPageNo: value})
     }
   },
   created(){
