@@ -18,7 +18,7 @@
       <el-table-column v-if="item.type === 'default'" align="center" v-for="(item,index) in tableList.list" :key="index" :label="item.key" :prop="item.prop" :width="item.width || '' " ></el-table-column>
       <el-table-column v-if="item.type === 'switch'" align="center" v-for="(item,index) in tableList.list" :key="index" :label="item.key" :prop="item.prop" :width="item.width || ''">
         <template slot-scope="scope">
-          <el-switch v-model="scope.row.state" active-text="启用" inactive-text="禁用" inactive-color="#999999" :active-value="1" :inactive-value="0" ></el-switch>
+          <el-switch v-model="scope.row.state" @change="item.change(routers,scope.row)" active-text="启用" inactive-text="禁用" inactive-color="#999999" :active-value="1" :inactive-value="0" ></el-switch>
         </template>
       </el-table-column>
       <el-table-column v-if="item.type === 'button'" :fixed="item.fix" :width="item.width" align="center" v-for="(item,index) in tableList.list" :key="index" :label="item.key">
