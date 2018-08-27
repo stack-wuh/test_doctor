@@ -3,6 +3,7 @@ import {
   jump2Add , 
   jump2AddWithDialog ,
   DelAndFreshWithAll ,
+  export2Excel ,
 } from './click'
 import { openDialog } from '../tables/click';
 const state = {
@@ -24,7 +25,7 @@ const state = {
           type:'',
           size:'small',
           style:'',
-          click:jump2Detail,
+          click:export2Excel,
         }
       ]
     },
@@ -86,7 +87,7 @@ const state = {
           type:'',
           size:'small',
           style:'',
-          click:openDialog
+          click:jump2AddWithDialog
         },
         {
           text:'删除',
@@ -114,6 +115,7 @@ const state = {
           type:'',
           size:'small',
           style:'',
+          click:DelAndFreshWithAll
         }
       ]
     },
