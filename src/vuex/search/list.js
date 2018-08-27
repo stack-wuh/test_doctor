@@ -22,6 +22,20 @@ const state = {
           type:'select',
           prop:'type',
           value:'',
+          list:[
+            {
+              label:'集团',
+              value:0
+            },
+            {
+              label:'4s店',
+              value:1
+            },
+            {
+              label:'维修点',
+              value:2
+            }
+          ],
         },
         {
           key:'服务开始日期',
@@ -40,13 +54,23 @@ const state = {
           type:'select',
           prop:'state',
           value:'',
+          list:[
+            {
+              label:'正常',
+              value:1
+            },
+            {
+              label:'禁用',
+              value:0
+            }
+          ],
         }
       ]
     },
     {
       name:'staff',
       type:'',
-      params:['员工管理','员工列表'],
+      params:['员工管理','员工列表','关注用户列表'],
       list:[
         {
           key:'姓名',
@@ -117,7 +141,7 @@ const state = {
           key:'保险公司名称',
           type:'input',
           value:'',
-          prop:'',
+          prop:'keyword',
         }
       ]
     },
@@ -130,7 +154,21 @@ const state = {
           key:'使用角色类型',
           type:'select',
           value:'',
-          prop:'',
+          prop:'roleId',
+          list:[
+            {
+              label:'销售顾问',
+              value:0
+            },
+            {
+              label:'续保顾问',
+              value:1
+            },
+            {
+              label:'售后顾问',
+              value:3
+            }
+          ]
         }
       ]
     },
@@ -148,8 +186,9 @@ const state = {
         {
           key:'请选择精品大类',
           type:'select',
-          prop:'type',
+          prop:'categoryId',
           value:'',
+          list:[],
         },
         {
           key:'是否推荐',
@@ -1682,8 +1721,17 @@ const actions = {}
 const mutations = {}
 
 const getters = {
-  getSearchListByPrams : state => parmas => {
-    const arr =  state.types.filter(item => item.params && item.params.includes(parmas.name))
+  getSearchListByPrams : (state, rootGetters) => parmas => {
+    let arr =  state.types.filter(item => item.params && item.params.includes(parmas.name))
+    arr.map(item => {
+      item.list.map(sub => {
+        if(sub.key === '请选择精品大类' && sub.type === 'select'){
+          sub.list = rootGetters.formatCarTypeList
+        }
+        return {...sub}
+      })
+      return {...item}
+    })
     return arr[0] ? arr[0].list : []
     // return state.types.find(item => item.params && item.params.includes(parmas.name) ? item : []).list
   },
