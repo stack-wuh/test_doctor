@@ -5,7 +5,7 @@
             <el-form-item v-for="(item,index) in formatList" :key="index" :label="item.key" :prop="item.prop" :rules="item.rules" >
               <el-input class="my-input-320" v-if="item.type === 'input' || item.type == 'default' || !item.type " :placeholder="'请编辑'+item.key" v-model="myForm[item.prop]" ></el-input>
               <el-input class="my-input-320" v-if="item.type == 'textarea'" :placeholder="'请编辑' + item.key" v-model="myForm[item.prop]" :type="item.type || 'textarea'" :rows="item.rows || 2" ></el-input>
-              <el-select class="my-input-320" v-if="item.type === 'select'" :placeholder="'请选择' + item.key" v-model="myForm[item.prop]" >
+              <el-select :multiple="item.multiple || false" class="my-input-320" v-if="item.type === 'select'" :placeholder="'请选择' + item.key" v-model="myForm[item.prop]" >
                 <el-option v-if="item.list" v-for="(list,lindex) in item.list" :key="lindex" :label="list.label" :value="list.value" ></el-option>
                 <el-option label="aaa" value="aaa" v-else ></el-option>
               </el-select>
@@ -37,7 +37,8 @@ export default {
   computed:{
     ...mapGetters({
       'departList':'formatDepList',
-      'roleList' : 'formatRoleList'
+      'roleList' : 'formatRoleList',
+      'couponList': 'formatCouponList',
     }),
     visibleDialog(){
       return this.$store.state.dialogVisible
@@ -52,8 +53,12 @@ export default {
       return this.list && this.list.map(item => {
         if(item.key == '上级部门'){
           return {...item ,list: this.departList}
-        }else if(item.key == '角色类型'){
+        }else if(item.key == '角色类型' || item.key == '员工角色'){
           return {...item ,list: this.roleList}
+        }else if(item.key == '所属部门'){
+          return {...item, list: this.departList}
+        }else if(item.key == '赠送卡券'){
+          return {...item, list:this.couponList}
         }else{
           return {...item}
         }
@@ -78,7 +83,8 @@ export default {
       'handleSubmitCompany' : 'companyPubAndPut',
       'handleSubmitFaseReply' : 'fastReplyPubAndPut',
       'handleSubmitParts' : 'partsPubAndPut',
-      'handleSubmitRole' : 'RolePubAndPut'
+      'handleSubmitRole' : 'RolePubAndPut' ,
+      'handleSubmitFirstStaff' : 'staffFirstPub'
     }),
     /**
      * dialog对话框
@@ -102,6 +108,8 @@ export default {
           case '部门管理' : this.handleSubmitDep({ path: this.rootPath ,form: this.myForm })
             break;
           case '员工列表' : this.handleSubmitStaff({path: this.rootPath ,form:this.myForm})
+            break;
+          case '关注用户列表' : this.handleSubmitFirstStaff({path: this.rootPath, form: this.myForm})
             break;
           case '会员卡等级设置' : this.handleSubmitCouponLevel({path: this.rootPath ,form: this.myForm})
             break;
@@ -132,6 +140,7 @@ export default {
   },
   created(){
     this.getList()
+    console.log(this.formList)
   }
 }
 </script>
