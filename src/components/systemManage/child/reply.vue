@@ -25,7 +25,9 @@
               <el-upload
                 class="avatar-uploader"
                 :action="uploadUrl"
-                :show-file-list="false">
+                :show-file-list="false"
+                name="upload_file"
+                :on-success="handleUploadPic">
                 <img v-if="form.picture" :src="form.picture" class="avatar" style="width:100%;height:100%;" >
                 <i v-else class="el-icon-plus avatar-uploader-icon"></i>
               </el-upload>
@@ -51,20 +53,23 @@ export default {
   },
   data () {
     return {
-      uploadUrl:'',
-      imageUrl:'',
+      uploadUrl:window.rootPath + '/store/uploadPictures.do',
       type:0,
       form:{
         keyword:'',
         type:'',
-        picture:'http://a4.att.hudong.com/50/35/01300000110309121921352591438.gif',
+        picture:'',
         content:'',
         state:'',
       }
     }
   },
 
-  methods: {},
+  methods: {
+    handleUploadPic(res){
+      (res.status == 0) && (this.form.picture = res.data)
+    },
+  },
   created(){
     let data =  this.$route.query.data && JSON.parse(this.$route.query.data)
     this.form = Object.assign(this.form , data)
@@ -75,10 +80,11 @@ export default {
 <style scoped lang='scss' >
 @import '../../../assets/style/mixin.scss';
 .wrapper{
-  height: 100%;
+  padding-top:10px;
   .content{
     height: 100%;
     padding: 20px 0;
+    box-sizing: border-box;
     background-color: #fff;
     .inline-box{
       @include flex-box(row,nowrap,space-between,center);
