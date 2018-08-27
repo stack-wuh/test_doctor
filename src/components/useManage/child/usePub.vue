@@ -21,7 +21,7 @@
         <section class="inline-box">
           <el-form-item label="精品大类" prop="categoryId">
             <el-select placeholder="请选择精品大类" v-model="form.categoryId" >
-              <el-option label="aaa" value="1"></el-option>
+              <el-option v-for="(item,index) in typeList" :key="index" :label="item.label" :value="item.value" ></el-option>
             </el-select>
           </el-form-item>
           <el-form-item label="商品状态" prop="commodityState">
@@ -68,8 +68,10 @@
           <el-form-item label="列表首图" prop="firstPicture" >
             <el-upload
               class="avatar-uploader"
-              action="https://jsonplaceholder.typicode.com/posts/"
-              :show-file-list="false">
+              :action='uploadUrl'
+              :show-file-list="false"
+              :on-success="handleUpload"
+              name="upload_file">
               <img v-if="form.firstPicture" :src="form.firstPicture" class="avatar">
               <i v-else class="el-icon-plus avatar-uploader-icon"></i>
             </el-upload>
@@ -90,7 +92,7 @@
 
 <script>
 import MyBottom from '@/components/common/bottom'
-import {mapState ,mapActions} from 'vuex'
+import {mapState ,mapActions, mapGetters} from 'vuex'
 
 const rules = {
   name:[{required:true,message:'请编辑精品名称',trigger:'blur'}],
@@ -116,8 +118,9 @@ export default {
   data () {
     return {
       rules,
+      uploadUrl:window.rootPath + '/store/uploadPictures.do',
       form:{
-        firstPicture:'https://tse4.mm.bing.net/th?id=OIP.tYdRHM10gAENpc06EKLBjQHaE7&pid=Api',
+        firstPicture:'',
         categoryId:'',
         name:'',
         originalPrice:'',
@@ -135,10 +138,14 @@ export default {
     }
   },
   computed:{
+    ...mapGetters({
+      'typeList':'formatCarTypeList'
+    })
   },
   methods: {
     ...mapActions({
-      'formPub':'highPubAndPut'
+      'formPub':'highPubAndPut',
+      'getList':'getCarTypeList'
     }),
     cancel(){
       this.$refs.myForm.resetFields()
@@ -146,11 +153,20 @@ export default {
         this.$router.go(-2)
       },500)
     },
+    handleUpload($event){
+      ($event.status == 0) && (
+        this.form.firstPicture = $event.data
+      )
+    },
     submit(){
       this.$refs.myForm.validate(valid => {
-        if(!valid){
+        if(valid){
           this.formPub({form:this.form}).then(res => {
-            console.log(res)
+            if(res.status == 0){
+              setTimeout(()=>{
+                this.cancel()
+              },1000)
+            }
           })
         }else{
           _g.toastMsg({
@@ -162,8 +178,11 @@ export default {
     }
   },
   created(){
-    let data =  (this.$route.query.data ) && JSON.parse(this.$route.query.data)
-    this.form = data
+    this.getList()
+    let data = this.$route.query.data
+    if(data){
+      this.form = JSON.parse(data)
+    }
   },
 }
 </script>
