@@ -9,6 +9,15 @@ import { _g} from '../../utils/global'
  * 
  */
 export const openDialog = (params,text,row) => {
+  let {menu, subMenu, child} = params
+  switch(child || subMenu){
+    case '部门管理' : window.$store.dispatch('getDepartmentList')  //获得上级部门列表
+        break;
+    case '关注用户列表' : window.$store.dispatch('getDepartmentList'), window.$store.dispatch('getRoleList')
+        break;
+    case '会员充值设置' : window.$store.dispatch('getCouponList')
+        break;
+  }
    window.$store.commit('handleOpenDialog',{params,text,row}) 
 }
 
@@ -22,7 +31,7 @@ export const jump2Other = (params ,types ,row) => {
   let {menu , subMenu ,child , path} = params
   let rootPath = '' , other = '' , data = ''
   switch(child || subMenu){
-    case '门店管理' : rootPath = '/system/store/pub' , child = '发布新店'
+    case '门店管理' : rootPath = '/system/store/pub' , child = '发布新店', data = JSON.stringify(row)
       break ;
     case '角色权限' : rootPath = '/system/limit/setting' , child = '编辑角色权限'
       break ;
@@ -160,4 +169,13 @@ export const useDelAndFresh = (params ,type ,row) => {
       message:'操作已取消！'
     })
   })
+}
+
+/**
+ * 表格事件 -- switch类型的change事件
+ * 切换状态
+ */
+export const handleSwitchChange = (params, row) => {
+  let {subMenu, child} = params
+  window.$store.dispatch('handleChangeState', {row, path: child || subMenu})
 }
