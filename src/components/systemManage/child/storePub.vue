@@ -2,24 +2,24 @@
   <section class="wrapper">
     <section class="content">
       <section class="form-box">
-        <el-form class="my-form" :modal="MyForm" label-width="140px" >
+        <el-form class="my-form" :model="MyForm" label-width="140px" >
           <section class="inline-box">
             <el-form-item class="box-item" label="门店名称">
               <el-input v-model="MyForm['storeName']" placeholder="请编辑门店名称" class="box-input" ></el-input>
             </el-form-item>
             <el-form-item class="box-item" label="门店类型">
               <el-select class="box-input" v-model="MyForm['storeType']">
-                <el-option value="0" label="集团" ></el-option>
-                <el-option value="1" label="4s店" ></el-option>
-                <el-option value="2" label="维修店" ></el-option>
+                <el-option :value="0" label="集团" ></el-option>
+                <el-option :value="1" label="4s店" ></el-option>
+                <el-option :value="2" label="维修店" ></el-option>
               </el-select>
             </el-form-item>
           </section>
           <section class="inline-box">
             <el-form-item class="box-item" label="状态">
               <el-select class="box-input" v-model="MyForm['state']" placeholder="请选择状态" >
-                <el-option label="禁用" value="0" ></el-option>
-                <el-option label="正常" value="1" ></el-option>
+                <el-option label="禁用" :value="0" ></el-option>
+                <el-option label="正常" :value="1" ></el-option>
               </el-select>
             </el-form-item>
             <el-form-item class="box-item" label="价格">
@@ -102,7 +102,9 @@
             <el-upload
               class="avatar-uploader"
               :action="uploadUrl"
-              :show-file-list="false">
+              :show-file-list="false"
+              :on-success="handleUploadCode"
+              name="upload_file">
               <img v-if="form.qrCode" :src="form.qrCode" class="avatar">
               <i v-else class="el-icon-plus avatar-uploader-icon"></i>
             </el-upload>
@@ -141,17 +143,31 @@ export default {
         qrCode:'',
       },
       uploadUrl:rootPath + '/store/uploadPictures.do',
-      imgUrl:'',
     }
   },
   computed:{
-    ...mapState({
-      MyForm:state => state.form
-    })
+    MyForm:{
+      get(){
+        return this.$store.state.form
+      },
+      set(value){
+        let data = JSON.parse(this.$route.query.data)
+        data && this.$store.commit('setFormData', value)
+      }
+    }
   },
   methods: {
     handleUploadLogo($event){
       this.form.logourl = ($event.status == 0) && $event.data
+    },
+    handleUploadCode($event){
+      this.form.qrCode = ($event.status == 0) && $event.data
+    }
+  },
+  created(){
+    if(this.$route.query.data){
+      let data = JSON.parse(this.$route.query.data)
+      this.MyForm = {...data}
     }
   }
 }
@@ -161,6 +177,7 @@ export default {
 @import '../../../assets/style/mixin.scss';
 .wrapper{
   height: 100%;
+  margin-top:10px;
   .content{
     height: 100%;
     .form-box{
