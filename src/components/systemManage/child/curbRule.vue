@@ -1,17 +1,22 @@
 <template>
-  <section class="father">
+  <section class="wrapper">
     <section class="content">
-      <section class="form" >
+      <section class="form inter-box">
+        <p class="t-title">{{this.$route.query.child}}</p>
         <el-form label-width="140px">
           <section class="inline-box" v-for="(item,index) in formatFormItem" :key="index"  >
             <el-form-item :label="item.label">
               <el-input clearable v-if="item.type == 'input'" class="my-input-220" v-model="item.value" ></el-input><span class="tips">{{item.tips}}</span>
-              <el-select clearable v-if="item.type == 'select'" v-model="item.value">
-                <el-option label="11" value="123"></el-option>
+              <el-select @change="item.change" clearable v-if="item.type == 'select'" v-model="item.value">
+                <el-option v-for="(list,lid) in item.list" :label="list.label" :value="list.value" :key="lid"></el-option>
               </el-select>
               <el-radio-group v-if="item.type == 'radio'" v-model="item.value" >
-                <el-radio v-for="(list,lindex) in item.list" :key="lindex" :label="list.label"></el-radio>
+                <el-radio v-for="(list,lindex) in item.list" :key="lindex" :label="list.value">{{list.label}}</el-radio>
               </el-radio-group>
+              <el-input type="textarea" placeholder="请编辑" v-if="item.type == 'textarea' && formatFormItem[0].value == 0" v-model="item.value" :style="item.style"></el-input>
+              <el-select v-if="item.type == 'textarea' && (formatFormItem[0].value !== 0 && formatFormItem[0].value !=='') " placeholder="请选择" v-model="item.value">
+                <el-option v-for="(sub,sid) in item.list" :key="sid" :label="sub.label" :value="sub.value"></el-option>
+              </el-select>
             </el-form-item>
           </section>
         </el-form>
@@ -34,7 +39,7 @@
             </template>
           </el-table-column>
         </el-table>
-        <section class="flex-box" >
+        <section class="flex-box inter-box">
           <p class="t-title" >消费返积分</p>
           <el-button @click="visibleDialog = true" type="small">编辑</el-button>
         </section>
@@ -216,22 +221,48 @@ export default {
               label:'推送消息',
               type:'select',
               value:'',
+              prop:'pushType',
+              list:[
+                {
+                  label:'文本',
+                  value:0
+                },
+                {
+                  label:'套餐',
+                  value:1
+                },
+                {
+                  label:'活动',
+                  value:2
+                },
+                {
+                  label:'卡券',
+                  value:3
+                }
+              ],
+              change:this.handleChange
             },
             {
               label:'推送内容',
-              type:'select',
+              type:'textarea',
               value:'',
+              list:[],
+              prop:'pushContent',
+              style:'width:320px',
             },
             {
               label:'是否推送',
               type:'radio',
               value:'',
+              prop:'whetherPush',
               list:[
                 {
                   label:'推送',
+                  value:1
                 },
                 {
                   label:'不推送',
+                  value:0
                 }
               ]
             }
@@ -258,7 +289,8 @@ export default {
       'interList':state => state.System.list1 ,
     }),
     ...mapGetters({
-      'formatInterList' : 'formatInterForConsume'
+      'formatInterList' : 'formatInterForConsume',
+      'pushList':'formatPushList'
     }),
     formItem(){
       return this.form.find(item => item.name === this.$route.query.child).list
@@ -276,36 +308,54 @@ export default {
       return this.formItem
     }
   },
+  watch:{
+    pushList(){
+      this.$set(this.formatFormItem[1], 'list', this.pushList)
+      console.log(this.pushList)
+    }
+  },
   methods: {
     ...mapActions({
       'getInterList':'couponIntergalForConsume',
-      'getInterListRules':'getCouponIntegralRules'
+      'getInterListRules':'getCouponIntegralRules',
+      'getPushList' : 'getPushList'
     }),
     /**
      * 积分消费规则
      * 编辑与发布
      */
     handleSubmitIntegralRule(){
-      this.$http.post('platform/addOrUpIntegralReturn.do' , this.formatInterList , res => {
+      let form = this.formatInterList.map(item => {
+        return {moneyMin:item.moneyMin, moneyMax:item.moneyMax, integral:item.integral, id:item.id}
+      })
+      form = JSON.stringify(form)
+      this.$http.post('platform/addOrUpIntegralReturn.do', {data:form}, res => {
         if(res.status == 0){
           _g.toastMsg({
             type:'success',
             msg:res.msg
           })
+          setTimeout(()=>{
+             this.visibleDialog = false
+          },1000)
         }
       })
     },
+    handleChange(e){
+      this.$store.dispatch('getPushList', {pushType:e})
+    }
   } , 
   created(){
     this.getInterList()
     this.getInterListRules()
+    this.getPushList()
   },
 }
 </script>
 
 <style scoped lang='scss' >
-.father{
-  height: 100%;
+.wrapper{
+  height: calc(100% - 20px);
   .content{
     background-color: #fff;
     section.form{
@@ -354,6 +404,8 @@ export default {
       }
     }
   }
-
+  .btn-area{
+    padding-bottom:10px;
+  }
 }
 </style>
