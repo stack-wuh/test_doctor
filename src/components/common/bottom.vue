@@ -1,8 +1,8 @@
 <template>
   <section class="wrapper">
     <section v-if="type == '' || type == 'pagination' || !type " class="pagination">
-      <el-pagination background :total="total || 0" :current-page="currentPage || 1" layout="total,prev,pager,next,jumper" ></el-pagination>
-    </section>
+      <el-pagination @current-change="getCurrentPage" background :total="total || 0" :current-page="currentPage || 1"  layout="total,prev,pager,next,jumper" ></el-pagination>
+    </section> 
     <section v-if="type == 'button'" class="btn-area">
       <el-button ref="botton" v-for="(item,index) in btnList" :key="index" :type="item.type" :size="item.size" @click="item.click" >{{item.text}}</el-button>
     </section>
@@ -44,10 +44,15 @@ export default {
     ...mapActions({
       'handleSubmitStore' : 'pubStoreList' , 
       'handleSubmitCoupon' : 'couponPubAndPut' , 
-      'handleSubmitRelply' : 'replyPubAndPut'
+      'handleSubmitRelply' : 'replyPubAndPut' ,
+      'handleClearForm' : 'clearForm',
+      'handleSubmitPush' : 'pushPubAndPut'
     }),
     handleClickBackPrev(){
       this.$router.go(-2)
+      setTimeout(()=>{
+        this.handleClearForm()
+      },1000)
     },
     handleSubmit(){
       switch(this.Path){
@@ -57,8 +62,13 @@ export default {
           break;
         case '自动回复配置' : this.handleSubmitRelply({form: this.formData , path: this.path})
           break;
+        case '关注后消息推送' : this.handleSubmitPush({form: this.formData, path: this.path})
+          break;
       }
     },
+    getCurrentPage($event){
+     this.$emit('getCurrent', $event)
+    }
   }
 }
 </script>
