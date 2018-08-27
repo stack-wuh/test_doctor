@@ -232,6 +232,101 @@ export const forms = [
     },
   },
   {
+    name:'关注用户列表',
+    list:[
+      {
+        key:'所属部门',
+        type:'select',
+        prop:'departmentId',
+        list:[
+          {
+            value:'1',
+            label:'销售部',
+          }
+        ],
+      },
+      {
+        key:'员工角色',
+        type:'select',
+        prop:'roleId',
+        list:[
+          {
+            value:'1',
+            label:'销售顾问',
+          }
+        ],
+      },
+      {
+        key:'员工姓名',
+        type:'input',
+        prop:'realName',
+      },
+      {
+        key:'员工性别',
+        type:'select',
+        prop:'sex',
+        list:[
+          {
+            label:'男',
+            value:1,
+          },
+          {
+            label:'女',
+            value:0
+          }
+        ],
+      },
+      {
+        key:'手机号码',
+        type:'input',
+        prop:'phone',
+      },
+      {
+        key:'出生日期',
+        type:'date',
+        prop:'birthday',
+      },
+      {
+        key:'登录账号',
+        type:'input',
+        prop:'username',
+      },
+      {
+        key:'登录密码',
+        type:'input',
+        prop:'password',
+      },
+      {
+        key:'电子邮箱',
+        type:'input',
+        prop:'email',
+      },
+      {
+        key:'身份证号',
+        type:'input',
+        prop:'idNum',
+      },
+      {
+        key:'每日预约',
+        type:'input',
+        prop:'reservation',
+      }
+    ],
+    myForm:{
+      departmentId:'',
+      roleId:'',
+      realName:'',
+      sex:'',
+      phone:'',
+      birthday:'',
+      username:'',
+      password:'',
+      email:'',
+      idNum:'',
+      reservation:'',
+    },
+  },
+  {
     name:'角色管理',
     list:[
       {
@@ -433,6 +528,7 @@ export const forms = [
         key:'赠送卡券',
         type:'select',
         prop:'couponId',
+        multiple:true,
         list:[
           {
             label:'普通卡券',
@@ -567,7 +663,15 @@ export const forms = [
         list:[
           {
             label:'销售顾问',
-            value:1,
+            value:0
+          },
+          {
+            label:'续保顾问',
+            value:1
+          },
+          {
+            label:'售后顾问',
+            value:3
           }
         ],
         rules:[
