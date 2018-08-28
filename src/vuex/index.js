@@ -5,7 +5,7 @@ export const state = {
   isShowLoading:false,
   form:{},
   search:{
-    currPageNo:1,
+    // currPageNo:1,
   } , 
   tableRow:{},
   choose:'',
