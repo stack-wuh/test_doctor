@@ -9,14 +9,14 @@ const actions = {
   /**
    * 获取用品管理模块表格数据
    */
-  getUseStore({commit ,rootState, dispatch} , {path ,search } = {}){
+  getUseStore({commit ,rootState, dispatch} , {path ,search, currPageNo = 1 } = {}){
     let _url = ''
     switch(path){
-      case '汽车精品管理' : _url = 'quality/getQualityList.do' , search = {...rootState.search ,search}, dispatch('getCarTypeList')
+      case '汽车精品管理' : _url = 'quality/getQualityList.do' , search = {...rootState.search ,search, currPageNo}, dispatch('getCarTypeList')
         break; 
-      case '精品订单管理' : _url = 'quality/getOrderList.do' , search = {...rootState.search ,search}
+      case '精品订单管理' : _url = 'quality/getOrderList.do' , search = {...rootState.search ,search, currPageNo}
         break;
-      case '配件大类管理' : _url = 'quality/getPartsList.do' , search = {...rootState.search}
+      case '配件大类管理' : _url = 'quality/getPartsList.do' , search = {...rootState.search ,search, currPageNo}
         break;
     }
     $http.post(_url ,search ,res => {
@@ -28,12 +28,45 @@ const actions = {
    * 用品管理 -- 汽车精品管理
    * 编辑 / 新增 汽车精品信息
    */
-   highPubAndPut({dispatch} , { form} = {} ){
-     $http.post('quality/addQuality.do' ,form ,res => {
-        return new Promise(resolve => {
-          return resolve(true)
-        })
-     })
+   highPubAndPut({dispatch} , {form, form:{
+     id,
+     firstPicture,
+     categoryId,
+     name,
+     originalPrice,
+     price,
+     applicableModel,
+     recommend,
+     stock,
+     supportIntegralChange,
+     purchaseIntegral,
+     commodityState,
+     obtainIntegral,
+     whetherDrop,
+     descInfo,
+   }} = {} ){
+     let _url = id ? 'quality/updateQuality.do' : 'quality/addQuality.do'
+    return new Promise((resolve,reject)=>{
+      $http.post(_url, {
+        id,
+        firstPicture,
+        categoryId,
+        name,
+        originalPrice,
+        price,
+        applicableModel,
+        recommend,
+        stock,
+        supportIntegralChange,
+        purchaseIntegral,
+        commodityState,
+        obtainIntegral,
+        whetherDrop,
+        descInfo,
+      }, res => {
+        return resolve(true)
+       })
+    })
    },
    /**
     * 用品管理 -- 精品订单管理
