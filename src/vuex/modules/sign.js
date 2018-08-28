@@ -1,5 +1,6 @@
 
 import $http from '../../../src/utils/axios'
+import {_g} from '../../../src/utils/global'
 const state = {
 
 }
@@ -13,17 +14,31 @@ const actions = {
    * 登录后台
    * @param {*} param0 
    */
-  signIn({rootState}){
+  signIn({rootState, dispatch},{code} = {}){
     let length = Object.values(rootState.form).length > 0 ? true : false
     let result = length && Object.values(rootState.form).every(item => item)
     if(result){
-      $http.post('employee/Login.do',rootState.form ,res => {
-        if(res.status == 0){
-          setTimeout(()=>{
-            window.$route.push({name:'index'})
-          },1000)
+      return new Promise((resolve,reject) => {
+        resolve()
+        if(rootState.form.code && rootState.form.code === code.join('')){
+          $http.post('employee/Login.do',rootState.form ,res => {
+            if(res.status == 0){
+              resolve()
+              setTimeout(()=>{
+                window.$route.push({name:'index'})
+              },1000)
+            }
+          })
+        }else{
+          if(rootState.form.code !== code.join('')){
+            _g.toastMsg({
+              type:'error',
+              msg:'验证码错误,请重试'
+            })
+          }
+          return reject()
         }
-      } )
+      })
     }else{
       window._g.toastMsg({type:'error',msg:'请编辑必填项后提交'})
     }

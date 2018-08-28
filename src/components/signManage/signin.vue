@@ -12,18 +12,20 @@
         <span class="nav-title">用户登录</span>
         <el-form class="my-form" ref="myForm">
           <el-form-item v-for="(item,index) in list" :key="index">
-            <el-input v-model="form[item.prop]" class="my-input" v-if="item.type == 'input'" :placeholder="'请编辑'+item.name" :style="item.style"></el-input>
-            <span v-if="item.child" >this is code</span>
+            <el-input v-model="form[item.prop]" class="my-input" v-if="item.type == 'input'" :type="item.inputType" :placeholder="'请编辑'+item.name" :style="item.style"></el-input>
+            <span v-if="item.child" class="code-box" >
+              <small v-for="(sub,sid) in code" :key="sid" class="box-item" :style="styleList[sid]" >{{sub}}</small>
+            </span>
           </el-form-item>
         </el-form>
         <section class="nav-list">
-          <el-checkbox>记住密码</el-checkbox>
+          <el-checkbox v-model="isSavePwd" @change="savePwdInExpire">记住密码</el-checkbox>
           <span class="empty-flex"></span>
           <span class="item">忘记密码?</span>
           <span class="item">去注册</span>
         </section>
         <section class="btn-area">
-          <el-button class="btn" @click="signIn(form)">登录</el-button>
+          <el-button class="btn" @click="handleSubmit">登录</el-button>
         </section>
       </section>
     </section>
@@ -43,6 +45,7 @@ export default {
           name:'用户名',
           type:'input',
           prop:'username',
+          inputType:'text',
           style:'',
           child:false,
         },
@@ -50,16 +53,23 @@ export default {
           name:'密码',
           type:'input',
           prop:'password',
+          inputType:'password',
           style:'',
           child:false,
         },
         {
           name:'验证码',
           type:'input',
+          prop:'code',
           child:true,
           style:'width:45%',
         }
-      ]
+      ],
+      code:'',
+      styleStore:['#FFFF00','#FF6600','#33CC00','#6666FF','#0033FF','#6600CC'],
+      textShadow:['#00FF00','	#00EE00','#00E5EE','#3A5FCD','#473C8B','#76EEC6'],
+      styleList:[],
+      isSavePwd:eval(localStorage.getItem('isSavePwdInExpire')) || false
     }
   },
   computed:{
@@ -71,11 +81,46 @@ export default {
     ...mapActions({
       'signIn':'signIn'
     }),
-    handleSignIn(form){
-      _g.toastMsg()
+    handleRandomCode(){
+      this.code = Math.random().toString().slice(-4).split('')
+      for(var i=0;i<=4;i++){
+        let index = Math.floor(Math.random() * (4-1)) + 1  // 出现的styleStore中的位置
+        let degX = Math.floor(Math.random()* (50-1)) + 1 // 在X轴翻转的角度
+        let offsetX = Math.floor(Math.random() * (15 - 0)) + 1 // 文字阴影在x轴偏移量
+        let offsetY = Math.floor(Math.random() * (15 - 0)) + 1 // 文字阴影在y轴偏移量
+        let style = `font-size:15px;color:${this.styleStore[index]};text-shadow:${offsetX}px ${offsetY}px 5px ${this.textShadow[index]};transform: rotateX(${degX}deg);`
+        this.styleList = [...this.styleList, style]
+      }
+    },
+    handleSubmit(){
+      this.signIn({code: this.code}).then(()=>{
+        let myStorage = localStorage , 
+            saveStorage = myStorage.getItem('saveObj')
+            saveStorage = saveStorage && JSON.parse(saveStorage)
+            saveStorage = {...saveStorage, username: this.form.username, password: this.form.password}
+            myStorage.setItem('saveObj', JSON.stringify(saveStorage))            
+      }).catch(err => {
+        this.handleRandomCode()
+      })
+    },
+    savePwdInExpire(){
+      let now = new Date().getTime(), expire = now + 7*24*60*60*1000
+      localStorage.setItem('isSavePwdInExpire',this.isSavePwd)
+      localStorage.setItem('saveObj',JSON.stringify({isSave:this.isSavePwd,now,expire}))
     }
   },
-
+  created(){
+    this.handleRandomCode()
+    let myStorage = localStorage.getItem('saveObj')
+    myStorage = JSON.parse(myStorage)
+    let date = new Date().getTime()
+    console.log(date - myStorage.expire < 0)
+    if(date && date - myStorage.expire < 0){
+      this.handleSubmit()
+    }else{
+      myStorage.setItem('saveObj','')
+    }
+  }
 }
 </script>
 
@@ -113,6 +158,20 @@ export default {
       }
       .my-form{
         margin:15px 0;
+        .code-box{
+          display: inline-block;
+          width:40%;
+          margin-left: 15px;
+          background-color: #fff;
+          user-select: none;
+          .box-item{
+            display: inline-block;
+            width: 25%;
+            text-align: center;
+            font-size: 14px;
+            
+          }
+        }
       }
       .nav-list{
         @include flex-box(row,nowrap,space-between,center);
