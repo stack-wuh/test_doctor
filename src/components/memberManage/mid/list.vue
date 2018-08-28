@@ -1,27 +1,32 @@
 <template>
-  <section class="father">
-      <section class="content">
-        <Search />
-        <my-table v-if="isShow" :list="[{}]" header="true" >
-          <span slot="title">{{$route.query.subMenu}}列表</span>
-          <div slot="right">
-            <my-button></my-button>
-          </div>
-        </my-table>
-      </section>
+  <section class="wrapper">
+    <section class="content">
+      <search @inputChange="getList({path:pathChange})" v-if="isShow" :name="pathChange" />
+      <my-table v-if="isShow" :list="changeList"  header="true" :params="pathChange" >
+        <span slot="title">{{pathChange}}列表</span>
+        <div slot="right">
+            <my-button  ></my-button>
+        </div>
+      </my-table>
+      <bottom @getCurrent="getCurrent" :total="total" :currentPage="currentPage" />
+    </section>
   </section>
 </template>
 
 <script>
-import Search from '@/components/common/search'
 import MyTable from '@/components/common/myTable'
+import Search from '@/components/common/search'
 import MyButton from '@/components/common/myButton'
+import Bottom from '@/components/common/bottom'
+
+import {mapActions , mapGetters , mapState} from 'vuex'
 export default {
-  name: 'list',
+  name: 'store',
   components:{
+    MyTable , 
     Search ,
-    MyTable ,
     MyButton ,
+    Bottom ,
   },
   data () {
     return {
@@ -29,22 +34,51 @@ export default {
     }
   },
   computed:{
-    changePath(){
-      return this.$route.query.subMenu
-    }
+    pathChange(){
+      return  this.$route.query.child || this.$route.query.subMenu
+    },
+    ...mapGetters({
+      'list':'formatStoreDataList',
+      'changeList' : 'changeStateDataList',
+    }),
+    ...mapState({
+      total:state => state.System.total,
+      currentPage:state => state.System.currentPage,
+    })
   },
   watch:{
-    changePath(){
+    pathChange(){
       this.isShow = false
+      this.getStoresList({path:this.pathChange})
       setTimeout(()=>{
         this.isShow = true
+        this.$store.commit('clearSearchForm')
       })
     }
   },
-  methods: {}
+  methods: {
+    ...mapActions({
+      'getList':'getMemberStore'
+    }),
+    inputChange(e){
+      console.log(e)
+    },
+    getCurrent(value){
+      this.getList({path: this.pathChange, currPageNo: value})
+    }
+  },
+  created(){
+    this.getList({path:this.pathChange})
+  }
 }
 </script>
 
 <style scoped lang='scss' >
-
+.wrapper{
+  .content{
+    .right{
+      height:60px;
+    }
+  }
+}
 </style>
