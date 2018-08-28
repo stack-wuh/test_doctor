@@ -1472,7 +1472,7 @@ const state = {
         {
           key:'备注',
           type:'default',
-          prop:'name',
+          prop:'decription',
         },
         {
           key:'操作',
@@ -1485,6 +1485,65 @@ const state = {
               size:'small',
               type:'default',
               click:jump2Other,
+            },
+          ]
+        }, 
+      ]
+    },
+    {
+      name:'用户佣金提现',
+      path:'',
+      type:'用户佣金提现',
+      params:['用户佣金提现'],
+      colType:'select',
+      colValue:'selection',
+      list:[
+        {
+          key:'车牌号',
+          type:'default',
+          prop:'name',
+        },
+        {
+          key:'姓名',
+          type:'default',
+          prop:'name',
+        },
+        {
+          key:'联系电话',
+          type:'default',
+          prop:'name',
+        },
+        {
+          key:'会员等级',
+          type:'default',
+          prop:'name',
+        },
+        {
+          key:'佣金',
+          type:'default',
+          prop:'name',
+        },
+        {
+          key:'余额',
+          type:'default',
+          prop:'name',
+        },
+        {
+          key:'会员积分',
+          type:'default',
+          prop:'name',
+        },
+        {
+          key:'操作',
+          type:'button',
+          prop:'name',
+          width:'140px',
+          list:[
+            {
+              text:'提现',
+              size:'small',
+              type:'',
+              click:openDialog,
             },
           ]
         }, 
