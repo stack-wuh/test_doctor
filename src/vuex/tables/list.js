@@ -37,6 +37,7 @@
    handleTakeGood ,
    useDelAndFresh ,
    handleSwitchChange,
+   handleDelAndFresh
   } from './click.js'
 const state = {
   data:[
@@ -1380,52 +1381,59 @@ const state = {
         {
           key:'卡券名称',
           type:'default',
-          prop:'name',
+          prop:'couponName',
+        },
+        {
+          key:'卡券类型',
+          type:'default',
+          prop:'couponType',
         },
         {
           key:'存量',
           type:'default',
-          prop:'name',
+          prop:'number',
         },
         {
           key:'已送出',
           type:'default',
-          prop:'name',
+          prop:'launch',
         },
         {
           key:'成功转赠',
           type:'default',
-          prop:'name',
+          prop:'successfulTransfer',
         },     
         {
           key:'已使用',
           type:'default',
-          prop:'name',
+          prop:'alreadyUsed',
         }, 
         {
           key:'已领取数量',
           type:'default',
-          prop:'name',
+          prop:'receiveNum',
         }, 
         {
           key:'有效期',
           type:'default',
-          prop:'name',
+          prop:'validTill',
         }, 
         {
           key:'添加日期',
           type:'default',
-          prop:'name',
+          prop:'addDate',
         }, 
         {
           key:'添加人',
           type:'default',
-          prop:'name',
+          prop:'employeeId',
         }, 
         {
           key:'操作',
           type:'button',
           prop:'name',
+          fix:'right',
+          width:'160px',
           list:[
             {
               text:'编辑',
@@ -1435,6 +1443,12 @@ const state = {
             },
             {
               text:'删除',
+              size:'small',
+              type:'text',
+              click:handleDelAndFresh,
+            },
+            {
+              text:'领取明细',
               size:'small',
               type:'text',
             }
