@@ -1667,7 +1667,137 @@ const state = {
           type:'date',
         }
       ],
-    }
+    },
+    {
+      name:'供应商设置',
+      params:['供应商设置'],
+      list:[
+        {
+          key:'供应商名称',
+          type:'default',
+        },
+        {
+          key:'联系人姓名',
+          type:'date',
+        },
+      ],
+    },
+    {
+      name:'仓库设置',
+      params:['仓库设置'],
+      list:[
+        {
+          key:'仓库名称',
+          type:'default',
+        },
+        {
+          key:'联系电话',
+          type:'default',
+        },
+        {
+          key:'仓库管理员',
+          type:'default',
+        },
+        {
+          key:'地址',
+          type:'default',
+        },
+      ],
+    },
+    {
+      name:'商品分类设置',
+      params:['商品分类设置'],
+      list:[
+        {
+          key:'商品类型',
+          type:'default'
+        }
+      ]
+    },
+    {
+      name:'商品设置',
+      params:['商品设置'],
+      list:[
+        {
+          key:'商品类型',
+          type:'default'
+        },
+        {
+          key:'商品名称',
+          type:'default'
+        },
+        {
+          key:'是否展示',
+          type:'select',
+          list:[
+            {
+              label:'是',
+              value:1
+            },
+            {
+              label:'否',
+              value:0
+            }
+          ]
+        },
+      ]
+    },
+    {
+      name:'项目分类设置',
+      params:['项目分类设置'],
+      list:[
+        {
+          key:'项目类型',
+          type:'default'
+        }
+      ]
+    },
+    {
+      name:'项目设置',
+      params:['项目设置'],
+      list:[
+        {
+          key:'项目类型',
+          type:'default',
+        },
+        {
+          key:'项目名称',
+          type:'default',
+        }
+      ]
+    },
+    {
+      name:'物流公司配置',
+      params:['物流公司配置'],
+      list:[
+        {
+          key:'物流公司名称',
+          type:'default',
+        },
+        {
+          key:'联系电话',
+          type:'default',
+        },
+        {
+          key:'仓库管理员',
+          type:'default',
+        },
+        {
+          key:'地址',
+          type:'default',
+        }
+      ]
+    },
+    {
+      name:'支付方式配置',
+      params:['支付方式配置'],
+      list:[
+        {
+          key:'支付方式名称',
+          type:'default',
+        }
+      ]
+    },
   ],
   btnList:[
     {
@@ -1714,6 +1844,7 @@ const state = {
         }
       ]
     },
+    
   ]
 }
 
