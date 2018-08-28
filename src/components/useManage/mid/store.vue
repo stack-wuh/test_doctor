@@ -8,7 +8,7 @@
             <my-button />
           </div>
         </my-table>
-        <my-bottom :total="total" :currentPage="currentPage" />
+        <my-bottom @getCurrent="getCurrent" :total="total" :currentPage="currentPage" />
       </section>
   </section>
 </template>
@@ -64,7 +64,10 @@ export default {
   methods: {
     ...mapActions({
       'getList' : 'getUseStore'
-    })
+    }),
+    getCurrent(value){
+      this.getList({path: this.changePath, currPageNo: value})
+    }
   },
   created(){
     this.getList({path:this.changePath})
