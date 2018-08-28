@@ -820,6 +820,32 @@ export const forms = [
     }
   },
   {
+    name:'用户佣金提现',
+    list:[
+      {
+        key:'金额',
+        prop:'money',
+        rules:[{
+          required:true,
+          message:'请编辑e',
+          trigger:'blur',
+        }],
+      },
+      {
+        key:'备注',
+        prop:'remark',
+        rules:[{
+          required:true,
+          message:'请编辑e',
+          trigger:'blur',
+        }],
+      }
+    ],
+    myForm:{
+
+    },
+  },
+  {
     name:'预约时间管理',
     list:[
       {
