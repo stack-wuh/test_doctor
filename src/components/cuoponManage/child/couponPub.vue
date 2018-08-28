@@ -13,11 +13,11 @@
             </el-form-item>
           </section>
           <section class="inline-box" >
-            <!-- <el-form-item label="卡券面值">
+            <el-form-item label="卡券面值">
               <el-select v-model="form.price" >
                 <el-option label="100" value="100" ></el-option>
               </el-select>
-            </el-form-item> -->
+            </el-form-item>
             <el-form-item label="卡券数量" prop="number" >
               <el-input v-model="form.number" ></el-input>
             </el-form-item>
