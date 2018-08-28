@@ -1,13 +1,14 @@
 <template>
   <section class="father">
       <section class="content">
-        <Search />
-        <my-table v-if="isShow" header="true" :list="[{}]">
+        <Search  @inputChange="getList({path:changePath})" v-if="isShow" :name="changePath" />
+        <my-table v-if="isShow" header="true" :list="list">
           <span slot="title">{{ $route.query.child || $route.query.subMenu}}列表</span>
           <div slot="right">
             <my-button></my-button>
           </div>
         </my-table>
+        <my-bottom :total="total" :currentPage="currentPage" @getCurrent="getCurrent" />
       </section>
   </section>
 </template>
@@ -16,6 +17,7 @@
 import Search from '@/components/common/search'
 import MyTable from '@/components/common/myTable'
 import MyButton from '@/components/common/myButton'
+import MyBottom from '@/components/common/bottom'
 import {mapActions ,mapState ,mapGetters} from 'vuex'
 export default {
   name: 'store',
@@ -23,6 +25,7 @@ export default {
     Search ,
     MyTable ,
     MyButton ,
+    MyBottom ,
   },
   data () {
     return {
@@ -53,7 +56,10 @@ export default {
   methods: {
     ...mapActions({
       'getList':'getCouponStore'
-    })
+    }),
+    getCurrent(value){
+      this.getList({path: this.changePath, currPageNo: value})
+    }
   },
   created(){
     this.getList({path: this.changePath})
