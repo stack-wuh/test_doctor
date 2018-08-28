@@ -14,6 +14,7 @@ import Sign from './vuex/modules/sign'
 import System from './vuex/modules/system/store'
 import Use from './vuex/modules/use/store'
 import Coupon from './vuex/modules/coupon/store'
+import Member from './vuex/modules/member/store'
 
 
 export default new Vuex.Store({
@@ -29,6 +30,7 @@ export default new Vuex.Store({
     System , 
     Use ,
     Coupon ,
+    Member ,
   },
   plugins:[MyLog]
 })
