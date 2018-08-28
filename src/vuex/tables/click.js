@@ -1,4 +1,5 @@
 import { _g} from '../../utils/global'
+import $http from '../../utils/axios'
 /**
  * 表格内按钮事件
  * 抽取页面组件按钮
@@ -179,3 +180,33 @@ export const handleSwitchChange = (params, row) => {
   let {subMenu, child} = params
   window.$store.dispatch('handleChangeState', {row, path: child || subMenu})
 }
+
+/**
+ * 表格内部删除按钮点击事件
+ * 测试 -- 抽取卡券模块内部所有表格删除事件
+ * 测试无误 -- 后期全部换成改方法
+ */
+
+ export const handleDelAndFresh = (params, text, row) => {
+   let {subMenu, child} = params
+   let {id} = row
+   let _url = '', dispatch =''
+   window.$confirm('改操作将删除此条信息,请确认?','提示',{
+     confirmButtonText:'确定',
+     cancelButtonText:'取消',
+     type:'info',
+   }).then(()=>{
+    switch(child || subMenu){
+      case '奖品卡券管理' : _url = 'coupon/delCoupon.do', dispatch = 'getCouponStore'
+        break; 
+    }
+    $http.post(_url, {ids:id}, res => {
+      window.$store.dispatch(dispatch, {path: child || subMenu})
+    })
+   }).catch(()=>{
+     _g.toastMsg({
+       type:'info',
+       message:'操作错误或已取消'
+     })
+   })
+ }
