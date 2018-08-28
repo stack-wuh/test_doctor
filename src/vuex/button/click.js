@@ -27,6 +27,8 @@ export const jump2Detail = params => {
           break ;  
      case '会员列表' : rootPath = '/member/pub' , child = '编辑会员信息'
           break ;
+     case '奖品卡券管理' : rootPath = '/coupon/pub', child = '编辑奖品卡券'
+          break;
      case '抽奖模板设置' : rootPath = '/coupon/lotto/pub' , child = '编辑抽奖模板'
           break ;
      case '普通活动' : rootPath = '/market/active/pub' , child = '编辑活动详情'
@@ -80,12 +82,13 @@ export const jump2Detail = params => {
          break;
        case '用品管理' : window.$store.dispatch('useDelAndFresh' , {path: params.child || params.subMenu , row:{id:choose}})
          break;
+       case '卡券管理' : window.$store.dispatch('couponModulesDelAndFresh', {path:params.child || params.subMenu, row:{id:choose}})
+         break;
      }
-     
    }).catch(()=>{
      _g.toastMsg({
        type:'info',
-       msg:'操作已取消',
+       msg:'操作错误或已取消',
      })
    })
  }
@@ -98,6 +101,6 @@ export const jump2Detail = params => {
    let {menu, subMenu, child} = params
    switch(child || subMenu){
      case '门店管理' : return location.href = window.rootPath + '/store/outStore.do' ;
-     case '精品订单管理' : return location.href = window.rootPath + 'quality/outQulity.do'
+     case '精品订单管理' : return location.href = window.rootPath + '/quality/outQulity.do'
    }
  }
