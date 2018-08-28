@@ -162,7 +162,7 @@ export default {
       this.$refs.myForm.validate(valid => {
         if(valid){
           this.formPub({form:this.form}).then(res => {
-            if(res.status == 0){
+            if(res){
               setTimeout(()=>{
                 this.cancel()
               },1000)
