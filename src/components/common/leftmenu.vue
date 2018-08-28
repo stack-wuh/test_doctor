@@ -581,12 +581,17 @@ export default {
                   path:'/selling/store',
                 },
                 {
+                  label: "商品设置",
+                  mid_path: "/mid/container",
+                  path:'/selling/store',
+                },
+                {
                   label: "项目分类设置",
                   mid_path: "/mid/container",
                   path:'/selling/store',
                 },
                 {
-                  label: "项目配置",
+                  label: "项目设置",
                   mid_path: "/mid/container",
                   path:'/selling/store',
                 },
