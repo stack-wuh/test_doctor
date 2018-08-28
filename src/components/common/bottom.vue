@@ -46,7 +46,8 @@ export default {
       'handleSubmitCoupon' : 'couponPubAndPut' , 
       'handleSubmitRelply' : 'replyPubAndPut' ,
       'handleClearForm' : 'clearForm',
-      'handleSubmitPush' : 'pushPubAndPut'
+      'handleSubmitPush' : 'pushPubAndPut',
+      'handleSubmitCoupon' : 'couponPraisePubAndPut'
     }),
     handleClickBackPrev(){
       this.$router.go(-2)
@@ -60,9 +61,11 @@ export default {
           break;
         case '会员卡积分规则' : this.handleSubmitCoupon({form: this.formData})
           break;
-        case '自动回复配置' : this.handleSubmitRelply({form: this.formData , path: this.path})
+        case '自动回复配置' : this.handleSubmitRelply({form: this.formData , path: this.Path})
           break;
-        case '关注后消息推送' : this.handleSubmitPush({form: this.formData, path: this.path})
+        case '关注后消息推送' : this.handleSubmitPush({form: this.formData, path: this.Path})
+          break;
+        case '编辑奖品卡券' : this.handleSubmitCoupon({form: this.formData, path: this.Path})
           break;
       }
     },
