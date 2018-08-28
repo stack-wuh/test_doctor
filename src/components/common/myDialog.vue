@@ -84,7 +84,8 @@ export default {
       'handleSubmitFaseReply' : 'fastReplyPubAndPut',
       'handleSubmitParts' : 'partsPubAndPut',
       'handleSubmitRole' : 'RolePubAndPut' ,
-      'handleSubmitFirstStaff' : 'staffFirstPub'
+      'handleSubmitFirstStaff' : 'staffFirstPub',
+      'handleSubmitUserCommUp' : 'userCommUp'
     }),
     /**
      * dialog对话框
@@ -124,6 +125,8 @@ export default {
           case '配件大类管理' : this.handleSubmitParts({path: this.rootPath ,form: this.myForm})
             break;
           case '角色管理' : this.handleSubmitRole({path: this.rootPath ,form: this.myForm})
+            break;
+          case '用户佣金提现' : this.handleSubmitUserCommUp({path: this.rootPath, form: this.myForm})
             break;
         }
         setTimeout(()=>{
