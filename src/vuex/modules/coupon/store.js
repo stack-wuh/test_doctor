@@ -27,6 +27,10 @@ const actions = {
         break;
       case '抽奖模板设置' : _url = 'lottery/carLotteryTemplateList.do', search = {...rootState.search, search, currPageNo}
         break;
+      case '编辑抽奖模板' : _url = 'lottery/getAddCarLottery.do', search = {...rootState.search, search, currPageNo}
+        break;
+      case '用户佣金提现' : _url = 'takeMoney/getUserTakeMoneny.do', search = {...rootState.search}
+        break;
     }
     $http.post(_url, search, res => {
       commit('setCouponStore' ,{params: res.data})
@@ -57,6 +61,13 @@ const actions = {
         dispatch('getCouponStore', {path})
       },1000)
     })
+  },
+  /**
+   * 卡券管理 -- 用户佣金提现 
+   * 提现
+   */
+  userCommUp({dispatch}, {path, row} = {}){
+    console.log(path, row)
   }
 }
 
