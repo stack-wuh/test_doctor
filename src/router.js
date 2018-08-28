@@ -128,9 +128,10 @@ export default new Router({
               ]
             },
             {
-              path:'/use',
+              path:'/system',
               name:'use',
-              component:UseIndex,
+              alias:'/use',
+              component:SystemIndex,
               redicre:'/use/store',
               children:[
                 {
@@ -146,9 +147,10 @@ export default new Router({
               ]
             },
             {
-              path:'/member',
+              path:'/system',
               name:'member',
-              component:MemberIndex,
+              alias:'/member',
+              component:SystemIndex,
               redirect:'/member/list',
               children:[
                 {
