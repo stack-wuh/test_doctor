@@ -710,19 +710,20 @@ const state = {
         {
           key:'卡券名称',
           type:'input',
-          prop:'',
+          prop:'couponName',
           value:'',
         },
         {
           key:'卡券类型',
           type:'select',
-          prop:'',
+          prop:'couponType',
           value:'',
+          list:[],
         },
         {
           key:'有效日期',
-          type:'select',
-          prop:'',
+          type:'date',
+          prop:'validDays',
           value:'',
         }
       ]
@@ -1727,6 +1728,8 @@ const getters = {
       item.list.map(sub => {
         if(sub.key === '请选择精品大类' && sub.type === 'select'){
           sub.list = rootGetters.formatCarTypeList
+        }else if(sub.key === '卡券类型' && sub.type === 'select'){
+          sub.list = rootGetters.formatCouponList
         }
         return {...sub}
       })
