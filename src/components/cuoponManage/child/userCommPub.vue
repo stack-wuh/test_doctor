@@ -3,36 +3,11 @@
       <section class="content">
         <Search />
         <section class="info">
-          <p class="c999 nav-title">佣金信息</p>
-          <el-form class="my-form" label-width="90px" >
-            <section class="inline-box">
-              <el-form-item label="车牌号">
-                <el-input placeholder="占位符" :disabled="inputDis"></el-input>
-              </el-form-item>
-              <el-form-item label="姓名">
-                <el-input placeholder="占位符" :disabled="inputDis"></el-input>
-              </el-form-item>
-              <el-form-item label="联系电话">
-                <el-input placeholder="占位符" :disabled="inputDis"></el-input>
-              </el-form-item>
-              <el-form-item label="会员等级">
-                <el-input placeholder="占位符" :disabled="inputDis"></el-input>
-              </el-form-item>
-            </section>
-            <section class="inline-box">
-              <el-form-item label="佣金">
-                <el-input placeholder="占位符" :disabled="inputDis"></el-input>
-              </el-form-item>
-              <el-form-item label="余额">
-                <el-input placeholder="占位符" :disabled="inputDis"></el-input>
-              </el-form-item>
-              <el-form-item label="会员积分">
-                <el-input placeholder="占位符" :disabled="inputDis"></el-input>
-              </el-form-item>
-            </section>
-          </el-form>
+          <my-table :list="[{}]" header="true">
+            <span slot="title">佣金信息</span>
+          </my-table>
         </section>
-        <section class="info">
+        <!-- <section class="info">
           <p class="nav-title c999">佣金提现</p>
           <el-form class="my-form" label-width="90px">
               <el-form-item  label="提现金额" >
@@ -42,18 +17,23 @@
                 <el-input class="my-input-320"></el-input>
               </el-form-item>
           </el-form>
-        </section>
+        </section> -->
+        <!-- <my-bottom type="button" /> -->
       </section>
   </section>
 </template>
 
 <script>
 import Search from '@/components/common/search'
-
+import MyBottom from '@/components/common/bottom'
+import MyTable from '@/components/common/myTable'
+import {mapActions, mapGetters} from 'vuex'
 export default {
   name: 'memberPay',
   components:{
     Search ,
+    MyBottom ,
+    MyTable ,
   },
   data () {
     return {
@@ -61,7 +41,14 @@ export default {
     }
   },
 
-  methods: {}
+  methods: {
+    ...mapActions({
+      'getList':'getCouponStore'
+    })
+  },
+  created(){
+    this.getList({path: this.$route.query.child || this.$route.query.subMenu})
+  }
 }
 </script>
 
