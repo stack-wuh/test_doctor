@@ -336,26 +336,42 @@ const state = {
         {
           key:'姓名',
           type:'input',
-          prop:'name',
+          prop:'realName',
           value:'',
         },
         {
           key:'联系电话',
-          type:'select',
-          prop:'type',
+          type:'input',
+          prop:'phone',
           value:'',
         },
         {
           key:'会员等级',
           type:'select',
-          prop:'start',
+          prop:'grade',
           value:'',
+          list:[
+            {
+              label:'普通会员1',
+              value:1
+            }
+          ],
         },
         {
           key:'性别',
           type:'select',
-          prop:'end',
+          prop:'sex',
           value:'',
+          list:[
+            {
+              label:'男',
+              value:1,
+            },
+            {
+              label:'女',
+              value:0,
+            }
+          ],
         },
         {
           key:'顾问类型',
@@ -368,47 +384,57 @@ const state = {
           type:'select',
           prop:'state',
           value:'',
+          list:[
+            {
+              label:'已关注',
+              value:1,
+            },
+            {
+              label:'未关注',
+              value:0
+            }
+          ],
         },
         {
           key:'推荐人',
           type:'input',
-          prop:'state',
+          prop:'userName',
           value:'',
         },
         {
-          key:'车辆',
+          key:'车牌号',
           type:'input',
-          prop:'state',
+          prop:'plateNum',
           value:'',
         },
         {
           key:'车型',
           type:'input',
-          prop:'state',
+          prop:'carModel',
           value:'',
         },
         {
           key:'关注开始日期',
           type:'date',
-          prop:'state',
+          prop:'startCreateTime',
           value:'',
         },
         {
           key:'关注结束日期',
           type:'date',
-          prop:'state',
+          prop:'endCreateTime',
           value:'',
         },
         {
           key:'积分区间(最小值)',
           type:'input',
-          prop:'state',
+          prop:'minIntegral',
           value:'',
         },
         {
           key:'积分区间(最大值)',
-          type:'select',
-          prop:'state',
+          type:'input',
+          prop:'maxIntegral',
           value:'',
         },
       ]
