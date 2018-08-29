@@ -2,7 +2,7 @@
   <section class="wrapper">
     <section class="content">
       <search @inputChange="getList({path:pathChange})" v-if="isShow" :name="pathChange" />
-      <my-table v-if="isShow" :list="changeList"  header="true" :params="pathChange" >
+      <my-table v-if="isShow" :list="list"  header="true" :params="pathChange" >
         <span slot="title">{{pathChange}}列表</span>
         <div slot="right">
             <my-button  ></my-button>
@@ -38,12 +38,11 @@ export default {
       return  this.$route.query.child || this.$route.query.subMenu
     },
     ...mapGetters({
-      'list':'formatStoreDataList',
-      'changeList' : 'changeStateDataList',
+      'list':'memberStore',
     }),
     ...mapState({
-      total:state => state.System.total,
-      currentPage:state => state.System.currentPage,
+      total:state => state.Member.total,
+      currentPage:state => state.Member.currentPage,
     })
   },
   watch:{
@@ -69,6 +68,7 @@ export default {
   },
   created(){
     this.getList({path:this.pathChange})
+    console.log(this.list)
   }
 }
 </script>
