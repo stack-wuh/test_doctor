@@ -9,27 +9,29 @@
               </el-select>
             </el-form-item>
             <el-form-item label="卡券名称" prop="couponName">
-              <el-input v-model="form.couponName"></el-input>
+              <el-input v-model="form.couponName" placeholder="请编辑卡券名称" ></el-input>
             </el-form-item>
           </section>
           <section class="inline-box" >
             <el-form-item label="卡券面值">
-              <el-select v-model="form.price" >
+              <el-input v-model="form.price" placeholder="请编辑卡券面值" ></el-input>
+              <!-- <el-select v-model="form.price" >
                 <el-option label="100" value="100" ></el-option>
-              </el-select>
+              </el-select> -->
             </el-form-item>
             <el-form-item label="卡券数量" prop="number" >
-              <el-input v-model="form.number" ></el-input>
+              <el-input v-model="form.number" placeholder="请编辑卡券数量" ></el-input>
             </el-form-item>
           </section>
           <section class="inline-box" >
             <el-form-item label="消费满" prop="consumptionFull" >
-              <el-select v-model="form.consumptionFull">
+              <el-input v-model="form.consumptionFull" placeholder="请编辑消费额" ></el-input>
+              <!-- <el-select v-model="form.consumptionFull">
                 <el-option label="100" value="100"></el-option>
-              </el-select>
+              </el-select> -->
             </el-form-item>
             <el-form-item label="有效期" prop="validTill">
-              <el-date-picker v-model="form.validTill" value-format="yyyy-MM-dd"></el-date-picker>
+              <el-date-picker v-model="form.validTill" value-format="yyyy-MM-dd" placeholder="请选择有效期" ></el-date-picker>
             </el-form-item>
           </section>
           <el-form-item label="领取规则" prop="receiveType">
