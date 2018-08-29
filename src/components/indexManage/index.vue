@@ -190,7 +190,9 @@ export default {
   }
   .echarts {
     width: 100%;
-    height: 100%;
+    height: inherit;
+    min-height:400px;
+    max-height:600px;
     padding:30px;
   }
 }
