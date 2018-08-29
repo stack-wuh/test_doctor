@@ -1,6 +1,8 @@
 import $http from '../../../utils/axios'
 const state = {
-
+  list:[],
+  total:0,
+  currentPage:1,
 }
 
 const actions = {
@@ -14,17 +16,23 @@ const actions = {
         break;
     }
     $http.post(_url, search, res => {
-      
+      commit('setMemberStore',{params: res.data})
     })
   }
 }
 
 const mutations = {
-
+  setMemberStore(state,{params:{list, total, pageNum}} = {}){
+    state.list = list
+    state.total = total
+    state.currentPage = pageNum
+  }
 }
 
 const getters = {
-
+  memberStore: state => {
+    return state.list
+  }
 }
 
 export default {
