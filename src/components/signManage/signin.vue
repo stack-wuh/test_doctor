@@ -10,6 +10,7 @@
     <section class="content">
       <section class="form-area">
         <span class="nav-title">用户登录</span>
+        {{form}} -- {{form.username}} -- this is username
         <el-form class="my-form" ref="myForm">
           <el-form-item v-for="(item,index) in list" :key="index">
             <el-input v-model="form[item.prop]" class="my-input" v-if="item.type == 'input'" :type="item.inputType" :placeholder="'请编辑'+item.name" :style="item.style"></el-input>
@@ -33,7 +34,7 @@
 </template>
 
 <script>
-import {mapState , mapActions} from 'vuex'
+import {mapState , mapActions, mapMutations} from 'vuex'
 export default {
   name: 'signin',
 
@@ -79,7 +80,11 @@ export default {
   },
   methods: {
     ...mapActions({
-      'signIn':'signIn'
+      'signIn':'signIn', // 处理登录验证, 带有code验证码验证
+      'handleSignIn':'handleSignInWidthoutCode' // 处理登录, 不带有code验证码
+    }),
+    ...mapMutations({
+      'handleNameAndPwd':'handleNameAndPwd'
     }),
     handleRandomCode(){
       this.code = Math.random().toString().slice(-4).split('')
@@ -96,17 +101,17 @@ export default {
       this.signIn({code: this.code}).then(()=>{
         let myStorage = localStorage , 
             saveStorage = myStorage.getItem('saveObj')
-            saveStorage = saveStorage && JSON.parse(saveStorage)
-            saveStorage = {...saveStorage, username: this.form.username, password: this.form.password}
-            myStorage.setItem('saveObj', JSON.stringify(saveStorage))            
+        saveStorage = saveStorage && JSON.parse(saveStorage)
+        saveStorage = {...saveStorage, username: this.form.username, password: this.form.password}
+        myStorage.setItem('saveObj', JSON.stringify(saveStorage))            
       }).catch(err => {
         this.handleRandomCode()
       })
     },
     savePwdInExpire(){
-      let now = new Date().getTime(), expire = now + 7*24*60*60*1000
+      let now = new Date().getTime(), expire = now + 7*24*60*60*1000 ; // 保质期七天
       localStorage.setItem('isSavePwdInExpire',this.isSavePwd)
-      localStorage.setItem('saveObj',JSON.stringify({isSave:this.isSavePwd,now,expire}))
+      localStorage.setItem('saveObj',JSON.stringify({isSave:this.isSavePwd,now,expire,username: this.form.username, password: this.form.password}))
     }
   },
   created(){
@@ -114,9 +119,9 @@ export default {
     let myStorage = localStorage.getItem('saveObj')
     myStorage = JSON.parse(myStorage)
     let date = new Date().getTime()
-    console.log(date - myStorage.expire < 0)
+    this.handleNameAndPwd({form: myStorage, rootState: this.$store.state})
     if(date && date - myStorage.expire < 0){
-      this.handleSubmit()
+      this.handleSignIn()
     }else{
       myStorage.setItem('saveObj','')
     }

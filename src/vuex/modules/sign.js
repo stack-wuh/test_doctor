@@ -6,7 +6,12 @@ const state = {
 }
 
 const mutations = {
-
+  handleNameAndPwd(state, {form, rootState, code} = {}){
+    rootState.form = {
+      username:form.username || '',
+      password:form.password || '',
+    }
+  }
 }
 
 const actions = {
@@ -19,7 +24,6 @@ const actions = {
     let result = length && Object.values(rootState.form).every(item => item)
     if(result){
       return new Promise((resolve,reject) => {
-        resolve()
         if(rootState.form.code && rootState.form.code === code.join('')){
           $http.post('employee/Login.do',rootState.form ,res => {
             if(res.status == 0){
@@ -42,6 +46,16 @@ const actions = {
     }else{
       window._g.toastMsg({type:'error',msg:'请编辑必填项后提交'})
     }
+  },
+
+  handleSignInWidthoutCode({rootState}){
+    $http.post('employee/Login.do',rootState.form ,res => {
+      if(res.status == 0){
+        setTimeout(()=>{
+          window.$route.push({name:'index'})
+        },1000)
+      }
+    })
   },
 
   signOut(){
