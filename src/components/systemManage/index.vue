@@ -33,8 +33,8 @@ export default {
 @import '../../assets/style/mixin.scss';
 .father{
   @include flex-box(column,nowrap,flex-start,flex-start);
-  height:100%;
-  overflow-y: scroll;
+  height:initial;
+  overflow-y: hidden;
   &::-webkit-scrollbar{
     width:5px;
     height:1px;
