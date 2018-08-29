@@ -4,9 +4,11 @@
     <section class="main">
       <Leftmenu class="left" />
       <section class="main">
-        <transition  name="fade">
-            <router-view v-loading="isShowLoading" />
-        </transition>
+        <section class="sub">
+          <transition name="fade">
+              <router-view v-loading="isShowLoading" />
+          </transition>
+        </section>
       </section>
     </section>
   </section>
