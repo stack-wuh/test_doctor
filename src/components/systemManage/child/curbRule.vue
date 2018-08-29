@@ -154,7 +154,7 @@ export default {
               type:'input',
               value:'',
               prop:'sharingActivities',
-              tips:'永久一次'
+              tips:'每次'
             },
             {
               label:'登录/每日访问',
