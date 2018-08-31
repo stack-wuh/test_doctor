@@ -1,4 +1,5 @@
 import $http from '../../../utils/axios'
+import {_g} from '../../../utils/global'
 const state = {
   data:[],
   list1:[], // 备用数组
