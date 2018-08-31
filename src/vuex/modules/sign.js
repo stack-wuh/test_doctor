@@ -25,13 +25,11 @@ const actions = {
     if(result){
       return new Promise((resolve,reject) => {
         if(rootState.form.code && rootState.form.code === code.join('')){
-          $http.post('employee/Login.do',rootState.form ,res => {
-            if(res.status == 0){
+          $http.post('employee/Login.do',rootState.form , res => {
               resolve()
               setTimeout(()=>{
                 window.$route.push({name:'index'})
               },1000)
-            }
           })
         }else{
           if(rootState.form.code !== code.join('')){
@@ -48,6 +46,11 @@ const actions = {
     }
   },
 
+  /**
+   * 记住密码直接登录
+   * 跳过验证码验证
+   * @param {object} rootState 
+   */
   handleSignInWidthoutCode({rootState}){
     $http.post('employee/Login.do',rootState.form ,res => {
       if(res.status == 0){
@@ -58,6 +61,9 @@ const actions = {
     })
   },
 
+  /**
+   * 用户退出
+   */
   signOut(){
     $http.post('employee/doLogout.do', {} ,res => {
       if(res.status == 0){
