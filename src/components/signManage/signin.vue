@@ -10,7 +10,7 @@
     <section class="content">
       <section class="form-area">
         <span class="nav-title">用户登录</span>
-        {{form}} -- {{form.username}} -- this is username
+        <!-- {{form}} -- {{form.username}} -- this is username -->
         <el-form class="my-form" ref="myForm">
           <el-form-item v-for="(item,index) in list" :key="index">
             <el-input v-model="form[item.prop]" class="my-input" v-if="item.type == 'input'" :type="item.inputType" :placeholder="'请编辑'+item.name" :style="item.style"></el-input>
@@ -86,6 +86,9 @@ export default {
     ...mapMutations({
       'handleNameAndPwd':'handleNameAndPwd'
     }),
+    /**
+     * 随机验证码
+     */
     handleRandomCode(){
       this.code = Math.random().toString().slice(-4).split('')
       for(var i=0;i<=4;i++){
@@ -97,6 +100,9 @@ export default {
         this.styleList = [...this.styleList, style]
       }
     },
+    /**
+     * 映射登录事件
+     */
     handleSubmit(){
       this.signIn({code: this.code}).then(()=>{
         let myStorage = localStorage , 
@@ -108,6 +114,9 @@ export default {
         this.handleRandomCode()
       })
     },
+    /**
+     * 单击确定保存用户名与密码
+     */
     savePwdInExpire(){
       let now = new Date().getTime(), expire = now + 7*24*60*60*1000 ; // 保质期七天
       localStorage.setItem('isSavePwdInExpire',this.isSavePwd)
