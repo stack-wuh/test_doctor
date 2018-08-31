@@ -191,7 +191,7 @@ export const handleSwitchChange = (params, row) => {
    let {subMenu, child} = params
    let {id} = row
    let _url = '', dispatch =''
-   window.$confirm('改操作将删除此条信息,请确认?','提示',{
+   window.$confirm('该操作将删除此条信息,请确认?','提示',{
      confirmButtonText:'确定',
      cancelButtonText:'取消',
      type:'info',
