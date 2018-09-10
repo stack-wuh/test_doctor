@@ -27,6 +27,7 @@ const actions = {
         maxIntegral:''
         , ...rootState.search, ...search, currPageNo}, 
         dispatch('getMemberList')
+        dispatch('getCounselorList')
         break;
     }
     $http.post(_url, search, res => {
@@ -51,8 +52,8 @@ const actions = {
    * 会员列表
    * 导入数据
    */
-  memberInfoImport({commit,dispatch}, {path, form}){
-    form.fileName = form.fileName.tolocalString()
+  memberInfoImport({commit,dispatch}, {path, form, form:{fileName} = {}}){
+    form.fileName = form.fileName.toString()
     return new Promise((resolve,reject) => {
       $http.post('vipList/imports.do', form, res => {
         setTimeout(()=>{

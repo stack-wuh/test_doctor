@@ -378,6 +378,20 @@ const state = {
           type:'select',
           prop:'state',
           value:'',
+          list:[
+            {
+              label:'保养顾问',
+              value:1,
+            },
+            {
+              label:'保险顾问',
+              value:2,
+            },
+            {
+              label:'续保顾问',
+              value:3
+            }
+          ]
         },
         {
           key:'状态',
@@ -1889,6 +1903,8 @@ const getters = {
           sub.list = rootGetters.formatCouponList
         }else if(sub.key === '会员等级'){
           sub.list = rootGetters.formatMemberList
+        }else if(sub.key === '顾问类型'){
+          // sub.list = rootGetters.formatCounselorList
         }
         return {...sub}
       })

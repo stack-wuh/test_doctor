@@ -16,6 +16,7 @@ export const state = {
   pushList:[],
   carTypeList:[],
   memberList:[],
+  counselorList:[]
 }
 
 export const mutations = {
@@ -41,7 +42,7 @@ export const mutations = {
    * 获取表格勾选的数组
    */
   handelSelection(state , {params} = {}){
-      state.choose = params
+    state.choose = params
   },
 
   /**
@@ -106,6 +107,15 @@ export const mutations = {
    */
   setMemberList(state, {params} = {}){
     state.memberList = params
+  },
+
+  /**
+   * 保存顾问类型列表
+   * @param {*} state 
+   * @param {*} param1 
+   */
+  setCounselorList(state, {params = {}}){
+    state.counselorList = params
   }
 }
 
@@ -179,12 +189,25 @@ export const actions = {
     })
   },
 
+  /**
+   * 会员等级 -- 会员等级列表 -- select
+   * @param {*} param0 
+   */
   getMemberList({commit}){
     $http.post('detail/commonGetMembers.do', {}, res => {
       commit('setMemberList', {params: res.data})
     })
   },
 
+  /**
+   * 会员等级 -- 获取顾问类型 -- select
+   * @param {*} param0 
+   */
+  getCounselorList({commit}){
+    $http.post('vipList/commonGetEmployees.do', {}, res => {
+      commit('setCounselorList', {params: res.data})
+    })
+  }
   
 }
 
@@ -208,5 +231,8 @@ export const getters = {
     return state.memberList.map(item => {
       return {label: item.name, value: item.id}
     })
+  },
+  formatCounselorList(){
+    return state.counselorList
   }
 }
