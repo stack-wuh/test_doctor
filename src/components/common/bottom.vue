@@ -79,6 +79,7 @@ export default {
 <style scoped lang='scss' >
 .wrapper{
   height: 50px !important;
+  margin:15px 0;
   .pagination{
     text-align: center;
   }
