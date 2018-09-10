@@ -1,7 +1,13 @@
 <template>
   <section class="wrapper">
     <section class="info">
-      <p class="nav-title flex flex-justify-between"><span>基本信息</span><el-button>编辑</el-button></p>
+      <p class="nav-title flex flex-justify-between"><span>基本信息</span>
+        <el-button v-if="isDisabled" @click="handleToggleState">编辑</el-button>
+        <span v-else-if="!isDisabled">
+          <el-button @click="handleCancel">取消</el-button>   
+          <el-button @click="handleClickSave">保存</el-button>   
+        </span>
+      </p>
         <el-form :model="form" class="my-form" label-width="120px">
           <section v-for="(item,index) in formList" :key="index" class="inline-box">
             <el-form-item v-for="(list,lid) in item" :key="lid" :label="list.label">
@@ -9,7 +15,7 @@
               <el-select :disabled="list.disabled" v-if="list.type === 'select'" v-model="form[list.prop]" :placeholder="'请选择' + list.label">
                 <el-option v-for="(sub,sid) in list.list" :key="sid" :label="sub.label" :value="sub.value"></el-option>
               </el-select>
-              <el-date-picker :disabled="list.disabled" v-model="form[list.prop]" v-if="list.type === 'date'" :placeholder="'请选择' + list.label"></el-date-picker>
+              <el-date-picker value-format="yyyy-MM-dd" :disabled="list.disabled" v-model="form[list.prop]" v-if="list.type === 'date'" :placeholder="'请选择' + list.label"></el-date-picker>
             </el-form-item>
           </section>
         </el-form>
@@ -18,28 +24,39 @@
 </template>
 
 <script>
+import {mapActions} from 'vuex'
 export default {
   name: 'car',
-
+  props:{
+    vehicleId:{
+      type:String,
+      required: true,
+      default:'',
+    }
+  },
   data () {
     return {
       form:{},
+      tempForm:{},
       formList:[
         [
           {
             label:'车型',
             disabled:true,
             type:'input',
+            prop:'carModel'
           },
           {
             label:'车牌号',
             disabled:true,
             type:'input',
+            prop:'plateNum'
           },
           {
             label:'车架号',
             disabled:true,
             type:'input',
+            prop:'frameNum'
           },
         ],
         [
@@ -47,40 +64,74 @@ export default {
             label:'发动机号',
             disabled:true,
             type:'input',
+            prop:'engineNum'
           },
           {
             label:'购买保险日期',
             disabled:true,
-            type:'input',
+            type:'date',
+            prop:'InsuranceStart'
           },
           {
             label:'上次保养日期',
             disabled:true,
-            type:'input',
+            type:'date',
+            prop:'lastMaintainTime'
           },
         ],
         [
           {
-            label:'首次上牌时间',
+            label:'首次上牌日期',
             disabled:true,
-            type:'input',
+            type:'date',
+            prop:'firstBoardTime'
           },
           {
             label:'上次保养公里数',
             disabled:true,
             type:'input',
+            prop:'lastMaintainKm'
           },
           {
             label:'保养间隔公里数',
             disabled:true,
             type:'input',
+            prop:'maintainIntervalKm'
           },
         ],
-      ]
+      ],
+      isDisabled: true
     }
   },
 
-  methods: {}
+  methods: {
+    ...mapActions({
+      'memberCarComm':'memberCarComm',
+      'memberCarCommPut':'memberCarCommPut'
+    }),
+    handleToggleState(){
+      this.formList.forEach(item => {
+        item.map(list => {
+          list.disabled = !list.disabled
+          this.isDisabled = !this.isDisabled
+        })
+      })
+    },
+    handleCancel(){
+      this.isDisabled = true
+      this.form = {...this.form, ...this.tempForm}
+    },
+    handleClickSave(){
+      this.memberCarCommPut({form: this.form})
+    }
+  },
+  created(){
+    let temp = JSON.parse(JSON.stringify(this.form))
+    this.memberCarComm({search: {vehicleId: this.vehicleId}}).then(res => {
+      this.form = {...this.form, ...res.data}
+      this.tempForm = {...temp, ...res.data}
+    })
+  }
 }
 </script>
 
