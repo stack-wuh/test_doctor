@@ -1893,7 +1893,7 @@ const actions = {}
 const mutations = {}
 
 const getters = {
-  getSearchListByPrams : (state, rootGetters) => parmas => {
+  getSearchListByPrams : (state, rootGetters, rootState) => parmas => {
     let arr =  state.types.filter(item => item.params && item.params.includes(parmas.name))
     arr.map(item => {
       item.list.map(sub => {
@@ -1904,7 +1904,10 @@ const getters = {
         }else if(sub.key === '会员等级'){
           sub.list = rootGetters.formatMemberList
         }else if(sub.key === '顾问类型'){
-          // sub.list = rootGetters.formatCounselorList
+          sub.list = rootGetters.formatCounselorList
+        }else if(sub.key === '业务类型'){
+          sub.list = rootState.Member.typeBusiness
+          console.log(rootState)
         }
         return {...sub}
       })

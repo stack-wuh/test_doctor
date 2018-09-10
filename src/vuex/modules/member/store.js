@@ -4,6 +4,8 @@ const state = {
   list:[],
   total:0,
   currentPage:1,
+  typeList:[],
+  typeBusiness:[],
 }
 
 const actions = {
@@ -31,13 +33,13 @@ const actions = {
         dispatch('getCounselorList')
         break;
       case '积分管理' : _url = 'detail/getIntegrals.do', search = {
-        ...rootState.search, ...search, currPageNo
+        ...rootState.search, ...search, currPageNo, realName: ''
       }
       break;
     }
     $http.post(_url, search, res => {
       switch(path){
-        case '积分管理' : return commit('setMemberStore', {params: res.data.info})
+        case '积分管理' : return commit('setMemberStore', {params: res.data.info,  typeBusiness:res.data.businessType})
         default : commit('setMemberStore', {params: res.data})
       }
       // commit('setMemberStore',{params: res.data})
@@ -83,10 +85,11 @@ const actions = {
 }
 
 const mutations = {
-  setMemberStore(state,{params:{list, total, pageNum}} = {}){
+  setMemberStore(state,{params:{list, total, pageNum}, typeBusiness} = {}){
     state.list = list
     state.total = total
     state.currentPage = pageNum
+    state.typeBusiness = typeBusiness && Object.values(typeBusiness).map(item => { return {label: item, value: item}})
   }
 }
 
