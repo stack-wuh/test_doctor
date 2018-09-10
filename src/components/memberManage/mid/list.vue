@@ -9,6 +9,7 @@
         </div>
       </my-table>
       <bottom @getCurrent="getCurrent" :total="total" :currentPage="currentPage" />
+      <dialog-with-import @handleHideDialog="handleHideDialog" :visibleDialog="visibleDialog" title="导入文件1" />
     </section>
   </section>
 </template>
@@ -18,6 +19,7 @@ import MyTable from '@/components/common/myTable'
 import Search from '@/components/common/search'
 import MyButton from '@/components/common/myButton'
 import Bottom from '@/components/common/bottom'
+import DialogWithImport from '../child/dialogWithImport'
 
 import {mapActions , mapGetters , mapState} from 'vuex'
 export default {
@@ -27,10 +29,12 @@ export default {
     Search ,
     MyButton ,
     Bottom ,
+    DialogWithImport,
   },
   data () {
     return {
       isShow:true,
+      visibleDialog:false,
     }
   },
   computed:{
@@ -64,7 +68,10 @@ export default {
     },
     getCurrent(value){
       this.getList({path: this.pathChange, currPageNo: value})
-    }
+    },
+    handleHideDialog(val){
+      this.visibleDialog = val.isShow
+    },
   },
   created(){
     this.getList({path:this.pathChange})
