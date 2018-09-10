@@ -29,6 +29,7 @@ const MemberIndex = resolve => require(['@/components/memberManage/index'],resol
 const MemberStore = resolve => require(['@/components/memberManage/mid/list'],resolve)
 const MemberPub = resolve => require(['@/components/memberManage/child/memberPub'],resolve)
 const MemberPay = resolve => require(['@/components/memberManage/child/memberPay'],resolve)
+const MemberCarInfo = resolve => require(['@/components/memberManage/child/carInfo'], resolve)
 
 
 const CouponIndex = resolve => require(['@/components/cuoponManage/index'],resolve)
@@ -167,6 +168,11 @@ export default new Router({
                   path:'/member/pay',
                   name:'memberPay',
                   component:MemberPay,
+                },
+                {
+                  path:'/member/info',
+                  name:'memberInfo',
+                  component:MemberCarInfo
                 }
               ]
             },
