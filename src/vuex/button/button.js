@@ -5,6 +5,7 @@ import {
   DelAndFreshWithAll ,
   export2Excel ,
   importExcelWithDialog,
+  handleDialogForMember
 } from './click'
 const state = {
   list:[
@@ -163,18 +164,21 @@ const state = {
           type:'',
           size:'small',
           style:'',
+          click:handleDialogForMember
         },
         {
           text:'分配保险顾问',
           type:'',
           size:'small',
           style:'',
+          click:handleDialogForMember
         },
         {
           text:'分配续保顾问',
           type:'',
           size:'small',
           style:'',
+          click:handleDialogForMember
         },
         {
           text:'导入',
