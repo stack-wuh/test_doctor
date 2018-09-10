@@ -69,7 +69,7 @@ export default {
     },
     handleSubmit(){
       switch(this.pathChange){
-        case '会员列表' : return  this.$store.dispatch('memberInfoImport', {path: this.pathChange, form:{fileName: this.fileList.map(item => item.response).map(list => list.data)}}).then(res => this.handleHideDialog())
+        case '会员列表' : return this.$store.dispatch('memberInfoImport', {path: this.pathChange, form:{fileName: this.fileList.map(item => item.response.data)}}).then(res => this.handleHideDialog())
       }
     }
   }
