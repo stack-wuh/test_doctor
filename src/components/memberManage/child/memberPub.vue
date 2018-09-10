@@ -3,8 +3,8 @@
     <section class="content">
       <el-form class="my-form" :model="form" :rules="rules" ref="myForm" label-width="140px">
         <section class="inline-box">
-          <el-form-item label="用户姓名" prop="realName" >
-            <el-input placeholder="请编辑用户姓名" v-model="form.realName" ></el-input>
+          <el-form-item label="用户姓名" prop="realNname" >
+            <el-input placeholder="请编辑用户姓名" v-model="form.realNname" ></el-input>
           </el-form-item>
           <el-form-item label="客户手机" prop="phone" >
             <el-input placeholder="请编辑客户手机" v-model="form.phone" ></el-input>
@@ -62,7 +62,7 @@
         <section class="inline-box">
           <el-form-item label="会员等级" prop="memberId">
             <el-select v-model="form.memberId" placeholder="请选择会员等级">
-              <el-option label="一级" value="1" ></el-option>
+              <el-option v-for="(item,index) in memberLever" :key="index" :label="item.label" :value="item.value" ></el-option>
             </el-select>
           </el-form-item>
           <el-form-item label="会员积分" prop="integral" >
@@ -78,17 +78,16 @@
           </el-form-item>
         </section>
       </el-form>
-      <my-sub-button @handleSubmit="handleSubmit" />
-
+      <my-sub-button @handleCancel="cancel" @handleSubmit="handleSubmit" />
     </section>
   </section>
 </template>
 
 <script>
 import MySubButton from  '../../common/subButton';
-import {mapActions} from 'vuex'
+import {mapActions, mapGetters} from 'vuex'
 const rules = {
-  realName:[{required:true,message:'请编辑用户姓名',trigger:'blur'}],
+  realNname:[{required:true,message:'请编辑用户姓名',trigger:'blur'}],
   phone:[{required:true,message:'请编辑用户手机号码',trigger:'blur'}],
   sex:[{required:true,message:'请选择用户性别',trigger:['blur','change']}],
   birthday:[{required:true,message:'请选择用户生日',trigger:['blur','change']}],
@@ -114,7 +113,7 @@ export default {
   data () {
     return {
       form:{
-        realName:'',
+        realNname:'',
         phone:'',
         sex:'',
         birthday:'',
@@ -134,15 +133,21 @@ export default {
       rules,
     }
   },
-
+  computed:{
+    ...mapGetters({
+      'memberLever': 'formatMemberList'
+    })
+  },
   methods: {
     ...mapActions({
-      'handleSubMember':'memberInfoPubAndPut'
+      'handleSubMember':'memberInfoPubAndPut',
+      'getMemberList' : 'getMemberList'
     }),
     handleSubmit({submit} = {}){
       if(submit){
         this.$refs.myForm.validate(valid => {
           if(valid){
+            console.log(this.form)
             this.handleSubMember({path: this.$route.query.child || this.$route.query.subMenu, form: this.form}).then(res => {
               console.log(res)
             })
@@ -154,8 +159,17 @@ export default {
           }
         })
       }
+    },
+    cancel(){
+      this.$refs.myForm.resetFields()
+      setTimeout(()=>{
+        this.$router.go(-2)
+      },1000)
     }
   },
+  created(){
+    this.getMemberList()
+  }
 }
 </script>
 
