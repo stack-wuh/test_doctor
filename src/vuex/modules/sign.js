@@ -49,11 +49,12 @@ const actions = {
   /**
    * 记住密码直接登录
    * 跳过验证码验证
+   * 似乎改过了登陆成功的code码？？？
    * @param {object} rootState 
    */
   handleSignInWidthoutCode({rootState}){
     $http.post('employee/Login.do',rootState.form ,res => {
-      if(res.status == 0){
+      if(res.status == 1){
         setTimeout(()=>{
           window.$route.push({name:'index'})
         },1000)
