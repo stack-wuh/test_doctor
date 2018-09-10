@@ -365,11 +365,11 @@ const state = {
           list:[
             {
               label:'男',
-              value:1,
+              value:'男',
             },
             {
               label:'女',
-              value:0,
+              value:'女',
             }
           ],
         },
@@ -382,7 +382,7 @@ const state = {
         {
           key:'状态',
           type:'select',
-          prop:'state',
+          prop:'attentionState',
           value:'',
           list:[
             {
@@ -1887,6 +1887,8 @@ const getters = {
           sub.list = rootGetters.formatCarTypeList
         }else if(sub.key === '卡券类型' && sub.type === 'select'){
           sub.list = rootGetters.formatCouponList
+        }else if(sub.key === '会员等级'){
+          sub.list = rootGetters.formatMemberList
         }
         return {...sub}
       })
