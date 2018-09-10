@@ -990,12 +990,12 @@ const state = {
         {
           key:'用户状态',
           type:'default',
-          prop:'',
+          prop:'state',
         },
         {
           key:'姓名',
           type:'default',
-          prop:'name',
+          prop:'realName',
         },
         {
           key:'联系电话',
@@ -1005,7 +1005,7 @@ const state = {
         {
           key:'性别',
           type:'default',
-          prop:'gender',
+          prop:'sex',
         },
         {
           key:'车牌号',
