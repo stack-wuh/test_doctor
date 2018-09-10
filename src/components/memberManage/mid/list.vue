@@ -10,7 +10,8 @@
       </my-table>
       <bottom @getCurrent="getCurrent" :total="total" :currentPage="currentPage" />
       <dialog-with-import @handleHideDialog="handleHideDialog" :visibleDialog="visibleDialog" title="导入文件1" />
-    </section>
+      <dialog-with-table :isShowDialog="isShowTable" :list="subData"  />
+    </section> 
   </section>
 </template>
 
@@ -20,6 +21,7 @@ import Search from '@/components/common/search'
 import MyButton from '@/components/common/myButton'
 import Bottom from '@/components/common/bottom'
 import DialogWithImport from '../child/dialogWithImport'
+import DialogWithTable from '../child/dialogWithTable'
 
 import {mapActions , mapGetters , mapState} from 'vuex'
 export default {
@@ -30,6 +32,7 @@ export default {
     MyButton ,
     Bottom ,
     DialogWithImport,
+    DialogWithTable,
   },
   data () {
     return {
@@ -47,6 +50,8 @@ export default {
     ...mapState({
       total:state => state.Member.total,
       currentPage:state => state.Member.currentPage,
+      'isShowTable': state => state.Member.tempObj.isShowDialog,
+      'subData': state => state.Member.tempObj.data
     })
   },
   watch:{
