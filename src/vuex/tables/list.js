@@ -1156,6 +1156,20 @@ const state = {
           type:'default',
           prop:'maintainState',
         },
+        {
+          key:'操作',
+          type:'button',
+          fix:'right',
+          width:'120px',
+          list:[
+            {
+              text:'查看详情',
+              style:'',
+              type:'text',
+              click:jump2Other
+            }
+          ]
+        }
       ]
     },   
     {
