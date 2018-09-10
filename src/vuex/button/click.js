@@ -104,3 +104,14 @@ export const jump2Detail = params => {
      case '精品订单管理' : return location.href = window.rootPath + '/quality/outQulity.do'
    }
  }
+
+ /**
+  * 导入数据表 -- dialog对话框上传文件
+  * import2JSON
+  */
+ export const importExcelWithDialog = ({params}) =>  {
+   let {menu, subMenu, child} = params
+   switch(child || subMenu){
+     case '会员列表' : return window.$store.commit('handleDialogWithImport',{visible: true})
+   }
+ }
