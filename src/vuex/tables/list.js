@@ -1075,6 +1075,7 @@ const state = {
         {
           key:'操作',
           type:'button',
+          fix:'right',
           list:[
             {
               text:'编辑',
@@ -1169,7 +1170,7 @@ const state = {
         {
           key:'头像',
           type:'image',
-          prop:'wxPic',
+          prop:'headPic',
         },
         {
           key:'微信昵称',
@@ -1179,7 +1180,7 @@ const state = {
         {
           key:'姓名',
           type:'default',
-          prop:'name',
+          prop:'realName',
         },
         {
           key:'联系电话',
@@ -1189,27 +1190,27 @@ const state = {
         {
           key:'积分',
           type:'default',
-          prop:'gender',
+          prop:'integral',
         },
         {
           key:'类型',
           type:'default',
-          prop:'dpt',
+          prop:'typeText',
         },
         {
           key:'业务类型',
           type:'default',
-          prop:'port',
+          prop:'businessType',
         },
         {
           key:'业务详情',
           type:'default',
-          prop:'order',
+          prop:'businessDetails',
         },
         {
           key:'时间',
           type:'default',
-          prop:'account',
+          prop:'operationTime',
         },
       ]
     },
