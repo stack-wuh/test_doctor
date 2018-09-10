@@ -4,8 +4,11 @@ const state = {
   list:[],
   total:0,
   currentPage:1,
-  typeList:[],
-  typeBusiness:[],
+  tempArr1:[],
+  tempObj: {
+    isShowDialog: false,
+    data:[]
+  }
 }
 
 const actions = {
@@ -33,16 +36,44 @@ const actions = {
         dispatch('getCounselorList')
         break;
       case '积分管理' : _url = 'detail/getIntegrals.do', search = {
-        ...rootState.search, ...search, currPageNo, realName: ''
+          ...rootState.search, 
+          ...search, 
+          currPageNo, 
+          realName: ''
+        }, dispatch('getMemberList')
+        break;
+      case '充值明细' : _url = "detail/getRecharge.do", search = {
+          ...rootState.search, 
+          ...search,
+          currPageNo,
+        }
+        break;
+      case '消费明细' : _url = 'detail/getConsumerDetails.do', search = {
+        ...rootState.search, 
+        ...search, 
+        currPageNo,
       }
-      break;
+       break;
+      case '会员充值' : _url = 'detail/selectUserMsgVo.do', search = {
+        ...rootState.search,
+        // realName:'',
+        // phone:'',
+        // plateNum:'',
+      }
+        break;
+      case '车辆管理' : _url = 'vehicle/init.do', search = {
+        ...rootState.search,
+        currPageNo,
+      }
+        break;
     }
     $http.post(_url, search, res => {
       switch(path){
-        case '积分管理' : return commit('setMemberStore', {params: res.data.info,  typeBusiness:res.data.businessType})
+        case '积分管理' : return commit('setMemberStore', {params: res.data.info, tempArr1: res.data.businessType || []})
+        case '充值明细' : return commit('setMemberStore', {params: res.data.info, tempArr1: res.data.payWay || []})
+        case '消费明细' : return commit('setMemberStore', {params: res.data.info, tempArr1: res.data.list2 || []})
         default : commit('setMemberStore', {params: res.data})
       }
-      // commit('setMemberStore',{params: res.data})
     })
   },
 
@@ -53,7 +84,7 @@ const actions = {
    */
   memberInfoPubAndPut({dispatch}, {path, form, form:{id}} = {}){
     return new Promise((resolve, reject) => {
-      $http.post('vipList/insertOrUpdate.do', form, res => {
+      $http.post('vipList/insertPage.do', form, res => {
         return resolve(res)
       })
     })
@@ -81,15 +112,52 @@ const actions = {
         },1000)
       })
     })
+  },
+
+  /**
+   * 会员管理 -- 添加顾问
+   */
+  memberAddCounselor({commit}, {choose, text, path}){
+    commit('setMemberAddCounselorData', {choose, path, text})
   }
 }
 
 const mutations = {
-  setMemberStore(state,{params:{list, total, pageNum}, typeBusiness} = {}){
+  /**
+   * 
+   * @param {*} state 
+   * @param {*} params
+   * @param {*} tempArr1 临时变量,用来存储后台data数据源中的下拉框数据  
+   */
+  setMemberStore(state,{params:{list, total, pageNum}, tempArr1} = {}){
     state.list = list
     state.total = total
     state.currentPage = pageNum
-    state.typeBusiness = typeBusiness && Object.values(typeBusiness).map(item => { return {label: item, value: item}})
+    state.tempArr1 = tempArr1 && Object.values(tempArr1) && Object.values(tempArr1).map(item => { return {label: item, value: item}})
+  },
+  setMemberAddCounselorData(state, {path, text, choose} = {}){
+    let sublist = []
+    choose.split(',').map(item => {
+      state.list.map(list => {
+        if(item == list.id){
+          sublist = [...sublist, list]
+        }
+      })
+    })
+    state.tempObj = {
+      isShowDialog : true,
+      data: sublist
+    }
+  },
+  clearMemberAddCounselor(state){
+    state.tempObj = {
+      isShowDialog: false,
+      data: []
+    }
+  },
+  handleDelMemberItem(state, {index} = {}){
+    console.log(index)
+    state.tempObj.data.splice(index, 1)
   }
 }
 
