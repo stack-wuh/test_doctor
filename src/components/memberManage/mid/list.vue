@@ -2,7 +2,7 @@
   <section class="wrapper">
     <section class="content">
       <search @inputChange="getList({path:pathChange})" v-if="isShow" :name="pathChange" />
-      <my-table v-if="isShow" :list="list"  header="true" :params="pathChange" >
+      <my-table v-if="isShow" :list="list({path: pathChange})"  header="true" :params="pathChange" >
         <span slot="title">{{pathChange}}列表</span>
         <div slot="right">
             <my-button  ></my-button>
@@ -52,7 +52,7 @@ export default {
   watch:{
     pathChange(){
       this.isShow = false
-      this.getStoresList({path:this.pathChange})
+      this.getList({path: this.pathChange})
       setTimeout(()=>{
         this.isShow = true
         this.$store.commit('clearSearchForm')
@@ -75,7 +75,6 @@ export default {
   },
   created(){
     this.getList({path:this.pathChange})
-    console.log(this.list)
   }
 }
 </script>
