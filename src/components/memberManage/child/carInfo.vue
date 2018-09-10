@@ -3,10 +3,10 @@
     <nav class="nav">
       <span @click="handleChange(index)" v-for="(item,index) in list" :key="index" :class="{'active': index === current}">{{item.label}}</span>
     </nav>
-    <coupon-comm v-show="current === 0" />
-    <car-comm v-show="current === 1" />
-    <order-comm v-show="current == 3" />
-    <check-comm v-show="current == 4" />
+    <coupon-comm :id="form.id" :userId="form.userId" v-if="current === 0" />
+    <car-comm :vehicleId="form.vehicleId" v-if="current === 1" />
+    <order-comm v-if="current == 3" />
+    <check-comm v-if="current == 4" />
   </section>
 </template>
 
@@ -50,6 +50,14 @@ export default {
   methods: {
     handleChange(index){
       this.current = index
+    }
+  },
+  created(){
+    let data = JSON.parse(this.$route.query.data)
+    this.form = {
+      id: data && data.id && data.id,
+      userId: data && data.userId && data.userId,
+      vehicleId: data && data.vehicleId && data.vehicleId
     }
   }
 }
