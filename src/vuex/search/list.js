@@ -491,56 +491,76 @@ const state = {
         },
         {
           key:'联系电话',
-          type:'select',
-          prop:'type',
+          type:'input',
+          prop:'telephone',
           value:'',
         },
         {
           key:'上次开始保养日期',
           type:'date',
-          prop:'start',
+          prop:'startLastMaintainTime',
           value:'',
         },
         {
           key:'上次保养结束日期',
           type:'date',
-          prop:'end',
+          prop:'endLastMaintainTime',
           value:'',
         },
         {
           key:'保养到期',
           type:'select',
-          prop:'state',
+          prop:'maintainState',
           value:'',
+          list:[
+            {
+              label:'已到期',
+              value:1
+            },
+            {
+              label:'未到期',
+              value:0
+            }
+          ]
         },
         {
           key:'保险购买开始日期',
           type:'date',
-          prop:'state',
+          prop:'StartInsuranceStart',
           value:'',
         },
         {
           key:'保险购买结束日期',
           type:'date',
-          prop:'state',
+          prop:'endInsuranceStart',
           value:'',
         },
         {
           key:'保险到期',
           type:'select',
-          prop:'state',
+          prop:'insuranceState',
           value:'',
+          list:[
+            {
+              label:'已到期',
+              value:1,
+            },
+            {
+              label:'未到期',
+              value:0
+            }
+          ]
         },
         {
           key:'车型',
           type:'input',
-          prop:'state',
+          prop:'carModel',
           value:'',
         },
         {
           key:'车牌号',
           type:'input',
-          prop:'state',
+          prop:'plateNum',
           value:'',
         }
       ]
@@ -635,6 +655,16 @@ const state = {
           type:'select',
           prop:'type',
           value:'',
+          list:[
+            {
+              label:'增加',
+              value:1,
+            },
+            {
+              label:'减少',
+              value:0
+            }
+          ]
         },
         {
           key:'业务类型',
@@ -652,43 +682,44 @@ const state = {
         {
           key:'订单号',
           type:'input',
-          prop:'name',
+          prop:'orderNum',
           value:'',
         },
         {
           key:'会员姓名',
-          type:'select',
-          prop:'type',
+          type:'input',
+          prop:'realName',
           value:'',
         },
         {
           key:'联系电话',
           type:'input',
-          prop:'type',
+          prop:'phone',
           value:'',
         },
         {
           key:'操作人',
           type:'input',
-          prop:'start',
+          prop:'employeeName',
           value:'',
         },
         {
           key:'充值方式',
           type:'select',
-          prop:'end',
+          prop:'rechargeType',
           value:'',
+          list:[],
         },
         {
           key:'开始日期',
           type:'date',
-          prop:'state',
+          prop:'startCreateTime',
           value:'',
         },
         {
           key:'结束日期',
           type:'date',
-          prop:'state',
+          prop:'endCreateTime',
           value:'',
         },
       ]
@@ -700,44 +731,81 @@ const state = {
       list:[
         {
           key:'会员姓名',
-          type:'select',
-          prop:'type',
+          type:'input',
+          prop:'realName',
           value:'',
         },
         {
           key:'联系电话',
           type:'input',
-          prop:'type',
+          prop:'phone',
           value:'',
         },
         {
           key:'车牌号',
           type:'input',
-          prop:'start',
+          prop:'plateNum',
           value:'',
         },
         {
           key:'选择消费项目',
           type:'select',
-          prop:'end',
+          prop:'mealName',
           value:'',
+          list:[
+            {
+              label:'一般维修',
+              value:'一般维修',
+            },
+            {
+              label:'购买保险',
+              value:'购买保险',
+            },
+            {
+              label:'美容洗车',
+              value:'美容洗车',
+            },
+            {
+              label:'汽车精品',
+              value:'汽车精品',
+            },
+            {
+              label:'套餐销售',
+              value:'套餐销售',
+            },
+            {
+              label:'其他',
+              value:'其他',
+            },
+          ]
+          
         },
         {
           key:'会员卡扣除状态',
           type:'select',
-          prop:'state',
+          prop:'status',
           value:'',
+          list:[
+            {
+              label:'已扣除',
+              value:1
+            },
+            {
+              label:'未扣除',
+              value:0,
+            }
+          ],
         },
         {
           key:'开始日期',
           type:'date',
-          prop:'',
+          prop:'startTime',
           value:''
         },
         {
           key:'结束日期',
           type:'date',
-          prop:'state',
+          prop:'endTime',
           value:'',
         },
       ]
@@ -1906,8 +1974,9 @@ const getters = {
         }else if(sub.key === '顾问类型'){
           sub.list = rootGetters.formatCounselorList
         }else if(sub.key === '业务类型'){
-          sub.list = rootState.Member.typeBusiness
-          console.log(rootState)
+          sub.list = rootState.Member.tempArr1
+        }else if(sub.key === '充值方式'){
+          sub.list = rootState.Member.tempArr1
         }
         return {...sub}
       })
