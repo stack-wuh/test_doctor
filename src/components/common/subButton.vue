@@ -1,7 +1,7 @@
 <template>
   <section class="wrapper">
       <section class="btn-area">
-        <el-button type="danger">取消</el-button>
+        <el-button @click="handleCancel" type="danger">取消</el-button>
         <el-button @click="handleSubmit" type="primary">确定</el-button>
       </section>
   </section>
@@ -19,6 +19,9 @@ export default {
   methods: {
     handleSubmit(){
       this.$emit('handleSubmit', {submit:true })
+    },
+    handleCancel(){
+      this.$emit('handleCancel', true)
     }
   }
 }
