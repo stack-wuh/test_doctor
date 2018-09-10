@@ -2,7 +2,7 @@
   <section class="wrapper">
     <section class="content">
       <div class="btn-list" v-for="(item,index) in getBtnList" :key="index">
-        <el-button v-if="item.type == '' || item.type =='button'" v-on:click="item.click({params , choose})" >{{item.text}}</el-button>
+        <el-button v-if="item.type == '' || item.type =='button'" v-on:click="item.click({params , choose, text: item.text})" >{{item.text}}</el-button>
         <el-select v-if="item.type == 'select'" :placeholder="item.text" :size="item.size" :style="item.style" v-model="item.value" >
           <el-option label="aa" value="aa"></el-option>
         </el-select>
