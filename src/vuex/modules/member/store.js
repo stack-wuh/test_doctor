@@ -122,12 +122,31 @@ const actions = {
   },
 
   /**
-   * 会员管理 -- 车辆管理
+   * 会员管理 -- 车辆管理 -- 会员卡
+   */
+  memberCouponComm({commit}, {search} = {}){
+    return new Promise((resolve,reject) => {
+      $http.post('vehicle/getPlateNum.do', search, res => {
+        return resolve(res)
+      })
+    })
+  },
+  /**
+   * 会员管理 -- 车辆管理 -- 车辆查询
    */
   memberCarComm({commit}, {search} = {}){
-    $http.post('vehicle/getPlateNum.do', search, res => {
-      console.log(res)
+    return new Promise((resolve, reject) => {
+      $http.post('vehicle/selectVehicle.do', search, res => {
+        return resolve(res)
+      })
     })
+  },
+  memberCarCommPut({commit}, {form} = {}){
+    return new Promise((resolve, reject)=> {
+      $http.post('vehicle/updateVehicle.do', form, res => {
+          return resolve(res)
+      })
+    }) 
   }
 }
 
