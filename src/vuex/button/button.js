@@ -4,8 +4,8 @@ import {
   jump2AddWithDialog ,
   DelAndFreshWithAll ,
   export2Excel ,
+  importExcelWithDialog,
 } from './click'
-import { openDialog } from '../tables/click';
 const state = {
   list:[
     {
@@ -181,6 +181,7 @@ const state = {
           type:'',
           size:'small',
           style:'',
+          click:importExcelWithDialog
         }
       ]
     },
