@@ -1,4 +1,5 @@
 import $http from '../../../utils/axios'
+import {_g } from '../../../utils/global'
 const state = {
   list:[],
   total:0,
@@ -29,9 +30,17 @@ const actions = {
         dispatch('getMemberList')
         dispatch('getCounselorList')
         break;
+      case '积分管理' : _url = 'detail/getIntegrals.do', search = {
+        ...rootState.search, ...search, currPageNo
+      }
+      break;
     }
     $http.post(_url, search, res => {
-      commit('setMemberStore',{params: res.data})
+      switch(path){
+        case '积分管理' : return commit('setMemberStore', {params: res.data.info})
+        default : commit('setMemberStore', {params: res.data})
+      }
+      // commit('setMemberStore',{params: res.data})
     })
   },
 
@@ -53,7 +62,15 @@ const actions = {
    * 导入数据
    */
   memberInfoImport({commit,dispatch}, {path, form, form:{fileName} = {}}){
-    form.fileName = form.fileName.toString()
+    if(form.fileName.length){
+      form.fileName = form.fileName.toString()
+    }else{
+      _g.toastMsg({
+        type:'error',
+        msg:'请选择文件之后再提交'
+      })
+      return
+    }
     return new Promise((resolve,reject) => {
       $http.post('vipList/imports.do', form, res => {
         setTimeout(()=>{
@@ -74,9 +91,14 @@ const mutations = {
 }
 
 const getters = {
-  memberStore: state => {
-    return state.list
-  }
+  memberStore: state => ({path} = {}) => {
+    return state.list.map(item => {
+      switch(path){
+        case '积分管理' : return {...item, typeText: item.type == 1 ? '增加' : '减少'}
+        default : return {...item}
+      }
+    })
+  },
 }
 
 export default {
