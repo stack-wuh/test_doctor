@@ -48,3 +48,12 @@ a{
   height: 30px;
   color: #999;
 }
+
+.flex{
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+.flex-justify-between{
+  justify-content: space-between;
+}
