@@ -18,6 +18,7 @@ export default {
   },
   watch:{
     '$route'(to,from){
+      console.log('aaa')
       if(to.query.path){
         this.$router.push({path:to.query.path,query:{menu:to.query.menu , subMenu:to.query.subMenu , child:to.query.child , data:to.query.data}})
       }
