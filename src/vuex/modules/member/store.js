@@ -9,7 +9,7 @@ const actions = {
   /**
    * 获取会员模块全部的表格内容
    */
-  getMemberStore({commit, rootState}, {path, search, currPageNo = 1} = {}){
+  getMemberStore({commit, rootState, dispatch}, {path, search, currPageNo = 1} = {}){
     let _url = ''
     switch(path){
       case '会员列表' : _url = 'vipList/init.do', search = {
@@ -25,7 +25,8 @@ const actions = {
         endCreateTime:'',
         minIntegral:'',
         maxIntegral:''
-        , ...rootState.search, ...search, currPageNo}
+        , ...rootState.search, ...search, currPageNo}, 
+        dispatch('getMemberList')
         break;
     }
     $http.post(_url, search, res => {
