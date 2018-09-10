@@ -1,6 +1,7 @@
 import $http from '../utils/axios'
 export const state = {
   dialogVisible:false,
+  visibleDialogWithImport:false,
   dialogForm:{},
   isShowLoading:false,
   form:{},
@@ -89,7 +90,15 @@ export const mutations = {
    */
   setCarTypeList(state,{params} = {}){
     state.carTypeList = params && params
-  } 
+  },
+  /**
+   * 设置导入文件dialog
+   * @param {*} state 
+   * @param {*} param1 
+   */
+  handleDialogWithImport(state, {visible} = {}){
+    state.visibleDialogWithImport  = visible
+  }
 }
 
 export const actions = {
@@ -160,7 +169,8 @@ export const actions = {
     $http.post('quality/qualityTypeDrop.do', {}, res => {
       commit('setCarTypeList', {params: res.data})
     })
-  }
+  },
+
 }
 
 export const getters = {
