@@ -98,10 +98,16 @@ export const jump2Detail = params => {
   * JSON2Excel
   */
  export const export2Excel = ({params}) => {
-   let {menu, subMenu, child} = params
+   let {subMenu, child} = params
+   _g.toastMsg({
+     type:'success',
+     msg:'正在导出Excel文件,请稍后!'
+   })
    switch(child || subMenu){
      case '门店管理' : return location.href = window.rootPath + '/store/outStore.do' ;
      case '精品订单管理' : return location.href = window.rootPath + '/quality/outQulity.do'
+     case '充值明细' : return location.href = window.rootPath + '/detail/exportRecharge.do'
+     case '消费明细' : return location.href = window.rootPath + '/detail/exportConsumerDetails.do'
    }
  }
 
@@ -114,4 +120,19 @@ export const jump2Detail = params => {
    switch(child || subMenu){
      case '会员列表' : return window.$store.commit('handleDialogWithImport',{visible: true})
    }
+ }
+
+
+ /**
+  * 定制 会员列表 -- 对话框
+  */
+ export const handleDialogForMember = ({params, text, choose} = {}) => {
+  if(!choose){
+    _g.toastMsg({
+      type: 'error',
+      msg: '请先选择操作对象!'
+    })
+    return 
+  }
+  window.$store.dispatch('memberAddCounselor',{path: params.child || params.subMenu, text, choose})
  }
