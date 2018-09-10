@@ -63,7 +63,18 @@
 import {mapActions} from 'vuex'
 export default {
   name: 'coupon',
-
+  props:{
+    id:{
+      type:Number,
+      default:'',
+      required: true,
+    },
+    userId:{
+      type:Number,
+      default:'',
+      required: true
+    }
+  },
   data () {
     return {
       formList:[[
@@ -137,13 +148,15 @@ export default {
 
   methods: {
     ...mapActions({
-      'memberCarComm':'memberCarComm'
+      'memberCouponComm':'memberCouponComm'
     })
   },
   created(){
-    let data = JSON.parse(this.$route.query.data)
-    let {id, userId} = data
-    this.memberCarComm({search:{id,userId}})
+    let search = {
+      id: this.id,
+      userId: this.userId
+    }
+    this.memberCouponComm({search})
   }
 }
 </script>
