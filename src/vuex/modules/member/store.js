@@ -119,6 +119,15 @@ const actions = {
    */
   memberAddCounselor({commit}, {choose, text, path}){
     commit('setMemberAddCounselorData', {choose, path, text})
+  },
+
+  /**
+   * 会员管理 -- 车辆管理
+   */
+  memberCarComm({commit}, {search} = {}){
+    $http.post('vehicle/getPlateNum.do', search, res => {
+      console.log(res)
+    })
   }
 }
 
@@ -156,7 +165,6 @@ const mutations = {
     }
   },
   handleDelMemberItem(state, {index} = {}){
-    console.log(index)
     state.tempObj.data.splice(index, 1)
   }
 }
