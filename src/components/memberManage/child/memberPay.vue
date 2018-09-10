@@ -61,6 +61,7 @@
 
 <script>
 import Search from '@/components/common/search'
+import {mapActions} from 'vuex'
 
 export default {
   name: 'memberPay',
@@ -72,8 +73,19 @@ export default {
       inputDis:true,
     }
   },
-
-  methods: {}
+  computed:{
+    pathChange(){
+      return this.$route.query.child || this.$route.query.subMenu
+    }
+  },
+  methods: {
+    ...mapActions({
+      'getList': 'getMemberStore'
+    })
+  },
+  created(){
+    this.getList({path: this.pathChange})
+  }
 }
 </script>
 
