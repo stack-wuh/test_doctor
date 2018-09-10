@@ -15,6 +15,7 @@ export const state = {
   couponList:[],
   pushList:[],
   carTypeList:[],
+  memberList:[],
 }
 
 export const mutations = {
@@ -98,6 +99,13 @@ export const mutations = {
    */
   handleDialogWithImport(state, {visible} = {}){
     state.visibleDialogWithImport  = visible
+  },
+
+  /**
+   * 保存会员等级列表
+   */
+  setMemberList(state, {params} = {}){
+    state.memberList = params
   }
 }
 
@@ -171,6 +179,13 @@ export const actions = {
     })
   },
 
+  getMemberList({commit}){
+    $http.post('detail/commonGetMembers.do', {}, res => {
+      commit('setMemberList', {params: res.data})
+    })
+  },
+
+  
 }
 
 export const getters = {
@@ -188,5 +203,10 @@ export const getters = {
   },
   formatCarTypeList(state){
     return state.carTypeList
+  },
+  formatMemberList(state){
+    return state.memberList.map(item => {
+      return {label: item.name, value: item.id}
+    })
   }
 }
