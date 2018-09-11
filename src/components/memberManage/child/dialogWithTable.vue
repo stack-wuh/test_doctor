@@ -10,13 +10,13 @@
         </el-form>
         <el-table :data="list" border stripe>
             <el-table-column align="center" label="头像">
-              <template scope="scope">
+              <template slot-scope="scope">
                 <img :src="scope.row.wxpic" alt="avatar" />
               </template>
             </el-table-column>
             <el-table-column align="center" label="微信昵称" prop="nickName" ></el-table-column>
             <el-table-column align="center" label="操作">
-              <template scope="scope">
+              <template slot-scope="scope">
                 <el-button type="danger" size="mini" @click="handleDelItem({index: scope.$index})">删除</el-button>
               </template>
             </el-table-column>
