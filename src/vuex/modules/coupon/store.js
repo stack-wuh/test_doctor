@@ -32,6 +32,9 @@ const actions = {
       case '用户佣金提现' : _url = 'takeMoney/getUserTakeMoneny.do', search = {...rootState.search}
         break;
       case '查看领取明细' : _url = 'coupon/getTakeList.do', search = {...rootState.search, ...search}, dispatch('getCouponFromList')
+        break;
+      case '抽奖模板设置' : _url = 'lottery/carLotteryTemplateList.do', search = {...rootState.search, ...search, currPageNo}
+        break;
     }
     $http.post(_url, search, res => {
       commit('setCouponStore' ,{params: res.data})
