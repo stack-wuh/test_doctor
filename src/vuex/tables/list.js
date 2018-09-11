@@ -1649,12 +1649,12 @@ const state = {
         {
           key:'名称',
           type:'default',
-          prop:'',
+          prop:'couponName',
         },
         {
           key:'奖品总数量',
           type:'default',
-          prop:'',
+          prop:'number',
         },
         {
           key:'中奖概率',
@@ -1931,49 +1931,54 @@ const state = {
       path:'',
       type:'用户提现记录',
       params:['用户提现记录'],
-      colType:'select',
-      colValue:'selection',
+      colType:'',
+      colValue:'',
       colTitle:'',
       list:[
         {
           key:'用户姓名',
           type:'default',
-          prop:'',
+          prop:'realName',
         },
         {
           key:'联系电话',
           type:'default',
-          prop:'',
+          prop:'phone',
+        },
+        {
+          key:'车牌号',
+          type:'default',
+          prop:'carNumber'
         },
         {
           key:'返利总金额',
           type:'default',
-          prop:'name',
+          prop:'totalMoney',
         },
         {
           key:'已提现金额',
           type:'default',
-          prop:'name',
+          prop:'takeMoney',
         },
         {
           key:'剩余可提现金额',
           type:'default',
-          prop:'name',
+          prop:'realMoney',
         },
         {
           key:'备注',
           type:'default',
-          prop:'name',
+          prop:'remark',
         },
         {
           key:'操作人',
           type:'default',
-          prop:'name',
+          prop:'employeeName',
         },
         {
           key:'操作时间',
           type:'default',
-          prop:'name',
+          prop:'takeDate',
         },
       ]
     },
@@ -1982,83 +1987,85 @@ const state = {
       path:'',
       type:'员工奖励',
       params:['员工奖励'],
-      colType:'select',
-      colValue:'selection',
+      colType:'',
+      colValue:'',
       colTitle:'',
       list:[
         {
           key:'活动卡券',
           type:'default',
-          prop:'',
+          prop:'activityCard',
         },
         {
           key:'员工姓名',
           type:'default',
-          prop:'',
+          prop:'employeeName',
         },
         {
           key:'联系方式',
           type:'default',
-          prop:'name',
+          prop:'employeePhone',
         },
         {
           key:'现金金额',
           type:'default',
-          prop:'name',
+          prop:'takeMoney',
         },
         {
           key:'卡券奖励',
           type:'default',
-          prop:'name',
+          prop:'couponReward',
         },
         {
           key:'奖励类型',
           type:'default',
-          prop:'name',
+          prop:'rewardTypeText',
         },
         {
           key:'领取用户姓名',
           type:'default',
-          prop:'name',
+          prop:'userName',
         },
         {
           key:'领取用户手机号',
           type:'default',
-          prop:'name',
+          prop:'userPhone',
         },
         {
           key:'消费金额',
           type:'default',
-          prop:'',
+          prop:'money',
         },
         {
           key:'优惠券金额',
           type:'default',
-          prop:'',
+          prop:'couponMoney',
         },
         {
           key:'奖励日期',
           type:'default',
-          prop:'',
+          prop:'rewardDate',
         },
         {
           key:'操作时间',
           type:'default',
-          prop:'',
+          prop:'operateTime',
         },
         {
           key:'操作人',
           type:'default',
-          prop:'',
+          prop:'operaterName',
         },
         {
           key:'是否发放',
           type:'default',
-          prop:'',
+          prop:'stateText',
         },
         {
           key:'操作',
           type:'button',
+          fix:'right',
+          width:'120px',
           list:[
             {
               text:'发放',

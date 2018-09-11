@@ -8,3 +8,9 @@ export const  clearSearchForm = ({path} = {}) => {
 export const searchFormList = ({path} = {}) => {
   window.$store.dispatch('getStoresList',{path})
 }
+
+export const handleSearchList = ({path} = {}) => {
+  switch(path){
+    case '用户佣金提现' : return window.$store.dispatch('couponMemberTake')
+  }
+}

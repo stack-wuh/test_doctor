@@ -37,6 +37,8 @@ export const jump2Detail = params => {
           break ;
      case '自动回复配置' : rootPath = '/system/store/reply' , child = '编辑自动回复设置'
           break ;
+     case '用户提现记录' : rootPath = '/coupon/userComm/pub', child = '编辑用户提现'
+          break;
      default : rootPath = '/index'
    }
    window.$route.push({path:'/mid/container',query:{path:rootPath , menu , subMenu ,child}})
@@ -50,12 +52,9 @@ export const jump2Detail = params => {
    let {subMenu ,child} = params.params
    window.$store.commit('handleOpenDialog',{params,text,row})
     switch(child || subMenu){
-      case '部门管理' : window.$store.dispatch('getDepartmentList')
-        break;
-      case '角色管理' : window.$store.dispatch('getRoleList')
-        break;
-      case '会员充值设置' : window.$store.dispatch('getCouponList')
-        break;
+      case '部门管理' : return window.$store.dispatch('getDepartmentList')
+      case '角色管理' : return window.$store.dispatch('getRoleList')
+      case '会员充值设置' : return window.$store.dispatch('getCouponList')
     }
  }
 
@@ -109,6 +108,7 @@ export const jump2Detail = params => {
      case '充值明细' : return location.href = window.rootPath + '/detail/exportRecharge.do'
      case '消费明细' : return location.href = window.rootPath + '/detail/exportConsumerDetails.do'
      case '查看领取明细' : return location.href = window.rootPath + '/coupon/getTakeListByUserCouponVoForReport.do'
+     case '员工奖励' : return location.href = window.rootPath + '/employeeReward/employeeRewardListReport.do'
    }
  }
 
@@ -137,4 +137,11 @@ export const jump2Detail = params => {
     return 
   }
   window.$store.dispatch('memberAddCounselor',{path: params.child || params.subMenu, text, choose})
+ }
+
+ /**
+  * 定制 -- 卡券管理 -- 抽奖模板
+  */
+ export const handleDialogForCoupon = ({params, text, } = {}) => {
+   window.$store.dispatch('couponAddModelWithDialog')
  }

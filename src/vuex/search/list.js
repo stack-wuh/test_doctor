@@ -1,5 +1,6 @@
 import {
   clearSearchForm ,
+  handleSearchList,
 } from './click'
 const state = {
   search:{
@@ -592,19 +593,19 @@ const state = {
         {
           key:'姓名',
           type:'input',
-          prop:'',
+          prop:'realName',
           value:'',
         },
         {
           key:'联系电话',
           type:'input',
-          prop:'',
+          prop:'phone',
           value:'',
         },
         {
           key:'车牌号',
           type:'input',
-          prop:'',
+          prop:'carNumber',
           value:'',
         }
       ],
@@ -996,26 +997,31 @@ const state = {
           key:'姓名',
           value:'',
           type:'default',
+          prop:'realName',
         },
         {
           key:'联系电话',
           value:'',
           type:'default',
+          prop:'phone',
         },
         {
           key:'车牌号',
           value:'',
           type:'default',
+          prop:'carNumber',
         },
         {
           key:'提现开始日期',
           value:'',
           type:'date',
+          prop:'startDate',
         },
         {
           key:'提现结束日期',
           value:'',
-          type:'date'
+          type:'date',
+          prop:'endDate',
         }
       ],
     },
@@ -1085,46 +1091,75 @@ const state = {
           key:'员工姓名',
           value:'',
           type:'default',
+          prop:'name',
         },
         {
           key:'联系电话',
           value:'',
           type:'default',
+          prop:'phone',
         },
         {
           key:'消费最小金额',
           value:'',
           type:'input',
+          prop:'minMoney',
         },
         {
           key:'消费最大金额',
           value:'',
           type:'input',
+          prop:'maxMoney',
         },
         {
           key:'奖励开始日期',
           value:'',
           type:'date',
+          prop:'startDate',
         },
         {
           key:'奖励结束日期',
           value:'',
           type:'date',
+          prop:'endDate',
         },
         {
           key:'活动卡券',
           value:'',
           type:'select',
+          prop:'activityCard',
         },
         {
           key:'发放状态',
           value:'',
           type:'select',
+          prop:'status',
+          list:[
+            {
+              label:'已发放',
+              value:1
+            },
+            {
+              label:'未发放',
+              value:0
+            }
+          ]
         },
         {
           key:'奖励类型',
           value:'',
           type:'select',
+          prop:'rewardType',
+          list:[
+            {
+              label:'分享',
+              value:1
+            },
+            {
+              label:'消费',
+              value:0
+            }
+          ]
         }
       ]
     },
@@ -1945,14 +1980,14 @@ const state = {
     },
     {
       name:'查询重置类别',
-      params:['员工列表','快捷回复设置','汽车精品管理','精品订单管理','配件大类管理','会员列表','车辆管理','积分管理','充值明细','消费明细','奖品卡券管理','用户卡券管理','用户卡券发放','用户奖励','员工奖励','用户提现记录','查看领取明细','普通活动','精准获客','活动抽奖','推荐有礼','预约管理','意见反馈','业务开单','业务结算','套餐销售','会员套餐记录'],
+      params:['员工列表','快捷回复设置','汽车精品管理','精品订单管理','配件大类管理','会员列表','车辆管理','积分管理','充值明细','消费明细','奖品卡券管理','用户卡券管理','用户卡券发放','用户奖励','员工奖励','用户提现记录','查看领取明细','用户佣金提现','普通活动','精准获客','活动抽奖','推荐有礼','预约管理','意见反馈','业务开单','业务结算','套餐销售','会员套餐记录'],
       type:'',
       list:[
         {
           text:'查询',
           type:'default',
           size:'small',
-          click:'',
+          click:handleSearchList,
         },
         {
           text:'重置',

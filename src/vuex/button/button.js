@@ -5,7 +5,8 @@ import {
   DelAndFreshWithAll ,
   export2Excel ,
   importExcelWithDialog,
-  handleDialogForMember
+  handleDialogForMember,
+  handleDialogForCoupon,
 } from './click'
 const state = {
   list:[
@@ -75,6 +76,20 @@ const state = {
           size:'small',
           style:'',
           click:jump2AddWithDialog
+        }
+      ]
+    },
+    {
+      name:'新增',
+      desc:'单独一个新增按钮,出现dialog对话框',
+      params:['编辑抽奖模板'],
+      btn:[
+        {
+          text:'新增',
+          type:'',
+          size:'small',
+          style:'',
+          click:handleDialogForCoupon
         }
       ]
     },
@@ -263,6 +278,7 @@ const state = {
           type:'',
           size:'small',
           style:'',
+          click:jump2Add
         }
       ]
     },
