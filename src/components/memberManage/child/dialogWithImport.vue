@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import {mapState} from 'vuex'
+import {mapState, mapActions} from 'vuex'
 export default {
   name: 'dialogWithImport',
   props:{
@@ -51,6 +51,9 @@ export default {
     }
   },
   methods: {
+    ...mapActions({
+      'couponReciverList':'couponReciverList'
+    }),
     beforeClose(){
       this.handleHideDialog()
     },
@@ -70,6 +73,8 @@ export default {
     handleSubmit(){
       switch(this.pathChange){
         case '会员列表' : return this.$store.dispatch('memberInfoImport', {path: this.pathChange, form:{fileName: this.fileList.map(item => item.response.data)}}).then(res => this.handleHideDialog())
+        case '查看领取明细' : return this.couponReciverList({path: this.pathChange, form: {fileName: this.fileList.map(item => item.response.data)}}).then(res => res.status == 0 && this.handleHideDialog())
+
       }
     }
   }
