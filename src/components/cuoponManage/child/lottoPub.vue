@@ -2,7 +2,7 @@
   <section class="wrapper">
     <section class="content">
       <Search />
-      <my-table header="true" :list="list" >
+      <my-table header="true" :list="list({path: changePath})" >
         <span slot="title">{{$route.query.child}}</span>
         <div slot="right">
           <my-button />
@@ -32,7 +32,10 @@ export default {
   computed:{
     ...mapGetters({
       'list':'formatCouponStore'
-    })
+    }),
+    changePath(){
+      return this.$route.query.child || this.$route.query.subMenu
+    }
   },
   methods: {
     ...mapActions({
