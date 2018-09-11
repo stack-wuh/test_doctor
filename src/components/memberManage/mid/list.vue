@@ -9,7 +9,7 @@
         </div>
       </my-table>
       <bottom @getCurrent="getCurrent" :total="total" :currentPage="currentPage" />
-      <dialog-with-import @handleHideDialog="handleHideDialog" :visibleDialog="visibleDialog" title="导入文件1" />
+      <dialog-with-import @handleHideDialog="handleHideDialog" :visibleDialog="visibleDialog" title="导入文件" />
       <dialog-with-table :isShowDialog="isShowTable" :list="subData"  />
     </section> 
   </section>
