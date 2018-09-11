@@ -67,6 +67,7 @@ const actions = {
    */
   signOut(){
     $http.post('employee/doLogout.do', {} ,res => {
+      localStorage.setItem('saveObj', '')
       if(res.status == 0){
        setTimeout(()=>{
           window.$route.push({name:'signin'})

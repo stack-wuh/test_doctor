@@ -10,7 +10,7 @@
     <section class="content">
       <section class="form-area">
         <span class="nav-title">用户登录</span>
-        <!-- {{form}} -- {{form.username}} -- this is username -->
+        {{form}} -- {{form.username}} -- this is username
         <el-form class="my-form" ref="myForm">
           <el-form-item v-for="(item,index) in list" :key="index">
             <el-input v-model="form[item.prop]" class="my-input" v-if="item.type == 'input'" :type="item.inputType" :placeholder="'请编辑'+item.name" :style="item.style"></el-input>
@@ -126,13 +126,13 @@ export default {
   created(){
     this.handleRandomCode()
     let myStorage = localStorage.getItem('saveObj')
-    myStorage = JSON.parse(myStorage)
+    myStorage = myStorage && JSON.parse(myStorage)
     let date = new Date().getTime()
     this.handleNameAndPwd({form: myStorage, rootState: this.$store.state})
-    if(date && date - myStorage.expire < 0){
+    if(date && date - myStorage.expire < 0 && this.isSavePwd){
       this.handleSignIn()
     }else{
-      myStorage.setItem('saveObj','')
+      localStorage.setItem('saveObj','')
     }
   }
 }
