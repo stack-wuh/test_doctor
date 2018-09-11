@@ -1401,7 +1401,7 @@ const state = {
         {
           key:'卡券类型',
           type:'default',
-          prop:'couponType',
+          prop:'couponTypeText',
         },
         {
           key:'存量',
@@ -1466,8 +1466,79 @@ const state = {
               text:'领取明细',
               size:'small',
               type:'text',
+              click:jump2Other
             }
           ]
+        }, 
+      ]
+    },
+    {
+      name:'奖品卡券领取明细',
+      path:'',
+      type:'奖品卡券管理',
+      params:['查看领取明细'],
+      colType:'index',
+      colValue:'selection',
+      list:[
+        {
+          key:'编号',
+          type:'default',
+          prop:'codeNum',
+        },
+        {
+          key:'姓名',
+          type:'default',
+          prop:'realNameByUser',
+        },
+        {
+          key:'联系电话',
+          type:'default',
+          prop:'phone',
+        },
+        {
+          key:'类型',
+          type:'default',
+          prop:'couponTypeText',
+        },
+        {
+          key:'卡券名称',
+          type:'default',
+          prop:'counponName',
+        },     
+        {
+          key:'卡券面值',
+          type:'default',
+          prop:'counponName',
+        }, 
+        {
+          key:'有效期',
+          type:'default',
+          prop:'vaildDays',
+        }, 
+        {
+          key:'卡券状态',
+          type:'default',
+          prop:'stateText',
+        }, 
+        {
+          key:'领取时间',
+          type:'default',
+          prop:'getTime',
+        }, 
+        {
+          key:'来源',
+          type:'default',
+          prop:'userreserved1',
+        },
+        {
+          key:'操作人',
+          type:'default',
+          prop:'realNameByEmployee',
+        },  
+        {
+          key:'核销日期',
+          type:'default',
+          prop:'canceTime',
         }, 
       ]
     },

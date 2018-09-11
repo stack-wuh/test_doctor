@@ -31,6 +31,7 @@ const actions = {
         break;
       case '用户佣金提现' : _url = 'takeMoney/getUserTakeMoneny.do', search = {...rootState.search}
         break;
+      case '查看领取明细' : _url = 'coupon/getTakeList.do', search = {...rootState.search, ...search}, dispatch('getCouponFromList')
     }
     $http.post(_url, search, res => {
       commit('setCouponStore' ,{params: res.data})
@@ -40,11 +41,23 @@ const actions = {
    * 卡券管理 -- 奖品卡券管理 
    *  更新/发布
    */
-  couponPraisePubAndPut({commit}, {path, form = {}, form:{receiveType, roleId}} = {}){
-    form = {...form, receiveType:receiveType.toString(), roleId:roleId.toString()}
-    $http.post('coupon/addCoupon.do', form, res => {
-
+  couponPraisePubAndPut({commit}, {path, form} = {}){
+    return new Promise((resolve, reject) => {
+      $http.post('coupon/addCoupon.do', form, res => {
+        return resolve(res)
+      })
     })
+  },
+
+  /**
+   *  卡券管理 -- 奖品卡券管理 -- 领取明细文件上传
+   */
+  couponReciverList({commit}, {path, form} = {}){
+   return new Promise((resolve, reject) => {
+    $http.post('coupon/getTakeListByUserCouponVoForReport.do', form, res => {
+      return resolve(res)
+    })
+   }) 
   },
   /**
    * 卡券管理 -- 抽取所有模块内的表格删除事件
@@ -62,6 +75,9 @@ const actions = {
       },1000)
     })
   },
+
+
+
   /**
    * 卡券管理 -- 用户佣金提现 
    * 提现
@@ -75,8 +91,14 @@ const getters = {
   /**
    * 计算卡券管理 store数据
    */
-  formatCouponStore(state){
-    return state.data
+  formatCouponStore: (state) => ({path} = {}) => {
+    return state.data.map(item => {
+      switch(path){
+        case '奖品卡券管理' : return {...item, couponTypeText: item.couponType == 1 ? '电子代金券' : '实物奖品'}
+        case '查看领取明细' : return {...item, couponTypeText: item.couponType == 1 ? '电子代金券' : '实物奖品', stateText: item.states == 0 ? '未使用' : item.states == 1 ? '已使用' : '已过期'}
+        default : return {...item}
+      }
+    })
   }
 }
 
