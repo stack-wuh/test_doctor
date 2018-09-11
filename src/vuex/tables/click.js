@@ -42,7 +42,9 @@ export const jump2Other = (params ,types ,row) => {
       break ; 
     case '会员列表' : rootPath = '/member/pub' , child = '编辑会员信息'
       break ;
-    case '奖品卡券管理' : rootPath = '/coupon/pub' , child = '编辑奖品卡券'
+    case '奖品卡券管理' : rootPath = types == '编辑' ? '/coupon/pub' : '/coupon/store' , 
+                        child = types == '编辑' ? '编辑奖品卡券' : '查看领取明细',
+                        data = JSON.stringify(row)
       break ;
     case '抽奖模板设置' : rootPath = '/coupon/lotto/pub' , child = '编辑抽奖模板'
       break ;

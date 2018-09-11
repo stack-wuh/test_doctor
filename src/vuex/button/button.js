@@ -192,19 +192,21 @@ const state = {
     {
       name:'导入导出',
       desc:'导入导出定制模板',
-      params:['用户卡券管理'],
+      params:['用户卡券管理','查看领取明细'],
       btn:[
         {
           text:'导入',
           type:'',
           size:'small',
           style:'',
+          click:importExcelWithDialog
         },
         {
           text:'导出',
           type:'',
           size:'small',
           style:'',
+          click:export2Excel
         }
       ]
     },
