@@ -11,12 +11,13 @@ export const state = {
   tableRow:{},
   choose:'',
   departmentList:[],
-  roleList:[],
+  roleList:[], // 角色列表
   couponList:[],
   pushList:[],
   carTypeList:[],
   memberList:[],
-  counselorList:[]
+  counselorList:[],
+  couponFormList:[]
 }
 
 export const mutations = {
@@ -116,6 +117,15 @@ export const mutations = {
    */
   setCounselorList(state, {params = {}}){
     state.counselorList = params
+  },
+
+  /**
+   * 保存卡券来源列表
+   * @param {*} state 
+   * @param {*} param1 
+   */
+  setCouponFromList(state, {params} = {}){
+    state.couponFromList = params
   }
 }
 
@@ -207,8 +217,16 @@ export const actions = {
     $http.post('vipList/commonGetEmployees.do', {}, res => {
       commit('setCounselorList', {params: res.data})
     })
-  }
+  },
   
+  /**
+   * 卡券管理 -- 奖品卡券管理  -- 获取卡券来源 -- select
+   */
+  getCouponFromList({commit}){
+    $http.post('coupon/couponSourceSelect.do', {}, res => {
+      commit('setCouponFromList', {params: res.data})
+    })
+  }
 }
 
 export const getters = {
