@@ -2,13 +2,14 @@
   <section class="father">
       <section class="content">
         <Search  @inputChange="getList({path:changePath})" v-if="isShow" :name="changePath" />
-        <my-table v-if="isShow" header="true" :list="list">
+        <my-table v-if="isShow" header="true" :list="list({path: changePath})">
           <span slot="title">{{ $route.query.child || $route.query.subMenu}}列表</span>
           <div slot="right">
             <my-button></my-button>
           </div>
         </my-table>
         <my-bottom :total="total" :currentPage="currentPage" @getCurrent="getCurrent" />
+        <import-with-dialog title="上传文件"></import-with-dialog>
       </section>
   </section>
 </template>
@@ -18,14 +19,16 @@ import Search from '@/components/common/search'
 import MyTable from '@/components/common/myTable'
 import MyButton from '@/components/common/myButton'
 import MyBottom from '@/components/common/bottom'
+import ImportWithDialog from '@/components/memberManage/child/dialogWithImport'
 import {mapActions ,mapState ,mapGetters} from 'vuex'
 export default {
   name: 'store',
   components:{
-    Search ,
-    MyTable ,
-    MyButton ,
-    MyBottom ,
+    Search,
+    MyTable,
+    MyButton,
+    MyBottom,
+    ImportWithDialog,
   },
   data () {
     return {
@@ -46,9 +49,13 @@ export default {
   },
   watch:{
     changePath(){
+      let data = this.$route.query.data && JSON.parse(this.$route.query.data)
+      let search = {
+        id: data && data.id
+      }
       this.isShow = false
       setTimeout(()=>{
-        this.getList({path: this.changePath})
+        this.getList({path: this.changePath, search})
         this.isShow = true
       })
     }
@@ -62,8 +69,11 @@ export default {
     }
   },
   created(){
-    this.getList({path: this.changePath})
-    console.log('is created')
+    let data = this.$route.query.data && JSON.parse(this.$route.query.data)
+    let search = {
+      id: data && data.id 
+    }
+    this.getList({path: this.changePath, search})
   }
 }
 </script>
