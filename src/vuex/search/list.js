@@ -853,7 +853,7 @@ const state = {
         {
           key:'模板名称',
           type:'input',
-          prop:'',
+          prop:'name',
           default:'',
         }
       ]
