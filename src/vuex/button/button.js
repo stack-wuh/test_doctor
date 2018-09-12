@@ -235,12 +235,24 @@ const state = {
           type:'select',
           size:'small',
           style:'width:140px;',
+          prop:'couponList',
         },
         {
           text:'推送数量',
           type:'select',
           size:'small',
           style:'width:140px;',
+          prop:'total',
+          list:[
+            {
+              label: '100',
+              value: 100
+            },
+            {
+              label: '200',
+              value: 200
+            }
+          ]
         },
         {
           text:'根据选中用户推送',
@@ -408,8 +420,18 @@ const actions = {
 }
 
 const getters = {
-  getBtnLists : state => params => {
+  getBtnLists : (state,rootGetters) => params => {
     const arr = state.list.filter(item => item.params && item.params.includes(params.name))
+    arr.forEach(item => {
+      item.btn.forEach(sub => {
+        if(sub.prop === 'total'){
+          sub.list = [{label: '10', value: 10}]
+        }else if(sub.prop === 'couponList'){
+          // sub.list = rootGetters.formatCouponList
+          sub.list = [{label: 'aaa', value: 'aaa'}]
+        }
+      })
+    })
     return arr[0] ? arr[0].btn : []
     // return state.list.find(item => item.params && item.params.includes(params.name) ? item : []).btn
   }
