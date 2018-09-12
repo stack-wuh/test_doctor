@@ -887,55 +887,79 @@ const state = {
       list:[
         {
           key:'姓名',
-          prop:'',
+          prop:'realName',
           type:'input',
           value:''
         },
         {
           key:'联系电话',
-          prop:'',
+          prop:'phone',
           type:'input',
           value:''
         },
         {
           key:'卡券名称',
-          prop:'',
+          prop:'couponName',
           type:'input',
           value:''
         },
         {
           key:'卡券编号',
-          prop:'',
+          prop:'codeNum',
           type:'input',
           value:''
         },
         {
-          key:'卡券类型',
-          prop:'',
+          key:'类型',
+          prop:'couponType',
           type:'select',
-          value:''
+          value:'',
+          list:[
+            {
+              label:'实物奖品',
+              value:0
+            },
+            {
+              label:'电子代金券',
+              value:1
+            }
+          ]
         },
         {
           key:'获取开始日期',
-          prop:'',
+          prop:'StartDate',
           type:'date',
           value:''
         },
         {
           key:'获取结束日期',
-          prop:'',
+          prop:'EndDate',
           type:'date',
           value:''
         },
         {
           key:'状态',
-          prop:'',
+          prop:'state',
           type:'select',
-          value:''
+          value:'',
+          list:[
+            {
+              label:'未使用',
+              value:0
+            },
+            {
+              label: '已使用',
+              value:1
+            },
+            {
+              label:'已过期',
+              value:2
+            }
+          ]
         },
         {
           key:'卡券来源',
-          prop:'',
+          prop:'reserved1',
           type:'select',
           value:'',
           list:[]
@@ -951,61 +975,108 @@ const state = {
           key:'姓名',
           value:'',
           type:'default',
+          prop:'name',
         },
         {
           key:'联系电话',
           value:'',
           type:'default',
+          prop:'phone',
         },
         {
           key:'车型',
           value:'',
           type:'default',
+          prop:'carModel',
         },
         {
           key:'车牌',
           value:'',
           type:'default',
+          prop:'carNum',
         },
         {
           key:'性别',
           value:'',
           type:'select',
+          prop:'sex',
+          list:[
+            {
+              label:'男',
+              value:1
+            },
+            {
+              label:'女',
+              value:0
+            }
+          ],
         },
         {
-          key:'会员级别',
+          key:'会员等级',
           value:'',
           type:'select',
+          prop:'memberId',
+          list:[],
         },
         {
           key:'销售顾问',
           value:'',
           type:'select',
+          prop:'saleEmployeeName',
+          list:[],
         },
         {
           key:'保养顾问',
           value:'',
           type:'select',
+          prop:'upKeepEmployeeName',
+          list:[],
         },
         {
           key:'保险顾问',
           value:'',
           type:'select',
+          prop:'safeEmployeeName',
+          list:[],
         },
         {
           key:'续保顾问',
           value:'',
           type:'select',
+          prop:'renewEmplyoeeName',
+          list:[],
         },
         {
-          key:'个人信息',
+          key:'个人信息是否完善',
           value:'',
           type:'select',
+          prop:'personlInfo',
+          list:[
+            {
+              label:'已完善',
+              value:1
+            },
+            {
+              label:'未完善',
+              value:0
+            }
+          ],
         },
         {
-          key:'车辆信息',
+          key:'车辆信息是否完善',
           value:'',
           type:'select',
+          prop:'carInfo',
+          list:[
+            {
+              label:'已完善',
+              value:1
+            },
+            {
+              label:'未完善',
+              value:0
+            }
+          ],
         },
       ]
     },
@@ -2049,6 +2120,8 @@ const getters = {
           sub.list = rootState.inSuranceList
         }else if(sub.key === '续保顾问'){
           sub.list = rootState.renewList
+        }else if(sub.key === '卡券来源'){
+          sub.list = rootGetters.formatCouponSrouce
         }
         return {...sub}
       })
