@@ -2120,6 +2120,8 @@ const getters = {
           sub.list = rootState.inSuranceList
         }else if(sub.key === '续保顾问'){
           sub.list = rootState.renewList
+        }else if(sub.key === '销售顾问'){
+          sub.list = rootState.sellList
         }else if(sub.key === '卡券来源'){
           sub.list = rootGetters.formatCouponSrouce
         }

@@ -23,6 +23,7 @@ export const state = {
   inSuranceList:[], // 会员列表 -- 保险顾问 -- select
   renewList:[], // 会员列表 -- 续保顾问 -- select
   couponSrouce:[], // 卡券来源 -- select
+  sellList:[], //销售顾问
 }
 
 export const mutations = {
@@ -169,6 +170,12 @@ export const mutations = {
   /**
    * 处理用户卡券发放的顾问列表
    */
+  setCouponCounselor(state, {params} = {}){
+    state.upKeepList = params['保养顾问'].map(item => {return {label: item, value: item}})
+    state.renewList = params['续保顾问'].map(item => { return {label: item, value: item}})
+    state.inSuranceList = params['保险顾问'].map(item => {return {label: item, value: item}})
+    state.sellList = params['销售顾问'].map(item => {return {label: item, value: item}})
+  }
 }
 
 export const actions = {
@@ -298,7 +305,7 @@ export const actions = {
     })
   },
   /**
-   * 卡券管理 -- 用户卡券发放 -- 获取顾问列表
+   * 卡券管理 -- 用户卡券发放 -- 获取顾问列表 -- select
    */
   getCouponCounselor({commit}){
     $http.post('coupon/getGrantCouponSelectList.do', {}, res => {
@@ -321,7 +328,9 @@ export const actions = {
     $http.post('coupon/couponSourceSelect.do', {}, res => {
       commit('setCouponSourceList', {params: res.data})
     })
-  }
+  },
+
+  
 }
 
 export const getters = {
