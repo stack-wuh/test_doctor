@@ -374,25 +374,46 @@ const state = {
             }
           ],
         },
+        // {
+        //   key:'顾问类型',
+        //   type:'select',
+        //   prop:'state',
+        //   value:'',
+        //   list:[
+        //     {
+        //       label:'保养顾问',
+        //       value:1,
+        //     },
+        //     {
+        //       label:'保险顾问',
+        //       value:2,
+        //     },
+        //     {
+        //       label:'续保顾问',
+        //       value:3
+        //     }
+        //   ]
+        // },
         {
-          key:'顾问类型',
+          key:'保养顾问',
           type:'select',
-          prop:'state',
+          prop:'upkeepEmployee',
           value:'',
-          list:[
-            {
-              label:'保养顾问',
-              value:1,
-            },
-            {
-              label:'保险顾问',
-              value:2,
-            },
-            {
-              label:'续保顾问',
-              value:3
-            }
-          ]
+          list:[]
+        },
+        {
+          key:'保险顾问',
+          type:'select',
+          prop:'safeEmployee',
+          value:'',
+          list:[]
+        },
+        {
+          key:'续保顾问',
+          type:'select',
+          prop:'renewEmployee',
+          value:'',
+          list:[]
         },
         {
           key:'状态',
@@ -2016,12 +2037,18 @@ const getters = {
           sub.list = rootGetters.formatCouponList
         }else if(sub.key === '会员等级'){
           sub.list = rootGetters.formatMemberList
-        }else if(sub.key === '顾问类型'){
-          sub.list = rootGetters.formatCounselorList
         }else if(sub.key === '业务类型'){
           sub.list = rootState.Member.tempArr1
         }else if(sub.key === '充值方式'){
           sub.list = rootState.Member.tempArr1
+        }else if(sub.key === '活动卡券'){
+          sub.list = rootGetters.formatCouponActivityList
+        }else if(sub.key === '保养顾问'){
+          sub.list = rootState.upKeepList
+        }else if(sub.key === '保险顾问'){
+          sub.list = rootState.inSuranceList
+        }else if(sub.key === '续保顾问'){
+          sub.list = rootState.counselorList.renewList
         }
         return {...sub}
       })

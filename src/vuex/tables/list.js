@@ -990,7 +990,7 @@ const state = {
         {
           key:'用户状态',
           type:'default',
-          prop:'state',
+          prop:'attentionState',
         },
         {
           key:'姓名',
@@ -1040,7 +1040,7 @@ const state = {
         {
           key:'最近登陆时间',
           type:'default',
-          prop:'newestLoginTime',
+          prop:'lastLoginTime',
         },
         {
           key:'保养顾问',
