@@ -19,9 +19,10 @@ export const state = {
   counselorList:{},
   couponFormList:[],
   couponActivityList:[],
-  upKeepList:[], // 会员列表 -- 保养顾问
-  inSuranceList:[], // 会员列表 -- 保险顾问
-  renewList:[], // 会员列表 -- 续保顾问
+  upKeepList:[], // 会员列表 -- 保养顾问 -- select
+  inSuranceList:[], // 会员列表 -- 保险顾问 -- select
+  renewList:[], // 会员列表 -- 续保顾问 -- select
+  couponSrouce:[], // 卡券来源 -- select
 }
 
 export const mutations = {
@@ -158,6 +159,16 @@ export const mutations = {
     state.couponActivityList = params
   },
 
+  /**
+   * 处理一下卡券来源的下拉框数据
+   */
+  setCouponSourceList(state, {params} = {}){
+    state.couponSrouce = params
+  },
+
+  /**
+   * 处理用户卡券发放的顾问列表
+   */
 }
 
 export const actions = {
@@ -291,7 +302,7 @@ export const actions = {
    */
   getCouponCounselor({commit}){
     $http.post('coupon/getGrantCouponSelectList.do', {}, res => {
-      
+      commit('setCouponCounselor', {params: res.data})
     })
   },
 
@@ -301,6 +312,14 @@ export const actions = {
   getCouponForActivity({commit}){
     $http.post('employeeReward/activityCouponList.do', {}, res => {
       commit('setActivityList', {params: res.data})
+    })
+  },
+  /**
+   * 卡券管理 -- 用户卡券发放 -- 卡券来源 -- select
+   */
+  getCouponSourceList({commit}){
+    $http.post('coupon/couponSourceSelect.do', {}, res => {
+      commit('setCouponSourceList', {params: res.data})
     })
   }
 }
@@ -326,8 +345,13 @@ export const getters = {
       return {label: item.name, value: item.id}
     })
   },
-  formatCouponActivityList(){
+  formatCouponActivityList(state){
     return state.couponActivityList.map(item => {
+      return {label: item, value: item}
+    })
+  },
+  formatCouponSrouce(state){
+    return state.couponSrouce.map(item => {
       return {label: item, value: item}
     })
   }
