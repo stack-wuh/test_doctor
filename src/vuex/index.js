@@ -16,8 +16,11 @@ export const state = {
   pushList:[],
   carTypeList:[],
   memberList:[],
-  counselorList:[],
-  couponFormList:[]
+  counselorList:{},
+  couponFormList:[],
+  couponActivityList:[],
+  upKeepList:[], // 会员列表 -- 保养顾问
+  inSuranceList:[] // 会员列表 -- 保修顾问
 }
 
 export const mutations = {
@@ -115,10 +118,23 @@ export const mutations = {
    * @param {*} state 
    * @param {*} param1 
    */
-  setCounselorList(state, {params = {}}){
-    state.counselorList = params
+  setCounselorList(state, {renewList} = {}){
+    state.counselorList = {renewList}
   },
-
+  /**
+   * 处理一下保养顾问
+   * @param {*} state 
+   * @param {*} param1 
+   */
+  setCounselorUpkeepList(state, {upKeepList} = {}){
+    state.upKeepList = upKeepList
+  },
+  /**
+   * 处理一下保险顾问
+   */
+  setCounselorInsuranceList(state, {inSuranceList} = {}){
+    state.inSuranceList = inSuranceList
+  },
   /**
    * 保存卡券来源列表
    * @param {*} state 
@@ -126,7 +142,15 @@ export const mutations = {
    */
   setCouponFromList(state, {params} = {}){
     state.couponFromList = params
-  }
+  },
+
+  /**
+   * 保存卡券内容 -- 活动卡券列表
+   */
+  setActivityList(state, {params} = {}){
+    state.couponActivityList = params
+  },
+
 }
 
 export const actions = {
@@ -210,21 +234,66 @@ export const actions = {
   },
 
   /**
-   * 会员等级 -- 获取顾问类型 -- select
+   * 会员等级 -- 获取保养顾问 -- select
+   * @param {*} param0 
+   */
+  getCounselorUpKeepList({commit}){
+    $http.post('vipList/commonGetEmployees.do', {name: '保养顾问'}, res => {
+      let arr = res.data.map(item => {
+        return {label: item.realName, value: item.realName, id: item.id}
+      })
+      commit('setCounselorUpkeepList', {upKeepList: arr})
+    })
+  },
+  /**
+   * 会员等级 -- 获取保险顾问 -- select
+   * @param {*} param0 
+   */
+  getCounselorInSuranceList({commit}){
+    $http.post('vipList/commonGetEmployees.do', {name: '保险顾问'}, res => {
+      let arr = res.data.map(item => {
+        return {label: item.realName, value: item.realName, id: item.id}
+      })
+      commit('setCounselorInsuranceList', {inSuranceList: arr})
+    })
+  },
+  /**
+   * 会员等级 -- 获取续保顾问 -- select
    * @param {*} param0 
    */
   getCounselorList({commit}){
-    $http.post('vipList/commonGetEmployees.do', {}, res => {
-      commit('setCounselorList', {params: res.data})
+    $http.post('vipList/commonGetEmployees.do', {name: '续保顾问'}, res => {
+      let arr = res.data.map(item => {
+        return {label: item.realName, value: item.realName, id: item.id}
+      })
+      commit('setCounselorList', {renewList: arr})
     })
   },
-  
+
+
   /**
    * 卡券管理 -- 奖品卡券管理  -- 获取卡券来源 -- select
    */
   getCouponFromList({commit}){
     $http.post('coupon/couponSourceSelect.do', {}, res => {
       commit('setCouponFromList', {params: res.data})
+    })
+  },
+  /**
+   * 卡券管理 -- 用户卡券发放 -- 获取顾问列表
+   */
+  getCouponCounselor({commit}){
+    $http.post('coupon/getGrantCouponSelectList.do', {}, res => {
+      
+    })
+  },
+
+  /**
+   * 卡券管理 -- 员工奖励 -- 活动卡券
+   */
+  getCouponForActivity({commit}){
+    $http.post('employeeReward/activityCouponList.do', {}, res => {
+      commit('setActivityList', {params: res.data})
     })
   }
 }
@@ -250,7 +319,9 @@ export const getters = {
       return {label: item.name, value: item.id}
     })
   },
-  formatCounselorList(){
-    return state.counselorList
+  formatCouponActivityList(){
+    return state.couponActivityList.map(item => {
+      return {label: item, value: item}
+    })
   }
 }
