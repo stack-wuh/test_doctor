@@ -34,6 +34,8 @@ const actions = {
         , ...rootState.search, ...search, currPageNo}, 
         dispatch('getMemberList')
         dispatch('getCounselorList')
+        dispatch('getCounselorUpKeepList')
+        dispatch('getCounselorInSuranceList')
         break;
       case '积分管理' : _url = 'detail/getIntegrals.do', search = {
           ...rootState.search, 
@@ -84,7 +86,7 @@ const actions = {
    */
   memberInfoPubAndPut({dispatch}, {path, form, form:{id}} = {}){
     return new Promise((resolve, reject) => {
-      $http.post('vipList/insertPage.do', form, res => {
+      $http.post('vipList/insertOrUpdate.do', form, res => {
         return resolve(res)
       })
     })
