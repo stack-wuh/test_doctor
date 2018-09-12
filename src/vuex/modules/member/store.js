@@ -162,6 +162,27 @@ const actions = {
           return resolve(res)
       })
     }) 
+  },
+  /**
+   * 会员管理 -- 会员充值 -- 精确查询会员信息
+   */
+  memberRecharge({commit, rootState}, {form} = {}){
+    return new Promise((resolve, reject) => {
+      $http.post('detail/selectUserMsgVo.do', rootState.search, res => {
+        commit('setSelectUserMsg', {params: res.data})
+        return resolve(res)
+      })
+    })
+  },
+  /**
+   * 会员管理 -- 会员充值 -- 充值
+   */
+  memberRechargeDo({commit}, {form} = {}){
+    return new Promise((resolve, reject) => {
+      $http.post('vipPage/recharge.do', form, res => {
+        
+      })
+    })
   }
 }
 
@@ -204,6 +225,14 @@ const mutations = {
   },
   handleDelMemberItem(state, {index} = {}){
     state.tempObj.data.splice(index, 1)
+  },
+  /**
+   * 临时处理一下会员充值页的 会员信息
+   * @param {*} state 
+   * @param {*} param1 
+   */
+  setSelectUserMsg(state, {params} = {}){
+    state.tempObj.data = params
   }
 }
 

@@ -4,27 +4,27 @@
         <Search />
         <section class="info">
           <p class="c999 nav-title">会员信息</p>
-          <el-form class="my-form" :model="tempForm" label-width="90px" >
+          <el-form class="my-form" label-width="90px" >
             <section class="inline-box">
               <el-form-item label="会员姓名">
-                <el-input placeholder="占位符" v-model="tempForm.realName" :disabled="inputDis"></el-input>
+                <el-input placeholder="占位符" v-model="tempObj.realName" :disabled="inputDis"></el-input>
               </el-form-item>
               <el-form-item label="联系电话">
-                <el-input placeholder="占位符" v-model="tempForm.phone" :disabled="inputDis"></el-input>
+                <el-input placeholder="占位符" v-model="tempObj.phone" :disabled="inputDis"></el-input>
               </el-form-item>
               <el-form-item label="车牌号">
-                <el-input placeholder="占位符" v-model="tempForm.plateNum" :disabled="inputDis"></el-input>
+                <el-input placeholder="占位符" v-model="tempObj.plateNum" :disabled="inputDis"></el-input>
               </el-form-item>
             </section>
             <section class="inline-box">
               <el-form-item label="积分">
-                <el-input placeholder="占位符" v-model="tempForm.integral" :disabled="inputDis"></el-input>
+                <el-input placeholder="占位符" v-model="tempObj.integral" :disabled="inputDis"></el-input>
               </el-form-item>
               <el-form-item label="余额">
-                <el-input placeholder="占位符" v-model="tempForm.money" :disabled="inputDis"></el-input>
+                <el-input placeholder="占位符" v-model="tempObj.money" :disabled="inputDis"></el-input>
               </el-form-item>
               <el-form-item label="会员等级">
-                <el-input placeholder="占位符" v-model="tempForm.member" :disabled="inputDis"></el-input>
+                <el-input placeholder="占位符" v-model="tempObj.member" :disabled="inputDis"></el-input>
               </el-form-item>
             </section>
           </el-form>
@@ -33,44 +33,49 @@
           <p class="nav-title c999">会员充值</p>
           <el-form class="my-form" :model="form">
             <section class="inline-box inline-other">
-              <el-form-item class="box-item" label="充值金额" label-width="90px" >
-                <el-input placeholder="请编辑充值金额" v-model="form.price"></el-input>
-              </el-form-item>
+              <section class="box-item">
+                <el-form-item class="box-item" label="充值金额" label-width="90px">
+                  <el-input placeholder="请编辑充值金额" v-model="form.price"></el-input>
+                </el-form-item>
+                <el-form-item class="box-item" label="赠送积分" label-width="90px" >
+                  <el-input placeholder="请编辑赠送积分" v-model="form.sendPoint"></el-input>
+                </el-form-item>
+              </section>
               <section class="box-item">
                 <el-form-item label="赠送金额">
-                  <el-input placeholder="请编辑赠送金额" v-model="form.sendPrice" ></el-input>
-                </el-form-item>
-                <el-form-item label="赠送积分">
-                  <el-input placeholder="请编辑赠送积分" v-model="form.sendPoint" ></el-input>
+                  <el-input placeholder="请编辑赠送金额" v-model="form.sendPrice"></el-input>
                 </el-form-item>
               </section>
               <section class="box-item">
                 <el-form-item label="请选择赠送卡券">
-                  <el-select placeholder="请选择赠送的卡券" v-model="form.coupon1">
-                    <el-option label="aaa" value="111" ></el-option>
+                  <el-select multiple placeholder="请选择赠送的卡券" v-model="form.coupon1">
+                    <el-option v-for="(item,index) in couponList" :key="index"  :label="item.label" :value="item.value" ></el-option>
                   </el-select>
                 </el-form-item>
-                <el-form-item label="请选择赠送卡券">
+                <!-- <el-form-item label="请选择赠送卡券">
                   <el-select placeholder="请选择赠送的卡券" v-model="form.coupon2">
                     <el-option label="bbb" value="111" ></el-option>
                   </el-select>
-                </el-form-item>
+                </el-form-item> -->
               </section>
             </section>
           </el-form>
         </section>
+        <sub-button @handleSubmit="submit" />
       </section>
   </section>
 </template>
 
 <script>
 import Search from '@/components/common/search'
-import {mapActions} from 'vuex'
+import SubButton from '@/components/common/subButton'
+import {mapActions, mapGetters, mapState} from 'vuex'
 
 export default {
   name: 'memberPay',
   components:{
-    Search ,
+    Search,
+    SubButton,
   },
   data () {
     return {
@@ -89,17 +94,27 @@ export default {
     }
   },
   computed:{
+    ...mapState({
+      'tempObj': state => state.Member.tempObj.data
+    }),
+    ...mapGetters({
+      'couponList': 'formatCouponList'
+    }),
     pathChange(){
       return this.$route.query.child || this.$route.query.subMenu
     }
   },
   methods: {
     ...mapActions({
-      'getList': 'getMemberStore'
-    })
+      'getCouponList': 'getCouponList',
+      'handleSubmit': 'memberRechargeDo'
+    }),
+    submit(){
+      this.handleSubmit({form: {name:111}})
+    }
   },
   created(){
-    // this.getList({path: this.pathChange})
+    this.getCouponList()
   }
 }
 </script>

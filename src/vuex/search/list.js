@@ -483,19 +483,19 @@ const state = {
         {
           key:'会员姓名',
           type:'input',
-          prop:'name',
+          prop:'realName',
           value:'',
         },
         {
           key:'联系电话',
           type:'input',
-          prop:'name',
+          prop:'phone',
           value:'',
         },
         {
           key:'车牌号',
           type:'input',
-          prop:'name',
+          prop:'plateNum',
           value:'',
         },
       ]
