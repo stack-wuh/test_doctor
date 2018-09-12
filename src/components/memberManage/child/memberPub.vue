@@ -3,8 +3,8 @@
     <section class="content">
       <el-form class="my-form" :model="form" :rules="rules" ref="myForm" label-width="140px">
         <section class="inline-box">
-          <el-form-item label="用户姓名" prop="realNname" >
-            <el-input placeholder="请编辑用户姓名" v-model="form.realNname" ></el-input>
+          <el-form-item label="用户姓名" prop="realName" >
+            <el-input placeholder="请编辑用户姓名" v-model="form.realName" ></el-input>
           </el-form-item>
           <el-form-item label="客户手机" prop="phone" >
             <el-input placeholder="请编辑客户手机" v-model="form.phone" ></el-input>
@@ -32,19 +32,19 @@
         <section class="inline-box">
           <el-form-item label="保养顾问" prop="upkeepEmployeeId" >
             <el-select v-model="form.upkeepEmployeeId" placeholder="请选择保养顾问">
-              <el-option label="aaa" value="aaa"></el-option>
+              <el-option v-for="(item,index) in upKeepList" :key="index" :label="item.label" :value="item.id"></el-option>
             </el-select>
           </el-form-item>
           <el-form-item label="续保顾问" prop="renewEmployeeId" >
             <el-select v-model="form.renewEmployeeId" placeholder="请选择续保顾问">
-              <el-option label="bbb" value="bbb"></el-option>
+              <el-option v-for="(item,index) in renewList" :key="index" :label="item.label" :value="item.id"></el-option>
             </el-select>
           </el-form-item>
         </section>
         <section class="inline-box">
           <el-form-item label="保险顾问" prop="safeEmployeeId" >
             <el-select v-model="form.safeEmployeeId"  placeholder="请选择保险顾问">
-              <el-option label="ccc" value="ccc"></el-option>
+              <el-option v-for="(item,index) in inSuranceList" :key="index" :label="item.label" :value="item.id"></el-option>
             </el-select>
           </el-form-item>
           <el-form-item label="保险购买日期" prop="insuranceStart" >
@@ -85,9 +85,9 @@
 
 <script>
 import MySubButton from  '../../common/subButton';
-import {mapActions, mapGetters} from 'vuex'
+import {mapActions, mapGetters, mapState} from 'vuex'
 const rules = {
-  realNname:[{required:true,message:'请编辑用户姓名',trigger:'blur'}],
+  realName:[{required:true,message:'请编辑用户姓名',trigger:'blur'}],
   phone:[{required:true,message:'请编辑用户手机号码',trigger:'blur'}],
   sex:[{required:true,message:'请选择用户性别',trigger:['blur','change']}],
   birthday:[{required:true,message:'请选择用户生日',trigger:['blur','change']}],
@@ -113,7 +113,7 @@ export default {
   data () {
     return {
       form:{
-        realNname:'',
+        realName:'',
         phone:'',
         sex:'',
         birthday:'',
@@ -136,12 +136,20 @@ export default {
   computed:{
     ...mapGetters({
       'memberLever': 'formatMemberList'
+    }),
+    ...mapState({
+      'upKeepList': state => state.upKeepList,
+      'inSuranceList': state => state.inSuranceList,
+      'renewList': state => state.counselorList.renewList
     })
   },
   methods: {
     ...mapActions({
-      'handleSubMember':'memberInfoPubAndPut',
-      'getMemberList' : 'getMemberList'
+      'handleSubMember': 'memberInfoPubAndPut',
+      'getMemberList' : 'getMemberList',
+      'getUpKeepList': 'getCounselorUpKeepList',
+      'getInSuranceList': 'getCounselorInSuranceList',
+      'getCounselorList': 'getCounselorList'
     }),
     handleSubmit({submit} = {}){
       if(submit){
@@ -169,6 +177,9 @@ export default {
   },
   created(){
     this.getMemberList()
+    this.getUpKeepList()
+    this.getInSuranceList()
+    this.getCounselorList()
   }
 }
 </script>
