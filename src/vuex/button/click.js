@@ -109,6 +109,7 @@ export const jump2Detail = params => {
      case '消费明细' : return location.href = window.rootPath + '/detail/exportConsumerDetails.do'
      case '查看领取明细' : return location.href = window.rootPath + '/coupon/getTakeListByUserCouponVoForReport.do'
      case '员工奖励' : return location.href = window.rootPath + '/employeeReward/employeeRewardListReport.do'
+     case '用户卡券管理' : return location.href = window.rootPath + '/coupon/getTakeListByUserCouponVoForReport.do'
    }
  }
 
@@ -121,6 +122,7 @@ export const jump2Detail = params => {
    switch(child || subMenu){
      case '会员列表' : return window.$store.commit('handleDialogWithImport', {visible: true})
      case '查看领取明细' : return window.$store.commit('handleDialogWithImport', {visible: true})
+     case '用户卡券管理' : return window.$store.commit('handleDialogWithImport', {visible: true})
    }
  }
 
