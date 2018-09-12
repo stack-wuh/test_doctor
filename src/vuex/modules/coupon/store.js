@@ -70,6 +70,8 @@ const actions = {
         break;
       case '用户卡券发放' : _url = 'coupon/grantCouponToUser.do', search = {...rootState.search, currPageNo, ...search}, dispatch('getCouponCounselor')
         break;
+      case '用户卡券管理' : _url = 'coupon/getTakeListByUserCouponVo.do', search = {...rootState.search, currPageNo, ...search}, dispatch('getCouponSourceList')
+        break;
     }
     $http.post(_url, search, res => {
       commit('setCouponStore' ,{params: res.data})
