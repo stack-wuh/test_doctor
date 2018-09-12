@@ -7,7 +7,9 @@ const state = {
   tempArr1:[],
   tempObj: {
     isShowDialog: false,
-    data:[]
+    data:[],
+    list:[],
+    text:'',
   }
 }
 
@@ -48,6 +50,7 @@ const actions = {
           ...rootState.search, 
           ...search,
           currPageNo,
+          rechargeType: (rootState.search.rechargeType) && (rootState.search.rechargeType === '线上' ? 0 : rootState.search.rechargeType === '线下' ? 1 : 2)
         }
         break;
       case '消费明细' : _url = 'detail/getConsumerDetails.do', search = {
@@ -117,10 +120,20 @@ const actions = {
   },
 
   /**
+   * 会员管理 -- 分配顾问
+   */
+  memberPostCounselor({commit, rootState}, {form} = {}){
+   return new Promise((resolve, reject)=>{
+    $http.post('vipList/changeEmployee.do', form, res => {
+      return resolve(res)
+    })
+   }) 
+  },
+  /**
    * 会员管理 -- 添加顾问
    */
-  memberAddCounselor({commit}, {choose, text, path}){
-    commit('setMemberAddCounselorData', {choose, path, text})
+  memberAddCounselor({commit, rootState}, {choose, text, path}){
+    commit('setMemberAddCounselorData', {choose, path, text, rootState})
   },
 
   /**
@@ -165,7 +178,7 @@ const mutations = {
     state.currentPage = pageNum
     state.tempArr1 = tempArr1 && Object.values(tempArr1) && Object.values(tempArr1).map(item => { return {label: item, value: item}})
   },
-  setMemberAddCounselorData(state, {path, text, choose} = {}){
+  setMemberAddCounselorData(state, {text, choose, rootState} = {}){
     let sublist = []
     choose.split(',').map(item => {
       state.list.map(list => {
@@ -176,13 +189,17 @@ const mutations = {
     })
     state.tempObj = {
       isShowDialog : true,
-      data: sublist
+      data: sublist,
+      list:text === '分配保养顾问' ? rootState.upKeepList : text === '分配保险顾问' ? rootState.inSuranceList : rootState.renewList,
+      text
     }
   },
   clearMemberAddCounselor(state){
     state.tempObj = {
       isShowDialog: false,
-      data: []
+      data: [],
+      list: [],
+      text:'',
     }
   },
   handleDelMemberItem(state, {index} = {}){

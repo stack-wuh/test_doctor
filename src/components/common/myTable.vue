@@ -65,7 +65,7 @@ export default {
       let str = val && val.map(item => {
         return item.id
       }).toLocaleString()
-      this.handelSelection({params:str,})
+      this.handelSelection({params:str})
     },
   },
   created(){}

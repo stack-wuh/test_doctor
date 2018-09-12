@@ -20,7 +20,8 @@ export const state = {
   couponFormList:[],
   couponActivityList:[],
   upKeepList:[], // 会员列表 -- 保养顾问
-  inSuranceList:[] // 会员列表 -- 保修顾问
+  inSuranceList:[], // 会员列表 -- 保险顾问
+  renewList:[], // 会员列表 -- 续保顾问
 }
 
 export const mutations = {
@@ -134,6 +135,12 @@ export const mutations = {
    */
   setCounselorInsuranceList(state, {inSuranceList} = {}){
     state.inSuranceList = inSuranceList
+  },
+  /***
+   * 处理一下续保顾问
+   */
+  setCouponrenewList(state, {renewList}){
+    state.renewList = renewList
   },
   /**
    * 保存卡券来源列表
@@ -266,7 +273,7 @@ export const actions = {
       let arr = res.data.map(item => {
         return {label: item.realName, value: item.realName, id: item.id}
       })
-      commit('setCounselorList', {renewList: arr})
+      commit('setCouponrenewList', {renewList: arr})
     })
   },
 

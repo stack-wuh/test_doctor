@@ -10,7 +10,7 @@
       </my-table>
       <bottom @getCurrent="getCurrent" :total="total" :currentPage="currentPage" />
       <dialog-with-import @handleHideDialog="handleHideDialog" :visibleDialog="visibleDialog" title="导入文件" />
-      <dialog-with-table :isShowDialog="isShowTable" :list="subData"  />
+      <dialog-with-table :isShowDialog="isShowTable" :data="subData" :list="searchList" :text="text" />
     </section> 
   </section>
 </template>
@@ -51,7 +51,9 @@ export default {
       total:state => state.Member.total,
       currentPage:state => state.Member.currentPage,
       'isShowTable': state => state.Member.tempObj.isShowDialog,
-      'subData': state => state.Member.tempObj.data
+      'subData': state => state.Member.tempObj.data,
+      'searchList': state => state.Member.tempObj.list,
+      'text': state => state.Member.tempObj.text
     })
   },
   watch:{

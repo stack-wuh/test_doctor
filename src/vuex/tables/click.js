@@ -40,7 +40,7 @@ export const jump2Other = (params ,types ,row) => {
       break ;
     case '汽车精品管理' : rootPath = types == '编辑' ? '/use/pub' : '' , child = types == '编辑' ? '编辑汽车精品信息' :'' , data = JSON.stringify(row)
       break ; 
-    case '会员列表' : rootPath = '/member/pub' , child = '编辑会员信息'
+    case '会员列表' : rootPath = '/member/pub' , child = '编辑会员信息', data = JSON.stringify(row)
       break ;
     case '奖品卡券管理' : rootPath = types == '编辑' ? '/coupon/pub' : '/coupon/store' , 
                         child = types == '编辑' ? '编辑奖品卡券' : '查看领取明细',

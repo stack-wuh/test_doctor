@@ -13,8 +13,8 @@
         <section class="inline-box">
           <el-form-item label="性别" prop="sex" >
             <el-select placeholder="请选择性别" v-model="form.sex">
-              <el-option label="男" value="0"></el-option>
-              <el-option label="女" value="1"></el-option>
+              <el-option label="男" value="1"></el-option>
+              <el-option label="女" value="0"></el-option>
             </el-select>
           </el-form-item>
           <el-form-item label="客户生日"  prop="birthday" >
@@ -140,7 +140,7 @@ export default {
     ...mapState({
       'upKeepList': state => state.upKeepList,
       'inSuranceList': state => state.inSuranceList,
-      'renewList': state => state.counselorList.renewList
+      'renewList': state => state.renewList
     })
   },
   methods: {
@@ -176,10 +176,14 @@ export default {
     }
   },
   created(){
+    let data = this.$route.query.data
+    data = data && JSON.parse(data)
+    this.form = {...this.form, ...data}
     this.getMemberList()
     this.getUpKeepList()
     this.getInSuranceList()
     this.getCounselorList()
+
   }
 }
 </script>

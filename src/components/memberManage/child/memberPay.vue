@@ -4,52 +4,56 @@
         <Search />
         <section class="info">
           <p class="c999 nav-title">会员信息</p>
-          <el-form class="my-form" label-width="90px" >
+          <el-form class="my-form" :model="tempForm" label-width="90px" >
             <section class="inline-box">
               <el-form-item label="会员姓名">
-                <el-input placeholder="占位符" :disabled="inputDis"></el-input>
+                <el-input placeholder="占位符" v-model="tempForm.realName" :disabled="inputDis"></el-input>
               </el-form-item>
               <el-form-item label="联系电话">
-                <el-input placeholder="占位符" :disabled="inputDis"></el-input>
+                <el-input placeholder="占位符" v-model="tempForm.phone" :disabled="inputDis"></el-input>
               </el-form-item>
               <el-form-item label="车牌号">
-                <el-input placeholder="占位符" :disabled="inputDis"></el-input>
+                <el-input placeholder="占位符" v-model="tempForm.plateNum" :disabled="inputDis"></el-input>
               </el-form-item>
             </section>
             <section class="inline-box">
               <el-form-item label="积分">
-                <el-input placeholder="占位符" :disabled="inputDis"></el-input>
+                <el-input placeholder="占位符" v-model="tempForm.integral" :disabled="inputDis"></el-input>
               </el-form-item>
               <el-form-item label="余额">
-                <el-input placeholder="占位符" :disabled="inputDis"></el-input>
+                <el-input placeholder="占位符" v-model="tempForm.money" :disabled="inputDis"></el-input>
               </el-form-item>
               <el-form-item label="会员等级">
-                <el-input placeholder="占位符" :disabled="inputDis"></el-input>
+                <el-input placeholder="占位符" v-model="tempForm.member" :disabled="inputDis"></el-input>
               </el-form-item>
             </section>
           </el-form>
         </section>
         <section class="info">
           <p class="nav-title c999">会员充值</p>
-          <el-form class="my-form">
+          <el-form class="my-form" :model="form">
             <section class="inline-box inline-other">
               <el-form-item class="box-item" label="充值金额" label-width="90px" >
-                <el-select placeholder="请选择充值金额"></el-select>
+                <el-input placeholder="请编辑充值金额" v-model="form.price"></el-input>
               </el-form-item>
               <section class="box-item">
                 <el-form-item label="赠送金额">
-                  <el-input></el-input>
+                  <el-input placeholder="请编辑赠送金额" v-model="form.sendPrice" ></el-input>
                 </el-form-item>
                 <el-form-item label="赠送积分">
-                  <el-input></el-input>
+                  <el-input placeholder="请编辑赠送积分" v-model="form.sendPoint" ></el-input>
                 </el-form-item>
               </section>
               <section class="box-item">
                 <el-form-item label="请选择赠送卡券">
-                  <el-select></el-select>
+                  <el-select placeholder="请选择赠送的卡券" v-model="form.coupon1">
+                    <el-option label="aaa" value="111" ></el-option>
+                  </el-select>
                 </el-form-item>
                 <el-form-item label="请选择赠送卡券">
-                  <el-select></el-select>
+                  <el-select placeholder="请选择赠送的卡券" v-model="form.coupon2">
+                    <el-option label="bbb" value="111" ></el-option>
+                  </el-select>
                 </el-form-item>
               </section>
             </section>
@@ -71,6 +75,17 @@ export default {
   data () {
     return {
       inputDis:true,
+      tempForm:{
+        realName:'',
+        phone:'',
+        plateNum:'',
+        integral:'',
+        money:'',
+        member:'',
+      },
+      form:{
+
+      }
     }
   },
   computed:{
@@ -84,7 +99,7 @@ export default {
     })
   },
   created(){
-    this.getList({path: this.pathChange})
+    // this.getList({path: this.pathChange})
   }
 }
 </script>
