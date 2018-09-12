@@ -740,10 +740,10 @@ export const forms = [
       {
         key:'姓名',
         type:'input',
-        prop:'name',
+        prop:'realNameByEmployee',
         rules:[
           {
-            required:true,
+            required:false,
             message:'请编辑姓名',
             trigger:'blur',
           }
@@ -755,7 +755,7 @@ export const forms = [
         prop:'phone',
         rules:[
           {
-            required:true,
+            required:false,
             message:'请编辑手机号',
             trigger:'blur',
           }
@@ -767,7 +767,7 @@ export const forms = [
         prop:'cid',
         rules:[
           {
-            required:true,
+            required:false,
             message:'请编辑车架号',
             trigger:'blur',
           }
@@ -779,7 +779,7 @@ export const forms = [
         prop:'number',
         rules:[
           {
-            required:true,
+            required:false,
             message:'请编辑车牌号',
             trigger:'blur',
           }
@@ -788,10 +788,10 @@ export const forms = [
       {
         key:'卡券名称',
         type:'input',
-        prop:'cname',
+        prop:'counponName',
         rules:[
           {
-            required:true,
+            required:false,
             message:'请编辑卡券名称',
             trigger:'blur',
           }
@@ -803,7 +803,7 @@ export const forms = [
         prop:'cnumber',
         rules:[
           {
-            required:true,
+            required:false,
             message:'请编辑卡券编号',
             trigger:'blur',
           }
