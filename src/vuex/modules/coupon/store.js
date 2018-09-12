@@ -66,9 +66,9 @@ const actions = {
         break;
       case '用户提现记录' : _url = 'takeMoney/getUserTakeCashList.do', search = {...rootState.search, ...search, currPageNo}
         break;
-      case '员工奖励' : _url = 'employeeReward/employeeRewardList.do', search = {...rootState.search, currPageNo, ...search}
+      case '员工奖励' : _url = 'employeeReward/employeeRewardList.do', search = {...rootState.search, currPageNo, ...search}, dispatch('getCouponForActivity')
         break;
-      case '用户卡券发放' : _url = 'coupon/grantCouponToUser.do', search = {...rootState.search, currPageNo, ...search}
+      case '用户卡券发放' : _url = 'coupon/grantCouponToUser.do', search = {...rootState.search, currPageNo, ...search}, dispatch('getCouponCounselor')
         break;
     }
     $http.post(_url, search, res => {
