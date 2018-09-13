@@ -175,7 +175,9 @@ export const mutations = {
     state.renewList = params['续保顾问'].map(item => { return {label: item, value: item}})
     state.inSuranceList = params['保险顾问'].map(item => {return {label: item, value: item}})
     state.sellList = params['销售顾问'].map(item => {return {label: item, value: item}})
-  }
+  },
+
+
 }
 
 export const actions = {
