@@ -7,6 +7,8 @@ import {
   importExcelWithDialog,
   handleDialogForMember,
   handleDialogForCoupon,
+  handleCouponMemberSend,
+  handleSelectChangeForTable,
 } from './click'
 const state = {
   list:[
@@ -236,11 +238,9 @@ const state = {
           size:'small',
           style:'width:140px;',
           prop:'couponList',
-          list:[
-            {
-
-            }
-          ]
+          key:'couponID',
+          list:[],
+          change:handleSelectChangeForTable
         },
         {
           text:'推送数量',
@@ -248,25 +248,30 @@ const state = {
           size:'small',
           style:'width:140px;',
           prop:'total',
-          list:[]
+          key:'num',
+          list:[],
+          change:handleSelectChangeForTable
         },
         {
           text:'根据选中用户推送',
           type:'',
           size:'small',
           style:'',
+          click:handleCouponMemberSend
         },
         {
           text:'根据条件推送',
           type:'',
           size:'small',
           style:'',
+          click:handleCouponMemberSend
         },
         {
           text:'全部推送',
           type:'',
           size:'small',
           style:'',
+          click:handleCouponMemberSend
         },
       ]
     },
