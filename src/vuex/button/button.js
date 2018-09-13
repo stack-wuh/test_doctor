@@ -236,6 +236,11 @@ const state = {
           size:'small',
           style:'width:140px;',
           prop:'couponList',
+          list:[
+            {
+
+            }
+          ]
         },
         {
           text:'推送数量',
@@ -243,16 +248,7 @@ const state = {
           size:'small',
           style:'width:140px;',
           prop:'total',
-          list:[
-            {
-              label: '100',
-              value: 100
-            },
-            {
-              label: '200',
-              value: 200
-            }
-          ]
+          list:[]
         },
         {
           text:'根据选中用户推送',
@@ -425,10 +421,10 @@ const getters = {
     arr.forEach(item => {
       item.btn.forEach(sub => {
         if(sub.prop === 'total'){
-          sub.list = [{label: '10', value: 10}]
+          let list = [1,2,5,10,50,100,200]
+          sub.list = list.map(item => {return {label: item, value: item}})
         }else if(sub.prop === 'couponList'){
-          // sub.list = rootGetters.formatCouponList
-          sub.list = [{label: 'aaa', value: 'aaa'}]
+          sub.list = rootGetters.formatCouponList
         }
       })
     })
