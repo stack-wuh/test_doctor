@@ -110,6 +110,7 @@ export const jump2Detail = params => {
      case '查看领取明细' : return location.href = window.rootPath + '/coupon/getTakeListByUserCouponVoForReport.do'
      case '员工奖励' : return location.href = window.rootPath + '/employeeReward/employeeRewardListReport.do'
      case '用户卡券管理' : return location.href = window.rootPath + '/coupon/getTakeListByUserCouponVoForReport.do'
+     case '用户奖励' : return location.href = window.rootPath + '/coupon/userCouponListReport.do'
    }
  }
 
@@ -147,3 +148,53 @@ export const jump2Detail = params => {
  export const handleDialogForCoupon = ({params, text, } = {}) => {
    window.$store.dispatch('couponAddModelWithDialog')
  }
+
+ /**
+  * 表格头部 -- select下拉框 change事件 -- 处理change值
+  */
+export const handleSelectChangeForTable = ({params, text, value, key}) => {
+  console.log(params, text, value, key)
+  switch(params.child || params.subMenu){
+    case '用户卡券发放' : return window.$store.commit('setTableHeaderForm', {key,value})
+  }
+}
+
+/**
+ * 表格头部 -- 用户卡券发放 -- 推送
+ */
+export const handleCouponMemberSend = ({params, choose, text} = {}) => {
+  let {subMenu ,child} = params, tempForm = window.$store.state.tableHeader
+   let result = Object.keys(tempForm).length === 2
+   if(!result){
+     _g.toastMsg({
+      type: 'error',
+      msg: '请选择推送卡券和推送数量'
+    })
+    return
+   }
+   if(text === '根据选中用户推送'){
+      if(!choose.length){
+        _g.toastMsg({
+          type:'error',
+          msg:'请勾选操作对象后推送'
+        })
+        return
+      }
+    }
+   window.$confirm(`该操作将${text},确认继续?` , '提示' , {
+    confirmButtonText:'确定',
+    cancelButtonText:'取消',
+    type:'warning',
+  }).then(()=>{
+    switch(text){
+      case '根据选中用户推送' : return window.$store.dispatch('couponMemberSend', {path: child || subMenu, choose, text})
+      case '根据条件推送' : return window.$store.dispatch('couponMemberSend', {path: child || subMenu, text})
+      case '全部推送' : return window.$store.dispatch('couponMemberSend', {path: child || subMenu, text})
+    }
+  }).catch(()=>{
+    _g.toastMsg({
+      type:'info',
+      msg:'操作错误或已取消',
+    })
+  })
+}
