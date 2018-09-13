@@ -24,6 +24,8 @@ export const state = {
   renewList:[], // 会员列表 -- 续保顾问 -- select
   couponSrouce:[], // 卡券来源 -- select
   sellList:[], //销售顾问
+  tableHeader:{}, // 表格顶部 -- select/input 
+  pariseList:[], // 用户奖励的奖励类型 -- select
 }
 
 export const mutations = {
@@ -177,7 +179,30 @@ export const mutations = {
     state.sellList = params['销售顾问'].map(item => {return {label: item, value: item}})
   },
 
-
+  /**
+   * 设置表格头部 select/input change时的值
+   */
+  setTableHeaderForm(state, {key, value} = {}){
+    state.tableHeader[key] = value
+  },
+  /**
+   * 清除tableHeader值
+   */
+  clearTableHeaderForm(state){
+    state.tableHeader = {}
+  },
+  /**
+   * 处理 奖励类型 -- select
+   */
+  setPariseList(state, {params} = {}){
+    // state.pariseList = params
+    Object.values(params).map(item => {
+      item.map(item => {
+        return {...item, label: item, value: item}
+      })
+    })
+    state.pariseList = params
+  }
 }
 
 export const actions = {
@@ -332,7 +357,14 @@ export const actions = {
     })
   },
 
-  
+  /**
+   * 卡券管理 -- 用户奖励 -- 奖励类型 -- select
+   */
+  getPariseList({commit}){
+    $http.post('coupon/userCouponSelect.do', {}, res => {
+      commit('setPariseList', {params: res.data})
+    })
+  }
 }
 
 export const getters = {
