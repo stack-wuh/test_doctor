@@ -68,7 +68,7 @@ const actions = {
         break;
       case '员工奖励' : _url = 'employeeReward/employeeRewardList.do', search = {...rootState.search, currPageNo, ...search}, dispatch('getCouponForActivity')
         break;
-      case '用户卡券发放' : _url = 'coupon/grantCouponToUser.do', search = {...rootState.search, currPageNo, ...search}, dispatch('getCouponCounselor'), dispatch('getMemberList')
+      case '用户卡券发放' : _url = 'coupon/grantCouponToUser.do', search = {...rootState.search, currPageNo, ...search}, dispatch('getCouponCounselor'), dispatch('getMemberList'), dispatch('getCouponList')
         break;
       case '用户卡券管理' : _url = 'coupon/getTakeListByUserCouponVo.do', search = {...rootState.search, currPageNo, ...search}, dispatch('getCouponSourceList')
         break;
