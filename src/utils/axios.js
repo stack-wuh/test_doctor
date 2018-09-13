@@ -1,5 +1,5 @@
 import axios from 'axios'
-import {_g}  from './global'
+import {_g, NotNull}  from './global'
 import qs  from 'qs'
 /**
  * 发起请求的拦截器
