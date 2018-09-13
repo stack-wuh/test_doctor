@@ -1,7 +1,7 @@
 <template>
   <section class="father">
     <header class="header">
-      <div>当前时间: {{new Date().toLocaleDateString()}} {{timer}} </div>
+      <div>当前时间: {{new Date().toLocaleDateString()}} {{timer}} {{getDay}}</div>
       <div>
         <p>系统到期时间:2030-09-28</p>
         <p>系统版本:v1.1</p>
@@ -99,7 +99,19 @@ export default {
   },
 
   computed:{
-
+    getDay(){
+      let date = new Date()
+      switch(date.getDay()){
+        case 0 : return '星期天'
+        case 1 : return '星期一'
+        case 2 : return '星期二'
+        case 3 : return '星期三'
+        case 4 : return '星期四'
+        case 5 : return '星期五'
+        case 6 : return '星期六'
+        default : return '星期一'
+      }
+    }
   },
   methods: {
     /**
