@@ -1,5 +1,5 @@
 import $http from '../../../utils/axios'
-import {_g} from '../../../utils/global'
+import {_g, NotNull} from '../../../utils/global'
 const state = {
   data:[],
   total:0,
@@ -72,8 +72,10 @@ const actions = {
         break;
       case '用户卡券管理' : _url = 'coupon/getTakeListByUserCouponVo.do', search = {...rootState.search, currPageNo, ...search}, dispatch('getCouponSourceList')
         break;
+      case '用户奖励' : _url = 'coupon/userCouponList.do', search = {...rootState.search, currPageNo, ...search}, dispatch('getPariseList')
+        break;
     }
-    $http.post(_url, search, res => {
+    $http.post(_url, NotNull(search), res => {
       commit('setCouponStore' ,{params: res.data})
     })
   },
@@ -116,7 +118,35 @@ const actions = {
     })
   },
 
+  /**
+   *卡券管理 -- 用户卡券管理 -- 核销 
+   */
+  couponMemberChecked({dispatch}, {path, form:{id}} = {}){
+    $http.post('lottery/cancleLottery.do', {id}, res => {
+      setTimeout(()=>{
+        dispatch('asyncHideDialog')
+        dispatch('getCouponStore', {path})
+      },1000)
+    })
+  },
 
+  /**
+   * 卡券管理 -- 用户卡券发放 -- 推送
+   */
+  couponMemberSend({dispatch, commit, rootState}, {path, choose, text} = {}){
+    let search = {}
+    switch(text){
+      case '根据选中用户推送' : search = {ids: choose}
+          break;
+      case '根据条件推送' : search = NotNull({...rootState.search})
+          break;
+      default : search = {}
+    }
+    $http.post('coupon/grantCoupon.do', {...search, ...rootState.tableHeader}, res => {
+      dispatch('getCouponStore', {path})
+      commit('clearTableHeaderForm')
+    })
+  },
 
   /**
    * 卡券管理 -- 用户佣金提现 
@@ -177,6 +207,7 @@ const getters = {
         case '奖品卡券管理' : return {...item, couponTypeText: item.couponType == 1 ? '电子代金券' : '实物奖品'}
         case '查看领取明细' : return {...item, couponTypeText: item.couponType == 1 ? '电子代金券' : '实物奖品', stateText: item.states == 0 ? '未使用' : item.states == 1 ? '已使用' : '已过期'}
         case '员工奖励' : return {...item, stateText: item.status == 0 ? '未发放' : '已发放', rewardTypeText: item.rewardType == 0 ? '消费' : '分享'}
+        case '用户奖励' : return {...item, couponTypeText: item.couponType == 0 ? '分享' : '消费'}
         default : return {...item}
       }
     })
