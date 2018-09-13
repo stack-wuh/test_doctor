@@ -29,11 +29,11 @@ const state = {
               value:0
             },
             {
-              label:'4s店',
+              label:'4S店',
               value:1
             },
             {
-              label:'维修点',
+              label:'维修店',
               value:2
             }
           ],
