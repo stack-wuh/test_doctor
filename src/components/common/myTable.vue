@@ -23,7 +23,8 @@
       </el-table-column>
       <el-table-column v-if="item.type === 'button'" :fixed="item.fix" :width="item.width" align="center" v-for="(item,index) in tableList.list" :key="index" :label="item.key">
         <template slot-scope="scope">
-          <el-button v-for="(btn,bid) in item.list" v-if="btn.valid" v-on:click="btn.click(routers,scope.row[btn.rules] !==2 ? btn.text : btn.elseText,scope.row)" :type="btn.type || 'text'" :size="btn.size || 'mini'" :key="bid">{{ scope.row[btn.rules] !==2 ? btn.text : btn.elseText}}</el-button>
+          <el-button v-for="(btn,bid) in item.list" v-if="btn.valid" v-on:click="btn.click(routers,scope.row[btn.rules] !== 2 ? btn.text : btn.elseText,scope.row)" :type="btn.type || 'text'" :size="btn.size || 'mini'" :key="bid">{{ scope.row[btn.rules] !== 2 ? btn.text : btn.elseText}}</el-button>
+          <el-button v-for="(btn,bid) in item.list" v-if="btn.valid == 2" v-on:click="btn.click(routers,btn.texts[scope.row[btn.rules]],scope.row)" :type="btn.type || 'text'" :size="btn.size || 'mini'" :key="'2' + bid" :style="btn.styles[scope.row[btn.rules]]" :disabled="scope.row[btn.rules] !== btn.value" >{{btn.texts[scope.row[btn.rules] || 0]}}</el-button>
           <el-button v-for="(btn,bid) in item.list" v-if="!btn.valid" v-on:click="btn.click(routers,btn.text,scope.row)" :type="btn.type || 'text'" :size="btn.size || 'mini'" :key="bid">{{btn.text}}</el-button>
         </template>
       </el-table-column>
