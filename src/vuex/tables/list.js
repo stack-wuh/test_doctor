@@ -27,6 +27,14 @@
  * 匹配内容扩大范围,可以为:[关键字,路由地址,路由别名]
  */
 
+  const STYLES = {
+    'SUCCESS' : '#67C23A',
+    'ERROR' : '#F56C6C',
+    'PRIMARY' : '#409EFF',
+    'WARNING' : '#E6A23C',
+    'INFO' : '#909399'
+  }
+
  import {
    openDialog , 
    jump2Other, 
@@ -1745,9 +1753,23 @@ const state = {
           fix:'right',
           list:[
             {
-              text:'核销',
+              valid:2,
+              value:0,
+              rules:'states',
+              texts:['待核销','已核销','已过期'],
+              styles:[
+                {
+                  color:STYLES['PRIMARY']
+                },
+                {
+                  color:STYLES['SUCCESS']
+                },
+                {
+                  color:STYLES['INFO']
+                }
+              ],
               size:'small',
-              type:'default',
+              type:'text',
               click:openDialog,
             },
           ]
@@ -1855,69 +1877,69 @@ const state = {
       path:'',
       type:'用户奖励',
       params:['用户奖励'],
-      colType:'select',
-      colValue:'selection',
-      colTitle:'',
+      colType:'index',
+      colValue:'index',
+      colTitle:'序号',
       list:[
         {
           key:'活动卡券',
           type:'default',
-          prop:'',
+          prop:'couponName',
         },
         {
           key:'分享用户电话',
           type:'default',
-          prop:'',
+          prop:'shareUserPhone',
         },
         {
           key:'分享用户姓名',
           type:'default',
-          prop:'name',
+          prop:'shareUserName',
         },
         {
           key:'奖励金额',
           type:'default',
-          prop:'name',
+          prop:'awardMoney',
         },
         {
           key:'卡券奖励',
           type:'default',
-          prop:'name',
+          prop:'couponTypeText',
         },
         {
           key:'奖励类型',
           type:'default',
-          prop:'name',
+          prop:'couponType',
         },
         {
           key:'领取用户姓名',
           type:'default',
-          prop:'name',
+          prop:'takeUserName',
         },
         {
           key:'领取用户电话',
           type:'default',
-          prop:'name',
+          prop:'takeUserPhone',
         },
         {
           key:'消费金额',
           type:'default',
-          prop:'name',
+          prop:'consumerAmount',
         },
         {
           key:'优惠券金额',
           type:'default',
-          prop:'name',
+          prop:'couponValue',
         },
         {
           key:'操作人',
           type:'default',
-          prop:'name',
+          prop:'employeeName',
         },
         {
           key:'操作时间',
           type:'default',
-          prop:'name',
+          prop:'takeDate',
         },
       ]
     },

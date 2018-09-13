@@ -1126,51 +1126,65 @@ const state = {
           key:'用户姓名',
           value:'',
           type:'default',
+          prop:'name',
         },
         {
           key:'联系电话',
           value:'',
           type:'default',
+          prop:'phone',
         },
         {
           key:'奖励类型',
           value:'',
           type:'select',
+          prop:'awardType',
+          list:[
+            {
+              label: '消费',
+              value: 1
+            },
+            {
+              label: '分享',
+              value:0
+            }
+          ]
         },
         {
           key:'活动卡券',
           value:'',
           type:'select',
+          prop:'couponName',
         },
         {
           key:'消费最小金额',
           value:'',
           type:'input',
+          prop:'minMoney',
         },
         {
           key:'消费最大金额',
           value:'',
           type:'input',
+          prop:'maxMoney',
         },
         {
           key:'返利开始日期',
           value:'',
           type:'date',
+          prop:'startDate',
         },
         {
           key:'返利结束日期',
           value:'',
           type:'date',
-        },
-        {
-          key:'单词分享用户数',
-          value:'',
-          type:'select',
+          prop:'',
         },
         {
           key:'奖励金额',
           value:'',
           type:'select',
+          prop:'awardMoney',
         }
       ]
     },
