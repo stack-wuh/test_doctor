@@ -85,7 +85,8 @@ export default {
       'handleSubmitParts' : 'partsPubAndPut',
       'handleSubmitRole' : 'RolePubAndPut' ,
       'handleSubmitFirstStaff' : 'staffFirstPub',
-      'handleSubmitUserCommUp' : 'userCommUp'
+      'handleSubmitUserCommUp' : 'userCommUp',
+      'handleSubmitMemberChecked' : 'couponMemberChecked'
     }),
     /**
      * dialog对话框
@@ -128,6 +129,8 @@ export default {
             break;
           case '用户佣金提现' : this.handleSubmitUserCommUp({path: this.rootPath, form: this.myForm})
             break;
+          case '用户卡券管理' : this.handleSubmitMemberChecked({path: this.rootPath, form: this.myForm})
+            break; 
         }
         setTimeout(()=>{
           this.$refs.myForm.resetFields()
