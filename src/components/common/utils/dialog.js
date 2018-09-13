@@ -740,7 +740,7 @@ export const forms = [
       {
         key:'姓名',
         type:'input',
-        prop:'realNameByEmployee',
+        prop:'realNameByUser',
         rules:[
           {
             required:false,
@@ -762,30 +762,6 @@ export const forms = [
         ],
       },
       {
-        key:'车架号',
-        type:'input',
-        prop:'cid',
-        rules:[
-          {
-            required:false,
-            message:'请编辑车架号',
-            trigger:'blur',
-          }
-        ],
-      },
-      {
-        key:'车牌号',
-        type:'input',
-        prop:'number',
-        rules:[
-          {
-            required:false,
-            message:'请编辑车牌号',
-            trigger:'blur',
-          }
-        ],
-      },
-      {
         key:'卡券名称',
         type:'input',
         prop:'counponName',
@@ -800,7 +776,7 @@ export const forms = [
       {
         key:'卡券编号',
         type:'input',
-        prop:'cnumber',
+        prop:'codeNum',
         rules:[
           {
             required:false,
