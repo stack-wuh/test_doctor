@@ -3,7 +3,7 @@
     <section class="content">
       <div class="btn-list" v-for="(item,index) in getBtnList" :key="index">
         <el-button v-if="item.type == '' || item.type =='button'" v-on:click="item.click({params , choose, text: item.text})" >{{item.text}}</el-button>
-        <el-select v-if="item.type == 'select'" :placeholder="item.text" :size="item.size" :style="item.style" v-model="item.value" >
+        <el-select @change="item.change({params, choose, text: item.text, key: item.key, value: form[item.key]})" v-if="item.type == 'select'" :placeholder="item.text" :size="item.size" :style="item.style" v-model="form[item.key]">
           <el-option v-for="(sub,sid) in item.list" :key="sid" :label="sub.label" :value="sub.value" ></el-option>
         </el-select>
       </div>
@@ -24,7 +24,8 @@ export default {
   
   computed:{
     ...mapState({
-      'choose':'choose'
+      'choose':'choose',
+      'form': 'tableHeader'
     }),
     getBtnList(){
       return this.$store.getters.getBtnLists({name:this.name || this.$route.query.child || this.$route.query.subMenu})
