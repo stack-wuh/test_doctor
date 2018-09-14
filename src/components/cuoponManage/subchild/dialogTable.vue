@@ -8,8 +8,12 @@
         </el-form>
         <el-table @selection-change="handleSelectionChange" ref="myTable" :data="list" border stripe>
             <el-table-column align="center" type="selection" width="55"></el-table-column>
-            <el-table-column align="center" label="奖品名称" prop="couponName" ></el-table-column>
-            <el-table-column align="center" label="类型" prop="couponType" ></el-table-column>
+            <el-table-column align="center" label="奖品名称" prop="couponName"></el-table-column>
+            <el-table-column align="center" label="类型" prop="couponType" >
+              <template slot-scope="scope">
+                <span>{{scope.row.couponType == 0 ? '实物奖品' : '电子代金券'}}</span>
+              </template>
+            </el-table-column>
             <el-table-column align="center" label="有效期" prop="validTill" ></el-table-column>
             <el-table-column align="center" label="总数量" prop="number" ></el-table-column>
         </el-table>
@@ -50,7 +54,8 @@ export default {
   methods: {
     ...mapMutations({
       'beforeClose' : 'clearCouponAddModel',
-      'handleDelItem' : 'handleDelMemberItem'
+      'handleDelItem' : 'handleDelMemberItem',
+      'hideDialog' : 'hideDialog'
     }),
     handleChange(){
       this.$emit('getKeyWord', {keyWord: this.keyWord})
@@ -60,6 +65,7 @@ export default {
     },
     handleSubmit(){
       this.$emit('getData', {data: this.selection})
+      this.hideDialog()
     }
   }
 }
