@@ -1,7 +1,16 @@
 <template>
   <section class="wrapper">
     <section class="content">
-      <Search />
+      <section class="header-form">
+        <el-form ref="myForm" :rules="rules" :model="form" label-width="80px">
+          <el-form-item label="名称" prop="name">
+            <el-input class="my-input-220" placeholder="请编辑抽奖模板" v-model="form.name"></el-input>
+          </el-form-item>
+          <el-form-item label="简介" prop="decription">
+            <el-input class="my-input-220" placeholder="请编辑模板简介" v-model="form.decription"></el-input>
+          </el-form-item>
+        </el-form>
+      </section>
       <my-table header="true" :list="data" >
         <span slot="title">{{$route.query.child}}</span>
         <div slot="right">
@@ -21,6 +30,11 @@ import MyButton from '@/components/common/myButton'
 import SubButton from '@/components/common/subButton'
 import DialogWithTable from '../subchild/dialogTable'
 import {mapActions, mapGetters, mapState} from 'vuex'
+
+const rules = {
+  name: [{required: true, message:'请编辑模板名称', trigger:'blur'}],
+  decription: [{required: true, message:'请编辑模板名称', trigger:'blur'}]
+}
 export default {
   name: 'lottoPub',
   components:{
@@ -32,13 +46,19 @@ export default {
   },
   data () {
     return {
-      data:[]
+      data:[],
+      form:{
+        name:'',
+        decription:'',
+      },
+      rules,
     }
   },
   computed:{
     ...mapState({
       'isShowDialog': state => state.Coupon.tempObj.isShowDialog,
       'subList': state => state.Coupon.tempObj.list ,
+      'tempForm': state => state.Coupon.tempForm
     }),
     ...mapGetters({
       'list': 'formatCouponStore',
@@ -50,8 +70,8 @@ export default {
   },
   methods: {
     ...mapActions({
-      'getList':'getCouponStore',
-      'handleSubmit': 'couponPariseTake'
+      'handleSubmit': 'couponPariseTake',
+      'getModelList': 'getCouponModel'
     }),
     getKeyWord(){
       console.log('is ok')
@@ -62,25 +82,59 @@ export default {
         return {...item, rank: list[index] + '等奖', rate: 0, quantity: 0}
       }) 
     },
-    cancel(){},
+    cancel(){
+      setTimeout(() => {
+        this.$router.go(-2)
+      }, 1000);
+    },
     submit(){
-      let data = this.subList.map(item => {
+      let data = this.data.map(item => {
         return {
           rank: item.rank,
           couponName: item.couponName,
           number: item.number,
-          quantity: item.quantity
+          quantity: item.quantity,
+          rate: item.rate
         }
       })
-      this.handleSubmit({form: data})
+      let form = {...this.form, data: JSON.stringify(data)}
+      this.$refs.myForm.validate(valid => {
+        if(valid){
+          this.handleSubmit({form}).then(res => {
+              this.cancel()
+          })
+        }else{
+          _g.toastMsg({
+            type:'error',
+            msg: '请编辑必填项目后提交'
+          })
+        }
+      })
     },
   },
   created(){
-    this.getList({path: this.$route.query.child || this.$route.query.subMenu})
+    this.getModelList({id: this.$route.query && JSON.parse(this.$route.query.data) && JSON.parse(this.$route.query.data).id})
+      .then(res => {
+        this.form = {...this.form, ...res.data.template}
+        this.data = res.data.pageInfo.list
+      })
+    window.$bus.$on('handleDelItemForModel', (e) => {
+      this.data && this.data.splice(e,1)
+    })
+    // this.form = {...this.form, ...this.tempForm.form}
+    // this.data = this.tempForm.list
+  },
+  destroyed(){
+    window.$bus.$off('handleDelItemForModel')
   }
 }
 </script>
 
 <style scoped lang='scss' >
-
+.wrapper{
+  .header-form{
+    padding:20px 0 10px 0;
+    background-color: #fff;
+  }
+}
 </style>
