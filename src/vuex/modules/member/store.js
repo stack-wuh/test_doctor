@@ -1,5 +1,5 @@
 import $http from '../../../utils/axios'
-import {_g } from '../../../utils/global'
+import {_g, NotNull } from '../../../utils/global'
 const state = {
   list:[],
   total:0,
@@ -72,7 +72,7 @@ const actions = {
       }
         break;
     }
-    $http.post(_url, search, res => {
+    $http.post(_url, NotNull(search), res => {
       switch(path){
         case '积分管理' : return commit('setMemberStore', {params: res.data.info, tempArr1: res.data.businessType || []})
         case '充值明细' : return commit('setMemberStore', {params: res.data.info, tempArr1: res.data.payWay || []})
@@ -147,6 +147,30 @@ const actions = {
     })
   },
   /**
+   * 保存会员卡信息
+   */
+  memberCouponCommPutAndFresh({dispatch}, {path, form:{
+    realName,
+    sex,
+    birthday,
+    phone,
+    afterService,
+    createTimes,
+  }} = {}){
+    return new Promise((resolve, reject) => {
+      $http.post('vehicle/save.do', {
+        realName,
+        sex,
+        birthday,
+        phone,
+        afterService,
+        createTimes,
+      }, res => {
+        return resolve(res)
+      })
+    })
+  },
+  /**
    * 会员管理 -- 车辆管理 -- 车辆查询
    */
   memberCarComm({commit}, {search} = {}){
@@ -156,9 +180,31 @@ const actions = {
       })
     })
   },
-  memberCarCommPut({commit}, {form} = {}){
+  memberCarCommPut({commit}, {form, form:{
+    id,
+    carModel,
+    plateNum,
+    frameNum,
+    engineNum,
+    InsuranceStart,
+    lastMaintainTime,
+    firstBoardTime,
+    lastMaintainKm,
+    maintainIntervalKm,
+  }} = {}){
     return new Promise((resolve, reject)=> {
-      $http.post('vehicle/updateVehicle.do', form, res => {
+      $http.post('vehicle/updateVehicle.do', {
+        id,
+        carModel,
+        plateNum,
+        frameNum,
+        engineNum,
+        InsuranceStart,
+        lastMaintainTime,
+        firstBoardTime,
+        lastMaintainKm,
+        maintainIntervalKm,
+      }, res => {
           return resolve(res)
       })
     }) 
