@@ -156,8 +156,9 @@ export default {
         this.$refs.myForm.validate(valid => {
           if(valid){
             console.log(this.form)
-            this.handleSubMember({path: this.$route.query.child || this.$route.query.subMenu, form: this.form}).then(res => {
-              console.log(res)
+            this.handleSubMember({path: this.$route.query.child || this.$route.query.subMenu, form: this.form})
+            .then(res => {
+              this.cancel()
             })
           }else{
             _g.toastMsg({
