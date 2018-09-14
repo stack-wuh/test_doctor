@@ -71,7 +71,8 @@ export default {
   methods: {
     ...mapActions({
       'handleSubmit': 'couponPariseTake',
-      'getModelList': 'getCouponModel'
+      'getModelList': 'getCouponModel',
+      'getCouponStore': 'getCouponStore'
     }),
     getKeyWord(){
       console.log('is ok')
@@ -113,7 +114,9 @@ export default {
     },
   },
   created(){
-    this.getModelList({id: this.$route.query && JSON.parse(this.$route.query.data) && JSON.parse(this.$route.query.data).id})
+    this.getCouponStore({path: this.changePath})
+    let data =  this.$route.query.data && JSON.parse(this.$route.query.data)
+    data && this.getModelList({id: data.id})
       .then(res => {
         this.form = {...this.form, ...res.data.template}
         this.data = res.data.pageInfo.list
@@ -121,8 +124,6 @@ export default {
     window.$bus.$on('handleDelItemForModel', (e) => {
       this.data && this.data.splice(e,1)
     })
-    // this.form = {...this.form, ...this.tempForm.form}
-    // this.data = this.tempForm.list
   },
   destroyed(){
     window.$bus.$off('handleDelItemForModel')
