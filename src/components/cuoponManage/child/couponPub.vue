@@ -5,8 +5,8 @@
           <section class="inline-box" >
             <el-form-item label="卡券类型" prop="couponType" >
               <el-select v-model="form.couponType">
-                <el-option label="实物奖品" :value="1" ></el-option>
-                <el-option label="电子代金券" :value="0" ></el-option>
+                <el-option label="实物奖品" :value="0" ></el-option>
+                <el-option label="电子代金券" :value="1" ></el-option>
               </el-select>
             </el-form-item>
             <el-form-item label="卡券名称" prop="couponName">
@@ -31,8 +31,8 @@
           </section>
           <el-form-item label="领取规则" prop="receiveType">
             <el-radio-group v-model="form.receiveType" >
-              <el-radio label="0" >允许重复领取</el-radio>
-              <el-radio label="1">首次分享后领取</el-radio>
+              <el-radio :label="0" >允许重复领取</el-radio>
+              <el-radio :label="1">首次分享后领取</el-radio>
             </el-radio-group>
           </el-form-item>
           <el-form-item label="员工推荐权限" prop="roleId">  
@@ -60,7 +60,7 @@ const rules = {
   validTill:[{required:true,message:'请选择有效期',trigger:'blur'}],
   instructions:[{required:false}],
   receiveType:[{required:true,message:'请选择领取规则',trigger:'change'}],
-  roleId:[{required:true,message:'请选择员工使用权限',trigger:'change'}],
+  roleId:[{required:false,message:'请选择员工使用权限',trigger:'change'}],
 }
 
 import MySubButton from  '@/components/common/subButton'
@@ -107,7 +107,7 @@ export default {
       this.$refs.myForm.validate(valid => {
         if(valid){
           let form = JSON.parse(JSON.stringify(this.form))
-          form = {...form, roleId: form.roleId.toString()}
+          form = {...form, roleId: form.roleId ? form.roleId.toString() : ''}
           this.submit({form}).then(res => {
             this.handleCancel()
           })
@@ -122,7 +122,7 @@ export default {
   },
   created(){
     let data = this.$route.query.data && JSON.parse(this.$route.query.data)
-    this.form = {...this.form, ...data}
+    this.form = {...this.form, ...data, roleId: data ? (data.roleIds ? data.roleIds.split(',') : []) : []}
     this.getRoleList()
   }
 }
