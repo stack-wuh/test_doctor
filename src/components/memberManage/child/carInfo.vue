@@ -54,6 +54,7 @@ export default {
   },
   created(){
     let data = JSON.parse(this.$route.query.data)
+    console.log(data)
     this.form = {
       id: data && data.id && data.id,
       userId: data && data.userId && data.userId,
