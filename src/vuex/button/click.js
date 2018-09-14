@@ -37,7 +37,7 @@ export const jump2Detail = params => {
           break ;
      case '自动回复配置' : rootPath = '/system/store/reply' , child = '编辑自动回复设置'
           break ;
-     case '用户提现记录' : rootPath = '/coupon/userComm/pub', child = '编辑用户提现'
+     case '用户提现记录' : rootPath = '/coupon/userComm/pub', subMenu = '用户佣金提现'
           break;
      default : rootPath = '/index'
    }
