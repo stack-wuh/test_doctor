@@ -851,17 +851,17 @@ const state = {
           list:[
             {
               label:'实物奖品',
-              value: 0
+              value:'0'
             },
             {
               label:'电子代金券',
-              value:1
+              value:'1'
             }
           ],
         },
         {
           key:'有效日期',
-          type:'date',
+          type:'input',
           prop:'validDays',
           value:'',
         }
@@ -2126,7 +2126,7 @@ const getters = {
           sub.list = rootState.Member.tempArr1
         }else if(sub.key === '充值方式'){
           sub.list = rootState.Member.tempArr1
-        }else if(sub.key === '活动卡券'){
+        }else if(sub.key === '活动卡券' && item.name !== '用户奖励'){
           sub.list = rootGetters.formatCouponActivityList
         }else if(sub.key === '保养顾问'){
           sub.list = rootState.upKeepList
@@ -2137,7 +2137,9 @@ const getters = {
         }else if(sub.key === '销售顾问'){
           sub.list = rootState.sellList
         }else if(sub.key === '卡券来源'){
-          sub.list = rootGetters.formatCouponSrouce
+          sub.list = rootGetters.formatCouponSrouce  
+        }else if((sub.key === '活动卡券') && (item.name === '用户奖励')){
+          sub.list = rootGetters.formatPariseList[0]
         }
         return {...sub}
       })
