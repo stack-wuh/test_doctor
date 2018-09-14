@@ -2,8 +2,8 @@
   <section class="wrapper">
     <section class="info">
       <p class="nav-title flex flex-justify-between"><span>基本信息</span>
-        <el-button v-if="isDisabled" @click="handleToggleState">编辑</el-button>
-        <span v-else-if="!isDisabled">
+        <el-button v-if="formList[0][0].disabled" @click="handleToggleState">编辑</el-button>
+        <span v-else-if="!formList[0][0].disabled">
           <el-button @click="handleCancel">取消</el-button>   
           <el-button @click="handleClickSave">保存</el-button>   
         </span>
@@ -113,15 +113,15 @@ export default {
       this.formList.forEach(item => {
         item.map(list => {
           list.disabled = !list.disabled
-          this.isDisabled = !this.isDisabled
         })
       })
     },
     handleCancel(){
-      this.isDisabled = true
+      this.handleToggleState()
       this.form = {...this.form, ...this.tempForm}
     },
     handleClickSave(){
+      console.log(this.form)
       this.memberCarCommPut({form: this.form})
     }
   },
