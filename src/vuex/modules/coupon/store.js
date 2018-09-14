@@ -52,6 +52,15 @@ const mutations = {
   handleClearCouponMemberTake(state, rootState){
     rootState.search = {}
     state.tempForm = {}
+  },
+  /**
+   * 处理一下抽奖模板页面的数据
+   */
+  setCouponModel(state, {params} = {}){
+    state.tempForm = {
+      form:params && params.template,
+      list:params && params.pageInfo.list
+    }
   }
 }
 
@@ -136,15 +145,23 @@ const actions = {
   /**
    * 卡券管理 -- 抽奖模板 -- 编辑抽奖模板
    */
-  couponPariseTake({commit}, {path, form} = {}){
+  couponPariseTake({commit, rootState}, {path, form} = {}){
+    return new Promise((resolve, reject) => {
+      $http.post('lottery/saveCarLotteryTemplate.do', form, res => {
+        return resolve(res)
+      })
+    })
     
   },
   /**
    * 卡券管理 -- 抽奖模板 -- 根据id获取抽奖模板
    */
-  getCouponModel({commit}, {path, row:{id}} = {}){
-    $http.post('lottery/getCarLotteryTemplateList.do', {id}, res => {
-      console.log('')
+  getCouponModel({commit}, {id} = {}){
+    return new Promise((resolve, reject) => {
+      $http.post('lottery/getCarLotteryTemplateList.do', {id}, res => {
+        // commit('setCouponModel', {params: res.data})
+        return resolve(res)
+       })
     })
   },
   /**
@@ -155,6 +172,8 @@ const actions = {
     let _url = ''
     switch(path){
       case '奖品卡券管理' : _url = 'coupon/delCoupon.do'
+        break;
+      case '抽奖模板设置' : _url = 'lottery/delCarLotteryTemplate.do'
         break;
     }
     $http.post(_url, {ids:id}, res => {
