@@ -27,11 +27,21 @@ const mutations = {
       list: state.data
     }
   },
+  /**
+   * 关闭弹框但是为清除表单
+   */
   clearCouponAddModel(state){
     state.tempObj = {
       isShowDialog: false,
-      list: []
+      list: state.tempObj.list
     }
+  },
+  /**
+   * 单纯的关闭弹框
+   * @param {*} state 
+   */
+  hideDialog(state){
+    state.tempObj.isShowDialog = false
   },
   /**
    * 保存一下 佣金提现的表单
@@ -52,7 +62,7 @@ const actions = {
   getCouponStore({commit, rootState, dispatch} ,{path ,search, currPageNo = 1} = {}){
     let _url;
     switch(path){
-      case '奖品卡券管理' : _url = 'coupon/getCouponList.do', search = {...rootState.search, search, currPageNo}, dispatch('getCouponList') 
+      case '奖品卡券管理' : _url = 'coupon/getCouponList.do', search = {...rootState.search, search, currPageNo}
         break;
       case '抽奖模板设置' : _url = 'lottery/carLotteryTemplateList.do', search = {...rootState.search, ...search, currPageNo}
         break;
@@ -60,7 +70,7 @@ const actions = {
         break;
       case '用户佣金提现' : _url = 'takeMoney/getUserTakeMoneny.do', search = {...rootState.search}
         break;
-      case '查看领取明细' : _url = 'coupon/getTakeList.do', search = {...rootState.search, ...search}, dispatch('getCouponFromList')
+      case '查看领取明细' : _url = 'coupon/getTakeListByUserCouponVo.do', search = {...rootState.search, ...search, currPageNo}, dispatch('getCouponSourceList')
         break;
       case '用户佣金提现' : _url = 'takeMoney/getUserTakeMoneny.do', search = {...rootState.search, ...search, currPageNo} 
         break;
@@ -83,9 +93,31 @@ const actions = {
    * 卡券管理 -- 奖品卡券管理 
    *  更新/发布
    */
-  couponPraisePubAndPut({commit}, {path, form} = {}){
+  couponPraisePubAndPut({commit}, {path, form:{
+    id,
+    couponType,
+    couponName,
+    number,
+    consumptionFull,
+    validTill,
+    receiveType,
+    roleId,
+    instructions,
+    couponValue,
+  }} = {}){
     return new Promise((resolve, reject) => {
-      $http.post('coupon/addCoupon.do', form, res => {
+      $http.post('coupon/addCoupon.do', {
+        id,
+        couponType,
+        couponName,
+        number,
+        consumptionFull,
+        validTill,
+        receiveType,
+        roleIds: roleId,
+        instructions,
+        couponValue,
+      }, res => {
         return resolve(res)
       })
     })
@@ -100,6 +132,20 @@ const actions = {
       return resolve(res)
     })
    }) 
+  },
+  /**
+   * 卡券管理 -- 抽奖模板 -- 编辑抽奖模板
+   */
+  couponPariseTake({commit}, {path, form} = {}){
+    
+  },
+  /**
+   * 卡券管理 -- 抽奖模板 -- 根据id获取抽奖模板
+   */
+  getCouponModel({commit}, {path, row:{id}} = {}){
+    $http.post('lottery/getCarLotteryTemplateList.do', {id}, res => {
+      console.log('')
+    })
   },
   /**
    * 卡券管理 -- 抽取所有模块内的表格删除事件
@@ -146,14 +192,6 @@ const actions = {
       dispatch('getCouponStore', {path})
       commit('clearTableHeaderForm')
     })
-  },
-
-  /**
-   * 卡券管理 -- 用户佣金提现 
-   * 提现
-   */
-  userCommUp({dispatch}, {path, row} = {}){
-    console.log(path, row)
   },
 
   /**
