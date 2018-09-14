@@ -195,13 +195,11 @@ export const mutations = {
    * 处理 奖励类型 -- select
    */
   setPariseList(state, {params} = {}){
-    // state.pariseList = params
-    Object.values(params).map(item => {
-      item.map(item => {
-        return {...item, label: item, value: item}
+    Object.values(params).map((item,index) => {
+      state.pariseList[index] =  item.map(list => {
+        return {label: list, value: list}
       })
     })
-    state.pariseList = params
   }
 }
 
@@ -397,5 +395,8 @@ export const getters = {
     return state.couponSrouce.map(item => {
       return {label: item, value: item}
     })
+  },
+  formatPariseList(state){
+    return state.pariseList
   }
 }
