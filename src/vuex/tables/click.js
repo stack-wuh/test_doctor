@@ -46,7 +46,7 @@ export const jump2Other = (params ,types ,row) => {
                         child = types == '编辑' ? '编辑奖品卡券' : '查看领取明细',
                         data = JSON.stringify(row)
       break ;
-    case '抽奖模板设置' : rootPath = '/coupon/lotto/pub' , child = '编辑抽奖模板'
+    case '抽奖模板设置' : rootPath = '/coupon/lotto/pub' , child = '编辑抽奖模板', data = JSON.stringify(row)
       break ;
     case '普通活动' : 
             rootPath = types == '编辑' ? '/market/active/pub' : types == '精准获客' ? '/market/store' : types == '报名查询' ? '/market/store' : '' , 
@@ -213,4 +213,8 @@ export const handleSwitchChange = (params, row) => {
        message:'操作错误或已取消'
      })
    })
+ }
+
+ export const handleDelItemForCouponModel = (params, text, row, index) => {
+  window.$bus.$emit('handleDelItemForModel',index)
  }

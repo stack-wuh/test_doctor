@@ -45,7 +45,8 @@
    handleTakeGood ,
    useDelAndFresh ,
    handleSwitchChange,
-   handleDelAndFresh
+   handleDelAndFresh,
+   handleDelItemForCouponModel
   } from './click.js'
 const state = {
   data:[
@@ -1668,6 +1669,28 @@ const state = {
           key:'奖品数量',
           type:'input',
           prop:'quantity',
+          list:[
+            {
+              label:'10',
+              value: 10
+            },
+            {
+              label: '20',
+              value:20,
+            },
+            {
+              label:'50',
+              value:50,
+            },
+            {
+              label:'100',
+              value:100
+            },
+            {
+              label:'200',
+              value:200
+            }
+          ]
         },
         {
           key:'中奖概率',
@@ -1719,6 +1742,7 @@ const state = {
           list:[
             {
               text:'删除',
+              click:handleDelItemForCouponModel
             }
           ]
         },
