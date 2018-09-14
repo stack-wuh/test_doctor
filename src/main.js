@@ -31,6 +31,9 @@ router.beforeEach((to, form, next) => {
   next()
 })
 
+const bus = new Vue()
+window.$bus = bus
+
 new Vue({
   router,
   store,
