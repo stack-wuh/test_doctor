@@ -62,7 +62,8 @@ export default {
   },
   methods: {
     ...mapActions({
-      'getList':'getCouponStore'
+      'getList':'getCouponStore',
+      
     }),
     getCurrent(value){
       this.getList({path: this.changePath, currPageNo: value})
