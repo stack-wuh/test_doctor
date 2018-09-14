@@ -6,8 +6,7 @@
               <el-input v-model="keyWord" @change="handleChange" placeholder="请输入关键字搜索" class="my-input-220"></el-input>
           </el-form-item>
         </el-form>
-        <el-table @selection-change="handleSelectionChange" ref="myTable" :data="list" border stripe>
-            <el-table-column align="center" type="selection" width="55"></el-table-column>
+        <el-table ref="myTable" :data="list" border stripe>
             <el-table-column align="center" label="奖品名称" prop="couponName"></el-table-column>
             <el-table-column align="center" label="类型" prop="couponType" >
               <template slot-scope="scope">
@@ -16,6 +15,11 @@
             </el-table-column>
             <el-table-column align="center" label="有效期" prop="validTill" ></el-table-column>
             <el-table-column align="center" label="总数量" prop="number" ></el-table-column>
+            <el-table-column label="操作" align="center">
+              <template slot-scope="scope">
+                <el-button size="small" @click="handleAddItem(scope.row)" >选取</el-button>
+              </template>
+            </el-table-column>
         </el-table>
         <span slot="footer">
           <el-button @click="beforeClose">取消</el-button>
@@ -60,8 +64,8 @@ export default {
     handleChange(){
       this.$emit('getKeyWord', {keyWord: this.keyWord})
     },
-    handleSelectionChange(val){
-      this.selection = val
+    handleAddItem(row){
+      this.selection = [...this.selection, row]
     },
     handleSubmit(){
       this.$emit('getData', {data: this.selection})
