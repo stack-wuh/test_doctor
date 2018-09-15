@@ -10,10 +10,9 @@
     <section class="content">
       <section class="form-area">
         <span class="nav-title">用户登录</span>
-        {{form}} -- {{form.username}} -- this is username
         <el-form class="my-form" ref="myForm">
-          <el-form-item v-for="(item,index) in list" :key="index">
-            <el-input v-model="form[item.prop]" class="my-input" v-if="item.type == 'input'" :type="item.inputType" :placeholder="'请编辑'+item.name" :style="item.style"></el-input>
+          <el-form-item v-for="(item,index) in list" :key="index" prop="username">
+            <el-input v-model="login[item.prop]" class="my-input" v-if="item.type == 'input'" :type="item.inputType" :placeholder="'请编辑'+item.name" :style="item.style"></el-input>
             <span v-if="item.child" class="code-box" >
               <small v-for="(sub,sid) in code" :key="sid" class="box-item" :style="styleList[sid]" >{{sub}}</small>
             </span>
@@ -35,6 +34,11 @@
 
 <script>
 import {mapState , mapActions, mapMutations} from 'vuex'
+const rules = {
+  username: [{require: true, message: '请编辑用户名', trigger:'blur'}],
+  password: [{require: true, message: '请编辑登录密码', trigger:'blur'}],
+}
+
 export default {
   name: 'signin',
 
@@ -70,7 +74,12 @@ export default {
       styleStore:['#FFFF00','#FF6600','#33CC00','#6666FF','#0033FF','#6600CC'],
       textShadow:['#00FF00','	#00EE00','#00E5EE','#3A5FCD','#473C8B','#76EEC6'],
       styleList:[],
-      isSavePwd:eval(localStorage.getItem('isSavePwdInExpire')) || false
+      isSavePwd:eval(localStorage.getItem('isSavePwdInExpire')) || false,
+      login:{
+        username:'',
+        password:'',
+        code:'',
+      },
     }
   },
   computed:{
@@ -104,15 +113,35 @@ export default {
      * 映射登录事件
      */
     handleSubmit(){
-      this.signIn({code: this.code}).then(()=>{
-        let myStorage = localStorage , 
-            saveStorage = myStorage.getItem('saveObj')
-        saveStorage = saveStorage && JSON.parse(saveStorage)
-        saveStorage = {...saveStorage, username: this.form.username, password: this.form.password}
-        myStorage.setItem('saveObj', JSON.stringify(saveStorage))            
-      }).catch(err => {
-        this.handleRandomCode()
-      })
+      let keys = Object.keys(this.login)
+      let result = keys.every(item => this.login[item].toString()[0])
+      let isSavePwdInExpire = localStorage.getItem('isSavePwdInExpire')
+      if(result){
+        if(this.code.join('') !== this.login['code']){
+          _g.toastMsg({
+            type: 'error',
+            msg: '验证码错误,请重试!'
+          })
+          setTimeout(()=>{
+            this.handleRandomCode()
+          },500)
+          return 
+        }
+        this.signIn({form: this.login})
+        .catch(err => {
+          this.handleRandomCode()
+        })
+      }else if(!this.login['username'] || !this.login['password']){
+        _g.toastMsg({
+          type: 'error',
+          msg: '请编辑用户名或密码'
+        })
+      }else{
+        _g.toastMsg({
+          type: 'error',
+          msg:'请填写验证码'
+        })
+      }
     },
     /**
      * 单击确定保存用户名与密码
@@ -120,20 +149,26 @@ export default {
     savePwdInExpire(){
       let now = new Date().getTime(), expire = now + 7*24*60*60*1000 ; // 保质期七天
       localStorage.setItem('isSavePwdInExpire',this.isSavePwd)
-      localStorage.setItem('saveObj',JSON.stringify({isSave:this.isSavePwd,now,expire,username: this.form.username, password: this.form.password}))
+      localStorage.setItem('saveObj',JSON.stringify({isSave:this.isSavePwd,now,expire,username: this.login.username, password: this.login.password}))
+    },
+    /**
+     * 自动登录事件
+     */
+    handleSubmitSelf(){
+      let isSavePwdInExpire = localStorage.getItem('isSavePwdInExpire'),
+          _saveObj = localStorage.getItem('saveObj') && JSON.parse(localStorage.getItem('saveObj'))
+      if(isSavePwdInExpire && (_saveObj.expire - new Date().getTime() > 0)){
+        this.login = {...this.login, ..._saveObj}
+        this.signIn({form: this.login}).catch(err => {
+          localStorage.setItem('isSavePwdInExpire', false)
+          localStorage.setItem('saveObj', JSON.stringify({}))
+        })
+      }
     }
   },
   created(){
     this.handleRandomCode()
-    let myStorage = localStorage.getItem('saveObj')
-    myStorage = myStorage && JSON.parse(myStorage)
-    let date = new Date().getTime()
-    this.handleNameAndPwd({form: myStorage, rootState: this.$store.state})
-    if(date && date - myStorage.expire < 0 && this.isSavePwd){
-      this.handleSignIn()
-    }else{
-      localStorage.setItem('saveObj','')
-    }
+    this.handleSubmitSelf()
   }
 }
 </script>

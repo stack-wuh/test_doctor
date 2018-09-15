@@ -19,31 +19,19 @@ const actions = {
    * 登录后台
    * @param {*} param0 
    */
-  signIn({rootState, dispatch},{code} = {}){
-    let length = Object.values(rootState.form).length > 0 ? true : false
-    let result = length && Object.values(rootState.form).every(item => item)
-    if(result){
-      return new Promise((resolve,reject) => {
-        if(rootState.form.code && rootState.form.code === code.join('')){
-          $http.post('employee/Login.do',rootState.form , res => {
-              resolve()
-              setTimeout(()=>{
-                window.$route.push({name:'index'})
-              },1000)
-          })
-        }else{
-          if(rootState.form.code !== code.join('')){
-            _g.toastMsg({
-              type:'error',
-              msg:'验证码错误,请重试'
-            })
-          }
-          return reject()
-        }
+  signIn({rootState, dispatch},{form} = {}){
+    return new Promise((resolve, reject) => {
+      $http.post('employee/Login.do', form, res => {
+         if(res.status == 0){
+          setTimeout(()=>{
+            window.$route.push({name: 'index'})
+          },1000)
+           return resolve(res)
+         }else{
+           return reject(res)
+         }
       })
-    }else{
-      window._g.toastMsg({type:'error',msg:'请编辑必填项后提交'})
-    }
+    })
   },
 
   /**
@@ -68,6 +56,7 @@ const actions = {
   signOut(){
     $http.post('employee/doLogout.do', {} ,res => {
       localStorage.setItem('saveObj', '')
+      localStorage.setItem('isSavePwdInExpire', false)
       if(res.status == 0){
        setTimeout(()=>{
           window.$route.push({name:'signin'})
