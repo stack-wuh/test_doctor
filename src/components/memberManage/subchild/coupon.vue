@@ -25,7 +25,7 @@
       <el-form :modal="form" class="my-form" label-width="80px">
         <section v-for="(item,index) in memberList" :key="index" class="inline-box">
           <el-form-item v-for="(list,lid) in item" :key="lid" :label="list.label">
-            <el-input :disabled="list.disabled" v-if="list.type === 'input'" :placeholder="'请编辑' + list.label" v-model="form[list.prop]" style="width:80%;" ></el-input>
+            <el-input :disabled="list.disabled" v-if="list.type === 'input'" :placeholder="list.label" v-model="form[list.prop]" style="width:80%;" ></el-input>
             <el-select :disabled="list.disabled" v-if="list.type === 'select'" v-model="form[list.prop]" :placeholder="'请选择' + list.label">
               <el-option  v-for="(sub,sid) in list.list" :key="sid" :label="sub.label" :value="sub.value"></el-option>
             </el-select>
@@ -39,7 +39,7 @@
       <el-form :modal="form" class="my-form" label-width="80px">
         <section v-for="(item,index) in comboList" :key="index" class="inline-box">
           <el-form-item v-for="(list,lid) in item" :key="lid" :label="list.label">
-            <el-input :disabled="list.disabled" v-if="list.type === 'input'" :placeholder="'请编辑' + list.label" v-model="form[list.prop]" style="width:80%;" ></el-input>
+            <el-input :disabled="list.disabled" v-if="list.type === 'input'" :placeholder="list.label" v-model="form[list.prop]" style="width:80%;" ></el-input>
             <el-select :disabled="list.disabled" v-if="list.type === 'select'" v-model="form[list.prop]" :placeholder="'请选择' + list.label">
               <el-option  v-for="(sub,sid) in list.list" :key="sid" :label="sub.label" :value="sub.value"></el-option>
             </el-select>
@@ -49,11 +49,11 @@
       </el-form>
     </section>
     <section class="info">
-      <p class="nav-title flex"><span>用户卡券</span><el-button>查看更多</el-button></p>
+      <p class="nav-title flex"><span>用户卡券</span><el-button @click="handleShowCoupon">查看更多</el-button></p>
       <el-form :modal="form" class="my-form" label-width="80px">
         <section v-for="(item,index) in couponList" :key="index" class="inline-box">
           <el-form-item v-for="(list,lid) in item" :key="lid" :label="list.label">
-            <el-input :disabled="list.disabled" v-if="list.type === 'input'" :placeholder="'请编辑' + list.label" v-model="form[list.prop]" style="width:80%;" ></el-input>
+            <el-input :disabled="list.disabled" v-if="list.type === 'input'" :placeholder="list.label" v-model="form[list.prop]" style="width:80%;" ></el-input>
             <el-select :disabled="list.disabled" v-if="list.type === 'select'" v-model="form[list.prop]" :placeholder="'请选择' + list.label">
               <el-option  v-for="(sub,sid) in list.list" :key="sid" :label="sub.label" :value="sub.value"></el-option>
             </el-select>
@@ -62,6 +62,20 @@
         </section>
       </el-form>
     </section>
+
+    <el-dialog title="用户卡券详情" :visible.sync="isShowMore">
+      <el-table :data="tempList" border stripe>
+        <el-table-column align="center" label="卡券名称" prop="couponName"></el-table-column>
+        <el-table-column align="center" label="卡券类型" prop="couponType">
+          <template slot-scope="scope">
+            <span>{{scope.row.couponType == 0 ? '实物奖品' : '电子代金券'}}</span> 
+          </template>
+        </el-table-column>
+        <el-table-column align="center" label="面值" prop="couponValue"></el-table-column>
+        <el-table-column align="center" label="有效日期" prop="validEnd"></el-table-column>
+        <el-table-column align="center" label="状态" prop="state"></el-table-column>
+      </el-table>
+    </el-dialog>
   </section>
 </template>
 
@@ -131,8 +145,14 @@ export default {
         {
           label:'售后经理',
           prop:'afterService',
-          type:'input',
+          type:'select',
           disabled:true,
+          list:[
+            {
+              label:'aaa',
+              value:'111'
+            }
+          ]
         },
         {
           label:'关注日期',
@@ -212,6 +232,9 @@ export default {
         }
       ]],
       form:{},
+      _temp:{},
+      isShowMore:false,
+      tempList: []
     }
   },
   computed:{
@@ -223,7 +246,8 @@ export default {
     ...mapActions({
       'memberCouponComm':'memberCouponComm',
       'submit': 'memberCouponCommPutAndFresh',
-      'getSellList': 'getSellsList'
+      'getSellList': 'getSellsList',
+      'getMemberCardList':'memberCardList'
     }),
     handleChangeState(){
       this.formList.map(item => {
@@ -233,10 +257,17 @@ export default {
       })
     },
     handleCancel(){
+      this.form = this._temp
       this.handleChangeState()
     },
     handleSubmit(){
       this.submit({form: this.form})
+    },
+    handleShowCoupon(){
+      this.isShowMore = true
+      this.getMemberCardList({id: this.userId}).then(res => {
+        this.tempList = res.data && res.data.list
+      })
     }
   },
   created(){
@@ -247,6 +278,7 @@ export default {
     this.memberCouponComm({search})
       .then(res => {
         this.form = {...this.form, ...res.data, ...res.data.user}
+        this._temp = {...res.data, ...res.data.user}
       })
     this.getSellList()
   }
