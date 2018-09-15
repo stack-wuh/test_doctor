@@ -52,6 +52,9 @@ const ServeQuestionPub = resolve => require(['@/components/serveManage/child/que
 
 const SellingStore = resolve => require(['@/components/sellingManage/mid/store'],resolve)
 
+const LogStore = resolve => require(['@/components/logManage/mid/store'], resolve)
+const LogConcat = resolve => require(['@/components/logManage/mid/concat'], resolve)
+const LogVersion = resolve => require(['@/components/logManage/mid/version'], resolve)
 
 export default new Router({
   mode: 'history',
@@ -262,6 +265,29 @@ export default new Router({
                   component:SellingStore
                 }
               ],
+            },
+            {
+              path:'/system',
+              component:SystemIndex,
+              alias:'/log',
+              redirect:'/log/store',
+              children:[
+                {
+                  path:'/log/store',
+                  name:'logStore',
+                  component:LogStore
+                },
+                {
+                  path:'/log/concat',
+                  name:'logConcat',
+                  component:LogConcat
+                },
+                {
+                  path:'/log/version',
+                  name:'logVersion',
+                  component:LogVersion
+                }
+              ]
             }
           ],
         }
