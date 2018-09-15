@@ -28,8 +28,8 @@ import {mapActions} from 'vuex'
 export default {
   name: 'car',
   props:{
-    vehicleId:{
-      type:String,
+    id:{
+      type:Number,
       required: true,
       default:'',
     }
@@ -127,7 +127,7 @@ export default {
   },
   created(){
     let temp = JSON.parse(JSON.stringify(this.form))
-    this.memberCarComm({search: {vehicleId: this.vehicleId}}).then(res => {
+    this.memberCarComm({search: {id: this.id}}).then(res => {
       this.form = {...this.form, ...res.data}
       this.tempForm = {...temp, ...res.data}
     })
