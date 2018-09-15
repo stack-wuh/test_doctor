@@ -4,7 +4,7 @@
       <span @click="handleChange(index)" v-for="(item,index) in list" :key="index" :class="{'active': index === current}">{{item.label}}</span>
     </nav>
     <coupon-comm :id="form.id" :userId="form.userId" v-if="current === 0" />
-    <car-comm :vehicleId="form.vehicleId" v-if="current === 1" />
+    <car-comm :id="form.id" v-if="current === 1" />
     <order-comm v-if="current == 3" />
     <check-comm v-if="current == 4" />
   </section>
@@ -57,8 +57,7 @@ export default {
     console.log(data)
     this.form = {
       id: data && data.id && data.id,
-      userId: data && data.userId && data.userId,
-      vehicleId: data && data.vehicleId && data.vehicleId
+      userId: data && data.userId && data.userId
     }
   }
 }
