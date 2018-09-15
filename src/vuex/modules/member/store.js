@@ -171,6 +171,16 @@ const actions = {
     })
   },
   /**
+   * 会员管理 -- 会员卡管理 -- 查看用户卡券
+   */
+  memberCardList({dispatch}, {id} = {}){
+    return new Promise((resolve, reject) => {
+      $http.post('vehicle/selectCoupon.do', {id}, res => {
+        return resolve(res)
+      })
+    })
+  },
+  /**
    * 会员管理 -- 车辆管理 -- 车辆查询
    */
   memberCarComm({commit}, {search} = {}){
