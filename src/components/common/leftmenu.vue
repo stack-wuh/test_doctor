@@ -207,16 +207,24 @@ export default {
           icon: require("../../assets/img/icon-log.png"),
           children: [
             {
-              label: "操作日志"
+              label: "操作日志",
+              mid_path:'/mid/container',
+              path:'/log/store',
             },
             {
-              label: "消息中心"
+              label: "消息中心",
+              mid_path:'/mid/container',
+              path:'/log/store',
             },
             {
-              label: "联系我们"
+              label: "联系我们",
+              mid_path:'/mid/container',
+              path:'/log/concat',
             },
             {
-              label: "版本更新"
+              label: "版本更新",
+              mid_path:'/mid/container',
+              path:'/log/version',
             }
           ]
         },
