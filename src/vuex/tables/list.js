@@ -976,7 +976,76 @@ const state = {
           ]
         },
       ]
-    },  
+    },
+    {
+      name:'操作日志',
+      path:'',
+      type:'操作日志',
+      params:['操作日志'],
+      colType:'',
+      colValue:'',
+      list:[
+        {
+          key:'日志号',
+          type:'default',
+          prop:'header',
+        },
+        {
+          key:'用户ID',
+          type:'default',
+          prop:'header',
+        },
+        {
+          key:'操作类型',
+          type:'default',
+          prop:'header',
+        },
+        {
+          key:'模块名称',
+          type:'default',
+          prop:'header',
+        },
+        {
+          key:'操作时间',
+          type:'default',
+          prop:'header',
+        },
+      ],
+    }, 
+    {
+      name:'消息中心',
+      path:'',
+      type:'消息中心',
+      params:['消息中心'],
+      colType:'',
+      colValue:'',
+      list:[
+        {
+          key:'消息标题',
+          type:'default',
+          prop:'header',
+        },
+        {
+          key:'消息类型',
+          type:'default',
+          prop:'header',
+        },
+        {
+          key:'发布时间',
+          type:'default',
+          prop:'header',
+        },
+        {
+          key:'操作',
+          type:'button',
+          list:[
+            {
+              text:'查看'
+            }
+          ]
+        }
+      ],
+    }, 
     {
       name:'会员列表',
       path:'',
