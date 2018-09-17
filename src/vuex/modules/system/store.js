@@ -105,8 +105,34 @@ const actions = {
    * @param {*} param0 
    * @param {*} param1 
    */
-  staffPubAndPut({commit,dispatch},{form,path} = {}){
-    $http.post('employee/updateEmployee.do',form,res => {
+  staffPubAndPut({commit,dispatch},{form, form: {
+    id,
+    departmentId,
+    realName,
+    phone,
+    birthday,
+    username,
+    idNum,
+    email,
+    reservation,
+    roleId,
+    userRoleId,
+    password,
+  },path} = {}){
+    $http.post('employee/updateEmployee.do',{
+      id,
+      departmentId,
+      realName,
+      phone,
+      birthday,
+      username,
+      idNum,
+      email,
+      reservation,
+      roleId,
+      userRoleId,
+      password,
+    } ,res => {
       (res.status) == 0 && (
         setTimeout(()=>{
           commit('handlehideDialog')
@@ -416,6 +442,8 @@ const getters = {
       return {...item , typeText:item.type == 0 ? '文本' : '图文'}
      }else if(keys.includes('roleTitle') && keys.includes('type') && keys.includes('description')){
       return {...item ,typeText:item.type == 0 ? '普通用户' : item.type == 1 ? '保养顾问' : item.type == 2 ? '续保顾问' : '保险顾问'}
+     }else if(keys.includes('sex')){
+      return {...item, sexText: item.sex == 1 ? '男' : '女'}
      }else{
        return {...item}
      }
