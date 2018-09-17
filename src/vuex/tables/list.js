@@ -514,7 +514,7 @@ const state = {
         {
           key:'赠送卡券',
           value:'',
-          prop:'couponId',
+          prop:'couponName',
           type:'default',
         },
         {
