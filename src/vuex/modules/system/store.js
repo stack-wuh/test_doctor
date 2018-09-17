@@ -40,7 +40,7 @@ const actions = {
    * @param {*} param0 
    * @param {*} params 
    */
-  getStoresList({commit,rootState},{path, search, currPageNo = 1} = {}){
+  getStoresList({commit, rootState, dispatch},{path, search, currPageNo = 1} = {}){
     let _url ;
     switch(path){
       case '门店管理' : _url = '/store/getStoreList.do' , search = {...rootState.search, currPageNo}
@@ -63,7 +63,7 @@ const actions = {
         break;
       case '保险公司' : _url = 'platform/getInsuranceList.do', search = {...rootState.search, currPageNo}
         break;
-      case '快捷回复设置' : _url = 'platform/getFastReplyList.do', search = {...rootState.search, currPageNo}
+      case '快捷回复设置' : _url = 'platform/getFastReplyList.do', search = {...rootState.search, currPageNo}, dispatch('getRoleList')
         break;
     }
     $http.post(_url,search,(res)=>{
