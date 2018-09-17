@@ -184,6 +184,16 @@ const actions = {
   },
 
   /**
+   * 卡券管理-- 用户卡券管理 -- 导入文件
+   */
+  couponImportExcel({dispatch}, {path, form}){
+    return new Promise((resolve, reject) => {
+      $http.post('takeListByUserCouponVoForImport.do', form, res => {
+        return resolve(res)
+      })
+    })
+  },
+  /**
    *卡券管理 -- 用户卡券管理 -- 核销 
    */
   couponMemberChecked({dispatch}, {path, form:{id}} = {}){

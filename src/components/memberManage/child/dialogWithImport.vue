@@ -52,7 +52,8 @@ export default {
   },
   methods: {
     ...mapActions({
-      'couponReciverList':'couponReciverList'
+      'couponReciverList': 'couponReciverList',
+      'couponMember': 'couponImportExcel'
     }),
     beforeClose(){
       this.handleHideDialog()
@@ -74,7 +75,7 @@ export default {
       switch(this.pathChange){
         case '会员列表' : return this.$store.dispatch('memberInfoImport', {path: this.pathChange, form:{fileName: this.fileList.map(item => item.response.data)}}).then(res => this.handleHideDialog())
         case '查看领取明细' : return this.couponReciverList({path: this.pathChange, form: {fileName: this.fileList.map(item => item.response.data)}}).then(res => res.status == 0 && this.handleHideDialog())
-
+        case '用户卡券管理' : return this.couponMember({path: this.pathChange, form: {fileName: this.fileList.map(item => item.response.data)}}).then(res => res.status == 0 && this.handleHideDialog())
       }
     }
   }
