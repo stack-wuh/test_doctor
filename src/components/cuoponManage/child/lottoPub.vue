@@ -18,7 +18,7 @@
         </div>
       </my-table>
       <SubButton @handleCancel="cancel" @handleSubmit="submit" />
-      <dialog-with-table @getData="getData" @getKeyWord="getKeyWord" :isShowDialog="isShowDialog" :list="subList" />
+      <dialog-with-table @getData="getData" @getKeyWord="getKeyWord" :isShowDialog="isShowDialog" :list="temp_list || []" :total="temp_total || 0" :currPageNo="temp_currPageNo || 1" />
     </section>
   </section>
 </template>
@@ -52,6 +52,9 @@ export default {
         decription:'',
       },
       rules,
+      temp_list: [],
+      temp_total: 0,
+      temp_currPageNo: 1
     }
   },
   computed:{
@@ -72,10 +75,14 @@ export default {
     ...mapActions({
       'handleSubmit': 'couponPariseTake',
       'getModelList': 'getCouponModel',
-      'getCouponStore': 'getCouponStore'
+      'getPariseList': 'couponPariseList'
     }),
-    getKeyWord(){
-      console.log('is ok')
+    getKeyWord(val){
+      this.getPariseList({search: {couponName: val.keyWord}}).then(res => {
+        this.temp_list = res.data.list
+        this.temp_total = res.data.total
+        this.temp_currPageNo = res.data.pageNum
+      })
     },
     getData(val){
       this.data = val.data.map((item,index) => {
@@ -114,7 +121,11 @@ export default {
     },
   },
   created(){
-    this.getCouponStore({path: this.changePath})
+    this.getPariseList().then(res => {
+      this.temp_list = res.data.list
+      this.temp_total = res.data.total
+      this.temp_currPageNo = res.data.pageNum
+    })
     let data =  this.$route.query.data && JSON.parse(this.$route.query.data)
     data && this.getModelList({id: data.id})
       .then(res => {
