@@ -156,8 +156,20 @@ export const forms = [
         prop:'roleId',
         list:[
           {
-            value:'1',
-            label:'销售顾问',
+            label:'普通用户',
+            value:0,
+          },
+          {
+            label:'保养用户',
+            value:1
+          },
+          {
+            label:'续保顾问',
+            value:2
+          },
+          {
+            label:'保险顾问',
+            value:3
           }
         ],
       },
@@ -249,10 +261,23 @@ export const forms = [
         key:'员工角色',
         type:'select',
         prop:'roleId',
+        picker: true,
         list:[
           {
-            value:'1',
-            label:'销售顾问',
+            label:'普通用户',
+            value:0,
+          },
+          {
+            label:'保养用户',
+            value:1
+          },
+          {
+            label:'续保顾问',
+            value:2
+          },
+          {
+            label:'保险顾问',
+            value:3
           }
         ],
       },
@@ -347,6 +372,7 @@ export const forms = [
         value:'',
         type:'select',
         prop:'type',
+        picker:true ,
         list:[
           {
             label:'普通用户',
