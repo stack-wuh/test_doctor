@@ -67,7 +67,10 @@ export default {
           return {...item, list: this.departList}
         }else if(item.key == '赠送卡券'){
           return {...item, list:this.couponList}
-        }else{
+        }else if(item.key === '使用角色类型'){
+          return {...item, list: this.roleList}
+        }
+        else{
           return {...item}
         }
       })
