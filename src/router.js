@@ -128,7 +128,7 @@ export default new Router({
                   path:'/system/store/reply',
                   name:'systemStoreReply',
                   component:SystemStoreReply,
-                }
+                },
               ]
             },
             {
