@@ -391,7 +391,7 @@ const state = {
         {
           key:'性别',
           type:'default',
-          prop:'sex',
+          prop:'sexText',
         },
         {
           key:'出生日期',
@@ -1556,7 +1556,8 @@ const state = {
       type:'奖品卡券管理',
       params:['查看领取明细'],
       colType:'index',
-      colValue:'selection',
+      colValue:'index',
+      colTitle:'序号',
       list:[
         {
           key:'编号',
