@@ -1,7 +1,7 @@
 <template>
   <section class="wrapper signin">
     <header class="header">
-      <span>
+      <span class="img-box">
         <img :src="headerLogo" alt="logo">
       </span>
       <h3 class="title">车医生后台管理CRM</h3>
@@ -177,7 +177,11 @@ export default {
 @import '../../assets/style/mixin.scss';
 @import '../../assets/style/color.scss';
 .wrapper{
-  height: 100%;
+  position: fixed;
+  top:0;
+  right:0;
+  bottom:0;
+  left:0;
   background-image: url('../../assets/img/bg-2.jpg');
   background-size: 100% 100%;
   background-position: center center;
@@ -185,7 +189,13 @@ export default {
     @include flex-box(row ,nowrap ,space-between,center);
     height: 80px;
     padding:0 20px;
+    span.img-box{
+      width: 20%;
+    }
     h3.title{
+      flex:1;
+      margin-left:-20%;
+      text-align: center;
       color: #FF0000;
       font-size: 28px;
     }
@@ -194,9 +204,9 @@ export default {
     position: relative;
     height: 100%;
     .form-area{
-      position: absolute;
-      right: 0;
-      bottom: 200px;
+      position: fixed;
+      left:75%;
+      bottom: 0;
       width: 300px;
       height: 350px;
       padding: 20px;
