@@ -97,20 +97,26 @@ export const jump2Detail = params => {
   * JSON2Excel
   */
  export const export2Excel = ({params}) => {
-   let {subMenu, child} = params
+   let {subMenu, child} = params, search = window.$store.state.search
+   let _temp = Object.entries(search), _str = '?'
+   _temp && _temp.forEach(item => {
+     _str += `${item[0]}=${item[1]}&`
+   })
    _g.toastMsg({
      type:'success',
      msg:'正在导出Excel文件,请稍后!'
    })
    switch(child || subMenu){
-     case '门店管理' : return location.href = window.rootPath + '/store/outStore.do' ;
-     case '精品订单管理' : return location.href = window.rootPath + '/quality/outQulity.do'
-     case '充值明细' : return location.href = window.rootPath + '/detail/exportRecharge.do'
-     case '消费明细' : return location.href = window.rootPath + '/detail/exportConsumerDetails.do'
-     case '查看领取明细' : return location.href = window.rootPath + '/coupon/getTakeListByUserCouponVoForReport.do'
-     case '员工奖励' : return location.href = window.rootPath + '/employeeReward/employeeRewardListReport.do'
-     case '用户卡券管理' : return location.href = window.rootPath + '/coupon/getTakeListByUserCouponVoForReport.do'
-     case '用户奖励' : return location.href = window.rootPath + '/coupon/userCouponListReport.do'
+     case '门店管理' : return location.href = window.rootPath + '/store/outStore.do' + _str;
+     case '精品订单管理' : return location.href = window.rootPath + '/quality/outQulity.do' + _str;
+     case '充值明细' : return location.href = window.rootPath + '/detail/exportRecharge.do' + _str;
+     case '消费明细' : return location.href = window.rootPath + '/detail/exportConsumerDetails.do' + _str;
+     case '查看领取明细' : return location.href = window.rootPath + '/coupon/getTakeListByUserCouponVoForReport.do' + _str;
+     case '员工奖励' : return location.href = window.rootPath + '/employeeReward/employeeRewardListReport.do' + _str;
+     case '用户卡券管理' : return location.href = window.rootPath + '/coupon/getTakeListByUserCouponVoForReport.do' + _str;
+     case '用户奖励' : return location.href = window.rootPath + '/coupon/userCouponListReport.do' + _str;
+     case '员工奖励' : return location.href = window.rootPath + '/employeeReward/employeeRewardListReport.do' + _str;
+     case '用户提现记录' : return location.href = window.rootPath + '/takeMoney/getUserTakeCashListReport.do' + _str;
    }
  }
 
