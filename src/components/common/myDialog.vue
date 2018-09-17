@@ -53,8 +53,12 @@ export default {
       return this.list && this.list.map(item => {
         if(item.key == '上级部门'){
           return {...item ,list: this.departList}
-        }else if(item.key == '角色类型' || item.key == '员工角色'){
-          return {...item ,list: this.roleList}
+        }else if(item.key == '角色类型'){
+          if(!item.picker){
+            return {...item, list: this.roleList}
+          }else{
+            return {...item}
+          }
         }else if(item.key == '所属部门'){
           return {...item, list: this.departList}
         }else if(item.key == '赠送卡券'){
