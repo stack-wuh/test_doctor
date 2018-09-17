@@ -3,8 +3,8 @@
     <section class="content">
       <section class="form inter-box">
         <p class="t-title">{{this.$route.query.child}}</p>
-        <el-form label-width="140px">
-          <section class="inline-box" v-for="(item,index) in formatFormItem" :key="index"  >
+        <el-form label-width="140px"> 
+          <section :class="[$route.query.child == '会员卡积分规则' ? 'inline-box' : 'block-box']" v-for="(item,index) in formatFormItem" :key="index">
             <el-form-item :label="item.label">
               <el-input clearable v-if="item.type == 'input'" class="my-input-220" v-model="item.value" ></el-input><span class="tips">{{item.tips}}</span>
               <el-select @change="item.change" clearable v-if="item.type == 'select'" v-model="item.value">
@@ -385,6 +385,9 @@ export default {
         width: 95%;
         margin:0 auto;
       }
+    }
+    section.block-box{
+      width:100%;
     }
     section.btn-area{
       margin:15px 0;
