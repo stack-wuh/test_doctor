@@ -453,7 +453,7 @@ export const forms = [
         key:'折扣比例',
         type:'input',
         prop:'discountRatio',
-        tips:'注: 达到次等级时,所能享受的折扣率,如0.80表示八折,最大为1.00,最小为0.10',
+        tips:'注: 达到此等级时,所能享受的折扣率,如0.80表示八折,最大为1.00,最小为0.10',
         rules:[
           {
             required:true,
@@ -466,7 +466,7 @@ export const forms = [
         key:'充值金额',
         type:'input',
         prop:'amount',
-        tips:'注: 达到此金额且为满足下一个金额数,会员卡自动升级到此级别',
+        tips:'注: 达到此金额且未满足下一个金额数,会员卡自动升级到此级别',
         rules:[
           {
             required:true,
