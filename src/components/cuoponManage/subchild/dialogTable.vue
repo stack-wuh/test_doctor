@@ -3,7 +3,8 @@
       <el-dialog title="添加抽奖模板" :visible.sync="isShowDialog" :before-close="beforeClose">
         <el-form label-width="70px" :model="form" >
           <el-form-item label="奖品名称">
-              <el-input v-model="keyWord" @change="handleChange" placeholder="请输入关键字搜索" class="my-input-220"></el-input>
+              <el-input v-model="keyWord" placeholder="请输入关键字搜索" class="my-input-220"></el-input>
+              <el-button @click="handleChange" class="margin-lf-15">搜索</el-button>
           </el-form-item>
         </el-form>
         <el-table ref="myTable" :data="list" border stripe>
@@ -21,6 +22,7 @@
               </template>
             </el-table-column>
         </el-table>
+        <my-bottom :total="total" :currPageNo="currPageNo" />
         <span slot="footer">
           <el-button @click="beforeClose">取消</el-button>
           <el-button @click="handleSubmit" type="primary">确定</el-button>
@@ -31,8 +33,12 @@
 
 <script>
 import {mapActions, mapMutations} from 'vuex'
+import MyBottom from '@/components/common/bottom'
 export default {
   name: 'dialogWithTable',
+  components:{
+    MyBottom,
+  },
   props:{
     isShowDialog:{
       required:true,
@@ -43,6 +49,16 @@ export default {
       required:true,
       type:Array,
       default:[]
+    },
+    total:{
+      required: true,
+      type:Number,
+      default:0
+    },
+    currPageNo:{
+      required: true,
+      type:Number,
+      default:1
     }
   },
   data () {
@@ -51,7 +67,7 @@ export default {
         id:''
       },
       keyWord:'',
-      selection:[]
+      selection:[],
     }
   },
 
