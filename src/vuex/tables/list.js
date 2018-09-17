@@ -408,6 +408,7 @@ const state = {
           type:'button',
           list:[
             {
+             
               text:'设为员工',
               type:'primary',
               size:'mini',
