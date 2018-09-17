@@ -13,5 +13,6 @@ export const handleSearchList = ({path} = {}) => {
   switch(path){
     case '用户佣金提现' : return window.$store.dispatch('couponMemberTake')
     case '会员充值' : return window.$store.dispatch('memberRecharge')
+    case '保险公司' : return window.$store.dispatch('getStoresList', {path}) 
   }
 }
