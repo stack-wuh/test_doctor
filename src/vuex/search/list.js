@@ -2212,6 +2212,8 @@ const getters = {
           sub.list = rootGetters.formatCouponSrouce  
         }else if((sub.key === '活动卡券') && (item.name === '用户奖励')){
           sub.list = rootGetters.formatPariseList[0]
+        }else if(sub.key === '使用角色类型'){
+          sub.list = rootGetters.formatRoleList
         }
         return {...sub}
       })
