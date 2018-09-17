@@ -115,7 +115,32 @@ const actions = {
     renewId,
   }} = {}){
     return new Promise((resolve, reject) => {
-      $http.post('vipList/insertOrUpdate.do', form, res => {
+      $http.post('vipList/insertOrUpdate.do', {
+        userId,
+        realName,
+        phone,
+        sex,
+        birthday,
+        vehicleId,
+        plateNum,
+        carModel,
+        upkeepEmployeeId,
+        safeEmployeeId,
+        renewEmployeeId,
+        insuranceStart,
+        lastMaintainTime,
+        maintainIntervalKm,
+        memberId,
+        integral,
+        money,
+        brokerage,
+        consultantId1,
+        consultantId2,
+        consultantId3,
+        upkeepId,
+        safeId,
+        renewId,
+      }, res => {
         return resolve(res)
       })
     })
