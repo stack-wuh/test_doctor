@@ -62,7 +62,9 @@ const actions = {
       type:'info'
     }).then(res => {
       $http.post(_url, {id}, res => {
-        dispatch('getLogStore', {path, })
+        setTimeout(() => {
+          dispatch('getLogStore', {path})
+        }, 1000);
       })
     }).catch(err => {
       _g.toastMsg({
