@@ -15,6 +15,7 @@ import System from './vuex/modules/system/store'
 import Use from './vuex/modules/use/store'
 import Coupon from './vuex/modules/coupon/store'
 import Member from './vuex/modules/member/store'
+import Log from './vuex/modules/log/store'
 
 
 export default new Vuex.Store({
@@ -23,14 +24,15 @@ export default new Vuex.Store({
   actions ,
   getters ,
   modules:{
-    TableList , 
-    SearchTypeList ,
-    Button ,
-    Sign ,
-    System , 
-    Use ,
-    Coupon ,
-    Member ,
+    TableList, 
+    SearchTypeList,
+    Button,
+    Sign,
+    System, 
+    Use,
+    Coupon,
+    Member,
+    Log,
   },
   plugins:[MyLog]
 })
