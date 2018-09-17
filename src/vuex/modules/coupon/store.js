@@ -75,7 +75,7 @@ const actions = {
         break;
       case '抽奖模板设置' : _url = 'lottery/carLotteryTemplateList.do', search = {...rootState.search, ...search, currPageNo}
         break;
-      case '编辑抽奖模板' : _url = 'lottery/getAddCarLottery.do', search = {...rootState.search, search, currPageNo}
+      case '编辑抽奖模板' : _url = 'lottery/getAddCarLottery.do', search = {...rootState.search, ...search, currPageNo}
         break;
       case '用户佣金提现' : _url = 'takeMoney/getUserTakeMoneny.do', search = {...rootState.search}
         break;
@@ -151,7 +151,16 @@ const actions = {
         return resolve(res)
       })
     })
-    
+  },
+  /**
+   * 卡券管理 -- 抽奖模板 -- 获取奖品列表
+   */
+  couponPariseList({commit, rootState}, {search, currPageNo = 1} = {}){
+    return new Promise((resolve, reject) => {
+      $http.post('lottery/getAddCarLottery.do', {currPageNo, ...search}, res => {
+        return resolve(res)
+      })
+    })
   },
   /**
    * 卡券管理 -- 抽奖模板 -- 根据id获取抽奖模板
