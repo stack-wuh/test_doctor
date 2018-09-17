@@ -1,5 +1,5 @@
 import $http from '../../../utils/axios'
-import {_g} from '../../../utils/global'
+import {_g, NotNull} from '../../../utils/global'
 const state = {
   data:[],
   list1:[], // 备用数组
@@ -351,7 +351,7 @@ const actions = {
    */
   RolePubAndPut({dispatch} , {form , path, form:{id}} = {}){
     let _url = id ? 'roleBackend/updateRole.do' : 'roleBackend/addRole.do'
-    $http.post(_url ,form ,res => {
+    $http.post(_url ,NotNull(form) ,res => {
       setTimeout(()=>{
         dispatch('asyncHideDialog')
         dispatch('getStoresList' ,{path})
