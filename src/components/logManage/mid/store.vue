@@ -1,11 +1,11 @@
 <template>
   <section class="wrapper">
     <section class="content">
-      <search @inputChange="getStoresList({path:pathChange})" v-if="isShow" :name="$route.query.child || $route.query.subMenu" />
-      <my-table v-if="isShow" :list="changeList"  header="true" :params=" $route.query.child ||$route.query.subMenu" >
+      <search @inputChange="getLogStore({path:pathChange})" v-if="isShow" :name="$route.query.child || $route.query.subMenu" />
+      <my-table v-if="isShow" :list="list({path: pathChange})"  header="true" :params=" $route.query.child ||$route.query.subMenu" >
         <span slot="title">{{ $route.query.child || $route.query.subMenu}}列表</span>
         <div slot="right">
-            <my-button  ></my-button>
+            <my-button></my-button>
         </div>
       </my-table>
       <bottom @getCurrent="getCurrent" :total="total" :currentPage="currentPage" />
@@ -38,18 +38,18 @@ export default {
       return  this.$route.query.child || this.$route.query.subMenu
     },
     ...mapGetters({
-      'list':'formatStoreDataList',
+      'list':'formatLogStore',
       'changeList' : 'changeStateDataList',
     }),
     ...mapState({
-      total:state => state.System.total,
-      currentPage:state => state.System.currentPage,
+      total:state => state.Log.total,
+      currentPage:state => state.Log.currentPage,
     })
   },
   watch:{
     pathChange(){
       this.isShow = false
-      this.getStoresList({path:this.pathChange})
+      this.getLogStore({path:this.pathChange})
       setTimeout(()=>{
         this.isShow = true
         this.$store.commit('clearSearchForm')
@@ -58,17 +58,17 @@ export default {
   },
   methods: {
     ...mapActions({
-      'getStoresList':'getStoresList'
+      'getLogStore':'getLogStore'
     }),
     inputChange(e){
       console.log(e)
     },
     getCurrent(value){
-      this.getStoresList({path: this.pathChange, currPageNo: value})
+      this.getLogStore({path: this.pathChange, currPageNo: value})
     }
   },
   created(){
-    this.getStoresList({path:this.pathChange})
+    this.getLogStore({path:this.pathChange})
   }
 }
 </script>
