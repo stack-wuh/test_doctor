@@ -68,7 +68,7 @@ const state = {
         {
           key:'所属销售组织',
           value:'',
-          prop:'party',
+          prop:'organizationName',
           type:'default',
         },
         {
@@ -325,7 +325,7 @@ const state = {
         {
           key:'状态',
           type:'switch',
-          prop:'state',
+          prop:'status',
           width:'140px',
           change:handleSwitchChange
         },
@@ -333,7 +333,7 @@ const state = {
           key:'操作',
           type:'button',
           fix:'right',
-          width:'180px',
+          width:'240px',
           list:[
             {
               text:'客户转移',
