@@ -18,6 +18,8 @@ export const openDialog = (params,text,row) => {
         break;
     case '会员充值设置' : window.$store.dispatch('getCouponList') // 获得卡券列表
         break;
+    case '员工列表' : window.$store.dispatch('getDepartmentList')
+        break;
   }
    window.$store.commit('handleOpenDialog',{params,text,row}) 
 }
