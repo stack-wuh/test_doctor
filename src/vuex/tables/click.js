@@ -17,7 +17,7 @@ export const openDialog = (params,text,row) => {
     case '关注用户列表' : window.$store.dispatch('getDepartmentList'), window.$store.dispatch('getRoleList') // 获得部门列表 / 角色列表
         break;
     case '会员充值设置' : window.$store.dispatch('getCouponList') // 获得卡券列表
-                        row = {...row, couponId:[]}
+                        row = {...row, couponId:row.couponIds ? row.couponIds.split(',').map(item => Number(item)) : []}
         break;
     case '员工列表' : window.$store.dispatch('getDepartmentList')
         break;
