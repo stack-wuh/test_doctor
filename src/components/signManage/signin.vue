@@ -159,7 +159,7 @@ export default {
           _saveObj = localStorage.getItem('saveObj') && JSON.parse(localStorage.getItem('saveObj'))
       if(isSavePwdInExpire && (_saveObj.expire - new Date().getTime() > 0)){
         this.login = {...this.login, ..._saveObj}
-        this.signIn({form: this.login}).catch(err => {
+        this.signIn({form: {username:this.login.username, password: this.login.password}}).catch(err => {
           localStorage.setItem('isSavePwdInExpire', false)
           localStorage.setItem('saveObj', JSON.stringify({}))
         })
