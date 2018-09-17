@@ -87,7 +87,33 @@ const actions = {
    * 会员列表 
    * 编辑/新增会员信息
    */
-  memberInfoPubAndPut({dispatch}, {path, form, form:{id}} = {}){
+  memberInfoPubAndPut({dispatch}, {path, form, form:{
+    id,
+    userId,
+    realName,
+    phone,
+    sex,
+    birthday,
+    vehicleId,
+    plateNum,
+    carModel,
+    upkeepEmployeeId,
+    safeEmployeeId,
+    renewEmployeeId,
+    insuranceStart,
+    lastMaintainTime,
+    maintainIntervalKm,
+    memberId,
+    integral,
+    money,
+    brokerage,
+    consultantId1,
+    consultantId2,
+    consultantId3,
+    upkeepId,
+    safeId,
+    renewId,
+  }} = {}){
     return new Promise((resolve, reject) => {
       $http.post('vipList/insertOrUpdate.do', form, res => {
         return resolve(res)
