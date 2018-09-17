@@ -712,7 +712,7 @@ const state = {
         {
           key:'使用角色类型',
           value:'',
-          prop:'roleIdText',
+          prop:'roleTitle',
           type:'default',
         },
         {
