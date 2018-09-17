@@ -281,13 +281,14 @@ const actions = {
     rechargeAmount,
     donationAmount,
     giftIntegral,
-    couponId,}} = {}){
+    }, form} = {}){
     let _url = id ? 'platform/updateRecharge.do' : 'platform/addRecharge.do'
+    let couponIds = JSON.parse(JSON.stringify(form)).couponId.toString()
     $http.post( _url , {
       rechargeAmount,
       donationAmount,
       giftIntegral,
-      couponId:couponId.toString()
+      couponIds
     }, res => {
       setTimeout(()=>{
         dispatch('asyncHideDialog')
@@ -342,9 +343,21 @@ const actions = {
    * 自动回复设置
    * 编辑 / 发布
    */
-  replyPubAndPut({dispatch} , {form , path , form:{id}}  = {}){
+  replyPubAndPut({dispatch} , {form , path , form:{
+    id,
+    keyword,
+    type,
+    picture,
+    content,
+  }}  = {}){
     let _url = id ? 'platform/updateAutoResponse.do' : 'platform/addAutoResponse.do'
-    $http.post( _url , form , res => {
+    $http.post( _url , {
+      id,
+      keyword,
+      type,
+      picture,
+      content,
+    } , res => {
       setTimeout(()=>{
         window.$route.go(-2)
       },1000)
@@ -367,9 +380,19 @@ const actions = {
    * 快捷回复设置
    * 编辑/新增
    */
-  fastReplyPubAndPut({dispatch} , {form , path , form:{id}} = {}){
+  fastReplyPubAndPut({dispatch} , {form , path , form:{
+    id,
+    roleId,
+    serialNum,
+    messageContent,
+  }} = {}){
     let _url = id ? 'platform/updateFastReply.do' : 'platform/addFastReply.do'
-    $http.post(_url ,form ,res => {
+    $http.post(_url ,{
+      id,
+      roleId,
+      serialNum,
+      messageContent,
+    } ,res => {
       setTimeout(()=>{
         dispatch('asyncHideDialog')
         dispatch('getStoresList' ,{path })
@@ -449,6 +472,8 @@ const getters = {
       return {...item ,typeText:item.type == 0 ? '普通用户' : item.type == 1 ? '保养顾问' : item.type == 2 ? '续保顾问' : '保险顾问'}
      }else if(keys.includes('sex')){
       return {...item, sexText: item.sex == 1 ? '男' : '女'}
+     }else if(keys.includes('roleId')){
+      return {...item, roleIdText: item.roleId == 0 ? '销售顾问' : item.roleId == 1 ? '续保顾问' : '售后顾问'}
      }else{
        return {...item}
      }
