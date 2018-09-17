@@ -990,27 +990,27 @@ const state = {
         {
           key:'日志号',
           type:'default',
-          prop:'header',
+          prop:'id',
         },
         {
-          key:'用户ID',
+          key:'用户姓名',
           type:'default',
-          prop:'header',
+          prop:'employeeName',
         },
         {
           key:'操作类型',
           type:'default',
-          prop:'header',
+          prop:'type',
         },
         {
           key:'模块名称',
           type:'default',
-          prop:'header',
+          prop:'modularName',
         },
         {
           key:'操作时间',
           type:'default',
-          prop:'header',
+          prop:'operationTime',
         },
       ],
     }, 

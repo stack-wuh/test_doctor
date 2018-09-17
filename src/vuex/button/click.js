@@ -125,7 +125,7 @@ export const jump2Detail = params => {
   * import2JSON
   */
  export const importExcelWithDialog = ({params}) =>  {
-   let {menu, subMenu, child} = params
+   let {subMenu, child} = params
    switch(child || subMenu){
      case '会员列表' : return window.$store.commit('handleDialogWithImport', {visible: true})
      case '查看领取明细' : return window.$store.commit('handleDialogWithImport', {visible: true})
