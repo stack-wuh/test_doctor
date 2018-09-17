@@ -47,7 +47,7 @@ const actions = {
         break ;
       case '部门管理' : _url = '/department/getDepartmentList.do', search = {...rootState.search, currPageNo}
         break ;
-      case '员工列表' : _url = 'employee/getEmployeeList.do' , search = {...rootState.search, search}
+      case '员工列表' : _url = 'employee/getEmployeeList.do' , search = {...rootState.search, search, currPageNo}
         break;
       case '关注用户列表' : _url = 'user/getUserList.do', search = {...rootState.search, currPageNo}
         break;
@@ -156,7 +156,7 @@ const actions = {
     idNum,
     email,
     reservation,
-    userId,
+    id,
     roleId,
   }, path} = {}){
     $http.post('employee/addEmployee.do', {
@@ -170,7 +170,7 @@ const actions = {
       idNum,
       email,
       reservation,
-      userId,
+      userId: id,
       roleId,
     }, res=>{
       setTimeout(()=>{
