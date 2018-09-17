@@ -324,9 +324,14 @@ const actions = {
    * 保养提醒设置
    * 新增 / 编辑
    */
-  keepPubAndPut({dispatch} , {form , form:{id} , path} = {}){
-    let _url = id ? 'platform/updateRecharge.do' : 'platform/addRemind.do'
-    $http.post( _url , form , res => {
+  keepPubAndPut({dispatch} , {form , form:{id, days, content, type} , path} = {}){
+    let _url = id ? 'platform/updateRemind.do' : 'platform/addRemind.do'
+    $http.post( _url , {
+      id,
+      days,
+      content,
+      type,
+    } , res => {
       setTimeout(()=>{
         dispatch('asyncHideDialog')
         dispatch('getStoresList' , {path})
