@@ -618,8 +618,9 @@ const state = {
         {
           key:'状态',
           value:'',
-          prop:'stateText',
+          prop:'status',
           type:'switch',
+          pickValue:'status',
           change:handleSwitchChange
         },
         {
@@ -711,7 +712,7 @@ const state = {
         {
           key:'使用角色类型',
           value:'',
-          prop:'roleId',
+          prop:'roleIdText',
           type:'default',
         },
         {

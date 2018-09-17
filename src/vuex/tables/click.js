@@ -10,13 +10,14 @@ import $http from '../../utils/axios'
  * 
  */
 export const openDialog = (params,text,row) => {
-  let {menu, subMenu, child} = params
+  let {subMenu, child} = params
   switch(child || subMenu){
     case '部门管理' : window.$store.dispatch('getDepartmentList')  //获得上级部门列表
         break;
     case '关注用户列表' : window.$store.dispatch('getDepartmentList'), window.$store.dispatch('getRoleList') // 获得部门列表 / 角色列表
         break;
     case '会员充值设置' : window.$store.dispatch('getCouponList') // 获得卡券列表
+                        row = {...row, couponId:[]}
         break;
     case '员工列表' : window.$store.dispatch('getDepartmentList')
         break;
