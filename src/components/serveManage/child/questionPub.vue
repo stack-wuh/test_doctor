@@ -84,13 +84,13 @@
               </section>
             </section>
           </section>
-          <my-bottom type="button" />
+          <my-sub-button @handleSubmit="submit" @handleCancel="cancel" />
       </section>
   </section>
 </template>
 
 <script>
-import MyBottom from '@/components/common/bottom'
+import MySubButton from '@/components/common/subButton'
 const radioType = {
   type:'radio',
   name:'单选题',
@@ -113,7 +113,7 @@ const textType = {
 export default {
   name: 'questionPub',
   components:{
-    MyBottom ,
+    MySubButton ,
   },
   data () {
     return {
@@ -155,6 +155,12 @@ export default {
     selectClick(type){
       let obj = type === 1 ? this.radioType : type == 2 ? this.checkType : this.textType
       this.lists = [...this.lists , JSON.parse(JSON.stringify(obj))]
+    },
+    submit(){
+      console.log(this.lists)
+    },
+    cancel(){
+
     }
   }
 }
