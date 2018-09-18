@@ -67,6 +67,8 @@ export const jump2Other = (params ,types ,row) => {
       break;
     case '系统消息' : rootPath = '/log/msg/detail', child = '系统消息详情', data = JSON.stringify(row)
       break;
+    case '养车知识' : rootPath = '/serve/carfeed/pub', child = '编辑养车知识', data = JSON.stringify(row)
+      break;
     default : rootPath = '/index'
   }
   window.$route.push({path:'/mid/container',query:Object.assign(params,{path:rootPath ,child , data})})
