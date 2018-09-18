@@ -79,11 +79,9 @@ export default {
     }).then(response => {
       return checkStatus(response)
     }).then(res=>{
-      // console.log(res ,'this is then' )
       return checkCode(res)
     }).then(res=>{
       cb && cb(res)
-      // console.log('this is then callback')
     }).catch(err=>{
       if(err){
         _g.toastMsg({
