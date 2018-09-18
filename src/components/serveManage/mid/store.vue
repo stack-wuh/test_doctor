@@ -51,6 +51,7 @@ export default {
       this.isShow = false
       setTimeout(()=>{
         this.isShow = true
+        this.$store.commit('clearSearchForm')
       })
     }
   },
