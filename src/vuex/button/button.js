@@ -409,6 +409,20 @@ const state = {
           style:'',
         }
       ]
+    },
+    {
+      name:'我要发布',
+      desc:'系统消息发布模块定制',
+      params:['系统消息'],
+      btn:[
+        {
+          text:'我要发布',
+          type:'',
+          size:'',
+          style:'',
+          click:jump2Add
+        },
+      ]
     }
   ]
 }
