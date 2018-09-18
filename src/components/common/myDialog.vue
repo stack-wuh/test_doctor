@@ -3,15 +3,15 @@
       <el-dialog :visible.sync="visibleDialog" ref="myDialog" :before-close="beforeClose" :title=" '编辑' + ($route.query.child || $route.query.subMenu)" >
           <el-form :model="myForm" ref="myForm" label-width="120px">
             <el-form-item v-for="(item,index) in formatList" :key="index" :label="item.key" :prop="item.prop" :rules="item.rules" >
-              <el-input class="my-input-320" v-if="item.type === 'input' || item.type == 'default' || !item.type " :placeholder="'请编辑'+item.key" v-model="myForm[item.prop]" ></el-input>
-              <el-input class="my-input-320" v-if="item.type == 'textarea'" :placeholder="'请编辑' + item.key" v-model="myForm[item.prop]" :type="item.type || 'textarea'" :rows="item.rows || 2" ></el-input>
-              <el-select class="my-input-320" v-if="item.type === 'select' && !item.multiple" :placeholder="'请选择' + item.key" v-model="myForm[item.prop]" >
+              <el-input class="my-input-320" v-if="item.type === 'input' || item.type == 'default' || !item.type " :disabled="item.disabled" :placeholder="'请编辑'+item.key" v-model="myForm[item.prop]" ></el-input>
+              <el-input class="my-input-320" v-if="item.type == 'textarea'" :placeholder="'请编辑' + item.key" :disabled="item.disabled" v-model="myForm[item.prop]" :type="item.type || 'textarea'" :rows="item.rows || 2" ></el-input>
+              <el-select class="my-input-320" v-if="item.type === 'select' && !item.multiple" :placeholder="'请选择' + item.key" :disabled="item.disabled" v-model="myForm[item.prop]" >
                 <el-option v-if="item.list" v-for="(list,lindex) in item.list" :key="lindex" :label="list.label" :value="list.value" ></el-option>
               </el-select>
-              <el-select multiple class="my-input-320" v-if="item.type === 'select' && item.multiple" :placeholder="'请选择' + item.key" v-model="myForm[item.prop]" >
+              <el-select multiple class="my-input-320" v-if="item.type === 'select' && item.multiple" :placeholder="'请选择' + item.key" :disabled="item.disabled" v-model="myForm[item.prop]" >
                 <el-option v-if="item.list" v-for="(list,lindex) in item.list" :key="lindex" :label="list.label" :value="list.value" ></el-option>
               </el-select>
-              <el-date-picker value-format="yyyy-MM-dd" v-if="item.type == 'date'" v-model="myForm[item.prop]" ></el-date-picker>
+              <el-date-picker value-format="yyyy-MM-dd" v-if="item.type == 'date'" :disabled="item.disabled" v-model="myForm[item.prop]" ></el-date-picker>
               <p v-if="item.tips"  class="c999" >{{item.tips}}</p>
             </el-form-item>
           </el-form>
@@ -97,7 +97,9 @@ export default {
       'handleSubmitRole' : 'RolePubAndPut' ,
       'handleSubmitFirstStaff' : 'staffFirstPub',
       'handleSubmitUserCommUp' : 'userCommUp',
-      'handleSubmitMemberChecked' : 'couponMemberChecked'
+      'handleSubmitMemberChecked' : 'couponMemberChecked',
+      'feedBackPut' : 'feedBackPut',
+      'handerServerCarFeed': 'carFeedPubAndFresh'
     }),
     /**
      * dialog对话框
@@ -142,6 +144,10 @@ export default {
             break;
           case '用户卡券管理' : this.handleSubmitMemberChecked({path: this.rootPath, form: this.myForm})
             break; 
+          case '意见反馈' : this.feedBackPut({path: this.rootPath, form: this.myForm})
+            break;
+          case '养车知识分类': this.handerServerCarFeed({path: this.rootPath, form: this.myForm})
+            break;
         }
         setTimeout(()=>{
           this.$refs.myForm.resetFields()
