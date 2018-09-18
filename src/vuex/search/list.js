@@ -1768,11 +1768,13 @@ const state = {
           key:'文章标题',
           value:'',
           type:'default',
+          prop:'title'
         },
         {
           key:'文章类别',
           value:'',
-          type:'select'
+          type:'select',
+          prop:'typeId'
         }
       ]
     },
@@ -2351,6 +2353,8 @@ const getters = {
           sub.list = rootGetters.formatPariseList[0]
         }else if(sub.key === '使用角色类型'){
           sub.list = rootGetters.formatRoleList
+        }else if(sub.key === '文章类别'){
+          sub.list = rootState.articleType
         }
         return {...sub}
       })
