@@ -65,6 +65,8 @@ export const jump2Other = (params ,types ,row) => {
       break ;
     case '车辆管理' :  rootPath = '/member/info', child = '查看客户及车辆档案', data = JSON.stringify(row)
       break;
+    case '系统消息' : rootPath = '/log/msg/detail', child = '系统消息详情', data = JSON.stringify(row)
+      break;
     default : rootPath = '/index'
   }
   window.$route.push({path:'/mid/container',query:Object.assign(params,{path:rootPath ,child , data})})
@@ -206,6 +208,8 @@ export const handleSwitchChange = (params, row) => {
     switch(child || subMenu){
       case '奖品卡券管理' : _url = 'coupon/delCoupon.do', dispatch = 'getCouponStore'
         break; 
+      case '系统消息' : _url = 'message/delMessageCenter.do', dispatch = 'getLogStore'
+        break;
     }
     $http.post(_url, {ids:id}, res => {
       window.$store.dispatch(dispatch, {path: child || subMenu})
