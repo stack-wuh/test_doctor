@@ -1,8 +1,8 @@
 <template>
   <section class="wrapper">
     <section class="content">
-      <search v-if="isShow" :name="$route.query.child || $route.query.subMenu" />
-      <my-table v-if="isShow" :list="[{}]"  header="true" :params=" $route.query.child ||$route.query.subMenu" >
+      <search @inputChange="getServerStore({path:pathChange})" v-if="isShow" :name="$route.query.child || $route.query.subMenu" />
+      <my-table v-if="isShow" :list="formatServerStore({path: pathChange})"  header="true" :params=" $route.query.child ||$route.query.subMenu" >
         <span slot="title">{{$route.query.subMenu}}列表</span>
         <div slot="right">
             <my-button ></my-button>
@@ -16,6 +16,7 @@
 import MyTable from '@/components/common/myTable'
 import Search from '@/components/common/search'
 import MyButton from '@/components/common/myButton'
+import {mapActions, mapGetters, mapState} from 'vuex'
 export default {
   name: 'store',
   components:{
@@ -29,19 +30,33 @@ export default {
     }
   },
   computed:{
+    ...mapState({
+      'data': state => state.Server.data
+    }),
+    ...mapGetters({
+      'formatServerStore':'formatServerStore'
+    }),
     pathChange(){
       return  this.$route.query.child || this.$route.query.subMenu
-    }
+    },
   },
   watch:{
     pathChange(){
+      this.getServerStore({path: this.pathChange})
       this.isShow = false
       setTimeout(()=>{
         this.isShow = true
       })
     }
   },
-  methods: {}
+  methods: {
+    ...mapActions({
+      'getServerStore':'getServerStore'
+    }),
+  },
+  created(){
+    this.getServerStore({path: this.pathChange})
+  }
 }
 </script>
 
