@@ -214,7 +214,23 @@ export default {
             {
               label: "消息中心",
               mid_path:'/mid/container',
-              path:'/log/store',
+              children:[
+                {
+                  label:'系统消息',
+                  mid_path:'/mid/container',
+                  path:'/log/store',
+                },
+                {
+                  label:'待办事项',
+                  mid_path:'/mid/container',
+                  path:'/log/store',
+                },
+                {
+                  label:'已办事项',
+                  mid_path:'/mid/container',
+                  path:'/log/store'
+                }
+              ]
             },
             {
               label: "联系我们",
