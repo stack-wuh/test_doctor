@@ -17,6 +17,7 @@ import Coupon from './vuex/modules/coupon/store'
 import Member from './vuex/modules/member/store'
 import Log from './vuex/modules/log/store'
 import Server from './vuex/modules/server/store'
+import Market from './vuex/modules/market/store'
 
 
 export default new Vuex.Store({
@@ -35,6 +36,7 @@ export default new Vuex.Store({
     Member,
     Log,
     Server,
+    Market,
   },
   plugins:[MyLog]
 })
