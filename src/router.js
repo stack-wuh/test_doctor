@@ -49,6 +49,7 @@ const ServeIndex = resolve => require(['@/components/serveManage/index'],resolve
 const ServeStore = resolve => require(['@/components/serveManage/mid/store'],resolve)
 const ServeInsurePub = resolve => require(['@/components/serveManage/child/insurePub'],resolve)
 const ServeQuestionPub = resolve => require(['@/components/serveManage/child/questionPub'],resolve)
+const ServeCarFeedPub = resolve => require(['@/components/serveManage/child/carFeed'], resolve)
 
 const SellingStore = resolve => require(['@/components/sellingManage/mid/store'],resolve)
 
@@ -252,6 +253,11 @@ export default new Router({
                   path:'/serve/question/pub',
                   name:'serveQuestionPub',
                   component:ServeQuestionPub
+                },
+                {
+                  path:'/serve/carfeed/pub',
+                  name:'serveCarfeedPub',
+                  component:ServeCarFeedPub
                 }
               ],
             },
