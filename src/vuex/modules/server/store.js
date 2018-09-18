@@ -12,12 +12,12 @@ const actions = {
    * @param {*} param0 
    * @param {*} param1 
    */
-  getServerStore({commit, rootState}, {path, search, currPageNo=1} = {}){
+  getServerStore({commit, rootState, dispatch}, {path, search, currPageNo=1} = {}){
     let _url = ''
     switch(path){
       case '养车知识分类' : _url = 'raisingBackend/raisingTypeList.do', search = {...rootState.search, ...search, currPageNo}
         break; 
-      case '养车知识' : _url = 'raisingBackend/getRaisingList.do', search = {...rootState.search, currPageNo}
+      case '养车知识' : _url = 'raisingBackend/getRaisingList.do', search = {...rootState.search, currPageNo}, dispatch('getArtType')
         break;
       case '救援服务' : _url = 'rescueBackend/getRescueList.do', search = {...rootState.search, currPageNo}
         break;
@@ -54,6 +54,29 @@ const actions = {
         dispatch('getServerStore', {path})
         dispatch('asyncHideDialog')
       },1000)
+    })
+  },
+  /**
+   * 养车知识
+   * 编辑/新增
+   */
+  carFeedTotalPut({dispatch}, {form, path, form:{id}} = {}){
+    let _url = id ? 'raisingBackend/updateRaising.do' : 'raisingBackend/addRaising.do'
+    return new Promise((resolve, reject) => {
+      $http.post(_url, form, res => {
+        return resolve(res)
+      })
+    })
+  },
+  /**
+   * 养车知识
+   * 文章详情
+   */
+  carFeedArtDetail({commit}, {form:{id}} = {}){
+    return new Promise((resolve, reject) => {
+      $http.post('raisingBackend/raisingInfo.do', {id}, res => {
+        return resolve(res)
+      })
     })
   },
   /**
