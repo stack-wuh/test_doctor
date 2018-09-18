@@ -8,6 +8,7 @@
             <my-button ></my-button>
         </div>
       </my-table>
+      <my-bottom @getCurrent="getCurrent" type="pagination" :total="total" :currentPage="currentPage" />
     </section>
   </section>
 </template>
@@ -16,6 +17,7 @@
 import MyTable from '@/components/common/myTable'
 import Search from '@/components/common/search'
 import MyButton from '@/components/common/myButton'
+import MyBottom from '@/components/common/bottom'
 import {mapActions, mapGetters, mapState} from 'vuex'
 export default {
   name: 'store',
@@ -23,6 +25,7 @@ export default {
     MyTable , 
     Search ,
     MyButton ,
+    MyBottom,
   },
   data () {
     return {
@@ -31,7 +34,9 @@ export default {
   },
   computed:{
     ...mapState({
-      'data': state => state.Server.data
+      'data': state => state.Server.data,
+      'total': state => state.Server.total,
+      'currentPage': state => state.Server.currPageNo
     }),
     ...mapGetters({
       'formatServerStore':'formatServerStore'
@@ -53,6 +58,9 @@ export default {
     ...mapActions({
       'getServerStore':'getServerStore'
     }),
+    getCurrent(value){
+      this.getServerStore({path: this.pathChange, currPageNo: value})
+    }
   },
   created(){
     this.getServerStore({path: this.pathChange})
