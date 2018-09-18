@@ -79,13 +79,15 @@ export const jump2Detail = params => {
      type:'warning',
    }).then(()=>{
      switch(menu){
-       case '系统管理' :  window.$store.dispatch('memberDelAndFresh' , {path: params.child || params.subMenu , row:{id:choose}})
+       case '系统管理' :  window.$store.dispatch('memberDelAndFresh' , {path: params.child || params.subMenu , row:{id: choose}})
          break;
-       case '用品管理' : window.$store.dispatch('useDelAndFresh' , {path: params.child || params.subMenu , row:{id:choose}})
+       case '用品管理' : window.$store.dispatch('useDelAndFresh' , {path: params.child || params.subMenu , row:{id: choose}})
          break;
-       case '卡券管理' : window.$store.dispatch('couponModulesDelAndFresh', {path:params.child || params.subMenu, row:{id:choose}})
+       case '卡券管理' : window.$store.dispatch('couponModulesDelAndFresh', {path:params.child || params.subMenu, row:{id: choose}})
          break;
-     }
+       case '客户服务' : window.$store.dispatch('serverModulesDelAndFresh', {path: params.child || params.subMenu, row:{id: choose}})
+         break;
+      }
    }).catch(()=>{
      _g.toastMsg({
        type:'info',
@@ -153,7 +155,7 @@ export const jump2Detail = params => {
  /**
   * 定制 -- 卡券管理 -- 抽奖模板
   */
- export const handleDialogForCoupon = ({params, text, } = {}) => {
+ export const handleDialogForCoupon = ({params, text} = {}) => {
    window.$store.dispatch('couponAddModelWithDialog')
  }
 
@@ -161,7 +163,6 @@ export const jump2Detail = params => {
   * 表格头部 -- select下拉框 change事件 -- 处理change值
   */
 export const handleSelectChangeForTable = ({params, text, value, key}) => {
-  console.log(params, text, value, key)
   switch(params.child || params.subMenu){
     case '用户卡券发放' : return window.$store.commit('setTableHeaderForm', {key,value})
   }
