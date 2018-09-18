@@ -1015,10 +1015,10 @@ const state = {
       ],
     }, 
     {
-      name:'消息中心',
+      name:'系统消息',
       path:'',
-      type:'消息中心',
-      params:['消息中心'],
+      type:'系统消息',
+      params:['系统消息'],
       colType:'',
       colValue:'',
       list:[
@@ -1048,6 +1048,110 @@ const state = {
         }
       ],
     }, 
+    {
+      name:'待办事项',
+      path:'',
+      type:'待办事项',
+      params:['待办事项'],
+      colType:'',
+      colValue:'',
+      list:[
+        {
+          key:'流水号',
+          type:'default',
+          prop:'header',
+        },
+        {
+          key:'待办审核单号',
+          type:'default',
+          prop:'header',
+        },
+        {
+          key:'审核内容',
+          type:'default',
+          prop:'header',
+        },
+        {
+          key:'发起人',
+          type:'default',
+          prop:'header',
+        },
+        {
+          key:'流程状态',
+          type:'default',
+          prop:'header',
+        },
+        {
+          key:'提交时间',
+          type:'default',
+          prop:'header',
+        },
+        {
+          key:'已停留',
+          type:'default',
+          prop:'header',
+        },
+        {
+          key:'操作',
+          type:'button',
+          list:[
+            {
+              text:'去办理'
+            }
+          ]
+        }
+      ],
+    },
+    {
+      name:'已办事项',
+      path:'',
+      type:'已办事项',
+      params:['已办事项'],
+      colType:'',
+      colValue:'',
+      list:[
+        {
+          key:'流水号',
+          type:'default',
+          prop:'header',
+        },
+        {
+          key:'待办审核单号',
+          type:'default',
+          prop:'header',
+        },
+        {
+          key:'审核内容',
+          type:'default',
+          prop:'header',
+        },
+        {
+          key:'发起人',
+          type:'default',
+          prop:'header',
+        },
+        {
+          key:'审核人',
+          type:'default',
+          prop:'header',
+        },
+        {
+          key:'流程状态',
+          type:'default',
+          prop:'header',
+        },
+        {
+          key:'提交时间',
+          type:'default',
+          prop:'header',
+        },
+        {
+          key:'办理时间',
+          type:'default',
+          prop:'header',
+        },
+      ],
+    },
     {
       name:'会员列表',
       path:'',
