@@ -55,6 +55,8 @@ const SellingStore = resolve => require(['@/components/sellingManage/mid/store']
 const LogStore = resolve => require(['@/components/logManage/mid/store'], resolve)
 const LogConcat = resolve => require(['@/components/logManage/mid/concat'], resolve)
 const LogVersion = resolve => require(['@/components/logManage/mid/version'], resolve)
+const LogMsgPub = resolve => require(['@/components/logManage/sub/msgPub'], resolve)
+const LogMsgDetail = resolve => require(['@/components/logManage/sub/msgDetail'], resolve)
 
 export default new Router({
   mode: 'history',
@@ -286,6 +288,16 @@ export default new Router({
                   path:'/log/version',
                   name:'logVersion',
                   component:LogVersion
+                },
+                {
+                  path:'/log/msg/pub',
+                  name:'logMsgPub',
+                  component:LogMsgPub
+                },
+                {
+                  path:'/log/msg/detail',
+                  name:'logMsgDetail',
+                  component:LogMsgDetail,
                 }
               ]
             }
