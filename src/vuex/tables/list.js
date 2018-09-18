@@ -3384,6 +3384,7 @@ const state = {
               text:'编辑',
               type:'',
               size:'small',
+              click:jump2Other
             },
             {
               text:'发布',
