@@ -26,6 +26,7 @@ export const state = {
   sellList:[], //销售顾问
   tableHeader:{}, // 表格顶部 -- select/input 
   pariseList:[], // 用户奖励的奖励类型 -- select
+  articleType:[], //养车知识文章类型 -- select
 }
 
 export const mutations = {
@@ -200,6 +201,12 @@ export const mutations = {
         return {label: list, value: list}
       })
     })
+  },
+  /**
+   * 客户服务 -- 养车知识 -- 文章分类 -- select
+   */
+  setArtType(state, {params} = {}){
+    state.articleType = params
   }
 }
 
@@ -367,6 +374,14 @@ export const actions = {
   getPariseList({commit}){
     $http.post('coupon/userCouponSelect.do', {}, res => {
       commit('setPariseList', {params: res.data})
+    })
+  },
+  /**
+   * 客户服务 -- 养车知识 -- 文章分类下拉
+   */
+  getArtType({commit}){
+    $http.post('raisingBackend/raisingTypeDrop.do', {}, res => {
+      commit('setArtType', {params: res.data})
     })
   }
 }
