@@ -326,6 +326,7 @@ const state = {
           type:'',
           size:'small',
           style:'',
+          click:export2Excel,
         },
         {
           text:'删除',
