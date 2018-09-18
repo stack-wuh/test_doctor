@@ -93,7 +93,7 @@ export default {
       this.editor = new this.$E(elem)
       this.editor.customConfig.zIndex = 100
       this.editor.customConfig.uploadImgShowBase64 = true  
-      this.editor.customConfig.uploadImgServer = '/upload'
+      this.editor.customConfig.uploadImgServer = rootPath + '/store/uploadPictures.do'
       this.editor.create()
     })
     this.getRoleList()
