@@ -1369,15 +1369,15 @@ const state = {
           key:'消息类型',
           value:'',
           type:'select',
-          prop:'name',
+          prop:'type',
           list:[
             {
               label:'公告',
-              value:1
+              value:0
             },
             {
               label:'提醒',
-              value:0
+              value:1
             }
           ]
         },
@@ -1385,12 +1385,12 @@ const state = {
           key:'发布开始时间',
           value:'',
           type:'date',
-          prop:'phone',
+          prop:'startTime',
         },
         {
           key:'发布结束时间',
           value:'',
-          type:'date',
+          type:'endTime',
           prop:''
         }
       ]
