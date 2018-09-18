@@ -1,7 +1,7 @@
 <template>
   <section class="wrapper">
       <section class="content">
-        <el-form :model="form" class="my-form" label-width="120px" >
+        <el-form :model="form" :rules="rules" ref="myForm" class="my-form" label-width="130px" >
           <el-form-item label="活动标题" prop="activityTitle">
             <el-input v-model="form.activityTitle" placeholder="请编辑活动标题"></el-input>
           </el-form-item>
@@ -25,8 +25,8 @@
           <el-form-item label="参与时强制支付" prop="partakeCompulsoryPayment" >
             <el-checkbox label="1" v-model="form.partakeCompulsoryPayment">勾选时表示参与时报名费用强制支付</el-checkbox>
           </el-form-item>
-          <el-form-item label="活动日期" prop="startDate" >
-            <el-date-picker v-model="form.startDate" value-format="yyyy-MM-dd"  type="daterange" range-separator="至" start-placeholder="开始日期" end-placeholde="结束日期" ></el-date-picker>
+          <el-form-item label="活动日期" prop="date" >
+            <el-date-picker v-model="form.startDate" value-format="yyyy-MM-dd"  type="daterange" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期" ></el-date-picker>
           </el-form-item>
           <el-form-item label="参与活动奖励" prop="couponId">
             <el-select v-model="form.couponId" placeholder="请选择活动奖励">
@@ -46,7 +46,7 @@
               <el-select placeholder="浏览次数" v-model="form.viewCount" ></el-select>
               <el-select placeholder="平均单词浏览最小时间" v-model="form.minTime"></el-select>
               <el-select placeholder="平均单词浏览最大时间" v-model="form.maxTime"></el-select>
-              <el-checkbox label="勾选时表示两者都要满足" v-model="form."></el-checkbox>
+              <el-checkbox label="勾选时表示两者都要满足" v-model="form.isok"></el-checkbox>
             </section>
           </el-form-item>
         </el-form>
@@ -58,6 +58,18 @@
 <script>
 import MyBottom from '@/components/common/bottom'
 import MySubButton from '@/components/common/subButton'
+
+const rules = {
+  activityTitle:[{required: true, message:'请编辑活动标题', trigger: 'blur'}],
+  picture:[{required: true, message:'请上传活动封面', trigger: 'change'}],
+  homePagePromotion:[{required: true, message:'请勾选是否首页推广', trigger: 'change'}],
+  enrollFee:[{required: true, message:'请编辑报名费', trigger: 'blur'}],
+  partakeCompulsoryPayment:[{required: true, message:'请勾选报名费用是否强制支付', trigger: 'change'}],
+  date:[{required: true, message:'请选择有效日期', trigger: 'change'}],
+  couponId:[{required: true, message:'请选择奖励卡券', trigger: 'change'}],
+  initialEnrollNum:[{required: true, message:'请选择初始报名数', trigger: 'change'}],
+  whetherAllowEnroll:[{required: true, message:'请勾选是否允许报名', trigger: 'change'}],
+}
 export default {
   name: 'activePub',
   components:{
@@ -73,15 +85,15 @@ export default {
         homePagePromotion:'',
         enrollFee:'',
         partakeCompulsoryPayment:'',
-        startDate:'',
-        endTime:'',
         couponId:'',
         initialEnrollNum:'',
         whetherAllowEnroll:'',
         viewCount:'',
         minTime:'',
         maxTime:'',
-      }
+        date:'',
+      },
+      rules,
     }
   },
 
@@ -89,7 +101,10 @@ export default {
     submit(){
       console.log(this.form)
     },
-    cancel(){},
+    cancel(){
+      this.$refs.myForm.resetFields()
+      this.$router.go(-2)
+    },
     handleAvatarSuccess(res){
       this.form.picture = res && res.data
     }

@@ -13,8 +13,14 @@ const actions = {
   getMarketStore({commit, dispatch, rootState}, {path, search, currPageNo = 1} = {}){
     let _url = ''
     switch(path){
-      case '普通活动' : _url = 'ordinaryActivities/ordinaryActivitiesList.do', search = {...rootState.search, currPageNo}
-        break
+      case '普通活动' : _url = 'ordinaryActivities/ordinaryActivitiesList.do', search = {...rootState.search, currPageNo}, dispatch('getActiveList')
+        break;
+      case '活动抽奖' : _url = 'activitiesDraws/activitiesDrawsList.do', search = {...rootState.search, currPageNo}
+        break;
+      case '推荐有礼' : _url = 'recommendingGift/recommendingGiftList.do', search = {...rootState.search, currPageNo}
+        break;
+      case '摇一摇活动' : _url = 'rockIngActivities/rockIngActivitiesList.do', search = {...rootState.search, currPageNo}
+        break;
     }
     return new Promise((resolve, reject) => {
       $http.post(_url, NotNull(search), res =>{

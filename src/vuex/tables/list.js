@@ -2568,22 +2568,22 @@ const state = {
         {
           key:'活动标题',
           type:'default',
-          prop:'',
+          prop:'title',
         },
         {
           key:'报名费(元)',
           type:'default',
-          prop:'name',
+          prop:'enrollFee',
         },
         {
           key:'报名数',
           type:'default',
-          prop:'name',
+          prop:'registNum',
         },
         {
           key:'访问数',
           type:'default',
-          prop:'name',
+          prop:'viewNum',
         },
         {
           key:'有效期',
@@ -2593,18 +2593,18 @@ const state = {
         {
           key:'发布日期',
           type:'default',
-          prop:'name',
+          prop:'publishTime',
         },
         {
           key:'状态',
           type:'default',
-          prop:'name',
+          prop:'state',
         },
         {
           key:'操作',
           type:'button',
           fix:'right',
-          width:'160px',
+          width:'240px',
           list:[
             {
               text:'编辑',
@@ -2699,62 +2699,62 @@ const state = {
         {
           key:'推荐类型',
           type:'default',
-          prop:'',
+          prop:'type',
         },
         {
           key:'推荐人',
           type:'default',
-          prop:'',
+          prop:'referrerUserName',
         },
         {
           key:'推荐人手机号',
           type:'default',
-          prop:'name',
+          prop:'referrerUserPhone',
         },
         {
           key:'推荐人奖品',
           type:'default',
-          prop:'name',
+          prop:'referrerUserCouponName',
         },
         {
           key:'被推荐人',
           type:'default',
-          prop:'name',
+          prop:'userName',
         },
         {
           key:'被推荐人手机号',
           type:'default',
-          prop:'name',
+          prop:'userPhone',
         },
         {
           key:'被推荐人奖品',
           type:'default',
-          prop:'name',
+          prop:'userCouponName',
         },
         {
           key:'推荐时间',
           type:'default',
-          prop:'name',
+          prop:'recommendedTime',
         },
         {
           key:'参与时间',
           type:'default',
-          prop:'name',
+          prop:'participationTime',
         },
         {
           key:'确认码',
           type:'default',
-          prop:'name',
+          prop:'confirmationCode',
         },
         {
           key:'确认时间',
           type:'default',
-          prop:'name',
+          prop:'confirmationTime',
         },
         {
           key:'当前状态',
           type:'default',
-          prop:'name',
+          prop:'currentState',
         },
         {
           key:'操作',
@@ -2782,32 +2782,32 @@ const state = {
         {
           key:'场次名称',
           type:'default',
-          prop:'',
+          prop:'fieldName',
         },
         {
           key:'参与人数',
           type:'default',
-          prop:'',
+          prop:'partakeNum',
         },
         {
           key:'显示人数',
           type:'default',
-          prop:'name',
+          prop:'displayNum',
         },
         {
           key:'活动日期',
           type:'default',
-          prop:'name',
+          prop:'activityDateToString',
         },
         {
           key:'发布日期',
           type:'default',
-          prop:'name',
+          prop:'releaseDateToString',
         },
         {
           key:'活动状态',
           type:'default',
-          prop:'name',
+          prop:'activeState',
         },
         {
           key:'操作',

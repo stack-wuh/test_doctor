@@ -27,6 +27,7 @@ export const state = {
   tableHeader:{}, // 表格顶部 -- select/input 
   pariseList:[], // 用户奖励的奖励类型 -- select
   articleType:[], //养车知识文章类型 -- select
+  activesList:[], //活动栏目下拉 -- select
 }
 
 export const mutations = {
@@ -207,6 +208,12 @@ export const mutations = {
    */
   setArtType(state, {params} = {}){
     state.articleType = params
+  },
+  /**
+   * 设置活动栏目 -- select
+   */
+  setActivesList(state, {params} = {}){
+    state.activesList = params
   }
 }
 
@@ -382,6 +389,11 @@ export const actions = {
   getArtType({commit}){
     $http.post('raisingBackend/raisingTypeDrop.do', {}, res => {
       commit('setArtType', {params: res.data})
+    })
+  },
+  getActiveList({commit}){
+    $http.post('activitiesDraws/activitiesDrawsSelect.do', {}, res => {
+      commit('setActivesList', {params: res.data})
     })
   }
 }
