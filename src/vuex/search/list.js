@@ -1822,31 +1822,65 @@ const state = {
           key:'姓名',
           value:'',
           type:'default',
+          prop:'userName',
         },
         {
           key:'联系电话',
           value:'',
           type:'default',
+          prop:'phone',
         },
         {
           key:'反馈开始时间',
           value:'',
-          type:'date'
+          prop:'startFeedbackTime',
+          type:'date',
         },
         {
           key:'反馈结束时间',
           value:'',
-          type:'date'
+          type:'date',
+          prop:'endFeedbackTime',
         },
         {
           key:'回复状态',
           value:'',
-          type:'select'
+          type:'select',
+          prop:'processingState',
+          list:[
+            {
+              label:'未回复',
+              value:0
+            },
+            {
+              label:'已回复',
+              value:1
+            }
+          ]
         },
         {
           key:'反馈类型',
           value:'',
-          type:'select'
+          type:'select',
+          prop:'feedbackType',
+          list:[
+            {
+              label:'保险',
+              value:0,
+            },
+            {
+              label:'续保',
+              value:1,
+            },
+            {
+              label:'保养',
+              value:2,
+            },
+            {
+              label:'其他',
+              value:3
+            }
+          ]
         },
       ]
     },

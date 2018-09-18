@@ -1956,7 +1956,7 @@ const state = {
         {
           key:'类型',
           type:'default',
-          prop:'couponType',
+          prop:'couponTypeText',
         },
         {
           key:'名称',
@@ -1976,7 +1976,7 @@ const state = {
         {
           key:'当前状态',
           type:'default',
-          prop:'states',
+          prop:'statesText',
         },
         {
           key:'领取时间',
@@ -2051,7 +2051,7 @@ const state = {
         {
           key:'关注状态',
           type:'default',
-          prop:'attentionState',
+          prop:'attentionStateText',
         },
         {
           key:'会员姓名',
@@ -2066,7 +2066,7 @@ const state = {
         {
           key:'性别',
           type:'default',
-          prop:'sex',
+          prop:'sexText',
         },
         {
           key:'车牌号',
@@ -3349,32 +3349,32 @@ const state = {
         {
           key:'文章标题',
           type:'default',
-          prop:'',
+          prop:'title',
         },
         {
           key:'文章分类',
           type:'default',
-          prop:'',
+          prop:'typeName',
         },
         {
           key:'浏览数',
           type:'default',
-          prop:'',
+          prop:'browseNum',
         },
         {
           key:'创建人',
           type:'default',
-          prop:'',
+          prop:'realName',
         },
         {
           key:'创建时间',
           type:'default',
-          prop:'',
+          prop:'createTime',
         },
         {
           key:'状态',
           type:'default',
-          prop:'',
+          prop:'stateText',
         },
         {
           key:'操作',
@@ -3420,11 +3420,13 @@ const state = {
               text:'编辑',
               type:'',
               size:'small',
+              click:openDialog
             },
             {
               text:'删除',
               type:'',
               size:'small',
+              click:handleDelAndFresh
             }
           ]
         },
@@ -3441,51 +3443,65 @@ const state = {
         {
           key:'微信昵称',
           type:'default',
-          prop:'',
+          prop:'nickName',
         },
         {
           key:'姓名',
           type:'default',
-          prop:'',
+          prop:'userName',
         },
         {
           key:'手机号',
           type:'default',
-          prop:'',
+          prop:'phone',
         },
         {
           key:'反馈类型',
           type:'default',
-          prop:'',
+          prop:'feedbackTypeText',
         },
         {
           key:'回复内容',
           type:'default',
-          prop:'',
+          prop:'replyContent',
         },
         {
           key:'反馈时间',
           type:'default',
-          prop:'',
+          prop:'feedbackTimes',
         },
         {
           key:'回复人',
           type:'default',
-          prop:'',
+          prop:'employeeName',
         },
         {
           key:'处理状态',
           type:'default',
-          prop:'',
+          prop:'processingStateText',
         },
         {
           key:'操作',
           type:'button',
+          fix:'right',
+          width:'120px',
           list:[
             {
-              text:'回复',
+              valid:2,
+              value:0,
+              rules:'processingState',
+              texts:['回复', '已回复'],
+              styles:[
+                {
+                  color:STYLES['PRIMARY'],
+                },
+                {
+                  color:STYLES['INFO']
+                }
+              ],
               type:'',
               size:'small',
+              click:openDialog
             },
           ]
         },
@@ -3500,36 +3516,58 @@ const state = {
       colTitle:'',
       list:[
         {
-          key:'参与人手机',
+          key:'标题',
           type:'default',
-          prop:'',
+          prop:'questionnaireTitle',
         },
         {
-          key:'姓名',
+          key:'所属栏目',
           type:'default',
-          prop:'',
+          prop:'columnType',
         },
         {
-          key:'手机号',
+          key:'有效期',
           type:'default',
-          prop:'',
+          prop:'validate',
         },
         {
-          key:'车牌',
+          key:'发布日期',
           type:'default',
-          prop:'',
+          prop:'releaseDates',
         },
         {
-          key:'参与时间',
+          key:'活动状态',
           type:'default',
-          prop:'',
+          prop:'activeStateText',
+        },
+        {
+          key:'奖品名称',
+          type:'default',
+          prop:'couponName',
         },
         {
           key:'操作',
           type:'button',
+          fix:'right',
+          width:'220px',
           list:[
             {
-              text:'详情',
+              text:'编辑',
+              type:'',
+              size:'small',
+            },
+            {
+              text:'发布',
+              type:'',
+              size:'small',
+            },
+            {
+              text:'问卷统计',
+              type:'',
+              size:'small',
+            },
+            {
+              text:'明细调查',
               type:'',
               size:'small',
             },
