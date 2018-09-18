@@ -1451,36 +1451,61 @@ const state = {
           key:'活动标题',
           value:'',
           type:'default',
+          prop:'activitieName',
         },
         {
           key:'活动开始日期',
           value:'',
           type:'date',
+          prop:'startDate',
         },
         {
           key:'活动结束日期',
           value:'',
           type:'date',
+          prop:'endDate',
         },
         {
           key:'发布开始日期',
           value:'',
           type:'date',
+          prop:'publishStartDate',
         },
         {
           key:'发布结束日期',
           value:'',
           type:'date',
+          prop:'getPublishEndDate',
         },
         {
           key:'活动栏目',
           value:'',
           type:'select',
+          prop:'column',
         },
         {
-          key:'全部活动',
+          key:'活动类型',
           value:'',
           type:'select',
+          prop:'state',
+          list:[
+            {
+              label:'未开始',
+              value:0
+            },
+            {
+              label:'进行中',
+              value:1
+            },
+            {
+              label:'已结束',
+              value:2
+            },
+            {
+              label:'已关闭',
+              value:3
+            },
+          ]
         },
       ],
     },

@@ -2357,48 +2357,48 @@ const state = {
         {
           key:'所属栏目',
           type:'default',
-          prop:'',
+          prop:'columnType',
         },
         {
           key:'活动标题',
           type:'default',
-          prop:'',
+          prop:'activityTitle',
         },
         {
           key:'报名费(元)',
           type:'default',
-          prop:'name',
+          prop:'enrollFee',
         },
         {
           key:'报名数',
           type:'default',
-          prop:'name',
+          prop:'enrollNum',
         },
         {
           key:'访问数',
           type:'default',
-          prop:'name',
+          prop:'visitNum',
         },
         {
           key:'有效期',
           type:'default',
-          prop:'name',
+          prop:'valid',
         },
         {
           key:'发布日期',
           type:'default',
-          prop:'name',
+          prop:'releaseDate',
         },
         {
           key:'状态',
           type:'default',
-          prop:'name',
+          prop:'statusText',
         },
         {
           key:'操作',
           type:'button',
           fix:'right',
-          width:'160px',
+          width:'240px',
           list:[
             {
               text:'编辑',
