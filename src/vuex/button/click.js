@@ -1,4 +1,4 @@
-import {_g} from '../../../src/utils/global'
+import {_g,NotNull} from '../../../src/utils/global'
 
 export const jump2Other =  params => {
   window.$route.push('/index')
@@ -101,7 +101,7 @@ export const jump2Detail = params => {
   * JSON2Excel
   */
  export const export2Excel = ({params}) => {
-   let {subMenu, child} = params, search = window.$store.state.search
+   let {subMenu, child} = params, search = NotNull(window.$store.state.search)
    let _temp = Object.entries(search), _str = '?'
    _temp && _temp.forEach(item => {
      _str += `${item[0]}=${item[1]}&`
@@ -121,7 +121,8 @@ export const jump2Detail = params => {
      case '用户奖励' : return location.href = window.rootPath + '/coupon/userCouponListReport.do' + _str;
      case '员工奖励' : return location.href = window.rootPath + '/employeeReward/employeeRewardListReport.do' + _str;
      case '用户提现记录' : return location.href = window.rootPath + '/takeMoney/getUserTakeCashListReport.do' + _str;
-   }
+     case '意见反馈' : return location.href = window.rootPath + '/feedback/export.do' + _str
+    }
  }
 
  /**
