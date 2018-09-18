@@ -1025,24 +1025,29 @@ const state = {
         {
           key:'消息标题',
           type:'default',
-          prop:'header',
+          prop:'title',
         },
         {
           key:'消息类型',
           type:'default',
-          prop:'header',
+          prop:'typeText',
         },
         {
           key:'发布时间',
           type:'default',
-          prop:'header',
+          prop:'publishTime',
         },
         {
           key:'操作',
           type:'button',
           list:[
             {
-              text:'查看'
+              text:'查看',
+              click:jump2Other,
+            },
+            {
+              text:'删除',
+              click:handleDelAndFresh
             }
           ]
         }
