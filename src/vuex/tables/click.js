@@ -210,6 +210,8 @@ export const handleSwitchChange = (params, row) => {
         break; 
       case '系统消息' : _url = 'message/delMessageCenter.do', dispatch = 'getLogStore'
         break;
+      case '养车知识分类': _url = 'raisingBackend/delRaisingType.do', dispatch = 'getServerStore'
+        break
     }
     $http.post(_url, {ids:id}, res => {
       window.$store.dispatch(dispatch, {path: child || subMenu})
