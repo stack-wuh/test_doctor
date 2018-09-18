@@ -920,5 +920,159 @@ export const forms = [
       content:'',
     }
   },
-  
+  {
+    name:'意见反馈',
+    list:[
+      {
+        key:'姓名',
+        type:'input',
+        prop:'userName',
+        disabled: true,
+        rules:[
+          {
+            required:false,
+            message:'请编辑用户姓名',
+            trigger:'blur',
+          }
+        ],
+      },
+      {
+        key:'联系电话',
+        type:'input',
+        prop:'phone',
+        disabled: true,
+        rules:[
+          {
+            required:false,
+            message:'请编辑联系电话',
+            trigger:'blur',
+          }
+        ],
+      },
+      {
+        key:'反馈类型',
+        type:'select',
+        prop:'feedbackType',
+        disabled: true,
+        list:[
+          {
+            label:'保险',
+            value:0
+          },
+          {
+            label:'续保',
+            value:1
+          },
+          {
+            label:'保养',
+            value:2
+          },
+          {
+            label:'其他',
+            value:3
+          }
+        ],
+        rules:[
+          {
+            required:false,
+            message:'请选择反馈类型',
+            trigger:'change',
+          }
+        ],
+      },
+      {
+        key:'反馈时间',
+        type:'date',
+        prop:'feedbackTimes',
+        disabled: true,
+        rules:[
+          {
+            required:false,
+            message:'请选择反馈时间',
+            trigger:'change',
+          }
+        ],
+      },
+      {
+        key:'回复时间',
+        type:'input',
+        prop:'recoveryTimes',
+        disabled: true,
+        rules:[
+          {
+            required:false,
+            message:'请编辑用户姓名',
+            trigger:'change',
+          }
+        ],
+      },
+      {
+        key:'反馈内容',
+        type:'input',
+        prop:'feedbackContent',
+        disabled: true,
+        rules:[
+          {
+            required:false,
+            message:'请编辑用户姓名',
+            trigger:'blur',
+          }
+        ],
+      },
+      {
+        key:'回复内容',
+        type:'input',
+        prop:'replyContent',
+        rules:[
+          {
+            required:true,
+            message:'请编辑回复内容',
+            trigger:'blur',
+          }
+        ],
+      },
+    ],
+    myForm:{
+      type:'',
+      start:'',
+      end:'',
+      number:'',
+      content:'',
+    }
+  },
+  {
+    name:'养车知识分类',
+    list:[
+      {
+        key:'分类名称',
+        type:'input',
+        prop:'name',
+        disabled: false,
+        rules:[
+          {
+            required:true,
+            message:'请编辑用户姓名',
+            trigger:'blur',
+          }
+        ],
+      },
+      {
+        key: '排序',
+        type:'input',
+        prop:'ranl',
+        disabled: false,
+        rules:[
+          {
+            required: true,
+            message:'请编辑联系电话',
+            trigger:'blur',
+          }
+        ],
+      },
+    ],
+    myForm:{
+      name:'',
+      ranl:'',
+    }
+  },
 ]
