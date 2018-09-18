@@ -284,6 +284,8 @@ const getters = {
         case '查看领取明细' : return {...item, couponTypeText: item.couponType == 1 ? '电子代金券' : '实物奖品', stateText: item.states == 0 ? '未使用' : item.states == 1 ? '已使用' : '已过期'}
         case '员工奖励' : return {...item, stateText: item.status == 0 ? '未发放' : '已发放', rewardTypeText: item.rewardType == 0 ? '消费' : '分享'}
         case '用户奖励' : return {...item, couponTypeText: item.couponType == 0 ? '分享' : '消费'}
+        case '用户卡券管理' : return {...item,couponTypeText: item.couponType == 0 ? '实物奖品' : '电子代金券',statesText: item.states == 0 ? '已使用' : item.states == 1 ? '未使用' : '已过期'}
+        case '用户卡券发放' : return {...item,attentionStateText: item.attentionState == 0 ? '未关注' : '已关注',sexText: item.sex == 1 ? '男' : '女'}
         default : return {...item}
       }
     })
