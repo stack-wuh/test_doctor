@@ -27,6 +27,8 @@ const actions = {
         break;
       case '操作日志' : _url = 'log/userLogList.do', search = {...search, currPageNo, ...rootState.search}
         break;
+      case '联系我们' : _url = 'log/getContactUs.do'
+        break;
     }
     return new Promise((resolve, reject) => {
       $http.post(_url, search, res => {
@@ -71,6 +73,17 @@ const actions = {
         type:'error',
         msg:'改操作已取消或操作错误!'
       })
+    })
+  },
+  /**
+   * 联系我们
+   */
+  logConcat({dispatch}, {form, path, form:{id}} = {}){
+    let _url = id ? 'log/updateContactUs.do' : 'log/addContactUs.do'
+    $http.post(_url, form, res => {
+      setTimeout(()=>{
+        dispatch('getLogStore',{path})
+      },1000)
     })
   }
 }
