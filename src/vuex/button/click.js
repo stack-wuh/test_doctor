@@ -35,11 +35,15 @@ export const jump2Detail = params => {
           break ;
      case '摇一摇活动' : rootPath = '/market/shake/pub' , child = '编辑摇一摇活动'
           break ;
-     case '自动回复配置' : rootPath = '/system/store/reply' , child = '编辑自动回复设置'
+     case '自动回复配置' : rootPath = '/system/store/reply', child = '编辑自动回复设置'
           break ;
      case '用户提现记录' : rootPath = '/coupon/userComm/pub', subMenu = '用户佣金提现'
           break;
      case '系统消息' : rootPath = '/log/msg/pub', child = '发布系统消息'
+          break;
+     case '问卷调查' : rootPath = '/serve/question/pub', child = '编辑问卷'
+          break;
+     case '养车知识' : rootPath = '/serve/carfeed/pub', child = '编辑养车知识'
           break;
      default : rootPath = '/index'
    }
