@@ -29,9 +29,11 @@ const actions = {
         break;
       case '联系我们' : _url = 'log/getContactUs.do'
         break;
+      case '系统消息' : _url = 'message/getMessageCenter.do', search = {...rootState.search, currPageNo}
+        break;
     }
     return new Promise((resolve, reject) => {
-      $http.post(_url, search, res => {
+      $http.post(_url, NotNull(search), res => {
         commit('setLogStore', {params: res.data})
         return resolve(res)
       })
@@ -85,6 +87,17 @@ const actions = {
         dispatch('getLogStore',{path})
       },1000)
     })
+  },
+  /**
+   * 发布 -- 系统消息
+   */
+  logSystemMsgPub({dispatch}, {form, path}){
+    return new Promise((resolve, reject) => {
+      $http.post('message/addOrUpMessageCenter.do', form, res => {
+        return resolve(res)
+      })
+    })
+
   }
 }
 
@@ -93,6 +106,8 @@ const getters = {
     return state.data && state.data.map(item => {
       if(path == '版本更新'){
         return {...item, lists:item.reserved1 && item.reserved1.split(',')}
+      }else if(path == '系统消息'){
+        return {...item, typeText: item.type == 0 ? '公告' : '提醒'}
       }else{
         return {...item}
       }
