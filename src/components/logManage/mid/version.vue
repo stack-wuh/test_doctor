@@ -30,7 +30,7 @@
             @click="handleAddItem" >添加</el-button>
           </span>
         </el-form-item>
-        <el-form-item v-if="form['reserved1'].length" >
+        <el-form-item v-if="form['reserved1'].length" prop="reserved1" >
           <h6 v-if="form['reserved1'].length" v-for="(list,lindex) in form['reserved1']" :key="lindex">{{list}} <el-button @click="handleDelItem(lindex)" size="mini" type="danger" class="margin-lf-15">删除</el-button></h6>        
         </el-form-item>
       </el-form>
