@@ -3269,49 +3269,68 @@ const state = {
         {
           key:'姓名',
           type:'default',
-          prop:'',
+          prop:'userName',
         },
         {
           key:'联系电话',
           type:'default',
-          prop:'',
+          prop:'phone',
         },
         {
-          key:'经纬度',
+          key:'经度',
           type:'default',
-          prop:'',
+          prop:'longitude',
+        },
+        {
+          key:'纬度',
+          type:'default',
+          prop:'latitude',
         },
         {
           key:'地址',
           type:'default',
-          prop:'',
+          prop:'address',
         },
         {
           key:'提交时间',
           type:'default',
-          prop:'',
+          prop:'submitTime',
         },
         {
           key:'救援人',
           type:'default',
-          prop:'',
+          prop:'employeeName',
         },
         {
           key:'确认时间',
           type:'default',
-          prop:'',
+          prop:'verifyTime',
         },
         {
           key:'状态',
           type:'default',
-          prop:'',
+          prop:'statusText',
         },
         {
           key:'操作',
           type:'button',
           list:[
             {
-              text:'确认',
+              valid:2,
+              value:0,
+              rules:'status',
+              texts:['确认','已确认','已取消'],
+              styles:[
+                {
+                  color:STYLES['PRIMARY']
+                },
+                {
+                  color:STYLES['SUCCESS']
+                },
+                {
+                  color:STYLES['INFO']
+                }
+              ],
               type:'',
               size:'small',
             },
@@ -3386,12 +3405,12 @@ const state = {
         {
           key:'分类名称',
           type:'default',
-          prop:'',
+          prop:'name',
         },
         {
           key:'排序',
           type:'default',
-          prop:'',
+          prop:'ranl',
         },
         {
           key:'操作',

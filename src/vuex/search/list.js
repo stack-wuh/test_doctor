@@ -1749,11 +1749,13 @@ const state = {
           key:'姓名',
           value:'',
           type:'default',
+          prop:'userName'
         },
         {
           key:'联系电话',
           value:'',
           type:'default',
+          prop:'phone'
         },
       ]
     },
