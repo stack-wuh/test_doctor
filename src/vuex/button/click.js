@@ -39,6 +39,8 @@ export const jump2Detail = params => {
           break ;
      case '用户提现记录' : rootPath = '/coupon/userComm/pub', subMenu = '用户佣金提现'
           break;
+     case '系统消息' : rootPath = '/log/msg/pub', child = '发布系统消息'
+          break;
      default : rootPath = '/index'
    }
    window.$route.push({path:'/mid/container',query:{path:rootPath , menu , subMenu ,child}})
