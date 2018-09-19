@@ -121,6 +121,7 @@
 import Bottom from '@/components/common/bottom'
 import MySubButton from '@/components/common/subButton'
 import {mapState, mapActions} from 'vuex'
+import {validPhone, MaxNumberValue} from '../../../utils/valid.js'
 
 const rules = {
   storeName:[{required: true, message: '请编辑门店名称', trigger: 'blur'}],
@@ -130,14 +131,14 @@ const rules = {
   descInfo:[{required: true, message: '请编辑组织描述', trigger: 'blur'}],
   address:[{required: true, message: '请编辑门店地址', trigger: 'blur'}],
   longitude:[{required: true, message: '请编辑经纬度', trigger: 'blur'}],
-  salesHotline:[{required: true, message: '请编辑销售热线', trigger: 'blur'}],
-  renewHotline:[{required: true, message: '请编辑续保热线', trigger: 'blur'}],
-  after:[{required: true, message: '请编辑售后热线', trigger: 'blur'}],
-  rescueHotline:[{required: true, message: '请编辑救援热线', trigger: 'blur'}],
+  salesHotline:[{required: true, validator: validPhone, trigger: 'blur'}],
+  renewHotline:[{required: true, validator: validPhone, trigger: 'blur'}],
+  after:[{required: true, validator: validPhone, trigger: 'blur'}],
+  rescueHotline:[{required: true, validator: validPhone, trigger: 'blur'}],
   contacts:[{required: true, message: '请编辑联系人', trigger: 'blur'}],
-  telephone:[{required: true, message: '请编辑联系电话', trigger: 'blur'}],
+  telephone:[{required: true, validator: validPhone, trigger: 'blur'}],
   referee:[{required: true, message: '请编辑推荐人', trigger: 'blur'}],
-  lntegralProportion:[{required: true, message: '请编辑积分比例', trigger: 'blur'}],
+  lntegralProportion:[{required: true, validator: MaxNumberValue, trigger: 'blur'}],
   serviceStart:[{required: true, message: '请选择服务开始日期', trigger: 'change'}],
   serviceEnd:[{required: true, message: '请选择服务结束日期', trigger: 'change'}],
   wifiName:[{required: true, message: '请编辑wifi名称', trigger: 'blur'}],
@@ -227,7 +228,6 @@ export default {
     if(this.$route.query.data){
       let data = JSON.parse(this.$route.query.data)
       this.form = {...this.form, ...data}
-      console.log(data)
     }
   }
 }
