@@ -311,7 +311,6 @@ export default {
   watch:{
     pushList(){
       this.$set(this.formatFormItem[1], 'list', this.pushList)
-      console.log(this.pushList)
     }
   },
   methods: {
