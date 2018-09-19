@@ -1194,7 +1194,7 @@ const state = {
         {
           key:'性别',
           type:'default',
-          prop:'sex',
+          prop:'sexText',
         },
         {
           key:'车牌号',
@@ -1323,7 +1323,7 @@ const state = {
         {
           key:'保险到期',
           type:'default',
-          prop:'insuranceState',
+          prop:'insuranceStateText',
         },
         {
           key:'上次保养公里数',
@@ -1343,7 +1343,7 @@ const state = {
         {
           key:'保养到期',
           type:'default',
-          prop:'maintainState',
+          prop:'maintainStateText',
         },
         {
           key:'操作',

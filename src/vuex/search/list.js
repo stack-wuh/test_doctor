@@ -427,7 +427,7 @@ const state = {
             },
             {
               label:'未关注',
-              value:0
+              value:'0'
             }
           ],
         },
@@ -541,7 +541,7 @@ const state = {
             },
             {
               label:'未到期',
-              value:0
+              value:'0'
             }
           ]
         },
@@ -569,7 +569,7 @@ const state = {
             },
             {
               label:'未到期',
-              value:0
+              value:'0'
             }
           ]
         },
@@ -684,7 +684,7 @@ const state = {
             },
             {
               label:'减少',
-              value:0
+              value:'0'
             }
           ]
         },
