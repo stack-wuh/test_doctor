@@ -23,6 +23,8 @@ export const NotNull = obj => {
   data.forEach(item => {
     if(obj[item] && obj[item].toString()[0]){
       _obj[item] = obj[item]
+    }else if(obj[item] === 0 || obj[item] === '0'){
+      _obj[item] = obj[item]
     }
   })
   return _obj
