@@ -11,14 +11,14 @@
           </el-form-item>
         </el-form>
       </section>
-      <my-table header="true" :list="data" >
+      <my-table v-if="isShow" header="true" :list="data" >
         <span slot="title">{{$route.query.child}}</span>
         <div slot="right">
           <my-button />
         </div>
       </my-table>
       <SubButton @handleCancel="cancel" @handleSubmit="submit" />
-      <dialog-with-table @getData="getData" @getKeyWord="getKeyWord" :isShowDialog="isShowDialog" :list="temp_list || []" :total="temp_total || 0" :currPageNo="temp_currPageNo || 1" />
+      <dialog-with-table @getCurrPageModel="getCurrPageModel"  @getData="getData" @getKeyWord="getKeyWord" :isShowDialog="isShowDialog" :list="temp_list || []" :total="temp_total || 0" :currPageNo="temp_currPageNo || 1" />
     </section>
   </section>
 </template>
@@ -54,7 +54,9 @@ export default {
       rules,
       temp_list: [],
       temp_total: 0,
-      temp_currPageNo: 1
+      temp_currPageNo: 1,
+      isShow: true,
+      _id:'',
     }
   },
   computed:{
@@ -84,11 +86,22 @@ export default {
         this.temp_currPageNo = res.data.pageNum
       })
     },
+    getCurrPageModel(e){
+      console.log(this.temp_list, e)
+      this.getPariseList({currPageNo: e}).then(res => {
+        this.temp_list = res.data.list
+      })
+    },
     getData(val){
-      this.data = val.data.map((item,index) => {
+      let _arr  = val.data && val.data.map((item,index) => {
+        return {...item, rate: 0, quantity: 0}
+      })
+      this.data = [...this.data, ..._arr]
+      this.data.map((item,index) => {
         let list = ['一','二','三','四','五','六','七','八','九','十']
-        return {...item, rank: list[index] + '等奖', rate: 0, quantity: 0}
-      }) 
+        this.$set(this.data[index], 'rank', list[index]+'等奖')
+        return {...item, rate: item.rate ? item.rate: 0, quantity: item.quantity ? item.quantity : 0}
+      })
     },
     cancel(){
       setTimeout(() => {
@@ -99,8 +112,8 @@ export default {
       let data = this.data.map(item => {
         return {
           rank: item.rank,
-          couponName: item.couponName,
-          number: item.number,
+          name: item.name,
+          total: item.total,
           quantity: item.quantity,
           rate: item.rate,
           id: item.id
@@ -110,7 +123,7 @@ export default {
       this.$refs.myForm.validate(valid => {
         if(valid){
           this.handleSubmit({form}).then(res => {
-              this.cancel()
+              res.status == 0 && this.cancel()
           })
         }else{
           _g.toastMsg({
@@ -120,6 +133,7 @@ export default {
         }
       })
     },
+    
   },
   created(){
     this.getPariseList().then(res => {
@@ -128,6 +142,7 @@ export default {
       this.temp_currPageNo = res.data.pageNum
     })
     let data =  this.$route.query.data && JSON.parse(this.$route.query.data)
+    this._id = data.id
     data && this.getModelList({id: data.id})
       .then(res => {
         this.form = {...this.form, ...res.data.template}
@@ -135,6 +150,7 @@ export default {
       })
     window.$bus.$on('handleDelItemForModel', (e) => {
       this.data && this.data.splice(e,1)
+      this.getData({data:[]})
     })
   },
   destroyed(){

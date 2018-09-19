@@ -22,7 +22,7 @@
               </template>
             </el-table-column>
         </el-table>
-        <my-bottom :total="total" :currPageNo="currPageNo" />
+        <my-bottom @getCurrent="getCurrent" :total="total" :currPageNo="currPageNo" />
         <span slot="footer">
           <el-button @click="beforeClose">取消</el-button>
           <el-button @click="handleSubmit" type="primary">确定</el-button>
@@ -86,6 +86,9 @@ export default {
     handleSubmit(){
       this.$emit('getData', {data: this.selection})
       this.hideDialog()
+    },
+    getCurrent(e){
+      this.$emit('getCurrPageModel', e)
     }
   }
 }

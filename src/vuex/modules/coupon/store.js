@@ -145,7 +145,7 @@ const actions = {
   /**
    * 卡券管理 -- 抽奖模板 -- 编辑抽奖模板
    */
-  couponPariseTake({commit, rootState}, {path, form, form:{id}} = {}){
+  couponPariseTake({commit, rootState}, {path, form, form:{id, data}} = {}){
     let _url = id ? 'lottery/updateCarLottery.do' : 'lottery/saveCarLotteryTemplate.do'
     return new Promise((resolve, reject) => {
       $http.post(_url, form, res => {
