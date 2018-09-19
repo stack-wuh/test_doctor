@@ -5,7 +5,7 @@
         <span class="nav-title">条件查询</span>
         <section class="search-btn-list">
           <div class="btn-item" v-for="(item,index) in getBtnList" :key="index">
-            <el-button :size="item.size || 'mini'" :type="item.type || ''" v-on:click="item.click({path})" >{{item.text}}</el-button>
+            <el-button :size="item.size || 'mini'" :type="item.type || ''" v-on:click="item.click({path, menu: $route.query.menu})" >{{item.text}}</el-button>
           </div>
         </section>
       </section>
