@@ -1839,12 +1839,12 @@ const state = {
         {
           key:'名称',
           type:'default',
-          prop:'couponName',
+          prop:'name',
         },
         {
           key:'奖品总数量',
           type:'default',
-          prop:'number',
+          prop:'total',
         },
         {
           key:'奖品数量',

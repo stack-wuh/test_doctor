@@ -110,7 +110,7 @@ const actions = {
     consumptionFull,
     validTill,
     receiveType,
-    roleId,
+    roleIds,
     instructions,
     couponValue,
   }} = {}){
@@ -123,7 +123,7 @@ const actions = {
         consumptionFull,
         validTill,
         receiveType,
-        roleIds: roleId,
+        roleIds,
         instructions,
         couponValue,
       }, res => {
@@ -145,9 +145,10 @@ const actions = {
   /**
    * 卡券管理 -- 抽奖模板 -- 编辑抽奖模板
    */
-  couponPariseTake({commit, rootState}, {path, form} = {}){
+  couponPariseTake({commit, rootState}, {path, form, form:{id}} = {}){
+    let _url = id ? 'lottery/updateCarLottery.do' : 'lottery/saveCarLotteryTemplate.do'
     return new Promise((resolve, reject) => {
-      $http.post('lottery/saveCarLotteryTemplate.do', form, res => {
+      $http.post(_url, form, res => {
         return resolve(res)
       })
     })
@@ -197,7 +198,7 @@ const actions = {
    */
   couponImportExcel({dispatch}, {path, form, form:{fileName}}){
     return new Promise((resolve, reject) => {
-      $http.post('takeListByUserCouponVoForImport.do', {fileName: fileName.toString()}, res => {
+      $http.post('coupon/takeListByUserCouponVoForImport.do', {fileName: fileName.toString()}, res => {
         return resolve(res)
       })
     })
