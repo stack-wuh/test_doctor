@@ -144,15 +144,10 @@ export default {
         },
         {
           label:'售后经理',
-          prop:'afterService',
+          prop:'afterServiceName',
           type:'select',
           disabled:true,
-          list:[
-            {
-              label:'aaa',
-              value:'111'
-            }
-          ]
+          list:[]
         },
         {
           label:'关注日期',
@@ -234,7 +229,8 @@ export default {
       form:{},
       _temp:{},
       isShowMore:false,
-      tempList: []
+      tempList: [],
+      sellsList:[]
     }
   },
   computed:{
@@ -280,7 +276,12 @@ export default {
         this.form = {...this.form, ...res.data, ...res.data.user}
         this._temp = {...res.data, ...res.data.user}
       })
-    this.getSellList()
+    this.getSellList().then(res => {
+      this.sellsList = res.data.map(item => {
+        return {label: item.realName, value: item.id}
+      })
+      this.formList[1][1].list = this.sellsList
+    })
   }
 }
 </script>
