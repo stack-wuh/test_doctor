@@ -43,7 +43,6 @@ const actions = {
           ...rootState.search, 
           ...search, 
           currPageNo, 
-          realName: ''
         }, dispatch('getMemberList')
         break;
       case '充值明细' : _url = "detail/getRecharge.do", search = {
@@ -61,9 +60,6 @@ const actions = {
        break;
       case '会员充值' : _url = 'detail/selectUserMsgVo.do', search = {
         ...rootState.search,
-        // realName:'',
-        // phone:'',
-        // plateNum:'',
       }
         break;
       case '车辆管理' : _url = 'vehicle/init.do', search = {
@@ -286,8 +282,8 @@ const actions = {
    */
   memberRechargeDo({commit}, {form} = {}){
     return new Promise((resolve, reject) => {
-      $http.post('vipPage/recharge.do', form, res => {
-        
+      $http.post('vipPage/recharge.do', {...form, ids:form.ids.toString()}, res => {
+        return resolve(res)
       })
     })
   }
@@ -348,6 +344,8 @@ const getters = {
     return state.list.map(item => {
       switch(path){
         case '积分管理' : return {...item, typeText: item.type == 1 ? '增加' : '减少'}
+        case '会员列表' : return {...item, sexText: item.sex == 0 ? '女' : '男'}
+        case '车辆管理' : return {...item, insuranceStateText: item.insuranceState == 1 ? '已到期' : '未到期',maintainStateText: item.maintainState == 1 ? '已到期' : '未到期'}
         default : return {...item}
       }
     })
