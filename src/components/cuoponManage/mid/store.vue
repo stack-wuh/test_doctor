@@ -56,6 +56,7 @@ export default {
       this.isShow = false
       setTimeout(()=>{
         this.getList({path: this.changePath, search})
+        this.$store.commit('clearSearchForm')
         this.isShow = true
       })
     }
