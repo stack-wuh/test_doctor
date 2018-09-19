@@ -70,6 +70,7 @@ export const jump2Detail = params => {
   */
  export const DelAndFreshWithAll = ({params , choose} = {}) => {
   let {menu ,subMenu ,child} = params
+  let path = child || subMenu
    if(!choose.length){
     _g.toastMsg({
       type:'error',
@@ -91,6 +92,8 @@ export const jump2Detail = params => {
          break;
        case '客户服务' : window.$store.dispatch('serverModulesDelAndFresh', {path: params.child || params.subMenu, row:{id: choose}})
          break;
+       case '市场推广' : window.$store.dispatch('marketDelAndFresh', {path, row: {id: choose}})
+        break;
       }
    }).catch(()=>{
      _g.toastMsg({
@@ -126,6 +129,7 @@ export const jump2Detail = params => {
      case '员工奖励' : return location.href = window.rootPath + '/employeeReward/employeeRewardListReport.do' + _str;
      case '用户提现记录' : return location.href = window.rootPath + '/takeMoney/getUserTakeCashListReport.do' + _str;
      case '意见反馈' : return location.href = window.rootPath + '/feedback/export.do' + _str
+     case '报名查询' : return location.href = window.rootPath + '/ordinaryActivities/takeSignUpListReport.do' + _str
     }
  }
 
