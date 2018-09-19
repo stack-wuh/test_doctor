@@ -144,7 +144,7 @@ export default {
         },
         {
           label:'售后经理',
-          prop:'afterServiceName',
+          prop:'afterServiceId',
           type:'select',
           disabled:true,
           list:[]
@@ -273,6 +273,7 @@ export default {
     }
     this.memberCouponComm({search})
       .then(res => {
+        console.log(res)
         this.form = {...this.form, ...res.data, ...res.data.user}
         this._temp = {...res.data, ...res.data.user}
       })

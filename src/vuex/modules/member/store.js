@@ -203,6 +203,8 @@ const actions = {
     phone,
     afterService,
     createTimes,
+    afterServiceId,
+    id
   }} = {}){
     return new Promise((resolve, reject) => {
       $http.post('vehicle/save.do', {
@@ -212,6 +214,8 @@ const actions = {
         phone,
         afterService,
         createTimes,
+        afterServiceId,
+        id
       }, res => {
         return resolve(res)
       })
