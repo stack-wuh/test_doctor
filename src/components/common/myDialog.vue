@@ -107,6 +107,8 @@ export default {
      */
     beforeClose(){
       this.$refs.myForm.resetFields()
+      this.myForm.couponId = []
+      console.log(this.myForm)
       this.$store.commit('handlehideDialog')
     },
 
