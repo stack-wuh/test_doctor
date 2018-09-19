@@ -1017,7 +1017,7 @@ const state = {
           list:[
             {
               label:'未使用',
-              value:0
+              value:'0'
             },
             {
               label: '已使用',
@@ -1079,7 +1079,7 @@ const state = {
             },
             {
               label:'女',
-              value:0
+              value:'0'
             }
           ],
         },
@@ -1130,7 +1130,7 @@ const state = {
             },
             {
               label:'未完善',
-              value:0
+              value:'0'
             }
           ],
         },
@@ -1146,7 +1146,7 @@ const state = {
             },
             {
               label:'未完善',
-              value:0
+              value:'0'
             }
           ],
         },
@@ -1218,7 +1218,7 @@ const state = {
             },
             {
               label: '分享',
-              value:0
+              value:'0'
             }
           ]
         },
@@ -1255,7 +1255,7 @@ const state = {
         {
           key:'奖励金额',
           value:'',
-          type:'select',
+          type:'input',
           prop:'awardMoney',
         }
       ]
@@ -1319,7 +1319,7 @@ const state = {
             },
             {
               label:'未发放',
-              value:0
+              value:'0'
             }
           ]
         },
@@ -1335,7 +1335,7 @@ const state = {
             },
             {
               label:'消费',
-              value:0
+              value:'0'
             }
           ]
         }
