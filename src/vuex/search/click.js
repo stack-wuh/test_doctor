@@ -4,6 +4,7 @@ export const  clearSearchForm = ({path, menu} = {}) => {
     switch(menu){
       case '卡券管理' : return window.$store.dispatch('getCouponStore', {path})
       case '会员管理' : return window.$store.dispatch('getMemberStore', {path})
+      case '系统管理' : return window.$store.dispatch('getStoresList', {path})
     }
   })
 }
@@ -21,5 +22,7 @@ export const handleSearchList = ({path, menu} = {}) => {
     }
   }else if(menu === '会员管理'){
       return window.$store.dispatch('getMemberStore', {path})
+  }else if(menu === '系统管理'){
+      return window.$store.dispatch('getStoresList', {path})
   }
 }

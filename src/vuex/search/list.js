@@ -2314,7 +2314,7 @@ const state = {
           text:'查询',
           type:'default',
           size:'small',
-          click:'',
+          click:handleSearchList,
         },
         {
           text:'重置',
