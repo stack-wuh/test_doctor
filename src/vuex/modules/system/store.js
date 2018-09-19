@@ -51,7 +51,7 @@ const actions = {
         break;
       case '关注用户列表' : _url = 'user/getUserList.do', search = {...rootState.search, currPageNo}
         break;
-      case '角色管理' : _url = 'roleBackend/getRoleList.do' 
+      case '角色管理' : _url = 'roleBackend/getRoleList.do', search = {...rootState.search, currPageNo}
         break;
       case '会员卡等级设置' : _url = 'platform/getRankList.do', search = {currPageNo}
         break;
