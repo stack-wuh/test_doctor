@@ -75,13 +75,11 @@ const actions = {
   /**
    * 发布新的门店
    */
-  pubStoreList({rootState}){
-    $http.post('store/addStoreInfo.do',rootState.form,(res)=>{
-      if(res.status == 0){
-        setTimeout(()=>{
-          window.$route.go(-2)
-        },1000)
-      }
+  pubStoreList({rootState}, {form} = {}){
+    return new Promise((resolve, reject) => {
+      $http.post('store/addStoreInfo.do', form,(res)=>{
+        return resolve(res)
+      })
     })
   },
 
@@ -483,7 +481,15 @@ const getters = {
      }
    })
   },
-
+  formatSystemStore: state => ({path} = {}) => {
+    return state.data.map(item => {
+      if(path === '门店管理'){
+        return {...item, typeText: item.type === 0 ? '集团' : item.type === 1 ? '4S店' : '维修店', stateText: item.state == 1 ? '正常' : '禁用'}
+      }else{
+        return {...item}
+      }
+    })
+  },
   /**
    * 处理消费返积分
    */
