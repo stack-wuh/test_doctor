@@ -102,7 +102,8 @@ export default {
           couponName: item.couponName,
           number: item.number,
           quantity: item.quantity,
-          rate: item.rate
+          rate: item.rate,
+          id: item.id
         }
       })
       let form = {...this.form, data: JSON.stringify(data)}
