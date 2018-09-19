@@ -48,6 +48,7 @@ const mutations = {
    */
   setCouponMemberTake(state, {params} = {}){
     state.tempForm  = params
+    console.log(params)
   },
   handleClearCouponMemberTake(state, rootState){
     rootState.search = {}
@@ -195,9 +196,9 @@ const actions = {
   /**
    * 卡券管理-- 用户卡券管理 -- 导入文件
    */
-  couponImportExcel({dispatch}, {path, form}){
+  couponImportExcel({dispatch}, {path, form, form:{fileName}}){
     return new Promise((resolve, reject) => {
-      $http.post('takeListByUserCouponVoForImport.do', form, res => {
+      $http.post('takeListByUserCouponVoForImport.do', {fileName: fileName.toString()}, res => {
         return resolve(res)
       })
     })
