@@ -48,7 +48,6 @@ const mutations = {
    */
   setCouponMemberTake(state, {params} = {}){
     state.tempForm  = params
-    console.log(params)
   },
   handleClearCouponMemberTake(state, rootState){
     rootState.search = {}
