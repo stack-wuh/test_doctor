@@ -313,6 +313,7 @@ const state = {
           type:'',
           size:'small',
           style:'',
+          click:DelAndFreshWithAll
         }
       ]
     },
