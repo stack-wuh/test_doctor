@@ -58,7 +58,7 @@
 <script>
 import MyBottom from '@/components/common/bottom'
 import MySubButton from '@/components/common/subButton'
-
+import {mapActions, mapState} from 'vuex'
 const rules = {
   activityTitle:[{required: true, message:'请编辑活动标题', trigger: 'blur'}],
   picture:[{required: true, message:'请上传活动封面', trigger: 'change'}],
@@ -96,8 +96,15 @@ export default {
       rules,
     }
   },
-
+  computed:{
+    ...mapState({
+      'activesList':'activesList'
+    })
+  },
   methods: {
+    ...mapActions({
+      'getActiveList':'getActiveList'
+    }),
     submit(){
       console.log(this.form)
     },
@@ -108,6 +115,9 @@ export default {
     handleAvatarSuccess(res){
       this.form.picture = res && res.data
     }
+  },
+  created(){
+    this.getActiveList()
   }
 }
 </script>
