@@ -1,3 +1,5 @@
+import {MaxNumberValue, MaxCouponNumber} from '../../../utils/valid'
+
 export const forms = [
   {
     name:'部门管理',
@@ -457,7 +459,8 @@ export const forms = [
         rules:[
           {
             required:true,
-            message:'请编辑折扣比例',
+            validator: MaxNumberValue,
+            // message:'请编辑折扣比例',
             trigger:'blur',
           }
         ],
@@ -564,7 +567,7 @@ export const forms = [
         rules:[
           {
             required:true,
-            message:'请编辑必填项',
+            validator: MaxCouponNumber,
             trigger:'blur',
           }
         ],
@@ -667,7 +670,7 @@ export const forms = [
         rules:[
           {
             required:true,
-            message:'请编辑折扣率',
+            validator: MaxNumberValue,
             trigger:['blur'],
           }
         ],
