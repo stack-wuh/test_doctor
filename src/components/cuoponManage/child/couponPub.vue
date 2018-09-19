@@ -35,10 +35,8 @@
               <el-radio :label="1">首次分享后领取</el-radio>
             </el-radio-group>
           </el-form-item>
-          <el-form-item label="员工推荐权限" prop="roleId">  
-            <el-checkbox-group v-model="form.roleId">
-              <el-checkbox v-for="(item,index) in roleList" :key="index" :label="item.value">{{item.label}}</el-checkbox>
-            </el-checkbox-group>
+          <el-form-item label="员工推荐权限" prop="roleId"> 
+            <span class="c666 margin-rg-15" v-for="(item,index) in roleLists" :key="index">{{item.label}}</span> 
           </el-form-item>
           <el-form-item label="使用说明" prop="instructions" >
             <el-input v-model="form.instructions" type="textarea" :rows="3"></el-input>
@@ -81,10 +79,11 @@ export default {
         validTill:'',
         receiveType:[],
         instructions:'',
-        roleId:[],
         couponValue:'',
       },
       rules,
+      roleLists:[],
+      roleIds:'',
     }
   },
   computed:{
@@ -95,7 +94,8 @@ export default {
   methods: {
     ...mapActions({
       'getRoleList': 'getRoleList',
-      'submit': 'couponPraisePubAndPut'
+      'submit': 'couponPraisePubAndPut',
+      'getAuthorRoleList':'getAuthorRoleList'
     }),
     handleCancel(){
       this.$refs.myForm.resetFields()
@@ -107,7 +107,7 @@ export default {
       this.$refs.myForm.validate(valid => {
         if(valid){
           let form = JSON.parse(JSON.stringify(this.form))
-          form = {...form, roleId: form.roleId ? form.roleId.toString() : ''}
+          form = {...form, roleIds: this.roleIds}
           this.submit({form}).then(res => {
             this.handleCancel()
           })
@@ -123,7 +123,10 @@ export default {
   created(){
     let data = this.$route.query.data && JSON.parse(this.$route.query.data)
     this.form = {...this.form, ...data, roleId: data ? (data.roleIds ? data.roleIds.split(',') : []) : []}
-    this.getRoleList()
+    this.getAuthorRoleList().then(res => {
+      this.roleLists = res.data
+      this.roleIds = res.data.map(item => item.value).toString()
+    })
   }
 }
 </script>
