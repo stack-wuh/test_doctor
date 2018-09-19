@@ -1518,31 +1518,57 @@ const state = {
           key:'姓名',
           value:'',
           type:'default',
+          prop:'name',
         },
         {
           key:'联系电话',
           value:'',
           type:'date',
+          prop:'phone',
         },
         {
           key:'是否精准客户',
           value:'',
-          type:'date',
+          type:'select',
+          prop:'accurateCustomers',
+          list:[
+            {
+              label:'是',
+              value:1
+            },
+            {
+              label:'否',
+              value:0
+            }
+          ]
         },
         {
           key:'是否转发',
           value:'',
-          type:'date',
+          type:'select',
+          prop:'whetherForwarding',
+          list:[
+            {
+              label:'是',
+              value:1
+            },
+            {
+              label:'否',
+              value:0
+            }
+          ]
         },
         {
           key:'活动开始日期',
           value:'',
           type:'date',
+          prop:'startDate',
         },
         {
           key:'活动结束日期',
           value:'',
           type:'select',
+          prop:'endDate',
         },
       ],
     },
@@ -1555,41 +1581,73 @@ const state = {
           key:'参与人姓名',
           value:'',
           type:'default',
+          prop:'name',
         },
         {
           key:'参与人联系电话',
           value:'',
           type:'default',
+          prop:'phone',
         },
         {
           key:'推荐人姓名',
           value:'',
           type:'default',
+          prop:'refereer',
         },
         {
           key:'推荐人联系电话',
           value:'',
           type:'default',
+          prop:'refereeerPhone',
         },
         {
           key:'活动开始日期',
           value:'',
           type:'date',
+          prop:'startDate',
         },
         {
           key:'活动结束日期',
           value:'',
-          type:'select',
+          type:'date',
+          prop:'endDate',
         },
         {
           key:'报名状态',
           value:'',
           type:'select',
+          prop:'status',
+          list:[
+            {
+              label:'已确认',
+              value:1
+            },
+            {
+              label:'未确认',
+              value:0
+            },
+            {
+              label:'已领取',
+              value:2
+            }
+          ],
         },
         {
           key:'支付状态',
           value:'',
           type:'select',
+          prop:'isValid',
+          list:[
+            {
+              label:'未支付',
+              value:0
+            },
+            {
+              label:'已支付',
+              value:1
+            }
+          ]
         },
       ],
     },
@@ -2390,6 +2448,8 @@ const getters = {
           sub.list = rootGetters.formatRoleList
         }else if(sub.key === '文章类别'){
           sub.list = rootState.articleType
+        }else if(sub.key === '活动栏目'){
+          sub.list = rootState.activesList
         }
         return {...sub}
       })

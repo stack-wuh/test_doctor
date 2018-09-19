@@ -46,7 +46,8 @@
    useDelAndFresh ,
    handleSwitchChange,
    handleDelAndFresh,
-   handleDelItemForCouponModel
+   handleDelItemForCouponModel,
+   marketActivePub
   } from './click.js'
 const state = {
   data:[
@@ -2398,7 +2399,7 @@ const state = {
           key:'操作',
           type:'button',
           fix:'right',
-          width:'240px',
+          width:'280px',
           list:[
             {
               text:'编辑',
@@ -2412,9 +2413,27 @@ const state = {
               size:'small',
             },
             {
-              text:'发布',
+              valid:2,
+              value:1,
+              rules:'status',
+              texts:['未开始', '进行中', '已结束', '已关闭'],
+              styles:[
+                {
+                  color: STYLES['PRIMARY']
+                },
+                {
+                  color: STYLES['SUCCESS']
+                },
+                {
+                  color: STYLES['INFO']
+                },
+                {
+                  color: STYLES['ERROR']
+                }
+              ],
               type:'',
               size:'small',
+              click:marketActivePub
             },
             {
               text:'精准获客',
@@ -2443,47 +2462,47 @@ const state = {
         {
           key:'姓名',
           type:'default',
-          prop:'',
+          prop:'name',
         },
         {
           key:'手机号',
           type:'default',
-          prop:'',
+          prop:'phone',
         },
         {
           key:'浏览次数',
           type:'default',
-          prop:'',
+          prop:'viewNum',
         },
         {
           key:'浏览时长',
           type:'default',
-          prop:'',
+          prop:'browseTime',
         },
         {
           key:'是否精准客户',
           type:'default',
-          prop:'',
+          prop:'accurateGuests',
         },
         {
           key:'是否转发',
           type:'default',
-          prop:'',
+          prop:'whetherForwarding',
         },
         {
           key:'最近查看时间',
           type:'default',
-          prop:'',
+          prop:'latelySeeTime',
         },
         {
           key:'关注内容',
           type:'default',
-          prop:'',
+          prop:'followContent',
         },
         {
           key:'转发记录',
           type:'default',
-          prop:'',
+          prop:'forwardingRecord',
         },
       ],
     },
@@ -2498,57 +2517,61 @@ const state = {
         {
           key:'报名编号',
           type:'default',
-          prop:'',
+          prop:'registCode',
         },
         {
           key:'参与人联系电话',
           type:'default',
-          prop:'',
+          prop:'joinPhone',
         },
         {
           key:'参与人姓名',
           type:'default',
-          prop:'',
+          prop:'joinName',
         },
         {
           key:'意向车型',
           type:'default',
-          prop:'',
+          prop:'carName',
         },
         {
           key:'是否支付',
           type:'default',
-          prop:'',
+          prop:'isPlayText',
         },
         {
           key:'报名日期',
           type:'default',
-          prop:'',
+          prop:'registDate',
         },
         {
           key:'推荐人',
           type:'default',
-          prop:'',
+          prop:'refereeerName',
         },
         {
           key:'推荐人联系电话',
           type:'default',
-          prop:'',
+          prop:'getRefereeerPhone',
         },
         {
           key:'是否有效',
           type:'default',
-          prop:'',
+          prop:'isValidText',
         },
         {
           key:'备注',
           type:'default',
-          prop:'',
+          prop:'remark',
         },
         {
           key:'操作',
-          type:'default',
-          prop:'',
+          type:'button',
+          list:[
+            {
+              text:'领取'
+            }
+          ]
         },
       ],
     },
@@ -2620,6 +2643,7 @@ const state = {
               text:'发布',
               type:'',
               size:'small',
+              click:marketActivePub
             },
             {
               text:'中奖查询',
