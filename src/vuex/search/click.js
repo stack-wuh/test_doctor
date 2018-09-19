@@ -3,6 +3,7 @@ export const  clearSearchForm = ({path, menu} = {}) => {
   setTimeout(()=>{
     switch(menu){
       case '卡券管理' : return window.$store.dispatch('getCouponStore', {path})
+      case '会员管理' : return window.$store.dispatch('getMemberStore', {path})
     }
   })
 }
@@ -18,5 +19,7 @@ export const handleSearchList = ({path, menu} = {}) => {
     }else{
       return window.$store.dispatch('getCouponStore', {path })
     }
+  }else if(menu === '会员管理'){
+      return window.$store.dispatch('getMemberStore', {path})
   }
 }
