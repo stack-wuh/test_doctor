@@ -231,3 +231,11 @@ export const handleSwitchChange = (params, row) => {
  export const handleDelItemForCouponModel = (params, text, row, index) => {
   window.$bus.$emit('handleDelItemForModel',index)
  }
+
+ /**
+  * 市场推广 -- 普通活动 -- 发布
+  */
+export const marketActivePub = (params, text, row) => {
+  let {subMenu, child } = params, {id} = row
+  window.$store.dispatch('marketActivePubAndFresh', {path: child || subMenu, id})
+}
