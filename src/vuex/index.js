@@ -398,6 +398,13 @@ export const actions = {
     $http.post('activitiesDraws/activitiesDrawsSelect.do', {}, res => {
       commit('setActivesList', {params: res.data})
     })
+  },
+  getAuthorRoleList({commit}){
+    return new Promise((resolve, reject) => {
+      $http.post('authorityBackend/getCouponRoleDrop.do', {}, res => {
+        return resolve(res)
+      })
+    })
   }
 }
 
