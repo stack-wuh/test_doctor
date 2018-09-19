@@ -337,9 +337,12 @@ export const actions = {
    * 获取售后顾问 --- select
    */
   getSellsList(){
-    $http.post('vipList/commonGetEmployees.do', {name: '售后顾问'}, res => {
-      
+    return new Promise((resolve, reject) => {
+      $http.post('vipList/commonGetEmployees.do', {name: '售后顾问'}, res => {
+        return resolve(res)
+      })
     })
+  
   },
   /**
    * 卡券管理 -- 奖品卡券管理  -- 获取卡券来源 -- select
