@@ -135,9 +135,9 @@ const actions = {
   /**
    *  卡券管理 -- 奖品卡券管理 -- 领取明细文件上传
    */
-  couponReciverList({commit}, {path, form} = {}){
+  couponReciverList({commit}, {path, form:{fileName}} = {}){
    return new Promise((resolve, reject) => {
-    $http.post('coupon/getTakeListByUserCouponVoForReport.do', form, res => {
+    $http.post('coupon/getTakeListByUserCouponVoForReport.do', {fileName: fileName.toString()}, res => {
       return resolve(res)
     })
    }) 
