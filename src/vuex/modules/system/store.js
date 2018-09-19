@@ -288,7 +288,8 @@ const actions = {
       rechargeAmount,
       donationAmount,
       giftIntegral,
-      couponIds
+      couponIds,
+      id
     }, res => {
       setTimeout(()=>{
         dispatch('asyncHideDialog')
@@ -349,19 +350,22 @@ const actions = {
     type,
     picture,
     content,
+    status,
   }}  = {}){
     let _url = id ? 'platform/updateAutoResponse.do' : 'platform/addAutoResponse.do'
-    $http.post( _url , {
-      id,
-      keyword,
-      type,
-      picture,
-      content,
-    } , res => {
-      setTimeout(()=>{
-        window.$route.go(-2)
-      },1000)
+    return new Promise((resolve, reject) => {
+      $http.post( _url , {
+        id,
+        keyword,
+        type,
+        picture,
+        content,
+        status,
+      } , res => {
+        return resolve(res)
+      })
     })
+ 
   },
   /**
    * 保险公司设置
