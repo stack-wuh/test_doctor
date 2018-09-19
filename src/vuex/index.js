@@ -214,7 +214,7 @@ export const mutations = {
    */
   setActivesList(state, {params} = {}){
     state.activesList = params
-  }
+  },
 }
 
 export const actions = {
@@ -394,18 +394,22 @@ export const actions = {
       commit('setArtType', {params: res.data})
     })
   },
+    /**
+   * 市场推广 -- 普通活动 -- 获取活动栏目下拉菜单 -- select
+   */
   getActiveList({commit}){
     $http.post('activitiesDraws/activitiesDrawsSelect.do', {}, res => {
       commit('setActivesList', {params: res.data})
     })
   },
+
   getAuthorRoleList({commit}){
     return new Promise((resolve, reject) => {
       $http.post('authorityBackend/getCouponRoleDrop.do', {}, res => {
         return resolve(res)
       })
     })
-  }
+  },
 }
 
 export const getters = {
