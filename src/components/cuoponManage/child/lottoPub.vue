@@ -87,7 +87,6 @@ export default {
       })
     },
     getCurrPageModel(e){
-      console.log(this.temp_list, e)
       this.getPariseList({currPageNo: e}).then(res => {
         this.temp_list = res.data.list
       })
