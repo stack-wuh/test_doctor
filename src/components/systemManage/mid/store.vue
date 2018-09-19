@@ -2,7 +2,7 @@
   <section class="wrapper">
     <section class="content">
       <search @inputChange="getStoresList({path:pathChange})" v-if="isShow" :name="$route.query.child || $route.query.subMenu" />
-      <my-table v-if="isShow" :list="changeList"  header="true" :params=" $route.query.child ||$route.query.subMenu" >
+      <my-table v-if="isShow" :list="formatSystemStore({path: pathChange})"  header="true" :params=" $route.query.child ||$route.query.subMenu" >
         <span slot="title">{{ $route.query.child || $route.query.subMenu}}列表</span>
         <div slot="right">
             <my-button  ></my-button>
@@ -40,6 +40,7 @@ export default {
     ...mapGetters({
       'list':'formatStoreDataList',
       'changeList' : 'changeStateDataList',
+      'formatSystemStore':'formatSystemStore'
     }),
     ...mapState({
       total:state => state.System.total,
