@@ -1,4 +1,4 @@
-import {MaxNumberValue, MaxCouponNumber} from '../../../utils/valid'
+import {MaxNumberValue, MaxCouponNumber, validPhone, validNoNum, validEmail, validDate} from '../../../utils/valid'
 
 export const forms = [
   {
@@ -252,12 +252,14 @@ export const forms = [
         key:'所属部门',
         type:'select',
         prop:'departmentId',
-        list:[
+        list:[],
+        rules:[
           {
-            value:'1',
-            label:'销售部',
+            required: true, 
+            message:'新选择所属部门',
+            trigger:'change',
           }
-        ],
+        ]
       },
       {
         key:'员工角色',
@@ -282,11 +284,25 @@ export const forms = [
             value:3
           }
         ],
+        rules:[
+          {
+            required: true,
+            message: '请选择员工角色',
+            trigger:'change'
+          }
+        ]
       },
       {
         key:'员工姓名',
         type:'input',
         prop:'realName',
+        rules:[
+          {
+            required: true,
+            message:'请编辑员工姓名',
+            trigger: 'blur'
+          }
+        ]
       },
       {
         key:'员工性别',
@@ -302,41 +318,97 @@ export const forms = [
             value:0
           }
         ],
+        rules:[
+          {
+            required: true,
+            message:'请选择员工性别',
+            trigger: 'change'
+          }
+        ]
       },
       {
         key:'手机号码',
         type:'input',
         prop:'phone',
+        rules:[
+          {
+            required: true,
+            validator: validPhone,
+            trigger: 'blur'
+          }
+        ]
       },
       {
         key:'出生日期',
         type:'date',
         prop:'birthday',
+        rules:[
+          {
+            required: true,
+            validator: validDate,
+            trigger: 'change'
+          }
+        ]
       },
       {
         key:'登录账号',
         type:'input',
         prop:'username',
+        rules:[
+          {
+            required: true,
+            message:'请编辑登录账号',
+            trigger: 'blur'
+          }
+        ]
       },
       {
         key:'登录密码',
         type:'input',
         prop:'password',
+        rules:[
+          {
+            required: true,
+            message:'请编辑登陆密码',
+            trigger: 'blur'
+          }
+        ]
       },
       {
         key:'电子邮箱',
         type:'input',
         prop:'email',
+        rules:[
+          {
+            required: true,
+            validator: validEmail,
+            trigger: 'blur'
+          }
+        ]
       },
       {
         key:'身份证号',
         type:'input',
         prop:'idNum',
+        rules:[
+          {
+            required: true,
+            validator: validNoNum,
+            trigger: 'blur'
+          }
+        ]
       },
       {
         key:'每日预约',
         type:'input',
         prop:'reservation',
+        rules:[
+          {
+            required: true,
+            message:'请编辑每日预约',
+            trigger: 'blur'
+          }
+        ]
       }
     ],
     myForm:{
