@@ -1,4 +1,5 @@
 import $http from '../../../utils/axios'
+import {_g, NotNull} from '../../../utils/global'
 const state = {
   data:[],
   total:0,
@@ -19,7 +20,7 @@ const actions = {
       case '配件大类管理' : _url = 'quality/getPartsList.do' , search = {...rootState.search ,search, currPageNo}
         break;
     }
-    $http.post(_url ,search ,res => {
+    $http.post(_url , NotNull(search),res => {
       commit('setUseStore' ,{data:res.data})
     })
   },
