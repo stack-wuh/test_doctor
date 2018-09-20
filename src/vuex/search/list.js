@@ -2424,7 +2424,9 @@ const getters = {
           sub.list = rootGetters.formatCarTypeList
         }else if(sub.key === '卡券类型' && sub.type === 'select'){
           sub.list = rootGetters.formatCouponList
-        }else if(sub.key === '会员等级'){
+        }else if((sub.key === '会员等级') && (item.name === '用户卡券发放')){
+          sub.list = rootState.level_List
+        }else if((sub.key === '会员等级') && (item.name !== '用户卡券发放')){
           sub.list = rootGetters.formatMemberList
         }else if(sub.key === '业务类型'){
           sub.list = rootState.Member.tempArr1

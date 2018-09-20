@@ -5,6 +5,7 @@ export const  clearSearchForm = ({path, menu} = {}) => {
       case '卡券管理' : return window.$store.dispatch('getCouponStore', {path})
       case '会员管理' : return window.$store.dispatch('getMemberStore', {path})
       case '系统管理' : return window.$store.dispatch('getStoresList', {path})
+      case '用品管理' : return window.$store.dispatch('getUseStore', {path})
     }
   })
 }
@@ -24,5 +25,7 @@ export const handleSearchList = ({path, menu} = {}) => {
       return window.$store.dispatch('getMemberStore', {path})
   }else if(menu === '系统管理'){
       return window.$store.dispatch('getStoresList', {path})
+  }else if(menu === '用品管理'){
+    return window.$store.dispatch('getUseStore', {path})
   }
 }

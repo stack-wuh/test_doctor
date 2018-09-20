@@ -301,7 +301,7 @@ const state = {
         {
           key:'性别',
           type:'default',
-          prop:'sex',
+          prop:'sexText',
         },
         {
           key:'所在部门',
@@ -754,7 +754,7 @@ const state = {
         {
           key:'类别',
           value:'',
-          prop:'categoryId',
+          prop:'categoryName',
           type:'default',
         },
         {
@@ -932,12 +932,20 @@ const state = {
           width:'140px',
           list:[
             {
-              text:'提货',
-              elseText:'已提货',
-              type:'text',
-              valid:true,
-              size:'mini',
-              value:2,
+              valid:2,
+              value:0,
+              texts:['未支付','已支付','已提货'],
+              styles:[
+                {
+                  color:STYLES['ERROR']
+                },
+                {
+                  color:STYLES['PRIMARY']
+                },
+                {
+                  color:STYLES['SUCCESS']
+                }
+              ],
               rules:'state',
               click:handleTakeGood
             },
@@ -1699,7 +1707,7 @@ const state = {
         {
           key:'卡券面值',
           type:'default',
-          prop:'counponName',
+          prop:'couponValue',
         }, 
         {
           key:'有效期',
