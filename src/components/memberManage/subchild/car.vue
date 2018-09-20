@@ -70,13 +70,13 @@ export default {
             label:'购买保险日期',
             disabled:true,
             type:'date',
-            prop:'InsuranceStart'
+            prop:'insuranceStarts'
           },
           {
             label:'上次保养日期',
             disabled:true,
             type:'date',
-            prop:'lastMaintainTime'
+            prop:'lastMaintainTimes'
           },
         ],
         [
@@ -84,7 +84,7 @@ export default {
             label:'首次上牌日期',
             disabled:true,
             type:'date',
-            prop:'firstBoardTime'
+            prop:'firstBoardTimes'
           },
           {
             label:'上次保养公里数',
@@ -121,8 +121,10 @@ export default {
       this.form = {...this.form, ...this.tempForm}
     },
     handleClickSave(){
-      console.log(this.form)
-      this.memberCarCommPut({form: this.form})
+      this.memberCarCommPut({form: this.form}).then(res => {
+        this.memberCarComm({search: {id: this.id}})
+        this.handleToggleState()
+      })
     }
   },
   created(){
