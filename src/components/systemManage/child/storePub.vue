@@ -26,6 +26,9 @@
               <el-input v-model="form['price']" placeholder="请编辑价格"></el-input>
             </el-form-item>
           </section>
+          <el-form-item label="组织机构" prop="organizationName">
+            <el-input placeholder="请编辑组织机构名称" v-model="form.organizationName" class="my-input-220"></el-input>
+          </el-form-item>
           <el-form-item label="组织描述"  prop="descInfo">
             <el-input v-model="form['descInfo']" :rows="3" type="textarea" placeholder="编辑组织描述" ></el-input>
           </el-form-item>  
@@ -145,6 +148,7 @@ const rules = {
   wifiPassword:[{required: true, message: '请编辑wifi密码', trigger: 'blur'}],
   logourl:[{required: false, message: '请上传Logo图', trigger: 'change'}],
   qrCode:[{required: false, message: '请上传二维码', trigger: 'change'}],
+  organizationName:[{required: true, message: '请编辑组织机构名称', trigger: 'blur'}],
 }
 export default {
   name: 'storePub',
@@ -177,6 +181,7 @@ export default {
         wifiPassword:'',
         logourl:'',
         qrCode:'',
+        organizationName:'',
       },
       uploadUrl:rootPath + '/store/uploadPictures.do',
       rules,
