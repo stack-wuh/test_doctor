@@ -66,7 +66,7 @@ const actions = {
       case '快捷回复设置' : _url = 'platform/getFastReplyList.do', search = {...rootState.search, currPageNo}, dispatch('getRoleList')
         break;
     }
-    $http.post(_url,search,(res)=>{
+    $http.post(_url, NotNull(search), (res)=>{
       commit('setStoreList',{params:res.data})
       commit('handleClear')
     })
@@ -241,8 +241,11 @@ const actions = {
    * 消费返积分列表
    */
   couponIntergalForConsume({commit}){
-    $http.post('platform/integralReturnList.do' , {} , res => {
-      commit('setInterConsume' , {params : res})
+    return new Promise((resolve, reject) => {
+      $http.post('platform/integralReturnList.do' , {} , res => {
+        commit('setInterConsume' , {params : res})
+        return resolve(res)
+      })
     })
   },
 
@@ -262,14 +265,53 @@ const actions = {
    * form表单
    */
   couponPubAndPut({dispatch} , {form} = {}){
-    let list = {}
-    form.forEach(item => {
-      list[item.prop] = item.value
-      list.id = item.id
+    return new Promise((resolve, reject) => {
+      $http.post('platform/addOrUpIntegralRule.do' , form, res => {
+        return resolve(res)
+      })
     })
-    $http.post('platform/addOrUpIntegralRule.do' , list)
   },
-
+  /**
+   * 会员卡积分规则 -- 积分消费规则
+   */
+  getCouponSaleRule(){
+    return new Promise((resolve, reject) => {
+      $http.post('platform/getIntegralExpend.do', {}, res => {
+        return resolve(res)
+      })
+    })
+  },
+  /**
+   * 会员卡积分规则 -- 发布积分消费规则
+   */
+  couponMemberSalePub({dispatch}, {form} = {}){
+    return new Promise((resolve, reject) => {
+      $http.post('platform/upIntegralExpend.do', form, res => {
+        return resolve(res)
+      })
+    })
+  },
+  /**
+   * 会员卡积分规则 -- 获取积分抵现列表
+   */
+  getCouponMemberSells(){
+    return new Promise((resolve, reject) => {
+      $http.post('platform/getIntegralTonow.do', {}, res => {
+        return resolve(res)
+      })
+    })
+  },
+  /**
+   * 会员卡积分规则 -- 发布积分底线规则
+   */
+  setCouponMemberSells({dispatch}, {form} = {}){
+    return new Promise((resolve, reject) => {
+      $http.post('platform/upIntegralTonow.do', form, res => {
+        dispatch('getCouponMemberSells')
+        return resolve(res)
+      })
+    })
+  },
   /**
    * 会员充值设置
    * 会员充值新增/更新
@@ -484,9 +526,13 @@ const getters = {
   formatSystemStore: state => ({path} = {}) => {
     return state.data.map(item => {
       if(path === '门店管理'){
-        return {...item, typeText: item.type === 0 ? '集团' : item.type === 1 ? '4S店' : '维修店', stateText: item.state == 1 ? '正常' : '禁用'}
+        return {...item, typeText: item.storeType == 0 ? '集团' : item.storeType == 1 ? '4S店' : '维修店', stateText: item.state == 1 ? '正常' : '禁用'}
+      }else if(path === '保养提醒设置'){
+        return {...item, typeText: item.type == 0 ? '未到店' : '已到店'}
+      }else if(path === '自动回复配置'){
+        return {...item, typeText: item.type == 0 ? '文本' : '图文'}
       }else{
-        return {...item}
+        return {...item, sexText: item.sex == 1 ? '男' : '女'}
       }
     })
   },
