@@ -106,9 +106,10 @@ export default {
      * beforeclose钩子
      */
     beforeClose(){
-      this.$refs.myForm.resetFields()
+      setTimeout(()=>{
+        this.$refs.myForm.resetFields()
+      },500)
       this.myForm.couponId = []
-      console.log(this.myForm)
       this.$store.commit('handlehideDialog')
     },
 
