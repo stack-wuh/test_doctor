@@ -73,6 +73,7 @@ const actions = {
         case '积分管理' : return commit('setMemberStore', {params: res.data.info, tempArr1: res.data.businessType || []})
         case '充值明细' : return commit('setMemberStore', {params: res.data.info, tempArr1: res.data.payWay || []})
         case '消费明细' : return commit('setMemberStore', {params: res.data.info, tempArr1: res.data.list2 || []})
+        case '会员充值' : return commit('setMemberInfo', {params: res.data})
         default : commit('setMemberStore', {params: res.data})
       }
     })
@@ -286,11 +287,11 @@ const actions = {
    */
   memberRechargeDo({commit}, {form} = {}){
     return new Promise((resolve, reject) => {
-      $http.post('vipPage/recharge.do', {...form, ids:form.ids.toString()}, res => {
+      $http.post('detail/realPay.do', {...form, ids:form.ids.toString()}, res => {
         return resolve(res)
       })
     })
-  }
+  },
 }
 
 const mutations = {
@@ -340,6 +341,13 @@ const mutations = {
    */
   setSelectUserMsg(state, {params} = {}){
     state.tempObj.data = params
+  },
+
+  setMemberInfo(state, {params} = {}){
+    state.tempObj.data = params
+  },
+  clearTempObj(state){
+    state.tempObj.data = []
   }
 }
 

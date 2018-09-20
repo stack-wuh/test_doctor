@@ -64,7 +64,7 @@
 <script>
 import Search from '@/components/common/search'
 import SubButton from '@/components/common/subButton'
-import {mapActions, mapGetters, mapState} from 'vuex'
+import {mapActions, mapGetters, mapState, mapMutations} from 'vuex'
 import {MaxCouponNumber} from '../../../utils/valid.js'
 const rules = {
   money:[{required: true, message:'请编辑充值金额', trigger:'blur'}],
@@ -114,7 +114,10 @@ export default {
   methods: {
     ...mapActions({
       'getCouponList': 'getCouponList',
-      'handleSubmit': 'memberRechargeDo'
+      'handleSubmit': 'memberRechargeDo',
+    }),
+    ...mapMutations({
+      'clearTempObj':'clearTempObj'
     }),
     submit(){
       let form = {...this.form, phone: this.search.phone}
@@ -127,7 +130,9 @@ export default {
       }
       this.$refs.myForm.validate(valid => {
         if(valid){
-          this.handleSubmit({form})
+          this.handleSubmit({form}).then(res => {
+            this.cancel()
+          })
         }else{
           _g.toastMsg({
             type:'error',
@@ -137,6 +142,7 @@ export default {
       })
     },
     cancel(){
+      this.clearTempObj()
       this.$refs.myForm.resetFields()
       this.$store.commit('clearSearchForm')
       setTimeout(()=>{
@@ -146,6 +152,9 @@ export default {
   },
   created(){
     this.getCouponList()
+  },
+  destroyed(){
+    this.$store.commit('clearSearchForm')
   }
 }
 </script>
