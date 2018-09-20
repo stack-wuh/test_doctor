@@ -504,6 +504,8 @@ const getters = {
         return {...item, typeText: item.type == 0 ? '未到店' : '已到店'}
       }else if(path === '自动回复配置'){
         return {...item, typeText: item.type == 0 ? '文本' : '图文'}
+      }else if(path === '角色管理'){
+        return {...item, typeText: item.type === 0 ? '普通用户' : item.type === 1 ? '保养顾问' : item.type === 2 ? '续保顾问' : '保险顾问'}
       }else{
         return {...item, sexText: item.sex == 1 ? '男' : '女'}
       }
