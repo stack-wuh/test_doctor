@@ -202,9 +202,9 @@ const actions = {
     sex,
     birthday,
     phone,
-    afterService,
-    createTimes,
     afterServiceId,
+    createTimes,
+    afterServiceRoleId,
     id
   }} = {}){
     return new Promise((resolve, reject) => {
@@ -213,9 +213,9 @@ const actions = {
         sex,
         birthday,
         phone,
-        afterService,
-        createTimes,
         afterServiceId,
+        createTimes,
+        afterServiceRoleId,
         id
       }, res => {
         return resolve(res)
@@ -248,9 +248,9 @@ const actions = {
     plateNum,
     frameNum,
     engineNum,
-    InsuranceStart,
-    lastMaintainTime,
-    firstBoardTime,
+    InsuranceStarts,
+    lastMaintainTimes,
+    firstBoardTimes,
     lastMaintainKm,
     maintainIntervalKm,
   }} = {}){
@@ -261,9 +261,9 @@ const actions = {
         plateNum,
         frameNum,
         engineNum,
-        InsuranceStart,
-        lastMaintainTime,
-        firstBoardTime,
+        InsuranceStarts,
+        lastMaintainTimes,
+        firstBoardTimes,
         lastMaintainKm,
         maintainIntervalKm,
       }, res => {
