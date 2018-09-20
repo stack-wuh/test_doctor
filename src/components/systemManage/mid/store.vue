@@ -39,7 +39,6 @@ export default {
     },
     ...mapGetters({
       'list':'formatStoreDataList',
-      'changeList' : 'changeStateDataList',
       'formatSystemStore':'formatSystemStore'
     }),
     ...mapState({

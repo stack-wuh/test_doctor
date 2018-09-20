@@ -496,33 +496,6 @@ const getters = {
     return state && state.data
   },
 
-  /**
-   * 过滤数据
-   * 门店管理/部门管理 / 自动回复 state过滤
-   * state ： 0禁用 ， 1：正常
-   */
-  changeStateDataList(state,getters){ 
-   return  (getters.formatStoreDataList) && (Array.isArray(getters.formatStoreDataList)) && getters.formatStoreDataList.map(item => {
-     let keys = Object.keys(item)
-     if(item.depName){  // 门店/部门过滤
-       return {...item , stateText:item.state == 0 ? '禁用' : '正常'}
-     }else if(keys.includes('storeName')){
-       return {...item, stateText:item.state == 0 ? '禁用' : '正常', typeText:item.type == 0 ? '集团' : item.type == 1 ? '4s店' : '维修店'}
-     }else if(keys.includes('days') && keys.includes('content') && keys.includes('type') ){  // 保养提醒过滤
-       return {...item , typeText:item.type == 0 ? '未到店' : '已到店'}
-     }else if(keys.includes('keyword') && keys.includes('picture')){   // 自动回复
-      return {...item , typeText:item.type == 0 ? '文本' : '图文'}
-     }else if(keys.includes('roleTitle') && keys.includes('type') && keys.includes('description')){
-      return {...item ,typeText:item.type == 0 ? '普通用户' : item.type == 1 ? '保养顾问' : item.type == 2 ? '续保顾问' : '保险顾问'}
-     }else if(keys.includes('sex')){
-      return {...item, sexText: item.sex == 1 ? '男' : '女'}
-     }else if(keys.includes('roleId')){
-      return {...item, roleIdText: item.roleId == 0 ? '销售顾问' : item.roleId == 1 ? '续保顾问' : '售后顾问'}
-     }else{
-       return {...item}
-     }
-   })
-  },
   formatSystemStore: state => ({path} = {}) => {
     return state.data.map(item => {
       if(path === '门店管理'){

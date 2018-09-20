@@ -39,7 +39,6 @@ export default {
     },
     ...mapGetters({
       'list':'formatLogStore',
-      'changeList' : 'changeStateDataList',
     }),
     ...mapState({
       total:state => state.Log.total,
