@@ -257,7 +257,10 @@ export default {
       this.handleChangeState()
     },
     handleSubmit(){
-      this.submit({form: this.form})
+      this.submit({form: this.form}).then(res => {
+        this.memberCouponComm({search: {id: this.id, userId: this.userId}})
+        this.handleChangeState()
+      })
     },
     handleShowCoupon(){
       this.isShowMore = true
@@ -273,7 +276,6 @@ export default {
     }
     this.memberCouponComm({search})
       .then(res => {
-        console.log(res)
         this.form = {...this.form, ...res.data, ...res.data.user}
         this._temp = {...res.data, ...res.data.user}
       })
