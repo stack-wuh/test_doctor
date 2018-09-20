@@ -69,7 +69,7 @@ export const jump2Other = (params ,types ,row) => {
       break;
     case '养车知识' : rootPath = '/serve/carfeed/pub', child = '编辑养车知识', data = JSON.stringify(row)
       break;
-    case '角色管理' : rootPath = '/system/limit/setting', child = '编辑用户权限'
+    case '角色管理' : rootPath = '/system/limit/setting', child = '编辑用户权限', data = JSON.stringify(row)
       break;
     default : rootPath = '/index'
   }
