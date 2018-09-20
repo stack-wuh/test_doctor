@@ -60,3 +60,54 @@ export const MaxCouponNumber = (rule, value, callback) => {
     }
    },500)
  }
+
+ /**
+  * 验证身份证号
+  */
+ export const validNoNum = (rule, value, callback) => {
+   if(!value){
+     return callback(new Error('请编辑身份证号'))
+   }
+   setTimeout(() => {
+     let reg = /^(^[1-9]\d{7}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}$)|(^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])((\d{4})|\d{3}[Xx])$)$/
+     if(reg.test(value)){
+        callback()
+     }else if(!reg.test(value)){
+       callback(new Error('身份证号格式错误'))
+     }
+   }, 100);
+ }
+
+ /**
+  * 验证邮箱地址
+  */
+ export const validEmail = (rule, value, callback) => {
+   if(!value){
+     return callback(new Error('请编辑邮箱地址'))
+   }
+   setTimeout(()=>{
+    let reg = /\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/ 
+    if(reg.test(value)){
+      callback()
+    }else if(!reg.test(value)){
+      callback(new Error('邮箱地址格式错误'))
+    }
+   },100)
+ }
+
+ /**
+  * 验证日期
+  */
+ export const validDate = (rule, value, callback) => {
+   if(!value){
+     return callback(new Error('请选择日期'))
+   }
+   setTimeout(()=>{
+     let reg = /^[1-2][0-9][0-9][0-9]-[0-1]{0,1}[0-9]-[0-3]{0,1}[0-9]$/
+     if(reg.test(value)){
+       callback()
+     }else if(!reg.test(value)){
+       callback(new Error('日期格式错误'))
+     }
+   },100)
+ }
