@@ -28,6 +28,7 @@ export const state = {
   pariseList:[], // 用户奖励的奖励类型 -- select
   articleType:[], //养车知识文章类型 -- select
   activesList:[], //活动栏目下拉 -- select
+  level_List:[], // 会员等级
 }
 
 export const mutations = {
@@ -179,6 +180,7 @@ export const mutations = {
     state.renewList = params['续保顾问'].map(item => { return {label: item, value: item}})
     state.inSuranceList = params['保险顾问'].map(item => {return {label: item, value: item}})
     state.sellList = params['销售顾问'].map(item => {return {label: item, value: item}})
+    state.level_List = params['会员等级'].map(item => {return {label: item, value: item}})
   },
 
   /**
