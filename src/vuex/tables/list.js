@@ -221,9 +221,9 @@ const state = {
       path:'/systemIndexLimit',
       type:'',
       params:['角色管理','角色权限'],
-      colType:'index',
-      colValue:'index',
-      colTitle:'序号',
+      colType:'select',
+      colValue:'selection',
+      colTitle:'选中',
       list:[
         {
           key:'角色名称',
@@ -1178,7 +1178,7 @@ const state = {
         {
           key:'头像',
           type:'image',
-          prop:'wxPic',
+          prop:'headPic',
         },
         {
           key:'微信昵称',
