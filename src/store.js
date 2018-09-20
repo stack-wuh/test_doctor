@@ -18,6 +18,7 @@ import Member from './vuex/modules/member/store'
 import Log from './vuex/modules/log/store'
 import Server from './vuex/modules/server/store'
 import Market from './vuex/modules/market/store'
+import Limit from './vuex/modules/limit'
 
 
 export default new Vuex.Store({
@@ -37,6 +38,7 @@ export default new Vuex.Store({
     Log,
     Server,
     Market,
+    Limit,
   },
   plugins:[MyLog]
 })

@@ -28,6 +28,7 @@
 <script>
 import {limit , baseObj} from '../../../utils/limit.js'
 import MyBottom from '@/components/common/bottom'
+import {mapActions, mapGetters, mapState} from 'vuex'
 export default {
   name: 'limitSetting',
   components:{
@@ -66,7 +67,13 @@ export default {
       isFatherChange:true,
     }
   },
+  computed:{
+
+  },
   methods: {
+    ...mapActions({
+      'getLimitStore':'getLimitStore'
+    }),
     /**
      * 一级权限管理
      */
@@ -121,9 +128,14 @@ export default {
        }
      })
     },
+
+
   },
   created(){
+    let data = this.$route.query.data && JSON.parse(this.$route.query.data)
+    console.log(data)
     this.formatList()
+    this.getLimitStore({form:{roleId: data.id}})
   }
 }
 </script>
