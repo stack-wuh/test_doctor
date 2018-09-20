@@ -86,18 +86,19 @@
 <script>
 import MySubButton from  '../../common/subButton';
 import {mapActions, mapGetters, mapState} from 'vuex'
+import {validPhone, validDate} from '../../../utils/valid.js'
 const rules = {
   realName:[{required:true,message:'请编辑用户姓名',trigger:'blur'}],
-  phone:[{required:true,message:'请编辑用户手机号码',trigger:'blur'}],
+  phone:[{required:true, validator: validPhone,trigger:'blur'}],
   sex:[{required:true,message:'请选择用户性别',trigger:['blur','change']}],
-  birthday:[{required:true,message:'请选择用户生日',trigger:['blur','change']}],
+  birthday:[{required:true, validator: validDate,trigger:['blur','change']}],
   plateNum:[{required:true,message:'请编辑用户车牌',trigger:['blur']}],
   carModel:[{required:true,message:'请编辑用户车型',trigger:['blur']}],
   upkeepEmployeeId:[{required:false,message:'请选择保养顾问',trigger:['blur','change']}],
   renewEmployeeId:[{required:false,message:'请选择续保顾问',trigger:['blur','change']}],
   safeEmployeeId:[{required:false,message:'请选择保险顾问',trigger:['blur','change']}],
-  insuranceStart:[{required:true,message:'请选择保险购买日期',trigger:['blur','change']}],
-  lastMaintainTime:[{required:true,message:'请选择上次保养日期',trigger:['blur','change']}],
+  insuranceStart:[{required:true,validator: validDate,trigger:['blur','change']}],
+  lastMaintainTime:[{required:true,validator: validDate,trigger:['blur','change']}],
   maintainIntervalKm:[{required:true,message:'请编辑保养间隔公里数',trigger:['blur','change']}],
   memberId:[{required:true,message:'请选择会员等级',trigger:['blur','change']}],
   integral:[{required:true,message:'请编辑会员积分',trigger:['blur','change']}],
