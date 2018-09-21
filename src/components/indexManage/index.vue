@@ -114,6 +114,9 @@ export default {
     }
   },
   methods: {
+    ...mapActions({
+      'getLimits': 'getLimitStore'
+    }),
     /**
      * cdn引入echarts
      * 初始化echarts
@@ -136,16 +139,13 @@ export default {
     /**
      * 
      */
-    fetchData(){
-      console.log(this.$store)
-    },
   },
   created() {
     this.$nextTick(() => {
       this.chartsInit();
     });
     this.clock()
-    this.fetchData()
+    // this.getLimits()
   }
 };
 </script>
