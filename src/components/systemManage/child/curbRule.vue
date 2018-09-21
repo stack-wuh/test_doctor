@@ -76,7 +76,7 @@
         <p class="t-title">注:可与优惠券叠加使用.抵现比例为: 100积分=1元.每单最高可抵扣金额与会员等级相关.</p>
       </section>
     </section>
-    <section class="btn-area">
+    <section v-if="$route.query.child !== '会员卡积分规则'" class="btn-area">
       <Bottom type="button" :formData="formatFormItem" />
     </section>
   </section>
