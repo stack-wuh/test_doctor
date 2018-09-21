@@ -12,78 +12,78 @@ export const list = [
         label: "门店管理",
         mid_path: "/mid/container",
         path: "/system/store",
-        isAuth: 1,
+        isAuth: 0,
       },
       {
         label: "部门管理",
         mid_path: "/mid/container",
         path:"/system/store",
-        isAuth: 1,
+        isAuth: 0,
       },
       {
         label:'角色管理',
         mid_path: "/mid/container",
         path:'/system/store',
-        isAuth: 1,
+        isAuth: 0,
       },
       {
         label:'员工列表',
         mid_path: "/mid/container",
         path:'/system/store',
-        isAuth: 1,
+        isAuth: 0,
       },
       {
         label: "平台配置",
         mid_path: "/mid/container",
-        isAuth: 1,
+        isAuth: 0,
         children: [
           {
             label: "会员卡等级设置",
             mid_path: "/mid/container",
             path: "/system/store",
-            isAuth: 1,
+            isAuth: 0,
           },
           {
             label: "会员卡积分规则",
             mid_path: "/mid/container",
             path: "/system/curb/pub",
-            isAuth: 1,
+            isAuth: 0,
           },
           {
             label: "会员充值设置",
             mid_path: "/mid/container",
             path: "/system/store",
-            isAuth: 1,
+            isAuth: 0,
           },
           {
             label: "保养提醒设置",
             mid_path: "/mid/container",
             path: "/system/store",
-            isAuth: 1,
+            isAuth: 0,
           },
           {
             label: "自动回复配置",
             mid_path: "/mid/container",
             path: "/system/store",
-            isAuth: 1,
+            isAuth: 0,
           },
           {
             label: "保险公司",
             mid_path: "/mid/container",
             path: "/system/store",
-            isAuth: 1,
+            isAuth: 0,
           },
           {
             label: "快捷回复设置",
             mid_path: "/mid/container",
             path: "/system/store",
-            isAuth: 1,
+            isAuth: 0,
           },
           {
             label: "关注后消息推送",
             mid_path: "/mid/container",
             path: "/system/curb/pub",
-            isAuth: 1,
+            isAuth: 0,
           }
         ]
       }
@@ -98,19 +98,19 @@ export const list = [
         label: "汽车精品管理",
         mid_path: "/mid/container",
         path: "/use/store",
-        isAuth: 1,
+        isAuth: 0,
       },
       {
         label: "精品订单管理",
         mid_path: "/mid/container",
         path: "/use/store",
-        isAuth: 1,
+        isAuth: 0,
       },
       {
         label: "配件大类管理",
         mid_path: "/mid/container",
         path: "/use/store",
-        isAuth: 1,
+        isAuth: 0,
       }
     ]
   },
@@ -169,6 +169,7 @@ export const list = [
       {
         label: "消息中心",
         mid_path:'/mid/container',
+        isAuth: 1,
         children:[
           {
             label:'系统消息',
