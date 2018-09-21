@@ -29,3 +29,25 @@ export const NotNull = obj => {
   })
   return _obj
 }
+
+/**
+ * 取出指定对象属性的值
+ */
+ export const getObj = (obj,argus) => {
+	let _arr = []
+	if(typeof(obj) !== 'object') return
+	if(typeof(argus) === 'string'){
+		argus = argus.toString()
+	}else {
+		argus = [...argus]
+	}
+	if(typeof(argus) === 'string'){
+		return obj[argus]
+	}
+	if(typeof(argus) === 'object'){
+		argus.forEach(item => {
+			_arr = [..._arr, obj[item]]
+		})
+		return _arr
+	}
+}
