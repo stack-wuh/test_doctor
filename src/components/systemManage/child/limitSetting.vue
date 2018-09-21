@@ -20,7 +20,7 @@
           </section>
         </section>
       </section> -->
-      {{list}}
+      <!-- {{list}} -->
       <section v-if="isFatherChange" class="list-item" v-for="(item,index) in list" :key="index">
         <section class="item">{{item.menuName}}</section>
         <section class="item-nav" v-if="item.subMenu" v-for="(list,lindex) in item.subMenu" >
@@ -28,17 +28,14 @@
             <span class="title"><el-checkbox :indeterminate="list.isIndeterminate" v-model="list.checkAll" @change="handleClickChangeForFirst(index,lindex,$event)" ></el-checkbox> {{list.menuName}} </span>
             <el-checkbox  v-for="(ll, ld) in list.authorityList" :key="ld" :label="ll.name" @change="handleClickOneChose(index, ld, $event, ll.id)" v-model="ll.isAuth" ></el-checkbox>
           </div>
-          <section class="sub-item-nav" v-if="list.children" v-for="(sub,sid) in list.children" :key="sid">
+          <section class="sub-item-nav" v-if="list.authorityMenuList" v-for="(sub,sid) in list.authorityMenuList" :key="sid">
             <div v-if="isFatherChange" >
-              <span class="title"><el-checkbox :indeterminate="sub.isIndeterminate" v-model="sub.checkAll" @change="handleClickChangeForChild(index,lindex,sid,$event)" ></el-checkbox> {{sub.label}}</span>
-                <el-checkbox-group class="nav-list" v-model="sub.checks" @change="handleClickOneChoseForChild(index,lindex,sid,$event)"  >
-                  <el-checkbox class="nav-item" v-for="(ss,sd) in sub.child" :label="ss.name" :key="sd" ></el-checkbox>
-                </el-checkbox-group>
+              <span class="title"><el-checkbox :indeterminate="sub.isIndeterminate" v-model="sub.checkAll" @change="handleClickChangeForChild(index,lindex,sid,$event)" ></el-checkbox> {{sub.menuName}}</span>
+                <el-checkbox v-for="(ll, ld) in sub.authorityList" @change="handleClickOneChose(index, ld, $event, ll.id)" :key="ld" :label="ll.name" v-model="ll.isAuth"></el-checkbox>
             </div>
           </section>
         </section>
       </section>
-
     </section>
   </section>
 </template>
@@ -60,24 +57,6 @@ export default {
           checkAll:false,
           isIndeterminate:true,
           checks:[],
-          child:[
-            {
-              name:'查看',
-              prop:'read',
-            },
-            {
-              name:'编辑',
-              prop:'update',
-            },
-            {
-              name:'删除',
-              prop:'remove',
-            },
-            {
-              name:'新增',
-              prop:'create',
-            } 
-          ]
         }
       ],
       limit ,
@@ -103,36 +82,13 @@ export default {
     /**
      * 一级权限管理
      */
-    handleClickChangeForFirst(index,lindex,val){
-      this.isFatherChange = false
-      let data = this.limit[index].children[lindex]
-      data.checks = val ? ['查看','编辑','删除','新增'] : []
-      data.isIndeterminate = false
-      this.isFatherChange = true
-    },
     handleClickOneChose(index, lindex, val, id){
       this.handleAccredit({form:{authorityId: id, roleId: this.roleId}})
-      console.log(this.list)
     },
 
     /**
      * 二级权限管理
      */
-    handleClickChangeForChild(index,lindex,sid,val){
-      this.isFatherChange = false
-      let data = this.limit[index].children[lindex].children[sid]
-      data.checks = val ? ['查看','编辑','删除','新增'] :[]
-      data.isIndeterminate = false
-      this.isFatherChange = true
-    },
-    handleClickOneChoseForChild(index,lindex,sid,val){
-      this.isFatherChange = false
-      let data = this.limit[index].children[lindex].children[sid]
-      let checkedCount = val.length
-      data.checkAll = checkedCount == 3
-      data.isIndeterminate = checkedCount > 0 && checkedCount < 3
-      this.isFatherChange = true
-    },
 
     formatList(){
      let baseobj = JSON.parse(JSON.stringify(baseObj))
@@ -161,6 +117,11 @@ export default {
         item.authorityMenuList && item.authorityMenuList.map(list => {
           list.authorityList && list.authorityList.map(sub => {
             sub.isAuth = sub.isAuth == 1 ? true : false
+          })
+          list.authorityMenuList && list.authorityMenuList.map(sub => {
+              sub.authorityList && sub.authorityList.map(ss => {
+                ss.isAuth = ss.isAuth == 1 ? true : false
+              })
           })
         })
         return {id: item.id, menuName: item.menuName, subMenu: item.authorityMenuList}
