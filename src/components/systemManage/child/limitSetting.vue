@@ -1,7 +1,7 @@
 <template>
   <section class="wrapper">
     <section class="list">
-      <section class="list-item" v-for="(item,index) in limit" :key="index">
+      <!-- <section class="list-item" v-for="(item,index) in limit" :key="index">
         <section class="item">{{item.label}}</section>
         <section class="item-nav" v-if="item.children" v-for="(list,lindex) in item.children" >
           <div v-if="isFatherChange">
@@ -19,8 +19,25 @@
             </div>
           </section>
         </section>
+      </section> -->
+      <section v-if="isFatherChange" class="list-item" v-for="(item,index) in list" :key="index">
+        <section class="item">{{item.menuName}}</section>
+        <section class="item-nav" v-if="item.subMenu" v-for="(list,lindex) in item.subMenu" >
+          <div>
+            <span class="title"><el-checkbox :indeterminate="list.isIndeterminate" v-model="list.checkAll" @change="handleClickChangeForFirst(index,lindex,$event)" ></el-checkbox> {{list.menuName}} </span>
+            <el-checkbox  v-for="(ll, ld) in list.authorityList" :key="ld" :label="ll.name" @change="handleClickOneChose(index, ld, $event, ll.id)" v-model="ll.isAuth" ></el-checkbox>
+          </div>
+          <section class="sub-item-nav" v-if="list.children" v-for="(sub,sid) in list.children" :key="sid">
+            <div v-if="isFatherChange" >
+              <span class="title"><el-checkbox :indeterminate="sub.isIndeterminate" v-model="sub.checkAll" @change="handleClickChangeForChild(index,lindex,sid,$event)" ></el-checkbox> {{sub.label}}</span>
+                <el-checkbox-group class="nav-list" v-model="sub.checks" @change="handleClickOneChoseForChild(index,lindex,sid,$event)"  >
+                  <el-checkbox class="nav-item" v-for="(ss,sd) in sub.child" :label="ss.name" :key="sd" ></el-checkbox>
+                </el-checkbox-group>
+            </div>
+          </section>
+        </section>
       </section>
-      <my-bottom type="button" />
+
     </section>
   </section>
 </template>
@@ -28,7 +45,7 @@
 <script>
 import {limit , baseObj} from '../../../utils/limit.js'
 import MyBottom from '@/components/common/bottom'
-import {mapActions, mapGetters, mapState} from 'vuex'
+import {mapActions, mapGetters, mapState, mapMutations} from 'vuex'
 export default {
   name: 'limitSetting',
   components:{
@@ -65,14 +82,22 @@ export default {
       limit ,
       baseObj , 
       isFatherChange:true,
+      roleId:'',
+      list:[]
     }
   },
   computed:{
-
+    ...mapState({
+      'store': state => state.Limit.data
+    }),
+    ...mapGetters({
+      // 'store': 'formatLimitStore'
+    })
   },
   methods: {
     ...mapActions({
-      'getLimitStore':'getLimitStore'
+      'getLimitStore':'getLimitStore',
+      'handleAccredit':'handleAccredit'
     }),
     /**
      * 一级权限管理
@@ -84,13 +109,9 @@ export default {
       data.isIndeterminate = false
       this.isFatherChange = true
     },
-    handleClickOneChose(index,lindex,val){  
-      this.isFatherChange = false
-      let data = this.limit[index].children[lindex]
-      let checkedCount = val.length
-      data.checkAll = checkedCount == 3
-      data.isIndeterminate = checkedCount > 0 && checkedCount < 3
-      this.isFatherChange = true
+    handleClickOneChose(index, lindex, val, id){
+      this.handleAccredit({form:{authorityId: id, roleId: this.roleId}})
+      console.log(this.list)
     },
 
     /**
@@ -129,13 +150,21 @@ export default {
      })
     },
 
-
   },
   created(){
     let data = this.$route.query.data && JSON.parse(this.$route.query.data)
-    console.log(data)
+    this.roleId = data.id
     this.formatList()
-    this.getLimitStore({form:{roleId: data.id}})
+    this.getLimitStore({form:{roleId: data.id}}).then(res => {
+      this.list = res.data && res.data.map(item => {
+        item.authorityMenuList.map(list => {
+          list.authorityList.map(sub => {
+            sub.isAuth = sub.isAuth == 1 ? true : false
+          })
+        })
+        return {id: item.id, menuName: item.menuName, subMenu: item.authorityMenuList}
+      })
+    })
   }
 }
 </script>
