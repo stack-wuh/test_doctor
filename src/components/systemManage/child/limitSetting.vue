@@ -20,6 +20,7 @@
           </section>
         </section>
       </section> -->
+      {{list}}
       <section v-if="isFatherChange" class="list-item" v-for="(item,index) in list" :key="index">
         <section class="item">{{item.menuName}}</section>
         <section class="item-nav" v-if="item.subMenu" v-for="(list,lindex) in item.subMenu" >
@@ -157,8 +158,8 @@ export default {
     this.formatList()
     this.getLimitStore({form:{roleId: data.id}}).then(res => {
       this.list = res.data && res.data.map(item => {
-        item.authorityMenuList.map(list => {
-          list.authorityList.map(sub => {
+        item.authorityMenuList && item.authorityMenuList.map(list => {
+          list.authorityList && list.authorityList.map(sub => {
             sub.isAuth = sub.isAuth == 1 ? true : false
           })
         })
