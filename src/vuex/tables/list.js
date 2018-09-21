@@ -47,8 +47,10 @@
    handleSwitchChange,
    handleDelAndFresh,
    handleDelItemForCouponModel,
-   marketActivePub
+   marketActivePub,
+   couponMemberParise
   } from './click.js'
+  import {moveUpItem, moveDown} from '../../utils/global'
 const state = {
   data:[
     {
@@ -1933,7 +1935,7 @@ const state = {
             {
               text:'删除',
               click:handleDelItemForCouponModel
-            }
+            },
           ]
         },
       ],
@@ -2347,9 +2349,21 @@ const state = {
           width:'120px',
           list:[
             {
-              text:'发放',
-              type:'default',
+              valid:2,
+              value:0,
+              texts:['发放','已发放'],
+              styles:[
+                {
+                  color:STYLES['PRIMARY']
+                },
+                {
+                  color:STYLES['SCUEESS']
+                }
+              ],
+              rules:'status',
+              type:'text',
               size:'small',
+              click:couponMemberParise
             }
           ]
         },
