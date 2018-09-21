@@ -239,3 +239,12 @@ export const marketActivePub = (params, text, row) => {
   let {subMenu, child } = params, {id} = row
   window.$store.dispatch('marketActivePubAndFresh', {path: child || subMenu, id})
 }
+
+/**
+ * 卡券管理 -- 员工奖励 -- 发放
+ */
+
+export const couponMemberParise = (params, text, row) => {
+  let {subMenu, child} = params
+  window.$store.dispatch('couponMemberParise', {row, path: child || subMenu})
+}
