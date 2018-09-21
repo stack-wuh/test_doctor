@@ -271,6 +271,16 @@ const actions = {
    */
   clearCouponMemberTake({commit, rootState}){
     commit('handleClearCouponMemberTake', rootState)
+  },
+  /**
+   * 员工奖励 -- 发放
+   */
+  couponMemberParise({dispatch}, {path, row, row:{id}} = {}){
+    $http.post('employeeReward/grantEmployeeReward.do', {id}, res => {
+      setTimeout(() => {
+        dispatch('getCouponStore', {path})
+      }, 1000);
+    })
   }
 }
 
