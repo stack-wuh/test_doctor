@@ -95,7 +95,17 @@ export default {
       let _arr  = val.data && val.data.map((item,index) => {
         return {...item, rate: 0, quantity: 0}
       })
+      let _arr1 = [], _arr2 = []
       this.data = [...this.data, ..._arr]
+      for(var k in this.data){
+        if(_arr1.includes(this.data[k].id)){
+          continue
+        }else{
+          _arr1.push(this.data[k].id)
+          _arr2.push(this.data[k])
+        }
+      }
+      this.data = _arr2
       this.data.map((item,index) => {
         let list = ['一','二','三','四','五','六','七','八','九','十']
         this.$set(this.data[index], 'rank', list[index]+'等奖')
@@ -118,6 +128,15 @@ export default {
           id: item.id
         }
       })
+      for(var k in data){
+        if(data[k].total < data[k].quantity){
+          _g.toastMsg({
+            type:'error',
+            msg:'奖品数量编辑错误'
+          })
+          return
+        }
+      }
       let form = {...this.form, data: JSON.stringify(data)}
       this.$refs.myForm.validate(valid => {
         if(valid){
