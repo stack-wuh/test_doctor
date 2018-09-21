@@ -7,6 +7,7 @@
 
 <script>
 import MyDialog from  '@/components/common/myDialog';
+import {mapActions, mapMutations, mapState} from 'vuex'
 export default {
   name: 'container',
   components:{
@@ -16,6 +17,11 @@ export default {
     return {
     }
   },
+  computed:{
+    ...mapState({
+      'store': 'getLimitStore'
+    })
+  },
   watch:{
     '$route'(to,from){
       if(to.query.path){
@@ -23,7 +29,11 @@ export default {
       }
     }
   },
-  methods: {},
+  methods: {
+    getStoreList(){
+      this.store()
+    }
+  },
   created(){
     let { path , menu , subMenu , child , data} = this.$route.query
     if(path){
