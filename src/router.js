@@ -7,6 +7,7 @@ const Home = resolve => require(['@/components/home'],resolve)
 
 const SignIn = resolve => require(['@/components/signManage/signin'],resolve)
 const SignUp = resolve => require(['@/components/signManage/signup'],resolve)
+const NoLimit = resolve => require(['@/components/signManage/noLimit'], resolve)
 
 const midContainer = resolve => require(['@/components/container/midContainer'],resolve)
 
@@ -88,7 +89,7 @@ export default new Router({
           path:'/index',
           name:'index',
           component:Index
-        }
+        },
       ]
     },
     {
@@ -101,6 +102,11 @@ export default new Router({
           name:'midContainer',
           component:midContainer,
           children:[
+            {
+              path:'/unlimit',
+              name:'unlimit',
+              component: NoLimit
+            },
             {
               path:'/system',
               name:'system',
