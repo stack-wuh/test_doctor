@@ -13,7 +13,7 @@
                   <span>{{list.label}}</span>
               </template>
               <section v-for="(sub,sindex) in list.children" :key="sindex">
-                <el-menu-item :route="{path:sub.mid_path,query:{menu:item.label, subMenu:list.label,child:sub.label,path:sub.path}}" :index="sub.label">
+                <el-menu-item v-if="sub.isAuth === 1" :route="{path:sub.mid_path,query:{menu:item.label, subMenu:list.label,child:sub.label,path:sub.path}}" :index="sub.label">
                   <span slot="title">{{sub.label}}</span>
                 </el-menu-item>
               </section>
@@ -37,6 +37,7 @@
 <script>
 import {mapState, mapMutations, mapGetters, mapActions} from 'vuex'
 import {list} from '../../utils/menu.js'
+import {getQueryString} from '../../utils/global.js'
 export default {
   name: "leftmenu",
 
@@ -613,43 +614,39 @@ export default {
       'store':state => state.Limit.data
     }),
     ...mapGetters({
-      'initList': 'formatLimitStoreInit',
+      'initList': 'formatLimitStoreMenu'
     })
   },
   methods: {
     ...mapActions({
-      'getStore':'getLimitStore'
+      'getStore':'getUserLimit'
     }),
-    formatLimit(){
-      this.getStore().then(res => {
-        let data = res.data
-        console.log(data)
-        this.list.map(item => {
-          item.children && item.children.map(list => {
-            this.initList.map(ss => {
-              if(item.label === ss.menuName){
-                ss.subMenu && ss.subMenu.map((sn, sid) => {
-                  if(list.label == sn.menuName){
-                    let result = sn.authorityList && sn.authorityList.find(sc => sc.name === '查看')
-                    if(result){
-                      list = Object.assign(list, {isAuth: result.isAuth})
-                    }else{
-                      list = Object.assign(list)
-                    }
-                  }else{
-                    list = Object.assign(list, {isAuth: list.isAuth})
+    formatLimit(argus){
+      let _arr = argus && argus.filter(item => item.name === '查看').map(list => getQueryString(list.url))
+      console.log(_arr)
+      this.list.map(item => {
+        _arr.map(list => {
+          if(item.label === list.menu){
+            item.children.map(subItem => {
+              if(subItem.label == list.subMenu){
+                subItem = Object.assign(subItem, {isAuth: 1})
+              }
+              if(subItem.children){
+                subItem.children.map(si => {
+                  if(si.label === list.child && list.child){
+                    si = Object.assign(si, {isAuth: 1})
                   }
                 })
               }
             })
-          })
+          }
         })
-        console.log(this.list)
       })
+      console.log(this.list)
     }
   },
   created(){
-    this.formatLimit()
+    this.getStore().then(this.formatLimit)
   }
 };
 </script>
