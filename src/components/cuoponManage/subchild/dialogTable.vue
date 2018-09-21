@@ -1,6 +1,6 @@
 <template>
   <section class="wrapper">
-      <el-dialog title="添加抽奖模板" :visible.sync="isShowDialog" :before-close="beforeClose">
+      <el-dialog title="添加奖品" :visible.sync="isShowDialog" :before-close="beforeClose">
         <el-form label-width="70px" :model="form" >
           <el-form-item label="奖品名称">
               <el-input v-model="keyWord" placeholder="请输入关键字搜索" class="my-input-220"></el-input>
@@ -86,6 +86,9 @@ export default {
     handleSubmit(){
       this.$emit('getData', {data: this.selection})
       this.hideDialog()
+      setTimeout(()=>{
+        this.selection = []
+      },500)
     },
     getCurrent(e){
       this.$emit('getCurrPageModel', e)
