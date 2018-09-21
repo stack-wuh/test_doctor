@@ -3,6 +3,26 @@ import {_g, NotNull, getObj} from '../../utils/global'
 import {list} from '../../utils/menu'
 const state = {
   data:[],
+  limits:[
+    {
+      "id":15,
+      "menuId":22,
+      "name":"汽车精品管理",
+      "descInfo":"主导航-汽车精品管理页面是否可见",
+      "url":"use/store?menu=用品管理&subMenu=汽车精品管理",
+      "method":"quality/getQualityList.do",
+      "type":0
+    },
+    {
+      "id":15,
+      "menuId":22,
+      "name":"平台设置",
+      "descInfo":"主导航-汽车精品管理页面是否可见",
+      "url":"use/store?menu=用品管理&subMenu=汽车精品管理",
+      "method":"quality/getQualityList.do",
+      "type":0
+    },
+  ], //登陆者权限列表
 }
 
 const actions = {
@@ -32,11 +52,25 @@ const actions = {
     })
   },
 
+  /**
+   * 按登陆者角色, 获取登陆者权限列表
+   */
+  getUserLimit({commit}){
+    return new Promise((resolve, reject) => {
+      $http.post('authorityBackend/getUserAuthList.do', {}, res => {
+        commit('setUserLimitList', {params: res.data})
+        return resolve(res.data)
+      })
+    })
+  }
 }
 
 const mutations = {
   setLimitStore(state, {params} = {}){
     state.data = params
+  },
+  setUserLimitList(state, {params} = {}){
+    state.limits = params
   }
 }
 
@@ -49,43 +83,34 @@ const getters = {
       return {id: item.id, menuName: item.menuName, subMenu: item.authorityMenuList}
     })
   },
+
   /**
-   * 过滤权限列表 -- 主导航的查看权限
+   * 主导航 -- 权限 --过滤器
    */
-  formatLimitStoreByMenu(state, getters){
-    let _arr = list.map((item,index) => {
+  formatLimitStoreMenu(state){
+    return list.map(item => {
       item.children && item.children.map(list => {
-        getters.formatLimitStoreInit.map(ss => {
-          if(ss.menuName === item.label){
-            ss.subMenu.map(sc => {
-              if(list.label === sc.menuName){
-                let result = sc.authorityList.find(sn => sn.name === '查看').isAuth
-                return {...list, isShow: result}
-              }
-            })
+        // 设置二级菜单的权限可见
+        state.limits.map(ll => {
+          if(list.label === ll.name){
+            list.isAuth = 1
+          }else{
+            list.isAuth = 0
           }
+        })
+        //设置三级菜单的权限可见
+        list.children && list.children.map(subList => {
+          state.limits.map(ll => {
+            if(subList.label === ll.name){
+              list.isAuth = 1
+            }else{
+              list.isAuth = 0
+            }
+          })
         })
       })
       return item
-      // getters.formatLimitStoreInit.map(list => {
-      //   if(item.label === list.menuName){ 
-      //     item.children.map((subItem,subIndex) =>{
-      //       list.subMenu.map(subList => {
-      //         if(subItem.label === subList.menuName){
-      //           let _obj = subList.authorityList.find(ss => ss.name === '查看')
-      //           if(!getObj(_obj, 'isAuth')){
-      //            return {isShow:false, ...subItem}
-      //           }else{
-      //             return {isShow: true, ...subItem}
-      //           }
-      //         }
-      //       })
-      //     })
-      //   }
-      // })
-    })[2]
-
-    return _arr
+    })
   }
 }
 
