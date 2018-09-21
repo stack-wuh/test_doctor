@@ -1,14 +1,14 @@
 <template>
   <section class="leftmenu">
     <el-menu class="my-menu" unique-opened collapse-transition router >
-      <section v-for="(item,index) in data" :key="index">
+      <section v-for="(item,index) in list" :key="index">
         <el-submenu v-if="item.children" :index="item.path || item.label">
           <template slot="title">
             <img :src="item.icon" class="icon-img" alt="icon" />
             <span>{{item.label}}</span>
           </template>
           <section v-for="(list,lindex) in item.children" :key="lindex">
-            <el-submenu v-if="list.children" :index="list.path || list.label" >
+            <el-submenu v-if="list.children && list.isAuth == 1" :index="list.path || list.label" >
               <template slot="title">
                   <span>{{list.label}}</span>
               </template>
@@ -18,7 +18,7 @@
                 </el-menu-item>
               </section>
             </el-submenu>
-            <el-menu-item  :route="{path:list.mid_path,query:{menu:item.label,subMenu:list.label,path:list.path}}" v-if="!list.children" :index="list.label">
+            <el-menu-item  :route="{path:list.mid_path,query:{menu:item.label,subMenu:list.label,path:list.path}}" v-if="!list.children && list.isAuth == 1 " :index="list.label">
               <span slot="title">{{list.label}}</span>
             </el-menu-item>
           </section>
@@ -35,6 +35,8 @@
 </template>
 
 <script>
+import {mapState, mapMutations, mapGetters, mapActions} from 'vuex'
+import {list} from '../../utils/menu.js'
 export default {
   name: "leftmenu",
 
@@ -61,40 +63,14 @@ export default {
               path:"/system/store"
             },
             {
-              // label: "角色管理",
               label:'角色管理',
               mid_path: "/mid/container",
               path:'/system/store',
-              // children: [
-              //   {
-              //     label: "角色权限",
-              //     mid_path: "/mid/container",
-              //     path: "/system/store"
-              //   },
-              //   {
-              //     label: "权限设置",
-              //     mid_path: "/mid/container",
-              //     path: "/system/limit/setting"
-              //   }
-              // ]
             },
             {
-              // label: "员工管理",
               label:'员工列表',
               mid_path: "/mid/container",
               path:'/system/store',
-              // children: [
-              //   {
-              //     label: "员工列表",
-              //     mid_path: "/mid/container",
-              //     path: "/system/store"
-              //   },
-              //   {
-              //     label: "新增员工",
-              //     mid_path: "/mid/container",
-              //     path: "/system/store"
-              //   }
-              // ]
             },
             {
               label: "平台配置",
@@ -416,72 +392,6 @@ export default {
             }
           ]
         },
-        // {
-        //   label:'股东分红',
-        //   children:[
-        //     {
-        //       label:'员工分红设置',
-        //       mid_path:'/mid/container',
-        //     },
-        //     {
-        //       label:'员工客户分配',
-        //       mid_path:'/mid/container',
-        //     },
-        //     {
-        //       label:'惩罚设置',
-        //       mid_path:'/mid/container',
-        //     },
-        //     {
-        //       label:'效果分析',
-        //       mid_path:'/mid/container',
-        //     },
-        //     {
-        //       label:'员工贡献报表',
-        //       mid_path:'/mid/container',
-        //     },
-        //     {
-        //       label:'员工分红汇总',
-        //       mid_path:'/mid/container',
-        //     },
-        //     {
-        //       label:'员工提现明细',
-        //       mid_path:'/mid/container',
-        //     },
-        //     {
-        //       label:'员工释放报表',
-        //       mid_path:'/mid/container',
-        //     },
-        //   ]
-        // },
-        // {
-        //   label:'门店经营分析',
-        //   children:[
-        //     {
-        //       label:'经营报表',
-        //       mid_path:'/mid/container',
-        //     },
-        //     {
-        //       label:'会员报表',
-        //       mid_path:'/mid/container',
-        //     },
-        //     {
-        //       label:'卡券报表',
-        //       mid_path:'/mid/container',
-        //     },
-        //     {
-        //       label:'应收款报表',
-        //       mid_path:'/mid/container',
-        //     },
-        //     {
-        //       label:'库存报表',
-        //       mid_path:'/mid/container',
-        //     },
-        //     {
-        //       label:'股东报表',
-        //       mid_path:'/mid/container',
-        //     },
-        //   ]
-        // },
         {
           label: "进存销",
           icon: require("../../assets/img/icon-shop.png"),
@@ -694,11 +604,53 @@ export default {
             }
           ]
         }
-      ]
+      ],
+      list,
     };
   },
-
-  methods: {}
+  computed:{
+    ...mapState({
+      'store':state => state.Limit.data
+    }),
+    ...mapGetters({
+      'initList': 'formatLimitStoreInit',
+    })
+  },
+  methods: {
+    ...mapActions({
+      'getStore':'getLimitStore'
+    }),
+    formatLimit(){
+      this.getStore().then(res => {
+        let data = res.data
+        console.log(data)
+        this.list.map(item => {
+          item.children && item.children.map(list => {
+            this.initList.map(ss => {
+              if(item.label === ss.menuName){
+                ss.subMenu && ss.subMenu.map((sn, sid) => {
+                  if(list.label == sn.menuName){
+                    let result = sn.authorityList && sn.authorityList.find(sc => sc.name === '查看')
+                    if(result){
+                      list = Object.assign(list, {isAuth: result.isAuth})
+                    }else{
+                      list = Object.assign(list)
+                    }
+                  }else{
+                    list = Object.assign(list, {isAuth: list.isAuth})
+                  }
+                })
+              }
+            })
+          })
+        })
+        console.log(this.list)
+      })
+    }
+  },
+  created(){
+    this.formatLimit()
+  }
 };
 </script>
 
