@@ -44,15 +44,15 @@ const checkStatus = response =>{
 }
 
 const checkCode = res => {
-  if(res.status == -404){
+  if(res.status === -404){
     _g.toastMsg({type:'error',msg:res.msg})
   }
-  if(res.data && res.status == 0){
+  if(res.data && res.status === 0){
     return new Promise((resolve,reject)=>{
       resolve(res)
     })
   }
-  if(res.status == 10){
+  if(res.status === 10){
     _g.toastMsg({
       type:'info',
       msg:'请登录之后操作!'
@@ -60,6 +60,9 @@ const checkCode = res => {
     setTimeout(() => {
       window.$route.push({name:'signin'})
     }, 1000);
+  }
+  if(res.status === 15){
+    window.$route.push({name: 'noLimit'})
   }
   return res
 }
