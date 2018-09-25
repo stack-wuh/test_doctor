@@ -1523,7 +1523,7 @@ const state = {
         {
           key:'联系电话',
           value:'',
-          type:'date',
+          type:'input',
           prop:'phone',
         },
         {
