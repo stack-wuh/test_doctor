@@ -2406,11 +2406,12 @@ const state = {
           key:'有效期',
           type:'default',
           prop:'valid',
+          width:'150px',
         },
         {
           key:'发布日期',
           type:'default',
-          prop:'releaseDate',
+          prop:'releaseDateStr',
         },
         {
           key:'状态',
@@ -2434,29 +2435,29 @@ const state = {
               type:'',
               size:'small',
             },
-            {
-              valid:2,
-              value:1,
-              rules:'status',
-              texts:['未开始', '进行中', '已结束', '已关闭'],
-              styles:[
-                {
-                  color: STYLES['PRIMARY']
-                },
-                {
-                  color: STYLES['SUCCESS']
-                },
-                {
-                  color: STYLES['INFO']
-                },
-                {
-                  color: STYLES['ERROR']
-                }
-              ],
-              type:'',
-              size:'small',
-              click:marketActivePub
-            },
+            // {
+            //   valid:2,
+            //   value:1,
+            //   rules:'status',
+            //   texts:['未开始', '进行中', '已结束', '已关闭'],
+            //   styles:[
+            //     {
+            //       color: STYLES['PRIMARY']
+            //     },
+            //     {
+            //       color: STYLES['SUCCESS']
+            //     },
+            //     {
+            //       color: STYLES['INFO']
+            //     },
+            //     {
+            //       color: STYLES['ERROR']
+            //     }
+            //   ],
+            //   type:'',
+            //   size:'small',
+            //   click:marketActivePub
+            // },
             {
               text:'精准获客',
               type:'',

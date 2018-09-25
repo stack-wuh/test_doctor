@@ -54,6 +54,7 @@ export const jump2Other = (params ,types ,row) => {
     case '普通活动' : 
             rootPath = types == '编辑' ? '/market/active/pub' : types == '精准获客' ? '/market/store' : types == '报名查询' ? '/market/store' : '' , 
             child = types == '编辑' ? '编辑活动详情' : types == '精准获客' ? '精准获客' : types == '报名查询' ? '报名查询' :''
+            data = JSON.stringify(row)
       break ;
     case '活动抽奖' : rootPath = '/market/store' , child = '活动中奖' 
       break ; 

@@ -2451,19 +2451,17 @@ const getters = {
         }else if(sub.key === '文章类别'){
           sub.list = rootState.articleType
         }else if(sub.key === '活动栏目'){
-          sub.list = rootState.activesList
+          sub.list = rootGetters.formatActivitiesList
         }
         return {...sub}
       })
       return {...item}
     })
     return arr[0] ? arr[0].list : []
-    // return state.types.find(item => item.params && item.params.includes(parmas.name) ? item : []).list
   },
   getSearchBtnsByParams :state => params => {
     const arr = state.btnList.filter(item => item.params && item.params.includes(params.name))
     return arr[0] ? arr[0].list : []
-    // return state.btnList.find(item => item.params && item.params.includes(params.name) ? item : []).list
   }
 }
 
