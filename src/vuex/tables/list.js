@@ -542,6 +542,58 @@ const state = {
       ]
     },
     {
+      name:'分享与消费奖励规则',
+      path:'',
+      type:'分享与消费奖励规则',
+      params:['分享与消费奖励规则'],
+      colType:'',
+      colValue:'',
+      list:[
+        {
+          key:'分享内容',
+          value:'',
+          prop:'typeText',
+          type:'default',
+        },
+        {
+          key:'一级分享奖励',
+          value:'',
+          prop:'firstAward',
+          type:'default',
+        },
+        {
+          key:'二级分享奖励',
+          value:'',
+          prop:'secondAward',
+          type:'default',
+        },
+        {
+          key:'一级分享最大数',
+          value:'',
+          prop:'firstCount',
+          type:'default',
+        },
+        {
+          key:'二级分享最大数',
+          value:'',
+          prop:'secondCount',
+          type:'default',
+        },
+        {
+          key:'操作',
+          type:'button',
+          list:[
+            {
+              text:'编辑',
+              type:'text',
+              size:'mini',
+              click:openDialog
+            },
+          ]
+        },
+      ]
+    },
+    {
       name:'保养提醒设置',
       path:'',
       type:'保养提醒设置',
