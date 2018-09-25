@@ -1,7 +1,7 @@
 <template>
   <section class="father">
       <section class="content">
-        <Search @inputChange="getMarketStore({path: changePath})" :name="changePath" />
+        <Search @inputChange="getMarketStore({path: changePath, id: temp_data.id || ''})" :name="changePath" />
         <my-table v-if="isShow" header="true" :list="formMarketStore({path: changePath})">
           <span slot="title">{{ $route.query.child || $route.query.subMenu}}列表</span>
           <div slot="right">
@@ -30,7 +30,8 @@ export default {
   },
   data () {
     return {
-      isShow:true
+      isShow:true,
+      temp_data: {}
     }
   },
   computed:{
@@ -48,7 +49,7 @@ export default {
   watch:{
     changePath(){
       let data = this.$route.query.data && JSON.parse(this.$route.query.data)
-      this.getMarketStore({path: this.changePath, search: {data}})
+      this.getMarketStore({path: this.changePath, id: data && data.id})
       this.isShow = false
       setTimeout(()=>{
         this.isShow = true
@@ -66,7 +67,8 @@ export default {
   },
   created(){
     let data = this.$route.query.data && JSON.parse(this.$route.query.data)
-    this.getMarketStore({path: this.changePath, search:{data}})
+    data && (this.temp_data = data)
+    this.getMarketStore({path: this.changePath, id: data && data.id})
   }
 }
 </script>
