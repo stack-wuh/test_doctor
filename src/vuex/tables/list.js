@@ -2635,6 +2635,11 @@ const state = {
           prop:'isValidText',
         },
         {
+          key:'状态',
+          type:'default',
+          prop:'statusText',
+        },
+        {
           key:'备注',
           type:'default',
           prop:'remark',
