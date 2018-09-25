@@ -13,7 +13,7 @@ const actions = {
   getMarketStore({commit, dispatch, rootState}, {path, search, currPageNo = 1} = {}){
     let _url = ''
     switch(path){
-      case '普通活动' : _url = 'ordinaryActivities/ordinaryActivitiesList.do', search = {...rootState.search, currPageNo}, dispatch('getActiveList')
+      case '普通活动' : _url = 'ordinaryActivities/ordinaryActivitiesList.do', search = {...rootState.search, currPageNo}, dispatch('getMarketActivies')
         break;
       case '活动抽奖' : _url = 'activitiesDraws/activitiesDrawsList.do', search = {...rootState.search, currPageNo}, dispatch('getActiveList')
         break;
@@ -57,6 +57,50 @@ const actions = {
       })
     })
   },
+  
+  /**
+   * 市场退管 -- 普通活动 -- 编辑/新增
+   */
+  marketActivePutAndPost({dispatch}, {path, form:{
+    date,
+    id,
+    activityTitle,
+    picture,
+    homePagePromotion,
+    enrollFee,
+    partakeCompulsoryPayment,
+    startDateStr,
+    endDateStr,
+    couponId,
+    initialEnrollNum,
+    whetherAllowEnroll,
+    viewCount,
+    minTime,
+    maxTime,
+    conditionStatus,
+  }} = {}){
+    return new Promise((resolve, reject) => {
+      $http.post('ordinaryActivities/addActivities.do', {
+        id,
+        activityTitle,
+        picture,
+        homePagePromotion:homePagePromotion === true ? 1 : 0 ,
+        enrollFee,
+        partakeCompulsoryPayment: partakeCompulsoryPayment === true ? 1 : 0,
+        startDateStr: date[0],
+        endDateStr: date[1],
+        couponId,
+        initialEnrollNum,
+        whetherAllowEnroll: whetherAllowEnroll === true ? 1 : 0,
+        viewCount,
+        minTime,
+        maxTime,
+        conditionStatus: conditionStatus === true ? 1 : 0,
+      }, res => {
+        return resolve(res)
+      })
+    })
+  },
 
   /**
    * 市场推广 -- 普通活动 -- 发布
@@ -66,6 +110,7 @@ const actions = {
       dispatch('getMarketStore', {path})
     })
   }
+
 }
 
 const mutations = {
@@ -83,7 +128,7 @@ const getters = {
   formMarketStore: (state) => ({path} = {}) => {
     return state.data.map(item => {
       if(path === '普通活动'){
-        return {...item, statusText: item.status == 0 ? '已下架' : item.status == 1 ? '已发布' : '已推送', valid: `${item.startDateStr || ''}-${item.endDateStr || ''}`}
+        return {...item, statusText: item.status == 0 ? '未开始' : item.status == 1 ? '进行中' : item.status == 2 ? '已结束' : '已关闭', valid: `${item.startDateStr || ''}至${item.endDateStr || ''}`}
       }else if(path === '报名查询'){
         return {...item, isValidText: item.isValid == 0 ? '已失效' : '有效', statusText: item.status == 0 ? '未确认' : item.staus == 1 ? '已确认' : '已领取', isPlayText: item.isPlay == 0 ? '未支付' : '已支付'}
       }else{
