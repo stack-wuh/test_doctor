@@ -47,7 +47,8 @@ export default {
   },
   watch:{
     changePath(){
-      this.getMarketStore({path: this.changePath})
+      let data = this.$route.query.data && JSON.parse(this.$route.query.data)
+      this.getMarketStore({path: this.changePath, search: {data}})
       this.isShow = false
       setTimeout(()=>{
         this.isShow = true

@@ -159,7 +159,7 @@ export default {
       this.form = {
         ...this.form,
         ...data,
-        date:[data.startDate, data.endTime],
+        date:[data.startDateStr, data.endDateStr],
         homePagePromotion: data.homePagePromotion === 1 ? true : false,
         partakeCompulsoryPayment: data.partakeCompulsoryPayment === 1 ? true : false,
         whetherAllowEnroll: data.whetherAllowEnroll === 1 ? true : false,
