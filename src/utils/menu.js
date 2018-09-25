@@ -12,30 +12,30 @@ export const list = [
         label: "门店管理",
         mid_path: "/mid/container",
         path: "/system/store",
-        isAuth: 1,
+        isAuth: 0,
       },
       {
         label: "部门管理",
         mid_path: "/mid/container",
         path:"/system/store",
-        isAuth: 1,
+        isAuth: 0,
       },
       {
         label:'角色管理',
         mid_path: "/mid/container",
         path:'/system/store',
-        isAuth: 1,
+        isAuth: 0,
       },
       {
         label:'员工列表',
         mid_path: "/mid/container",
         path:'/system/store',
-        isAuth: 1,
+        isAuth: 0,
       },
       {
         label: "平台配置",
         mid_path: "/mid/container",
-        isAuth: 1,
+        isAuth: 0,
         children: [
           {
             label: "会员卡等级设置",
@@ -104,19 +104,19 @@ export const list = [
         label: "汽车精品管理",
         mid_path: "/mid/container",
         path: "/use/store",
-        isAuth: 1,
+        isAuth: 0,
       },
       {
         label: "精品订单管理",
         mid_path: "/mid/container",
         path: "/use/store",
-        isAuth: 1,
+        isAuth: 0,
       },
       {
         label: "配件大类管理",
         mid_path: "/mid/container",
         path: "/use/store",
-        isAuth: 1,
+        isAuth: 0,
       }
     ]
   },
@@ -128,37 +128,37 @@ export const list = [
         label: "会员列表",
         mid_path: "/mid/container",
         path: "/member/list",
-        isAuth: 1,
+        isAuth: 0,
       },
       {
         label: "车辆管理",
         mid_path: "/mid/container",
         path: "/member/list",
-        isAuth: 1,
+        isAuth: 0,
       },
       {
         label: "积分管理",
         mid_path: "/mid/container",
         path: "/member/list",
-        isAuth: 1,
+        isAuth: 0,
       },
       {
         label: "会员充值",
         mid_path: "/mid/container",
         path: "/member/pay",
-        isAuth: 1,
+        isAuth: 0,
       },
       {
         label: "充值明细",
         mid_path: "/mid/container",
         path: "/member/list",
-        isAuth: 1,
+        isAuth: 0,
       },
       {
         label: "消费明细",
         mid_path: "/mid/container",
         path: "/member/list",
-        isAuth: 1,
+        isAuth: 0,
       }
     ]
   },
@@ -170,30 +170,30 @@ export const list = [
         label: "操作日志",
         mid_path:'/mid/container',
         path:'/log/store',
-        isAuth: 1,
+        isAuth: 0,
       },
       {
         label: "消息中心",
         mid_path:'/mid/container',
-        isAuth: 1,
+        isAuth: 0,
         children:[
           {
             label:'系统消息',
             mid_path:'/mid/container',
             path:'/log/store',
-            isAuth:1,
+            isAuth:0,
           },
           {
             label:'待办事项',
             mid_path:'/mid/container',
             path:'/log/store',
-            isAuth:1,
+            isAuth:0,
           },
           {
             label:'已办事项',
             mid_path:'/mid/container',
             path:'/log/store',
-            isAuth:1,
+            isAuth:0,
           }
         ]
       },
@@ -201,13 +201,13 @@ export const list = [
         label: "联系我们",
         mid_path:'/mid/container',
         path:'/log/concat',
-        isAuth: 1,
+        isAuth: 0,
       },
       {
         label: "版本更新",
         mid_path:'/mid/container',
         path:'/log/version',
-        isAuth: 1,
+        isAuth: 0,
       }
     ]
   },
@@ -219,49 +219,49 @@ export const list = [
         label: "奖品卡券管理",
         mid_path: "/mid/container",
         path: "/coupon/store",
-        isAuth: 1,
+        isAuth: 0,
       },
       {
         label: "抽奖模板设置",
         mid_path: "/mid/container",
         path: "/coupon/store",
-        isAuth: 1,
+        isAuth: 0,
       },
       {
         label: "用户卡券管理",
         mid_path: "/mid/container",
         path: "/coupon/store",
-        isAuth: 1,
+        isAuth: 0,
       },
       {
         label: "用户卡券发放",
         mid_path: "/mid/container",
         path: "/coupon/store",
-        isAuth: 1,
+        isAuth: 0,
       },
       {
         label: "用户奖励",
         mid_path: "/mid/container",
         path: "/coupon/store",
-        isAuth: 1,
+        isAuth: 0,
       },
       {
         label: "用户佣金提现",
         mid_path: "/mid/container",
         path: "/coupon/userComm/pub",
-        isAuth: 1,
+        isAuth: 0,
       },
       {
         label: "用户提现记录",
         mid_path: "/mid/container",
         path: "/coupon/store",
-        isAuth: 1,
+        isAuth: 0,
       },
       {
         label: "员工奖励",
         mid_path: "/mid/container",
         path: "/coupon/store",
-        isAuth: 1,
+        isAuth: 0,
       }
     ]
   },
