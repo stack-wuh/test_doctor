@@ -10,7 +10,7 @@ const actions = {
   /**
    * 获取市场推广模块所有的get请求
    */
-  getMarketStore({commit, dispatch, rootState}, {path, search, currPageNo = 1} = {}){
+  getMarketStore({commit, dispatch, rootState}, {path, search, currPageNo = 1, id} = {}){
     let _url = ''
     switch(path){
       case '普通活动' : _url = 'ordinaryActivities/ordinaryActivitiesList.do', search = {...rootState.search, currPageNo}, dispatch('getMarketActivies')
@@ -21,7 +21,7 @@ const actions = {
         break;
       case '摇一摇活动' : _url = 'rockIngActivities/rockIngActivitiesList.do', search = {...rootState.search, currPageNo}
         break;
-      case '精准获客' : _url = 'ordinaryActivities/accurateGuests.do', search = {...rootState.search, currPageNo, id: search.data.id}
+      case '精准获客' : _url = 'ordinaryActivities/accurateGuests.do', search = {...rootState.search, currPageNo, id}
         break;
       case '报名查询' : _url = 'ordinaryActivities/signUpList.do', search = {...rootState.search, currPageNo}, dispatch('getActiveList')
         break;
@@ -130,7 +130,7 @@ const getters = {
       if(path === '普通活动'){
         return {...item, statusText: item.status == 0 ? '未开始' : item.status == 1 ? '进行中' : item.status == 2 ? '已结束' : '已关闭', valid: `${item.startDateStr || ''}至${item.endDateStr || ''}`}
       }else if(path === '报名查询'){
-        return {...item, isValidText: item.isValid == 0 ? '已失效' : '有效', statusText: item.status == 0 ? '未确认' : item.staus == 1 ? '已确认' : '已领取', isPlayText: item.isPlay == 0 ? '未支付' : '已支付'}
+        return {...item, isValidText: item.isValid == 0 ? '已失效' : '有效', statusText: item.status == 0 ? '未确认' : item.status == 1 ? '已确认' : '已领取', isPlayText: item.isPlay == 0 ? '未支付' : '已支付'}
       }else{
         return {...item}
       }
