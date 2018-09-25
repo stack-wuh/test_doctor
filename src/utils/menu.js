@@ -59,7 +59,7 @@ export const list = [
             label: "分享与消费奖励规则",
             mid_path: "/mid/container",
             path: "/system/share",
-            isAuth: 1,
+            isAuth: 0,
           },
           {
             label: "保养提醒设置",
