@@ -652,6 +652,90 @@ export const forms = [
     }
   },
   {
+    name:'分享与消费奖励规则',
+    list:[
+      {
+        key:'分享类型',
+        type:'select',
+        prop:'type',
+        list:[
+          {
+            label:'套餐',
+            value:1
+          },
+          {
+            label:'活动',
+            value:2
+          },
+          {
+            label:'卡券',
+            value:3
+          }
+        ],
+        rules:[
+          {
+            required:true,
+            message:'请编辑选择分享类型',
+            trigger:'change',
+          }
+        ],
+      },
+      {
+        key:'一级分享奖励',
+        type:'input',
+        prop:'firstAward',
+        rules:[
+          {
+            required:true,
+            message:'请编辑一级分享奖励',
+            trigger:'blur',
+          }
+        ],
+      },
+      {
+        key:'二级分享奖励',
+        type:'input',
+        prop:'secondAward',
+        rules:[
+          {
+            required:true,
+            message:'请编辑二级分享奖励',
+            trigger:'blur',
+          }
+        ],
+      },
+      {
+        key:'最大一级分享',
+        type:'input',
+        prop:'firstCount',
+        rules:[
+          {
+            required:true,
+            message: '请编辑一级分享',
+            trigger:'blur',
+          }
+        ],
+      },
+      {
+        key:'最大二级分享',
+        type:'input',
+        prop:'secondCount',
+        rules:[
+          {
+            required:true,
+            message: '请编辑二级分享',
+            trigger:'blur',
+          }
+        ],
+      },
+    ],
+    myForm:{
+      price:'',
+      send:'',
+      coupon:'',
+    }
+  },
+  {
     name:'保养提醒设置',
     list:[
       {
