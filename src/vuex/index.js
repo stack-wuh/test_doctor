@@ -29,6 +29,7 @@ export const state = {
   articleType:[], //养车知识文章类型 -- select
   activesList:[], //活动栏目下拉 -- select
   level_List:[], // 会员等级
+  activitiesList:[], // 普通会员 -- 活动栏目 -- 下拉
 }
 
 export const mutations = {
@@ -217,6 +218,12 @@ export const mutations = {
   setActivesList(state, {params} = {}){
     state.activesList = params
   },
+  /**
+   * 处理 普通活动 -- 活动栏目下拉 -- select
+   */
+  setMarketActivies(state, {params} = {}){
+    state.activitiesList = params
+  }
 }
 
 export const actions = {
@@ -412,6 +419,18 @@ export const actions = {
       })
     })
   },
+
+    /**
+   * 获取普通活动 -- 活动栏目 -- select
+   */
+  getMarketActivies({commit}){
+    return new Promise((resolve, reject) => {
+      $http.post('ordinaryActivities/ordinaryActivitiesColumnList.do', {}, res => {
+        commit('setMarketActivies', {params: res.data})
+        return resolve(res)
+      })
+    })
+  }
 }
 
 export const getters = {
@@ -447,5 +466,10 @@ export const getters = {
   },
   formatPariseList(state){
     return state.pariseList
+  },
+  formatActivitiesList(state){
+    return state.activitiesList.map(item => {
+      return {label: item, value: item}
+    })
   }
 }
