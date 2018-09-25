@@ -1,32 +1,40 @@
 <template>
   <section class="wrapper signin">
-    <header class="header">
-      <span class="img-box">
-        <img :src="headerLogo" alt="logo">
-      </span>
-      <h3 class="title">车医生后台管理CRM</h3>
-      <span></span>
-    </header>
-    <section class="content">
-      <section class="form-area">
-        <span class="nav-title">用户登录</span>
-        <el-form class="my-form" ref="myForm">
-          <el-form-item v-for="(item,index) in list" :key="index" prop="username">
-            <el-input v-model="login[item.prop]" class="my-input" v-if="item.type == 'input'" :type="item.inputType" :placeholder="'请编辑'+item.name" :style="item.style"></el-input>
-            <span v-if="item.child" class="code-box" >
-              <small v-for="(sub,sid) in code" :key="sid" class="box-item" :style="styleList[sid]" >{{sub}}</small>
-            </span>
-          </el-form-item>
-        </el-form>
-        <section class="nav-list">
-          <el-checkbox v-model="isSavePwd" @change="savePwdInExpire">记住密码</el-checkbox>
-          <span class="empty-flex"></span>
-          <span class="item">忘记密码?</span>
-          <span class="item">去注册</span>
+    <section class="left-content">
+      <section :class="'img-item-' + index" class="img-list" v-for="(item,index) in imgs" :key="index">
+        <img v-if="index < 4" :src="item.url" alt="logo">
+      </section>
+    </section>
+    <section class="middle">
+      <section class="content-wrap">
+        <h3 class="title">车医生后台管理系统登录</h3>
+        <section class="form-area">
+          <h3 class="form-title">用户登录</h3>
+          <el-form class="my-form">
+            <el-form-item v-for="(item,index) in list" :key="index" >
+              <el-input v-model="login[item.prop]" class="my-input" v-if="item.type == 'input'" :type="item.inputType" :style="item.style">
+                <template slot="prepend">
+                    <img :src="item.icon" ></img>
+                </template>
+              </el-input>
+              <span v-if="item.child" style="width:40%;">
+                <span v-if="item.child" class="code-box">
+                  <small v-for="(sub, sid) in code" :key="sid" class="box-item" :style="styleList[sid]" >{{sub}}</small>
+                </span>
+                <span @click="handleRandomCode" class="code-btn">换一张</span>
+              </span>
+            </el-form-item>
+            <p class="margin-bm-15">
+              <el-checkbox v-model="isSavePwd" @change="savePwdInExpire">记住密码</el-checkbox>
+            </p>
+            <el-button @click="handleSubmit" class="submit-button">登录</el-button>
+          </el-form>
         </section>
-        <section class="btn-area">
-          <el-button class="btn" @click="handleSubmit">登录</el-button>
-        </section>
+      </section>
+    </section>
+    <section class="right-content">
+      <section :class="'img-item-' + index" class="img-list" v-for="(item,index) in imgs" :key="index">
+        <img v-if="index > 3" :src="item.url" alt="logo">
       </section>
     </section>
   </section>
@@ -53,6 +61,8 @@ export default {
           inputType:'text',
           style:'',
           child:false,
+          place:'请编辑用户名',
+          icon:require('../../assets/img/icon-user.png')
         },
         {
           name:'密码',
@@ -61,13 +71,17 @@ export default {
           inputType:'password',
           style:'',
           child:false,
+          place:'请编辑登录密码',
+          icon:require('../../assets/img/icon-password.png')
         },
         {
           name:'验证码',
           type:'input',
           prop:'code',
           child:true,
-          style:'width:45%',
+          style:'width:50%',
+          place:'请编辑验证码',
+          icon:require('../../assets/img/icon-check.png')
         }
       ],
       code:'',
@@ -80,6 +94,29 @@ export default {
         password:'',
         code:'',
       },
+      imgs:[
+        {
+          url:require('../../assets/img/icon1.png'),
+        },
+        {
+          url:require('../../assets/img/icon2.png'),
+        },
+        {
+          url:require('../../assets/img/icon3.png'),
+        },
+        {
+          url:require('../../assets/img/icon4.png'),
+        },
+        {
+          url:require('../../assets/img/icon5.png'),
+        },
+        {
+          url:require('../../assets/img/icon6.png'),
+        },
+        {
+          url:require('../../assets/img/icon7.png'),
+        }
+      ]
     }
   },
   computed:{
@@ -177,49 +214,78 @@ export default {
 @import '../../assets/style/mixin.scss';
 @import '../../assets/style/color.scss';
 .wrapper{
+  display: flex;
+  justify-content: space-between;
+  flex-flow: row nowrap;
   position: fixed;
   top:0;
   right:0;
   bottom:0;
   left:0;
-  background-image: url('../../assets/img/bg-2.jpg');
+  background-image: url('../../assets/img/bg-list1.png');
   background-size: 100% 100%;
   background-position: center center;
-  header.header{
-    @include flex-box(row ,nowrap ,space-between,center);
-    height: 80px;
-    padding:0 20px;
-    span.img-box{
-      width: 20%;
-    }
-    h3.title{
-      flex:1;
-      margin-left:-20%;
-      text-align: center;
-      color: #FF0000;
-      font-size: 28px;
+  @for $i from 0 to 8{
+    .img-item-#{$i} {
+      position: relative;
+      @if $i == 0{
+        top:200px;
+        left: 160px;
+      }@else if $i == 1{
+        top:500px;
+        left: 120px;
+      }@else if $i == 2{
+        top:200px;
+        left: 240px;
+      }@else if $i == 3{
+        top: 50px;
+        left: 80px;
+      }@else if $i == 4{
+        top:200px;
+        left: 100px;
+      }@else if $i == 5{
+        top:300px;
+        left: 180px;
+      }@else if $i == 6{
+        top:400px;
+        left: 150px;
+      }
     }
   }
-  .content{
+  .content-wrap{
     position: relative;
-    height: 100%;
+    top:40%;
+    width: 460px;
+    height: 460px;
+    transform: translateY(-50%);
+    h3.title{
+      text-align: center;
+      color: #fff;
+      font-size: 32px;
+    }
     .form-area{
-      position: fixed;
-      left:75%;
-      bottom: 0;
-      width: 300px;
-      height: 350px;
-      padding: 20px;
-      .nav-title{
-        font-weight: bold;
-        font-size: 18px;
-        color: $a-color;
+      margin-top:50px;
+      padding: 20px 30px;
+      border-radius: 8px;
+      background-color: #A4CBFB;
+      h3.form-title{
+        margin-bottom: 20px;
       }
       .my-form{
-        margin:15px 0;
+        .code-btn{
+          position: relative;
+          top:10px;
+          margin-left: 10px;
+          user-select: none;
+          &:hover{
+            cursor: pointer;
+            text-decoration: underline;
+          }
+        }
         .code-box{
           display: inline-block;
-          width:40%;
+          width:30%;
+          height: 40px;
           margin-left: 15px;
           background-color: #fff;
           user-select: none;
@@ -227,34 +293,31 @@ export default {
             display: inline-block;
             width: 25%;
             text-align: center;
-            font-size: 14px;
+            font-size: 16px;
             
           }
         }
-      }
-      .nav-list{
-        @include flex-box(row,nowrap,space-between,center);
-        color: $a-color !important;
-        .item{
-          margin-left: 10px;
-          font-size: 14px;
-          &:hover{
-            cursor: pointer;
-          }
+        .my-input{
+          height: 50px;
         }
-      }
-      .btn-area{
-        margin-top:15px;
-        .btn{
+        .submit-button{
           width: 100%;
-          height: 40px;
-          background-color: $a-color;
+          height: 57px;
+          font-size: 20px;
+          background-color: #3D93F9;
           color: #fff;
-          font-size: 16px;
-          border-radius: 10px;
+          border-color: #3D93F9;
         }
       }
     }
+  }
+  .left-content, 
+  .right-content{
+    position: relative;
+    width: 35%;
+  }
+  .content-wrap{
+    flex:1;
   }
 }
 </style>
