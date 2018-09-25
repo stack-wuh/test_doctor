@@ -19,6 +19,7 @@ const SystemCurbRule = resolve => require(['@/components/systemManage/child/curb
 const SystemLimitSetting = resolve => require(['@/components/systemManage/child/limitSetting'],resolve)
 const SystemStorePub = resolve => require(['@/components/systemManage/child/storePub'],resolve)
 const SystemStoreReply = resolve => require(['@/components/systemManage/child/reply'],resolve)
+const SystemShare = resolve => require(['@/components/systemManage/child/share'], resolve)
 
 
 const UseIndex = resolve => require(['@/components/useManage/index'],resolve)
@@ -138,6 +139,11 @@ export default new Router({
                   name:'systemStoreReply',
                   component:SystemStoreReply,
                 },
+                {
+                  path:'/system/share',
+                  name:'systemShare',
+                  component:SystemShare
+                }
               ]
             },
             {

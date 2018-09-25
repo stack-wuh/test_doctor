@@ -12,30 +12,30 @@ export const list = [
         label: "门店管理",
         mid_path: "/mid/container",
         path: "/system/store",
-        isAuth: 0,
+        isAuth: 1,
       },
       {
         label: "部门管理",
         mid_path: "/mid/container",
         path:"/system/store",
-        isAuth: 0,
+        isAuth: 1,
       },
       {
         label:'角色管理',
         mid_path: "/mid/container",
         path:'/system/store',
-        isAuth: 0,
+        isAuth: 1,
       },
       {
         label:'员工列表',
         mid_path: "/mid/container",
         path:'/system/store',
-        isAuth: 0,
+        isAuth: 1,
       },
       {
         label: "平台配置",
         mid_path: "/mid/container",
-        isAuth: 0,
+        isAuth: 1,
         children: [
           {
             label: "会员卡等级设置",
@@ -54,6 +54,12 @@ export const list = [
             mid_path: "/mid/container",
             path: "/system/store",
             isAuth: 0,
+          },
+          {
+            label: "分享与消费奖励规则",
+            mid_path: "/mid/container",
+            path: "/system/share",
+            isAuth: 1,
           },
           {
             label: "保养提醒设置",
@@ -98,19 +104,19 @@ export const list = [
         label: "汽车精品管理",
         mid_path: "/mid/container",
         path: "/use/store",
-        isAuth: 0,
+        isAuth: 1,
       },
       {
         label: "精品订单管理",
         mid_path: "/mid/container",
         path: "/use/store",
-        isAuth: 0,
+        isAuth: 1,
       },
       {
         label: "配件大类管理",
         mid_path: "/mid/container",
         path: "/use/store",
-        isAuth: 0,
+        isAuth: 1,
       }
     ]
   },
