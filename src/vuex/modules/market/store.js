@@ -21,7 +21,7 @@ const actions = {
         break;
       case '摇一摇活动' : _url = 'rockIngActivities/rockIngActivitiesList.do', search = {...rootState.search, currPageNo}
         break;
-      case '精准获客' : _url = 'ordinaryActivities/accurateGuests.do', search = {...rootState.search, currPageNo}
+      case '精准获客' : _url = 'ordinaryActivities/accurateGuests.do', search = {...rootState.search, currPageNo, id: search.data.id}
         break;
       case '报名查询' : _url = 'ordinaryActivities/signUpList.do', search = {...rootState.search, currPageNo}, dispatch('getActiveList')
         break;
