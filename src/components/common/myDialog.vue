@@ -99,7 +99,8 @@ export default {
       'handleSubmitUserCommUp' : 'userCommUp',
       'handleSubmitMemberChecked' : 'couponMemberChecked',
       'feedBackPut' : 'feedBackPut',
-      'handerServerCarFeed': 'carFeedPubAndFresh'
+      'handerServerCarFeed': 'carFeedPubAndFresh',
+      'userSharePubAndFresh':'userSharePubAndFresh'
     }),
     /**
      * dialog对话框
@@ -150,6 +151,8 @@ export default {
           case '意见反馈' : this.feedBackPut({path: this.rootPath, form: this.myForm})
             break;
           case '养车知识分类': this.handerServerCarFeed({path: this.rootPath, form: this.myForm})
+            break;
+          case '分享与消费奖励规则': this.userSharePubAndFresh({path: this.rootPath, form: this.myForm})
             break;
         }
         setTimeout(()=>{

@@ -6,6 +6,7 @@ const state = {
   list2:[], //备用数组
   total:0,
   currentPage:1,
+  temp_list:[],
 }
 
 const mutations = {
@@ -31,6 +32,11 @@ const mutations = {
    */
   setCouponIntegRules(state , status){
     state.data =  status && status.params
+  },
+  setShareList(state, {params}){
+    state.temp_list = params && params.map(item => {
+      return {...item, typeText: item.type === 1 ? '套餐' : item.type === 2 ? '活动' : '卡券'}
+    })
   }
 }
 
@@ -485,6 +491,42 @@ const actions = {
         break;
     }
     $http.post(_url, {id, state, status})
+  },
+  /**
+   * 系统管理 -- 平台设置 -- 获取分享列表
+   */
+  getShareList({commit}){
+    return new Promise((resolve, reject) => {
+      $http.post('platform/getShareRuleList.do', {}, res => {
+        commit('setShareList',{params: res.data})
+        return resolve(res)
+      })
+    })
+  },
+  /**
+   * 系统管理 -- 平台管理 -- 获取消费规则列表
+   */
+  getSalesRuleList(){
+    return new Promise((resolve, reject) => {
+      $http.post('platform/getConsumeRuleList.do', {}, res => {
+        return resolve(res)
+      })
+    })
+  },
+  /**
+   * 系统管理 -- 平台管理 -- 分享与消费奖励 -- 用户分享
+   */
+  userSharePubAndFresh({dispatch}, {form, form:{id}} = {}){
+    let _url = id ? 'platform/updateShareRule.do' : 'platform/addShareRule.do'
+    return new Promise((resolve, reject) => {
+      $http.post(_url, form, res => {
+        setTimeout(()=>{
+          dispatch('getShareList')
+          dispatch('asyncHideDialog')
+        },1000)
+        return resolve(res)
+      })
+    })
   }
 }
 
