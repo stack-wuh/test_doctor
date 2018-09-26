@@ -100,7 +100,8 @@ export default {
       'handleSubmitMemberChecked' : 'couponMemberChecked',
       'feedBackPut' : 'feedBackPut',
       'handerServerCarFeed': 'carFeedPubAndFresh',
-      'userSharePubAndFresh':'userSharePubAndFresh'
+      'userSharePubAndFresh':'userSharePubAndFresh',
+      'handleServerTime':'serverPrevTimePubAndFresh'
     }),
     /**
      * dialog对话框
@@ -153,6 +154,8 @@ export default {
           case '养车知识分类': this.handerServerCarFeed({path: this.rootPath, form: this.myForm})
             break;
           case '分享与消费奖励规则': this.userSharePubAndFresh({path: this.rootPath, form: this.myForm})
+            break;
+          case '预约时间管理' : this.handleServerTime({path: this.rootPath, form: this.myForm})
             break;
         }
         setTimeout(()=>{
