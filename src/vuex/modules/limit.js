@@ -1,28 +1,9 @@
 import $http from '../../utils/axios'
-import {_g, NotNull, getObj} from '../../utils/global'
+import {_g, NotNull, getObj, getQueryString} from '../../utils/global'
 import {list} from '../../utils/menu'
 const state = {
   data:[],
-  limits:[
-    {
-      "id":15,
-      "menuId":22,
-      "name":"汽车精品管理",
-      "descInfo":"主导航-汽车精品管理页面是否可见",
-      "url":"use/store?menu=用品管理&subMenu=汽车精品管理",
-      "method":"quality/getQualityList.do",
-      "type":0
-    },
-    {
-      "id":15,
-      "menuId":22,
-      "name":"平台设置",
-      "descInfo":"主导航-汽车精品管理页面是否可见",
-      "url":"use/store?menu=用品管理&subMenu=汽车精品管理",
-      "method":"quality/getQualityList.do",
-      "type":0
-    },
-  ], //登陆者权限列表
+  limits:[], //登陆者权限列表
 }
 
 const actions = {
@@ -85,32 +66,20 @@ const getters = {
   },
 
   /**
-   * 主导航 -- 权限 --过滤器
+   * 权限列表 -- 精确到页面按钮 
    */
-  formatLimitStoreMenu(state){
-    return list.map(item => {
-      item.children && item.children.map(list => {
-        // 设置二级菜单的权限可见
-        state.limits.map(ll => {
-          if(list.label === ll.name){
-            list.isAuth = 1
-          }else{
-            list.isAuth = 0
-          }
-        })
-        //设置三级菜单的权限可见
-        list.children && list.children.map(subList => {
-          state.limits.map(ll => {
-            if(subList.label === ll.name){
-              list.isAuth = 1
-            }else{
-              list.isAuth = 0
-            }
-          })
-        })
-      })
-      return item
-    })
+  formatLimitByButton: (state) => ({menu, subMenu, child, text}) => {
+    let data =  state.limits.filter(item => getQueryString(item.url).menu === menu)
+    let result
+    if(child){
+      result = data.filter(list => getQueryString(list.url).subMenu === subMenu)
+                  .filter(child => getQueryString(child.url).child === child)
+                    .some(sub => sub.name === text)
+    } else{          
+      result = data.filter(list => getQueryString(list.url).subMenu === subMenu)
+                            .some(sub => sub.name === text)
+    }
+    return result
   }
 }
 
