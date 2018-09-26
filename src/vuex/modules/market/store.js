@@ -16,7 +16,7 @@ const actions = {
     switch(path){
       case '普通活动' : _url = 'ordinaryActivities/ordinaryActivitiesList.do', search = {...rootState.search, currPageNo}, dispatch('getMarketActivies')
         break;
-      case '活动抽奖' : _url = 'activitiesDraws/activitiesDrawsList.do', search = {...rootState.search, currPageNo}, dispatch('getActiveList')
+      case '活动抽奖' : _url = 'activitiesDraws/activitiesDrawsList.do', search = {...rootState.search, currPageNo}, dispatch('getMarketActivies')
         break;
       case '推荐有礼' : _url = 'recommendingGift/recommendingGiftList.do', search = {...rootState.search, currPageNo}
         break;
@@ -137,11 +137,13 @@ const getters = {
   formMarketStore: (state) => ({path} = {}) => {
     return state.data.map(item => {
       if(path === '普通活动'){
-        return {...item,columnTypeText: item.columnType === 0 ? '养车' : '养车', statusText: item.status == 0 ? '未开始' : item.status == 1 ? '进行中' : item.status == 2 ? '已结束' : '已关闭', valid: `${item.startDateStr || ''}至${item.endDateStr || ''}`}
+        return {...item, columnTypeText: item.columnType === 0 ? '养车' : '养车', statusText: item.status == 0 ? '未开始' : item.status == 1 ? '进行中' : item.status == 2 ? '已结束' : '已关闭', valid: `${item.startDateStr || ''}至${item.endDateStr || ''}`}
       }else if(path === '报名查询'){
         return {...item, isValidText: item.isValid == 0 ? '已失效' : '有效', statusText: item.status == 0 ? '未确认' : item.status == 1 ? '已确认' : '已领取', isPlayText: item.isPlay == 0 ? '未支付' : '已支付'}
       }else if(path === '精准获客'){
         return {...item, accurateGuestsText: item.accurateGuests === 1 ? '是' : '否',whetherForwardingText: item.whetherForwarding === 1 ? '是' : '否'}
+      }else if(path === '活动抽奖'){
+        return {...item,  columnTypeText: item.columnType === 0 ? '养车' : '养车', validate: `${item.startTimeForString} 至 ${item.endTimeForString}`, stateText: item.state === 0 ? '未开始' : item.state === 1 ? '进行中' : '已结束'}
       }else{
         return {...item}
       }
