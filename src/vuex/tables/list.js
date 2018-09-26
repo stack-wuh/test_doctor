@@ -2707,6 +2707,7 @@ const state = {
               text:'编辑',
               type:'',
               size:'small',
+              click:jump2Other,
             },
             {
               text:'推送',
@@ -2740,49 +2741,42 @@ const state = {
         {
           key:'用户名',
           type:'default',
-          prop:'',
+          prop:'name',
         },
         {
           key:'联系电话',
           type:'default',
-          prop:'',
+          prop:'phone',
         },
         {
           key:'奖品名称',
           type:'default',
-          prop:'name',
+          prop:'awardName',
         },
         {
           key:'奖品数量',
           type:'default',
-          prop:'name',
+          prop:'quantity',
         },
         {
           key:'奖项等级',
           type:'default',
-          prop:'name',
+          prop:'rank',
         },
         {
           key:'状态',
           type:'default',
-          prop:'name',
+          prop:'statusText',
         },
         {
           key:'类型',
           type:'default',
-          prop:'name',
+          prop:'typeText',
         },
         {
           key:'抽奖时间',
           type:'default',
-          prop:'name',
-        },
-        {
-          key:'操作',
-          type:'button',
-          fix:'right',
-          width:'160px',
-          list:[]
+          prop:'time',
         },
       ]
     },
@@ -3002,62 +2996,67 @@ const state = {
         {
           key:'预约编号',
           type:'default',
-          prop:'',
+          prop:'reservationNum',
         },
         {
           key:'姓名',
           type:'default',
-          prop:'',
+          prop:'name',
         },
         {
           key:'手机号',
           type:'default',
-          prop:'name',
+          prop:'phone',
         },
         {
           key:'预约类型',
           type:'default',
-          prop:'name',
+          prop:'bookingSetIdText',
         },
         {
           key:'服务顾问',
           type:'default',
-          prop:'name',
+          prop:'serviceName',
         },
         {
-          key:'车辆,里程数',
+          key:'车辆',
           type:'default',
-          prop:'name',
+          prop:'plateNum',
+        },
+        {
+          key:'里程数',
+          type:'default',
+          prop:'currentMileage'
         },
         {
           key:'到店时间',
           type:'default',
-          prop:'name',
+          prop:'arrivalTimes',
         },
         {
           key:'下单时间',
           type:'default',
-          prop:'name',
+          prop:'orderTime',
         },
         {
           key:'接单人',
           type:'default',
-          prop:'name',
+          prop:'ordererName',
         },
         {
           key:'接单时间',
           type:'default',
-          prop:'name',
+          prop:'takeOdererTames',
         },
         {
           key:'完成时间',
           type:'default',
-          prop:'name',
+          prop:'finishTime',
         },
         {
           key:'状态',
           type:'default',
-          prop:'name',
+          prop:'stateText',
         },
         {
           key:'操作',
@@ -3066,8 +3065,26 @@ const state = {
           width:'160px',
           list:[
             {
-              text:'确认',
-              type:'',
+              // text:'确认',
+              valid:3,
+              rules:'state',
+              value:[0,1],
+              texts:['确认','确认','已确认','已取消'],
+              styles:[
+                {
+                  color:STYLES['PRIMARY']
+                },
+                {
+                  color:STYLES['PRIMARY']
+                },
+                {
+                  color:STYLES['SUCCESS']
+                },
+                {
+                  color:STYLES['ERROR']
+                }
+              ],
+              type:'text',
               size:'small',
             },
           ]
@@ -3085,22 +3102,22 @@ const state = {
         {
           key:'预约类型',
           type:'default',
-          prop:'',
+          prop:'bookingName',
         },
         {
           key:'备注',
           type:'default',
-          prop:'',
+          prop:'remark',
         },
         {
           key:'时间段',
           type:'default',
-          prop:'name',
+          prop:'arrivalTimes',
         },
         {
           key:'人数',
           type:'default',
-          prop:'name',
+          prop:'number',
         },
         {
           key:'操作',
@@ -3129,57 +3146,57 @@ const state = {
         {
           key:'姓名',
           type:'default',
-          prop:'',
+          prop:'userName',
         },
         {
           key:'联系电话',
           type:'default',
-          prop:'',
+          prop:'phone',
         },
         {
           key:'车型',
           type:'default',
-          prop:'name',
+          prop:'carModel',
         },
         {
           key:'车辆年限',
           type:'default',
-          prop:'name',
+          prop:'carAge',
         },
         {
           key:'裸车价格',
           type:'default',
-          prop:'name',
+          prop:'carPrice',
         },
         {
           key:'出险次数',
           type:'default',
-          prop:'name',
+          prop:'risksNum',
         },
         {
           key:'保险公司',
           type:'default',
-          prop:'name',
+          prop:'insuranceCompanyId',
         },
         {
           key:'系统估价',
           type:'default',
-          prop:'name',
+          prop:'offer',
         },
         {
           key:'备注',
           type:'default',
-          prop:'name',
+          prop:'remarks',
         },
         {
           key:'提交日期',
           type:'default',
-          prop:'name',
+          prop:'submitTimes',
         },
         {
           key:'状态',
           type:'default',
-          prop:'name',
+          prop:'stateText',
         },
         {
           key:'操作',

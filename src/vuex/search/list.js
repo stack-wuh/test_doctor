@@ -1510,6 +1510,25 @@ const state = {
       ],
     },
     {
+      name:'活动中奖',
+      params:['活动中奖'],
+      type:'',
+      list:[
+        {
+          key:'姓名',
+          value:'',
+          type:'default',
+          prop:'name',
+        },
+        {
+          key:'电话',
+          value:'',
+          type:'input',
+          prop:'phone',
+        },
+      ],
+    },
+    {
       name:'精准获客',
       params:['精准获客'],
       type:'',
@@ -1751,31 +1770,81 @@ const state = {
           key:'姓名',
           value:'',
           type:'default',
+          prop:'name',
         },
         {
           key:'联系电话',
           value:'',
           type:'default',
+          prop:'phone',
         },
         {
           key:'预约类型',
           value:'',
           type:'select',
+          prop:'bookingSetId',
+          list:[
+            {
+              label:'爱车保养',
+              value:1
+            },
+            {
+              label:'事故维修',
+              value:2
+            },
+            {
+              label:'故障检查',
+              value:3
+            },
+            {
+              label:'购买保险',
+              value:4
+            },
+            {
+              label:'爱车美容',
+              value:5
+            },
+            {
+              label:'其他',
+              value:6
+            },
+          ],
         },
         {
           key:'预约状态',
           value:'',
           type:'select',
+          prop:'state',
+          list:[
+            {
+              label:'未确认',
+              value:0
+            },
+            {
+              label:'未到店',
+              value:1
+            },
+            {
+              label:'已确认',
+              value:2
+            },
+            {
+              label:'已取消',
+              value:3
+            },
+          ],
         },
         {
           key:'预约开始时间',
           value:'',
           type:'date',
+          prop:'orderTimeStart',
         },
         {
           key:'预约结束时间',
           value:'',
           type:'date',
+          prop:'orderTimeEnd',
         },
       ]
     },
@@ -1788,16 +1857,29 @@ const state = {
           key:'姓名',
           value:'',
           type:'default',
+          prop:'userName',
         },
         {
           key:'联系电话',
           value:'',
           type:'default',
+          prop:'phone',
         },
         {
           key:'状态',
           value:'',
           type:'select',
+          prop:'state',
+          list:[
+            {
+              label:'未确认',
+              value:0
+            },
+            {
+              label:'已确认',
+              value:1
+            }
+          ]
         },
       ]
     },

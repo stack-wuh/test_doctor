@@ -56,13 +56,15 @@ export const jump2Other = (params ,types ,row) => {
             child = types == '编辑' ? '编辑活动详情' : types == '精准获客' ? '精准获客' : types == '报名查询' ? '报名查询' :''
             data = JSON.stringify(row)
       break ;
-    case '活动抽奖' : rootPath = '/market/store' , child = '活动中奖' 
+    case '活动抽奖' : rootPath = types === '编辑' ? '/market/active/other/pub' : '/market/store' , child = types === '编辑' ? '编辑活动详情' : types === '中奖查询' ? '活动中奖' : '暂无'
+            data = JSON.stringify(row)
       break ; 
     case '摇一摇活动' :
             rootPath = types == '编辑' ? '/market/shake/pub' : types == '中奖查询' ? '/market/store' : '' ,
             child = types == '编辑' ? '编辑摇一摇活动' : types == '中奖查询' ? '摇一摇中奖' : ''
       break ;
-    case '保险服务' : rootPath = '/serve/insure/pub' , child = '编辑保险服务'
+    case '保险服务' : rootPath = '/serve/insure/pub' , child = '编辑保险服务',
+            data = JSON.stringify(row)
       break ;
     case '车辆管理' :  rootPath = '/member/info', child = '查看客户及车辆档案', data = JSON.stringify(row)
       break;
