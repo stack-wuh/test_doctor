@@ -23,6 +23,7 @@ const state = {
           size:'small',
           style:'',
           click:jump2Add,
+          isAuth:1,
         },
         {
           text:'导出',
@@ -30,6 +31,7 @@ const state = {
           size:'small',
           style:'',
           click:export2Excel,
+          isAuth:1,
         }
       ]
     },
@@ -44,6 +46,7 @@ const state = {
           size:'small',
           style:'',
           click:jump2AddWithDialog,
+          isAuth:1,
         },
         {
           text:'导出',
@@ -51,6 +54,7 @@ const state = {
           size:'small',
           style:'',
           click:jump2Detail,
+          isAuth:1,
         }
       ]
     },
@@ -64,7 +68,8 @@ const state = {
           type:'',
           size:'small',
           style:'',
-          click:jump2Add
+          click:jump2Add,
+          isAuth:1,
         }
       ]
     },{
@@ -77,7 +82,8 @@ const state = {
           type:'',
           size:'small',
           style:'',
-          click:jump2AddWithDialog
+          click:jump2AddWithDialog,
+          isAuth:1,
         }
       ]
     },
@@ -91,7 +97,8 @@ const state = {
           type:'',
           size:'small',
           style:'',
-          click:handleDialogForCoupon
+          click:handleDialogForCoupon,
+          isAuth:1,
         }
       ]
     },
@@ -105,7 +112,8 @@ const state = {
           type:'',
           size:'small',
           style:'',
-          click:jump2AddWithDialog
+          click:jump2AddWithDialog,
+          isAuth:1,
         },
         {
           text:'删除',
@@ -113,6 +121,7 @@ const state = {
           size:'small',
           style:'',
           click:DelAndFreshWithAll,
+          isAuth:1,
         }
       ]
     },
@@ -126,14 +135,16 @@ const state = {
           type:'',
           size:'small',
           style:'',
-          click:jump2Add
+          click:jump2Add,
+          isAuth:1,
         },
         {
           text:'删除',
           type:'',
           size:'small',
           style:'',
-          click:DelAndFreshWithAll
+          click:DelAndFreshWithAll,
+          isAuth:1,
         }
       ]
     },
@@ -147,7 +158,8 @@ const state = {
           type:'',
           size:'small',
           style:'',
-          click:export2Excel
+          click:export2Excel,
+          isAuth:1,
         }
       ]
     },
@@ -161,6 +173,7 @@ const state = {
           type:'',
           size:'small',
           style:'',
+          isAuth:1,
         }
       ],
     },
@@ -175,34 +188,39 @@ const state = {
           size:'small',
           style:'',
           click:jump2Add,
+          isAuth:1,
         },
         {
           text:'分配保养顾问',
           type:'',
           size:'small',
           style:'',
-          click:handleDialogForMember
+          click:handleDialogForMember,
+          isAuth:1,
         },
         {
           text:'分配保险顾问',
           type:'',
           size:'small',
           style:'',
-          click:handleDialogForMember
+          click:handleDialogForMember,
+          isAuth:1,
         },
         {
           text:'分配续保顾问',
           type:'',
           size:'small',
           style:'',
-          click:handleDialogForMember
+          click:handleDialogForMember,
+          isAuth:1,
         },
         {
           text:'导入',
           type:'',
           size:'small',
           style:'',
-          click:importExcelWithDialog
+          click:importExcelWithDialog,
+          isAuth:1,
         }
       ]
     },
@@ -216,14 +234,16 @@ const state = {
           type:'',
           size:'small',
           style:'',
-          click:importExcelWithDialog
+          click:importExcelWithDialog,
+          isAuth:1,
         },
         {
           text:'导出',
           type:'',
           size:'small',
           style:'',
-          click:export2Excel
+          click:export2Excel,
+          isAuth:1,
         }
       ]
     },
@@ -257,21 +277,24 @@ const state = {
           type:'',
           size:'small',
           style:'',
-          click:handleCouponMemberSend
+          click:handleCouponMemberSend,
+          isAuth:1,
         },
         {
           text:'根据条件推送',
           type:'',
           size:'small',
           style:'',
-          click:handleCouponMemberSend
+          click:handleCouponMemberSend,
+          isAuth:1,
         },
         {
           text:'全部推送',
           type:'',
           size:'small',
           style:'',
-          click:handleCouponMemberSend
+          click:handleCouponMemberSend,
+          isAuth:1,
         },
       ]
     },
@@ -453,7 +476,6 @@ const getters = {
       })
     })
     return arr[0] ? arr[0].btn : []
-    // return state.list.find(item => item.params && item.params.includes(params.name) ? item : []).btn
   }
 }
 
