@@ -25,7 +25,6 @@ export default {
   watch:{
     '$route'(to,from){
       if(to.query.path){
-        this.$store.dispatch('getLimitStore')
         this.$router.push({path:to.query.path,query:{menu:to.query.menu , subMenu:to.query.subMenu , child:to.query.child , data:to.query.data}})
       }
     }
@@ -35,7 +34,6 @@ export default {
   created(){
     let { path , menu , subMenu , child , data} = this.$route.query
     if(path){
-      this.$store.dispatch('getLimitStore')
       this.$router.push({path:path,query:{menu , subMenu , child , data}})
     }
   }
