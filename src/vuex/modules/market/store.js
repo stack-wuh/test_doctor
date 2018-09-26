@@ -1,5 +1,6 @@
 import $http from '../../../utils/axios'
 import {_g, NotNull} from '../../../utils/global'
+import { marketPrevSend } from '../../tables/click';
 const state = {
  data:[],
  total:0,
@@ -109,8 +110,16 @@ const actions = {
     $http.post('ordinaryActivities/releaseActivities.do', {id}, res => {
       dispatch('getMarketStore', {path})
     })
-  }
+  },
 
+  /**
+   * 市场推广 -- 普通活动 -- 报名查询 -- 领取
+   */
+  marketPrevSend({dispatch}, {path, row:{id,status}} = {}){
+    $http.post('ordinaryActivities/takeSignUp.do', {id, status}, res => {
+      dispatch('getMarketStore', {path})
+    })
+  }
 }
 
 const mutations = {
@@ -128,9 +137,11 @@ const getters = {
   formMarketStore: (state) => ({path} = {}) => {
     return state.data.map(item => {
       if(path === '普通活动'){
-        return {...item, statusText: item.status == 0 ? '未开始' : item.status == 1 ? '进行中' : item.status == 2 ? '已结束' : '已关闭', valid: `${item.startDateStr || ''}至${item.endDateStr || ''}`}
+        return {...item,columnTypeText: item.columnType === 0 ? '养车' : '养车', statusText: item.status == 0 ? '未开始' : item.status == 1 ? '进行中' : item.status == 2 ? '已结束' : '已关闭', valid: `${item.startDateStr || ''}至${item.endDateStr || ''}`}
       }else if(path === '报名查询'){
         return {...item, isValidText: item.isValid == 0 ? '已失效' : '有效', statusText: item.status == 0 ? '未确认' : item.status == 1 ? '已确认' : '已领取', isPlayText: item.isPlay == 0 ? '未支付' : '已支付'}
+      }else if(path === '精准获客'){
+        return {...item, accurateGuestsText: item.accurateGuests === 1 ? '是' : '否',whetherForwardingText: item.whetherForwarding === 1 ? '是' : '否'}
       }else{
         return {...item}
       }
