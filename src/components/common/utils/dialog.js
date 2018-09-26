@@ -1020,11 +1020,37 @@ export const forms = [
             trigger:['change','blur'],
           }
         ],
+        list:[
+          {
+            label:'爱车保养',
+            value:1
+          },
+          {
+            label:'事故维修',
+            value:2
+          },
+          {
+            label:'故障检查',
+            value:3
+          },
+          {
+            label:'购买保险',
+            value:4
+          },
+          {
+            label:'爱车美容',
+            value:5
+          },
+          {
+            label:'其他',
+            value:6
+          },
+        ],
       },
       {
         key:'开始时间',
         type:'date',
-        prop:'start',
+        prop:'startTime',
         rules:[
           {
             required:true,
@@ -1036,7 +1062,7 @@ export const forms = [
       {
         key:'结束时间',
         type:'date',
-        prop:'end',
+        prop:'endTime',
         rules:[
           {
             required:true,
@@ -1061,7 +1087,7 @@ export const forms = [
       {
         key:'备注',
         type:'input',
-        prop:'content',
+        prop:'remark',
         rules:[
           {
             required:true,
