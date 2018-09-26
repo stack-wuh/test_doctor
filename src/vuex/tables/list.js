@@ -2660,7 +2660,7 @@ const state = {
         {
           key:'所属栏目',
           type:'default',
-          prop:'',
+          prop:'columnTypeText',
         },
         {
           key:'活动标题',
@@ -2685,17 +2685,17 @@ const state = {
         {
           key:'有效期',
           type:'default',
-          prop:'name',
+          prop:'validate',
         },
         {
           key:'发布日期',
           type:'default',
-          prop:'publishTime',
+          prop:'publishTimeForString',
         },
         {
           key:'状态',
           type:'default',
-          prop:'state',
+          prop:'stateText',
         },
         {
           key:'操作',
