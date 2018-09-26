@@ -119,6 +119,45 @@ const actions = {
     $http.post('ordinaryActivities/takeSignUp.do', {id, status}, res => {
       dispatch('getMarketStore', {path})
     })
+  },
+
+  /**
+   * 市场推广 -- 活动抽奖 -- 编辑/新增
+   */
+  marketOtherActivePub({dispatch}, {path, form:{
+    title,
+    picture,
+    isPush,
+    enrollFee,
+    isPay,
+    startTimeForString,
+    endTimeForString,
+    type,
+    number,
+    id,
+    lotteryTemplateId,
+    date,
+    registNum,
+  }} = {}){
+    return new Promise((resolve, reject) => {
+      $http.post('activitiesDraws/addOrUpdateActivitiesDraws.do', {
+        title,
+        picture,
+        isPush: isPush === true ? 1 : 0,
+        enrollFee,
+        isPay:isPay === true ? 1: 0,
+        startTimeForString: date[0],
+        endTimeForString: date[1],
+        type,
+        number,
+        id,
+        lotteryTemplateId,
+        registNum,
+      }, res => {
+        
+        return resolve(res)
+      })
+    })
   }
 }
 
@@ -144,6 +183,8 @@ const getters = {
         return {...item, accurateGuestsText: item.accurateGuests === 1 ? '是' : '否',whetherForwardingText: item.whetherForwarding === 1 ? '是' : '否'}
       }else if(path === '活动抽奖'){
         return {...item,  columnTypeText: item.columnType === 0 ? '养车' : '养车', validate: `${item.startTimeForString} 至 ${item.endTimeForString}`, stateText: item.state === 0 ? '未开始' : item.state === 1 ? '进行中' : '已结束'}
+      }else if(path === '活动中奖'){
+        return  {...item, statusText: item.status === 0 ? '未领取' : '已领取', typeText: item.type === 0 ? '电子代金券' : '实物卡券'}
       }else{
         return {...item}
       }
