@@ -1,7 +1,10 @@
 <template>
   <section class="wrapper">
     <section class="unlimit">
-      <section class="bg-img"></section>
+      <img :src="bgUrl" alt="unlimit" style="width:100%;height:100%;">
+      <section class="btn-area">
+        <el-button type="danger" @click="goBackPrev">返回上一页</el-button>
+      </section>
     </section>
   </section>
 </template>
@@ -16,18 +19,22 @@ export default {
     }
   },
 
-  methods: {}
+  methods: {
+    goBackPrev(){
+      this.$router.go(-2)
+    }
+  }
 }
 </script>
 
 <style scoped lang='scss' >
 .wrapper{
   width: 100%;
-  .bg-img{
-    width: 100%;
-    height: 200px;
-    background-image: url(../../../src/assets/img/unlimit.png);
-    background-position: center center;
+  .btn-area{
+    height: 50px;
+    margin-top:20px;
+    line-height: 50px;
+    text-align: center;
   }
 }
 </style>
