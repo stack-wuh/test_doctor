@@ -28,37 +28,37 @@
           <el-form-item label="活动日期" prop="date">
             <el-date-picker v-model="form.date" value-format="yyyy-MM-dd"  type="daterange" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期" ></el-date-picker>
           </el-form-item>
-          <el-form-item label="参与活动奖励" prop="couponId">
-            <el-select v-model="form.couponId" placeholder="请选择活动奖励">
-              <el-option v-for="(item, index) in couponList" :key="index" :label="item.label" :value="item.value"></el-option>
-            </el-select>
-          </el-form-item>
-          <el-form-item label="初始报名数" prop="initialEnrollNum">
-            <el-input v-model="form.initialEnrollNum" placeholder="请编辑初始报名数" class="my-input-220" ></el-input>
-          </el-form-item>
-          <el-form-item label="是否允许报名" prop="whetherAllowEnroll" >
-            <el-checkbox label="1" v-model="form.whetherAllowEnroll">勾选时表示允许报名</el-checkbox>
-          </el-form-item>
-          <el-form-item label="精准用户设置" >
-            <section class="inline-box">
-              <el-form-item prop="viewCount">
-                <el-select placeholder="浏览次数" v-model.number="form.viewCount" clearable filterable allow-create default-first-option></el-select>
-              </el-form-item>
-              <el-form-item prop="minTime">
-                  <el-select placeholder="平均单词浏览最小时间" v-model="form.minTime">
-                    <el-option label="1分钟" value="1"></el-option>
+            <el-form-item label="参与活动奖励" prop="couponId">
+              <el-select v-model="form.couponId" placeholder="请选择活动奖励">
+                <el-option v-for="(item, index) in couponList" :key="index" :label="item.label" :value="item.value"></el-option>
+              </el-select>
+            </el-form-item>
+            <el-form-item label="初始报名数" prop="initialEnrollNum">
+              <el-input v-model="form.initialEnrollNum" placeholder="请编辑初始报名数" class="my-input-220" ></el-input>
+            </el-form-item>
+            <el-form-item label="是否允许报名" prop="whetherAllowEnroll" >
+              <el-checkbox label="1" v-model="form.whetherAllowEnroll">勾选时表示允许报名</el-checkbox>
+            </el-form-item>
+            <el-form-item label="精准用户设置" >
+              <section class="inline-box">
+                <el-form-item prop="viewCount">
+                  <el-select placeholder="浏览次数" v-model.number="form.viewCount" clearable filterable allow-create default-first-option></el-select>
+                </el-form-item>
+                <el-form-item prop="minTime">
+                    <el-select placeholder="平均单词浏览最小时间" v-model="form.minTime">
+                      <el-option label="1分钟" value="1"></el-option>
+                    </el-select>
+                </el-form-item>
+                <el-form-item prop="maxTime">
+                  <el-select placeholder="平均单词浏览最大时间" v-model="form.maxTime">
+                    <el-option label="1小时" value="60"></el-option>
                   </el-select>
-              </el-form-item>
-              <el-form-item prop="maxTime">
-                <el-select placeholder="平均单词浏览最大时间" v-model="form.maxTime">
-                  <el-option label="1小时" value="60"></el-option>
-                </el-select>
-              </el-form-item>
-              <el-form-item prop="isok">
-                <el-checkbox label="勾选时表示两者都要满足" v-model="form.conditionStatus"></el-checkbox>
-              </el-form-item>
-            </section>
-          </el-form-item>
+                </el-form-item>
+                <el-form-item prop="isok">
+                  <el-checkbox label="勾选时表示两者都要满足" v-model="form.conditionStatus"></el-checkbox>
+                </el-form-item>
+              </section>
+            </el-form-item>
         </el-form>
         <my-sub-button @handleSubmit="submit" @handleCancel="cancel" ></my-sub-button>
       </section>
