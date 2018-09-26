@@ -38,6 +38,8 @@ export const jump2Detail = params => {
             break ;
       case '摇一摇活动' : rootPath = '/market/shake/pub' , child = '编辑摇一摇活动'
             break ;
+      case '活动抽奖': rootPath = '/market/active/other/pub', child = '编辑活动详情'
+            break;
       case '自动回复配置' : rootPath = '/system/store/reply', child = '编辑自动回复设置'
             break ;
       case '用户提现记录' : rootPath = '/coupon/userComm/pub', subMenu = '用户佣金提现'
@@ -110,6 +112,8 @@ export const jump2Detail = params => {
          break;
        case '市场推广' : window.$store.dispatch('marketDelAndFresh', {path, row: {id: choose}})
         break;
+       case '客户服务' : window.$store.dispatch('serverModulesDelAndFresh', {path, row:{id: choose}})
+        break;
       }
    }).catch(()=>{
      _g.toastMsg({
@@ -148,7 +152,10 @@ export const jump2Detail = params => {
       case '用户提现记录' : return location.href = window.rootPath + '/takeMoney/getUserTakeCashListReport.do' + _str;
       case '意见反馈' : return location.href = window.rootPath + '/feedback/export.do' + _str
       case '报名查询' : return location.href = window.rootPath + '/ordinaryActivities/takeSignUpListReport.do' + _str
-      }
+      case '活动中奖': return location.href = window.rootPath + '/activitiesDraws/userLotteryInfoReport.do' + _str
+      case '预约管理' : return location.href = window.rootPath + '/bookingBackend/delete.do' + _str
+      case '保险服务' : return location.href = window.rootPath + '/insurances/exports.do' + _str
+    }
    }else{
     window.$route.push({path:'/mid/container', query:{path:'/unlimit'}})
    }
