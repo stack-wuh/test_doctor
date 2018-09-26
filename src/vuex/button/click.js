@@ -1,4 +1,4 @@
-import {_g,NotNull} from '../../../src/utils/global'
+import {_g, NotNull, getQueryString} from '../../../src/utils/global'
 
 export const jump2Other =  params => {
   window.$route.push('/index')
@@ -13,41 +13,47 @@ export const jump2Detail = params => {
  * 需要路由跳转到指定页面
  */
 
- export const jump2Add = ({params} = {}) => {
+ export const jump2Add = ({params, text} = {}) => {
+   const $store = window.$store
    let {menu , subMenu , child} = params
-   let rootPath = '' , other = ''
-   switch( child || subMenu || menu){
-     case '门店管理' : rootPath =  '/system/store/pub' , child = '发布新店'
-          break ;
-     case '员工列表' : rootPath = '/system/store'  , child = '关注用户列表'
-          break ;
-     case '自动回复配置' : rootPath = '/system/store/reply' 
-          break ;
-     case '汽车精品管理' : rootPath = '/use/pub' , child = '编辑汽车精品信息'
-          break ;  
-     case '会员列表' : rootPath = '/member/pub' , child = '编辑会员信息'
-          break ;
-     case '奖品卡券管理' : rootPath = '/coupon/pub', child = '编辑奖品卡券'
-          break;
-     case '抽奖模板设置' : rootPath = '/coupon/lotto/pub' , child = '编辑抽奖模板'
-          break ;
-     case '普通活动' : rootPath = '/market/active/pub' , child = '编辑活动详情'
-          break ;
-     case '摇一摇活动' : rootPath = '/market/shake/pub' , child = '编辑摇一摇活动'
-          break ;
-     case '自动回复配置' : rootPath = '/system/store/reply', child = '编辑自动回复设置'
-          break ;
-     case '用户提现记录' : rootPath = '/coupon/userComm/pub', subMenu = '用户佣金提现'
-          break;
-     case '系统消息' : rootPath = '/log/msg/pub', child = '发布系统消息'
-          break;
-     case '问卷调查' : rootPath = '/serve/question/pub', child = '编辑问卷'
-          break;
-     case '养车知识' : rootPath = '/serve/carfeed/pub', child = '编辑养车知识'
-          break;
-     default : rootPath = '/index'
-   }
-   window.$route.push({path:'/mid/container',query:{path:rootPath , menu , subMenu ,child}})
+   let result = $store.getters.formatLimitByButton({menu, subMenu, child, text})
+   let rootPath = ''
+  //  if(result){
+    switch( child || subMenu || menu){
+      case '门店管理' : rootPath =  '/system/store/pub' , child = '发布新店'
+            break ;
+      case '员工列表' : rootPath = '/system/store'  , child = '关注用户列表'
+            break ;
+      case '自动回复配置' : rootPath = '/system/store/reply' 
+            break ;
+      case '汽车精品管理' : rootPath = '/use/pub' , child = '编辑汽车精品信息'
+            break ;  
+      case '会员列表' : rootPath = '/member/pub' , child = '编辑会员信息'
+            break ;
+      case '奖品卡券管理' : rootPath = '/coupon/pub', child = '编辑奖品卡券'
+            break;
+      case '抽奖模板设置' : rootPath = '/coupon/lotto/pub' , child = '编辑抽奖模板'
+            break ;
+      case '普通活动' : rootPath = '/market/active/pub' , child = '编辑活动详情'
+            break ;
+      case '摇一摇活动' : rootPath = '/market/shake/pub' , child = '编辑摇一摇活动'
+            break ;
+      case '自动回复配置' : rootPath = '/system/store/reply', child = '编辑自动回复设置'
+            break ;
+      case '用户提现记录' : rootPath = '/coupon/userComm/pub', subMenu = '用户佣金提现'
+            break;
+      case '系统消息' : rootPath = '/log/msg/pub', child = '发布系统消息'
+            break;
+      case '问卷调查' : rootPath = '/serve/question/pub', child = '编辑问卷'
+            break;
+      case '养车知识' : rootPath = '/serve/carfeed/pub', child = '编辑养车知识'
+            break;
+      default : rootPath = '/index'
+    }
+    window.$route.push({path:'/mid/container',query:{path:rootPath , menu , subMenu ,child}})
+  //  }else{
+  //    window.$route.push({path:'/mid/container', query:{path:'/unlimit'}})
+  //  }
  }
 
  /**
