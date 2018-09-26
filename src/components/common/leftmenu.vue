@@ -613,9 +613,6 @@ export default {
     ...mapState({
       'store':state => state.Limit.data
     }),
-    ...mapGetters({
-      'initList': 'formatLimitStoreMenu'
-    })
   },
   methods: {
     ...mapActions({
@@ -623,7 +620,6 @@ export default {
     }),
     formatLimit(argus){
       let _arr = argus && argus.filter(item => item.name === '查看').map(list => getQueryString(list.url))
-      console.log(_arr)
       this.list.map(item => {
         _arr.map(list => {
           if(item.label === list.menu){
@@ -642,7 +638,6 @@ export default {
           }
         })
       })
-      console.log(this.list)
     }
   },
   created(){
