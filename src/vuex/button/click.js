@@ -18,7 +18,7 @@ export const jump2Detail = params => {
    let {menu , subMenu , child} = params
    let result = $store.getters.formatLimitByButton({menu, subMenu, child, text})
    let rootPath = ''
-  //  if(result){
+   if(result){
     switch( child || subMenu || menu){
       case '门店管理' : rootPath =  '/system/store/pub' , child = '发布新店'
             break ;
@@ -51,32 +51,42 @@ export const jump2Detail = params => {
       default : rootPath = '/index'
     }
     window.$route.push({path:'/mid/container',query:{path:rootPath , menu , subMenu ,child}})
-  //  }else{
-  //    window.$route.push({path:'/mid/container', query:{path:'/unlimit'}})
-  //  }
+   }else{
+     window.$route.push({path:'/mid/container', query:{path:'/unlimit'}})
+   }
  }
 
  /**
   * 点击新增按钮
   * 出现dialog对话框
   */
- export const jump2AddWithDialog = (params ,text , row )=> {
-   let {subMenu ,child} = params.params
-   window.$store.commit('handleOpenDialog',{params,text,row})
-    switch(child || subMenu){
-      case '部门管理' : return window.$store.dispatch('getDepartmentList')
-      case '角色管理' : return window.$store.dispatch('getRoleList')
-      case '会员充值设置' : return window.$store.dispatch('getCouponList')
-    }
+ export const jump2AddWithDialog = ({params ,text , row} = {} )=> {
+   let {menu, subMenu ,child} = params
+   let result = window.$store.getters.formatLimitByButton({menu, subMenu, child, text})
+   if(result){
+    window.$store.commit('handleOpenDialog',{params,text,row})
+      switch(child || subMenu){
+        case '部门管理' : return window.$store.dispatch('getDepartmentList')
+        case '角色管理' : return window.$store.dispatch('getRoleList')
+        case '会员充值设置' : return window.$store.dispatch('getCouponList')
+      }
+   }else{
+     window.$route.push({path:'/mid/container', query:{path: '/unlimit'}})
+   }
  }
 
  /**
   * 表格头部按钮点击事件
   * 批量删除
   */
- export const DelAndFreshWithAll = ({params , choose} = {}) => {
+ export const DelAndFreshWithAll = ({params , choose, text} = {}) => {
   let {menu ,subMenu ,child} = params
+  let result = window.$store.getters.formatLimitByButton({menu, subMenu, child, text})
   let path = child || subMenu
+  if(!result){
+    window.$route.push({path: '/mid/container', query: {path: '/unlimit'}})
+    return
+  }
    if(!choose.length){
     _g.toastMsg({
       type:'error',
@@ -113,30 +123,35 @@ export const jump2Detail = params => {
   * 导出数据为表格
   * JSON2Excel
   */
- export const export2Excel = ({params}) => {
-   let {subMenu, child} = params, search = NotNull(window.$store.state.search)
-   let _temp = Object.entries(search), _str = '?'
-   _temp && _temp.forEach(item => {
-     _str += `${item[0]}=${item[1]}&`
-   })
-   _g.toastMsg({
-     type:'success',
-     msg:'正在导出Excel文件,请稍后!'
-   })
-   switch(child || subMenu){
-     case '门店管理' : return location.href = window.rootPath + '/store/outStore.do' + _str;
-     case '精品订单管理' : return location.href = window.rootPath + '/quality/outQulity.do' + _str;
-     case '充值明细' : return location.href = window.rootPath + '/detail/exportRecharge.do' + _str;
-     case '消费明细' : return location.href = window.rootPath + '/detail/exportConsumerDetails.do' + _str;
-     case '查看领取明细' : return location.href = window.rootPath + '/coupon/getTakeListByUserCouponVoForReport.do' + _str;
-     case '员工奖励' : return location.href = window.rootPath + '/employeeReward/employeeRewardListReport.do' + _str;
-     case '用户卡券管理' : return location.href = window.rootPath + '/coupon/getTakeListByUserCouponVoForReport.do' + _str;
-     case '用户奖励' : return location.href = window.rootPath + '/coupon/userCouponListReport.do' + _str;
-     case '员工奖励' : return location.href = window.rootPath + '/employeeReward/employeeRewardListReport.do' + _str;
-     case '用户提现记录' : return location.href = window.rootPath + '/takeMoney/getUserTakeCashListReport.do' + _str;
-     case '意见反馈' : return location.href = window.rootPath + '/feedback/export.do' + _str
-     case '报名查询' : return location.href = window.rootPath + '/ordinaryActivities/takeSignUpListReport.do' + _str
-    }
+ export const export2Excel = ({params, text}) => {
+  let {menu, subMenu, child} = params, search = NotNull(window.$store.state.search)
+  let result = window.$store.getters.formatLimitByButton({menu, subMenu, child, text})
+   if(result){
+    let _temp = Object.entries(search), _str = '?'
+    _temp && _temp.forEach(item => {
+      _str += `${item[0]}=${item[1]}&`
+    })
+    _g.toastMsg({
+      type:'success',
+      msg:'正在导出Excel文件,请稍后!'
+    })
+    switch(child || subMenu){
+      case '门店管理' : return location.href = window.rootPath + '/store/outStore.do' + _str;
+      case '精品订单管理' : return location.href = window.rootPath + '/quality/outQulity.do' + _str;
+      case '充值明细' : return location.href = window.rootPath + '/detail/exportRecharge.do' + _str;
+      case '消费明细' : return location.href = window.rootPath + '/detail/exportConsumerDetails.do' + _str;
+      case '查看领取明细' : return location.href = window.rootPath + '/coupon/getTakeListByUserCouponVoForReport.do' + _str;
+      case '员工奖励' : return location.href = window.rootPath + '/employeeReward/employeeRewardListReport.do' + _str;
+      case '用户卡券管理' : return location.href = window.rootPath + '/coupon/getTakeListByUserCouponVoForReport.do' + _str;
+      case '用户奖励' : return location.href = window.rootPath + '/coupon/userCouponListReport.do' + _str;
+      case '员工奖励' : return location.href = window.rootPath + '/employeeReward/employeeRewardListReport.do' + _str;
+      case '用户提现记录' : return location.href = window.rootPath + '/takeMoney/getUserTakeCashListReport.do' + _str;
+      case '意见反馈' : return location.href = window.rootPath + '/feedback/export.do' + _str
+      case '报名查询' : return location.href = window.rootPath + '/ordinaryActivities/takeSignUpListReport.do' + _str
+      }
+   }else{
+    window.$route.push({path:'/mid/container', query:{path:'/unlimit'}})
+   }
  }
 
  /**

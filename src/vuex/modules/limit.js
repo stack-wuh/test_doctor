@@ -72,8 +72,8 @@ const getters = {
     let data =  state.limits.filter(item => getQueryString(item.url).menu === menu)
     let result
     if(child){
-      result = data.filter(list => getQueryString(list.url).subMenu === subMenu)
-                  .filter(child => getQueryString(child.url).child === child)
+     result = data.filter(list => getQueryString(list.url).subMenu === subMenu)
+                  .filter(subList => getQueryString(subList.url).child === child)
                     .some(sub => sub.name === text)
     } else{          
       result = data.filter(list => getQueryString(list.url).subMenu === subMenu)
