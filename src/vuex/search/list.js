@@ -1567,7 +1567,7 @@ const state = {
         {
           key:'活动结束日期',
           value:'',
-          type:'select',
+          type:'date',
           prop:'endDate',
         },
       ],
@@ -2451,7 +2451,7 @@ const getters = {
         }else if(sub.key === '文章类别'){
           sub.list = rootState.articleType
         }else if(sub.key === '活动栏目'){
-          sub.list = rootGetters.formatActivitiesList
+          sub.list = rootState.activitiesList
         }
         return {...sub}
       })

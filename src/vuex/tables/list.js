@@ -48,7 +48,8 @@
    handleDelAndFresh,
    handleDelItemForCouponModel,
    marketActivePub,
-   couponMemberParise
+   couponMemberParise,
+   marketPrevSend,
   } from './click.js'
   import {moveUpItem, moveDown} from '../../utils/global'
 const state = {
@@ -2432,7 +2433,7 @@ const state = {
         {
           key:'所属栏目',
           type:'default',
-          prop:'columnType',
+          prop:'columnTypeText',
         },
         {
           key:'活动标题',
@@ -2487,29 +2488,6 @@ const state = {
               type:'',
               size:'small',
             },
-            // {
-            //   valid:2,
-            //   value:1,
-            //   rules:'status',
-            //   texts:['未开始', '进行中', '已结束', '已关闭'],
-            //   styles:[
-            //     {
-            //       color: STYLES['PRIMARY']
-            //     },
-            //     {
-            //       color: STYLES['SUCCESS']
-            //     },
-            //     {
-            //       color: STYLES['INFO']
-            //     },
-            //     {
-            //       color: STYLES['ERROR']
-            //     }
-            //   ],
-            //   type:'',
-            //   size:'small',
-            //   click:marketActivePub
-            // },
             {
               text:'精准获客',
               type:'',
@@ -2557,12 +2535,12 @@ const state = {
         {
           key:'是否精准客户',
           type:'default',
-          prop:'accurateGuests',
+          prop:'accurateGuestsText',
         },
         {
           key:'是否转发',
           type:'default',
-          prop:'whetherForwarding',
+          prop:'whetherForwardingText',
         },
         {
           key:'最近查看时间',
@@ -2649,7 +2627,23 @@ const state = {
           type:'button',
           list:[
             {
-              text:'领取'
+              // text:'领取',
+              valid:3,
+              rules:'status',
+              value:[0,1],
+              texts:['领取','确认','已确认'],
+              styles:[
+                {
+                  color:STYLES['PRIMARY']
+                },
+                {
+                  color:STYLES['PRIMARY']
+                },
+                {
+                  color:STYLES['SUCCESS']
+                },
+              ],
+              click:marketPrevSend
             }
           ]
         },

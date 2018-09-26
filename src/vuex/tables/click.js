@@ -249,3 +249,11 @@ export const couponMemberParise = (params, text, row) => {
   let {subMenu, child} = params
   window.$store.dispatch('couponMemberParise', {row, path: child || subMenu})
 }
+
+/**
+ * 市场推广 -- 普通活动 -- 报名查询 -- 发放
+ */
+export const marketPrevSend = (params, status, row) => {
+  let {subMenu, child} = params
+  window.$store.dispatch('marketPrevSend', {row, path: child || subMenu})
+}
