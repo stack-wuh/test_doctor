@@ -21,7 +21,6 @@ const SystemStorePub = resolve => require(['@/components/systemManage/child/stor
 const SystemStoreReply = resolve => require(['@/components/systemManage/child/reply'],resolve)
 const SystemShare = resolve => require(['@/components/systemManage/child/share'], resolve)
 
-
 const UseIndex = resolve => require(['@/components/useManage/index'],resolve)
 const UseStore = resolve => require(['@/components/useManage/mid/store'],resolve)
 const UsePub = resolve => require(['@/components/useManage/child/usePub'],resolve)
@@ -46,6 +45,7 @@ const MarketIndex = resolve => require(['@/components/marketManage/index'],resol
 const MarketStore = resolve => require(['@/components/marketManage/mid/store'],resolve)
 const MarketActivePub = resolve => require(['@/components/marketManage/child/activePub'],resolve)
 const MarketShakePub = resolve => require(['@/components/marketManage/child/shakePub'],resolve)
+const MarketOtherActivePub = resolve => require(['@/components/marketManage/child/otherActivePub'], resolve)
 
 const ServeIndex = resolve => require(['@/components/serveManage/index'],resolve)
 const ServeStore = resolve => require(['@/components/serveManage/mid/store'],resolve)
@@ -242,6 +242,11 @@ export default new Router({
                   path:'/market/shake/pub',
                   name:'marketShakePub',
                   component:MarketShakePub
+                },
+                {
+                  path:'/market/active/other/pub',
+                  name:'marketActiveOtherPub',
+                  component:MarketOtherActivePub,
                 }
               ]
             },
