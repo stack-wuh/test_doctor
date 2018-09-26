@@ -25,6 +25,12 @@ const actions = {
         break;
       case '问卷调查' : _url = 'questionnaire/init.do', search = {currPageNo}
         break;
+      case '预约管理' : _url = 'bookingBackend/init.do', search = {...rootState.search, currPageNo}
+        break;
+      case '预约时间管理' : _url = 'bookingTime/init.do', search = {...rootState.search, currPageNo}
+        break;
+      case '保险服务' : _url = 'insurances/init.do', search = {...rootState.search, currPageNo}
+        break;
     }
     return new Promise((resolve, reject) => {
       $http.post(_url, NotNull(search), res => {
@@ -93,12 +99,58 @@ const actions = {
         break;
       case '养车知识分类' : _url = 'raisingBackend/delRaisingType.do'
         break
+      case '预约管理' : _url = 'bookingBackend/delete.do'
+        break;
+      case '预约时间管理' : _url = 'bookingTime/delete.do'
+        break;
     }
     return new Promise((resolve,reject) => {
       $http.post(_url, {ids: id}, res => {
         setTimeout(()=>{
           dispatch('getServerStore',{path})
         },1000)
+        return resolve(res)
+      })
+    })
+  },
+
+  /**
+   * 客户服务 -- 预约时间管理-- 新增/编辑
+   */
+  serverPrevTimePubAndFresh({dispatch}, {path, form:{
+    id,
+    startTime,
+    endTime,
+    number,
+    remark,
+  }} = {}){
+    $http.post('bookingTime/insert.do', {
+      id,
+      startTime,
+      endTime,
+      number,
+      remark,
+    }, res => {
+      setTimeout(()=>{
+        dispatch('asyncHideDialog')
+        dispatch('getServerStore', {path})
+      },1000)
+    })
+  },
+  /**
+   * 客户服务 -- 保险服务 -- 编辑保修服务
+   */
+  serverInsuracePutAndFresh({dispatch}, {form:{
+    id,
+    offer,
+    remarks,
+  }} = {}){
+    return new Promise((resolve, reject) => {
+      $http.post('insurances/update.do', {
+        id,
+        offer,
+        remarks
+      }, res => {
         return resolve(res)
       })
     })
@@ -124,6 +176,12 @@ const getters = {
         return {...item, validate: `${item.startDates}-${item.endDates}`, activeStateText: item.activeState == 0 ? '待发布' : item.activeState == 1 ? '进行中' : item.activeState == 2 ? '已结束' : '已关闭'}
       }else if(path === '养车知识'){
         return {...item, stateText: item.state == 0 ? '未发布' : '已发布'}
+      }else if(path === '预约管理'){
+        return {...item, bookingSetIdText: item.bookingSetId === 1 ? '爱车保养' : item.bookingSetId === 2 ? '事故维修' : item.bookingSetId === 3 ? '故障检查' : item.bookingSetId === 4 ? '购买保险' : item.bookingSetId === 5 ? '爱车美容' : '其他', stateText: item.state === 0 ? '未确认' : item.state === 1 ? '未到店' : item.state === 2 ? '已确认' : '已取消'}
+      }else if(path === '预约时间管理'){
+        return {...item, rankTime: `${item.startTime}至${item.endTime}`}
+      }else if(path === '保险服务'){
+        return {...item, stateText: item.state === 0 ? '未确认' : '已确认'}
       }else{
         return {...item}
       }
