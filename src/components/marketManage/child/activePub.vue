@@ -154,7 +154,6 @@ export default {
     this.getActiveList()
     this.getCouponList()
     let data = this.$route.query.data && (JSON.parse(this.$route.query.data))
-    console.log(data)
     if(data){
       this.form = {
         ...this.form,
