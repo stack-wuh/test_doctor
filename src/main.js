@@ -16,6 +16,7 @@ window._g = _g
 Vue.prototype.$http = $http
 Vue.config.productionTip = false
 Vue.prototype.$E = $E
+
 window.rootPath = '/car_doctor'
 
 router.beforeEach((to, form, next) => {
