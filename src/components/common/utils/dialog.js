@@ -145,6 +145,13 @@ export const forms = [
         key:'所属部门',
         type:'select',
         prop:'departmentId',
+        rules:[
+          {
+            required:true,
+            message:'请选择所属部门',
+            trigger:'change'
+          }
+        ],
         list:[
           {
             value:'1',
@@ -156,6 +163,13 @@ export const forms = [
         key:'员工角色',
         type:'select',
         prop:'roleId',
+        rules:[
+          {
+            required:true,
+            message:'请选择员工角色',
+            trigger:'change'
+          }
+        ],
         list:[
           {
             label:'普通用户',
@@ -179,11 +193,25 @@ export const forms = [
         key:'员工姓名',
         type:'input',
         prop:'realName',
+        rules:[
+          {
+            required:true,
+            message:'请编辑员工姓名',
+            trigger:'blur'
+          }
+        ],
       },
       {
         key:'员工性别',
         type:'select',
         prop:'sex',
+        rules:[
+          {
+            required:true,
+            message:'请选择员工性别',
+            trigger:'change'
+          }
+        ],
         list:[
           {
             label:'男',
@@ -199,31 +227,73 @@ export const forms = [
         key:'手机号码',
         type:'input',
         prop:'phone',
+        rules:[
+          {
+            required:true,
+            validator:validPhone,
+            trigger:'change'
+          }
+        ],
       },
       {
         key:'出生日期',
         type:'date',
         prop:'birthday',
+        rules:[
+          {
+            required:true,
+            validator:validDate,
+            trigger:'change'
+          }
+        ],
       },
       {
         key:'登录账号',
         type:'input',
         prop:'username',
+        rules:[
+          {
+            required:true,
+            message:'请编辑登录账号',
+            trigger:'input'
+          }
+        ],
       },
       {
         key:'登录密码',
         type:'input',
         prop:'password',
+        rules:[
+          {
+            required:false,
+            message:'请编辑登录密码',
+            trigger:'input'
+          }
+        ],
       },
       {
         key:'电子邮箱',
         type:'input',
         prop:'email',
+        rules:[
+          {
+            required:true,
+            validator:validEmail,
+            trigger:'input'
+          }
+        ],
       },
       {
         key:'身份证号',
         type:'input',
         prop:'idNum',
+        rules:[
+          {
+            required:true,
+            validator:validNoNum,
+            trigger:'input'
+          }
+        ],
       },
       {
         key:'每日预约',
