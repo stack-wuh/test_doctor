@@ -65,7 +65,7 @@ const mutations = {
 }
 
 const actions = {
-  /**
+  /*
    * 卡券管理 -- 获取卡券管理模块下所有的列表
    */
   getCouponStore({commit, rootState, dispatch} ,{path ,search, currPageNo = 1} = {}){
