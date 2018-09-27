@@ -303,52 +303,53 @@ export const list = [
         label: "预约管理",
         mid_path: "/mid/container",
         path:'/serve',
-        isAuth:1,
+        isAuth:0,
       },
       {
         label: "预约时间管理",
         mid_path: "/mid/container",
         path:'/serve',
-        isAuth:1,
+        isAuth:0,
       },
       {
         label: "保险服务",
         mid_path: "/mid/container",
         path:'/serve',
-        isAuth:1,
+        isAuth:0,
       },
       {
         label: "救援服务",
         mid_path: "/mid/container",
         path:'/serve',
-        isAuth:1,
+        isAuth:0,
       },
       {
         label: "意见反馈",
         mid_path: "/mid/container",
         path:'/serve',
-        isAuth:1,
+        isAuth:0,
       },
       {
         label: "问卷调查",
         mid_path: "/mid/container",
         path:'/serve',
-        isAuth:1,
+        isAuth:0,
       },
       {
         label: "养车知识",
         mid_path: "/mid/container",
         path:'/serve',
-        isAuth:1,
+        isAuth:0,
       },
       {
         label: "养车知识分类",
         mid_path: "/mid/container",
         path:'/serve',
-        isAuth:1,
+        isAuth:0,
       },
       {
         label: "车辆检测",
+        isAuth:1,
         children: [
           {
             label: "检修记录",
@@ -379,37 +380,37 @@ export const list = [
       {
         label: "用户统计",
         mid_path: "/mid/container",
-        isAuth:0,
+        isAuth:1,
       },
       {
         label: "车辆统计",
         mid_path: "/mid/container",
-        isAuth:0,
+        isAuth:1,
       },
       {
         label: "业务统计",
         mid_path: "/mid/container",
-        isAuth:0,
+        isAuth:1,
       },
       {
         label: "活动统计",
         mid_path: "/mid/container",
-        isAuth:0,
+        isAuth:1,
       },
       {
         label: "会员统计",
         mid_path: "/mid/container",
-        isAuth:0,
+        isAuth:1,
       },
       {
         label: "提成日报",
         mid_path: "/mid/container",
-        isAuth:0,
+        isAuth:1,
       },
       {
         label: "门店经营诊断",
         mid_path: "/mid/container",
-        isAuth:0,
+        isAuth:1,
       }
     ]
   },
@@ -419,244 +420,251 @@ export const list = [
     children: [
       {
         label: "业务管理",
+        isAuth:1,
         children: [
           {
             label: "业务开单",
             mid_path: "/mid/container",
             path:'/selling/store',
-            isAuth:0,
+            isAuth:1,
           },
           {
             label: "业务结算",
             mid_path: "/mid/container",
             path:'/selling/store',
-            isAuth:0,
+            isAuth:1,
           },
           {
             label: "业务出库",
             mid_path: "/mid/container",
             path:'/selling/store',
-            isAuth:0,
+            isAuth:1,
           },
           {
             label: "业务退货",
             mid_path: "/mid/container",
             path:'/selling/store',
-            isAuth:0,
+            isAuth:1,
           }
         ]
       },
       {
         label: "套餐管理",
+        isAuth:1,
         children: [
           {
             label: "套餐管理",
             mid_path: "/mid/container",
             path:'/selling/store',
-            isAuth:0,
+            isAuth:1,
           },
           {
             label: "套餐销售",
             mid_path: "/mid/container",
             path:'/selling/store',
-            isAuth:0,
+            isAuth:1,
           },
           {
             label: "会员套餐记录",
             mid_path: "/mid/container",
             path:'/selling/store',
-            isAuth:0,
+            isAuth:1,
           }
         ]
       },
       {
         label: "采购管理",
+        isAuth:1,
         children: [
           {
             label: "采购订单",
             mid_path: "/mid/container",
             path:'/selling/store',
-            isAuth:0,
+            isAuth:1,
           },
           {
             label: "采购入库",
             mid_path: "/mid/container",
             path:'/selling/store',
-            isAuth:0,
+            isAuth:1,
           },
           {
             label: "采购退货",
             mid_path: "/mid/container",
             path:'/selling/store',
-            isAuth:0,
+            isAuth:1,
           }
         ]
       },
       {
         label: "财务管理",
+        isAuth:1,
         children: [
           {
             label: "付款管理",
             mid_path: "/mid/container",
             path:'/selling/store',
-            isAuth:0,
+            isAuth:1,
           },
           {
             label: "挂账还款",
             mid_path: "/mid/container",
             path:'/selling/store',
-            isAuth:0,
+            isAuth:1,
           }
         ]
       },
       {
         label: "仓库管理",
+        isAuth:1,
         children: [
           {
             label: "调拨发起",
             mid_path: "/mid/container",
             path:'/selling/store',
-            isAuth:0,
+            isAuth:1,
           },
           {
             label: "调拨接收",
             mid_path: "/mid/container",
             path:'/selling/store',
-            isAuth:0,
+            isAuth:1,
           },
           {
             label: "日常盘点",
             mid_path: "/mid/container",
             path:'/selling/store',
-            isAuth:0,
+            isAuth:1,
           }
         ]
       },
       {
         label: "平台配置管理",
+        isAuth:1,
         children: [
           {
             label: "供应商设置",
             mid_path: "/mid/container",
             path:'/selling/store',
-            isAuth:0,
+            isAuth:1,
           },
           {
             label: "仓库设置",
             mid_path: "/mid/container",
             path:'/selling/store',
-            isAuth:0,
+            isAuth:1,
           },
           {
             label: "商品分类设置",
             mid_path: "/mid/container",
             path:'/selling/store',
-            isAuth:0,
+            isAuth:1,
           },
           {
             label: "商品设置",
             mid_path: "/mid/container",
             path:'/selling/store',
-            isAuth:0,
+            isAuth:1,
           },
           {
             label: "项目分类设置",
             mid_path: "/mid/container",
             path:'/selling/store',
-            isAuth:0,
+            isAuth:1,
           },
           {
             label: "项目设置",
             mid_path: "/mid/container",
             path:'/selling/store',
-            isAuth:0,
+            isAuth:1,
           },
           {
             label: "物流公司配置",
             mid_path: "/mid/container",
             path:'/selling/store',
-            isAuth:0,
+            isAuth:1,
           },
           {
             label: "支付方式配置",
             mid_path: "/mid/container",
             path:'/selling/store',
-            isAuth:0,
+            isAuth:1,
           }
         ]
       },
       {
         label: "报表管理",
+        isAuth:1,
         children: [
           {
             label: "库存报表",
             mid_path: "/mid/container",
-            isAuth:0,
+            isAuth:1,
           },
           {
             label: "出入库明细表",
             mid_path: "/mid/container",
-            isAuth:0,
+            isAuth:1,
           },
           {
             label: "盘点明细表",
             mid_path: "/mid/container",
-            isAuth:0,
+            isAuth:1,
           },
           {
             label: "日报月报",
             mid_path: "/mid/container",
-            isAuth:0,
+            isAuth:1,
           },
           {
             label: "员工绩效表",
             mid_path: "/mid/container",
-            isAuth:0,
+            isAuth:1,
           },
           {
             label: "销售统计表",
             mid_path: "/mid/container",
-            isAuth:0,
+            isAuth:1,
           },
           {
             label: "商品销售统计",
             mid_path: "/mid/container",
-            isAuth:0,
+            isAuth:1,
           },
           {
             label: "项目销售统计",
             mid_path: "/mid/container",
-            isAuth:0,
+            isAuth:1,
           },
           {
             label: "采购明细表",
             mid_path: "/mid/container",
-            isAuth:0,
+            isAuth:1,
           },
           {
             label: "挂账单据明细表",
             mid_path: "/mid/container",
-            isAuth:0,
+            isAuth:1,
           },
           {
             label: "挂账还款明细表",
             mid_path: "/mid/container",
-            isAuth:0,
+            isAuth:1,
           },
           {
             label: "营业额统计表",
             mid_path: "/mid/container",
-            isAuth:0,
+            isAuth:1,
           },
           {
             label: "收款统计",
             mid_path: "/mid/container",
-            isAuth:0,
+            isAuth:1,
           },
           {
             label: "付款统计",
             mid_path: "/mid/container",
-            isAuth:0,
+            isAuth:1,
           }
         ]
       }
