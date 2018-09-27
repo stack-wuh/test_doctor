@@ -109,34 +109,8 @@ const actions = {
    * @param {*} param0 
    * @param {*} param1 
    */
-  staffPubAndPut({commit,dispatch},{form, form: {
-    id,
-    departmentId,
-    realName,
-    phone,
-    birthday,
-    username,
-    idNum,
-    email,
-    reservation,
-    roleId,
-    userRoleId,
-    password,
-  },path} = {}){
-    $http.post('employee/updateEmployee.do',{
-      id,
-      departmentId,
-      realName,
-      phone,
-      birthday,
-      username,
-      idNum,
-      email,
-      reservation,
-      roleId,
-      userRoleId,
-      password,
-    } ,res => {
+  staffPubAndPut({commit,dispatch},{form, path} = {}){
+    $http.post('employee/updateEmployee.do',NotNull(form) ,res => {
       (res.status) == 0 && (
         setTimeout(()=>{
           commit('handlehideDialog')
