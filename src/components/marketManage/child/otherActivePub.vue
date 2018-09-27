@@ -48,7 +48,7 @@
           </el-form-item>
           <el-form-item label="奖项设置" prop="lotteryTemplateId">
             <el-select placeholder="请选择奖项设置" v-model="form.lotteryTemplateId">
-              <el-option v-for="(item,index) in couponList" :label="item.label" :value="item.value"></el-option>
+              <el-option v-for="(item,index) in activesList" :label="item.label" :value="item.value"></el-option>
             </el-select>
           </el-form-item>
         </el-form>
@@ -99,14 +99,12 @@ export default {
   },
   computed:{
     ...mapState({
-      'activesList':'activesList',
-      'couponList': state => state.couponList
+      'activesList':'activesList'
     })
   },
   methods: {
     ...mapActions({
       'getActiveList':'getActiveList',
-      'getCouponList':'getCouponList',
       'handleSubmit': 'marketOtherActivePub'
     }),
     submit(){
@@ -135,9 +133,7 @@ export default {
   },
   created(){
     this.getActiveList()
-    this.getCouponList()
     let data = this.$route.query.data && (JSON.parse(this.$route.query.data))
-    console.log(data)
     if(data){
       this.form = {
         ...this.form,
