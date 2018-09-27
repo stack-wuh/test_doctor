@@ -86,7 +86,6 @@ const actions = {
    */
   memberInfoPubAndPut({dispatch}, {path, form, form:{
     id,
-    userId,
     realName,
     phone,
     sex,
@@ -113,7 +112,7 @@ const actions = {
   }} = {}){
     return new Promise((resolve, reject) => {
       $http.post('vipList/insertOrUpdate.do', {
-        userId,
+        userId:id,
         realName,
         phone,
         sex,
