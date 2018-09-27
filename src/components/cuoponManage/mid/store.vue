@@ -67,7 +67,11 @@ export default {
       
     }),
     getCurrent(value){
-      this.getList({path: this.changePath, currPageNo: value})
+      let data = this.$route.query.data && JSON.parse(this.$route.query.data)
+      let search = {
+        id: data && data.id 
+      }
+      this.getList({path: this.changePath, currPageNo: value, search})
     }
   },
   created(){
