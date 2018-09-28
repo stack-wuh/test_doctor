@@ -351,12 +351,6 @@ const state = {
               size:'small',
               click:openDialog,
             },
-            // {
-            //   text:'禁用',
-            //   type:'text',
-            //   size:'small',
-            //   click:'',
-            // },
             {
               text:'重置密码',
               type:'text',
