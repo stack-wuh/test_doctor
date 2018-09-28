@@ -19,7 +19,7 @@ export const openDialog = (params,text,row) => {
     case '会员充值设置' : window.$store.dispatch('getCouponList') // 获得卡券列表
                         row = {...row, couponId:row.couponIds ? row.couponIds.split(',').map(item => Number(item)) : []}
         break;
-    case '员工列表' : window.$store.dispatch('getDepartmentList')
+    case '员工列表' : window.$store.dispatch('getDepartmentList'), window.$store.dispatch('getRoleList')
         break;
   }
    window.$store.commit('handleOpenDialog',{params,text,row}) 
