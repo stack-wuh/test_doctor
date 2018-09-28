@@ -92,6 +92,7 @@ export default {
       })
     },
     getData(val){
+      console.log(val)
       let _arr  = val.data && val.data.map((item,index) => {
         return {...item, rate: 0, quantity: 0}
       })
@@ -160,7 +161,7 @@ export default {
       this.temp_currPageNo = res.data.pageNum
     })
     let data =  this.$route.query.data && JSON.parse(this.$route.query.data)
-    this._id = data.id
+    this._id = data && data.id
     data && this.getModelList({id: data.id})
       .then(res => {
         this.form = {...this.form, ...res.data.template}
