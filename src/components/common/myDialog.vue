@@ -69,8 +69,9 @@ export default {
           return {...item, list:this.couponList}
         }else if(item.key === '使用角色类型'){
           return {...item, list: this.roleList}
-        }
-        else{
+        }else if(item.key === '员工角色'){
+          return {...item, list: this.roleList}
+        }else{
           return {...item}
         }
       })
