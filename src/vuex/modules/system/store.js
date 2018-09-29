@@ -514,6 +514,25 @@ const actions = {
         return resolve(res)
       })
     })
+  },
+  /**
+   * 系统管理 -- 平台管理 -- 分享与消费奖励 -- 用户消费
+   */
+  userShopPubAndFresh({dispatch}, {form} = {}){
+    let memberId = [], commissionCoefficient = []
+    let reg = /^\d$/
+    form.filter(item => item.commissionCoefficient).map(ss => { 
+      memberId = [...memberId, ss.id]
+      commissionCoefficient =  [...commissionCoefficient ,ss.commissionCoefficient]
+     })
+    return new Promise((resolve, reject) => {
+      $http.post('platform/addConsumeRule.do', {
+        memberId: memberId.toString(),
+        commissionCoefficient: commissionCoefficient.toString()
+      }, res => {
+        dispatch('getSalesRuleList')
+      })
+    })
   }
 }
 

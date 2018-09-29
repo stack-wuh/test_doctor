@@ -9,11 +9,15 @@
     
     <section class="flex flex-justify-between nav-btn">
       <p>用户消费</p>
-      <el-button>保存</el-button>
+      <el-button @click="userShopPubAndFresh({form: data})">保存</el-button>
     </section>
     <el-table :data="data" stripe border>
-      <el-table-column align="center" label="会员等级"></el-table-column>
-      <el-table-column align="center" label="提成系数"></el-table-column>
+      <el-table-column align="center" label="会员等级" prop="name"></el-table-column>
+      <el-table-column align="center" label="提成系数" prop="commissionCoefficient">
+        <template slot-scope="scope">
+            <el-input v-model="scope.row.commissionCoefficient" placeholder="请编辑提成系数"></el-input>
+        </template>
+      </el-table-column>
     </el-table>
     <small class="c999">注：用户提成即为用户消费金额乘以相应提成系数</small>
   </section>
@@ -49,7 +53,8 @@ export default {
   methods: {
     ...mapActions({
       'getShareList': 'getShareList',
-      'getSalesRuleList':'getSalesRuleList'
+      'getSalesRuleList':'getSalesRuleList',
+      'userShopPubAndFresh':'userShopPubAndFresh'
     })
   },
   created(){
