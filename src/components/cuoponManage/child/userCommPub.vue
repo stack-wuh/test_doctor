@@ -52,12 +52,13 @@
 import Search from '@/components/common/search'
 import MyTable from '@/components/common/myTable'
 import MySubBotton from '@/components/common/subButton'
-import {mapActions, mapGetters, mapState} from 'vuex'
+import {mapActions, mapGetters, mapState, mapMutations} from 'vuex'
+import {positiveNumber} from '@/utils/valid'
 const rules = {
   money:[
     {
       required:true,
-      message:'请编辑佣金提现的金额',
+      validator:positiveNumber,
       trigger:'blur'
     },
   ],
@@ -94,7 +95,7 @@ export default {
     ...mapActions({
       'getList':'getCouponStore',
       'handleSubmit': 'couponMemberTakePut',
-      'handleCancel' : 'clearCouponMemberTake'
+      'handleCancel' : 'clearCouponMemberTake',
     }),
     cancel(){
       this.$refs.myForm.resetFields()
@@ -119,8 +120,9 @@ export default {
       })
     }
   },
-  created(){
-    // this.getList({path: this.$route.query.child || this.$route.query.subMenu})
+  destroyed(){
+    this.handleCancel()
+    
   }
 }
 </script>
