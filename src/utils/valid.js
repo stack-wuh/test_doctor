@@ -111,3 +111,42 @@ export const MaxCouponNumber = (rule, value, callback) => {
      }
    },100)
  }
+
+ /**
+  * 验证输入的金额不能为负
+  */
+
+  export const positiveNumber = (rule, value, callback) => {
+    if(!value){
+      return callback(new Error('请编辑金额'))
+    }
+    setTimeout(()=>{
+      let reg = /^\d+$/
+      if(Number.parseInt(value, 10) <= 0){
+        callback(new Error('请编辑正确的金额'))
+      }else if(!reg.test(value)){
+        callback(new Error('只能输入数字'))
+      }else{
+        callback()
+      }
+    },100)
+  }
+
+  /**
+   * 验证积分
+   */
+  export const validIntegral = (rule, value, callback) => {
+    if(!value){
+      return callback(new Error('请编辑积分'))
+    }
+    setTimeout(()=>{
+      let reg = /^\d+$/
+      if(Number.parseInt(value, 10) < 0){
+        callback(new Error('请编辑正确的积分'))
+      }else if(!reg.test(value)){
+        callback(new Error('只能输入数字'))
+      }else{
+        callback()
+      }
+    },100)
+  }
