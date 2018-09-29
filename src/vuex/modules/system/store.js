@@ -234,6 +234,7 @@ const actions = {
    * 获取积分规则
    */
   getCouponIntegralRules({commit}){
+    console.log('is loading')
     $http.post('platform/getIntegralRule.do' , {} , res =>{
       commit('setCouponIntegRules' , {params : res.data })
     })
@@ -447,8 +448,18 @@ const actions = {
         list.typeId = item.pushType
       }
     })
+    console.log(form, id)
+
     $http.post('platform/addMessagePush.do', list, res => {
 
+    })
+  },
+  /**
+   * 系统管理 -- 获取关注后消息推送内容
+   */
+  getPushInfo({commit}){
+    $http.post('platform/getMessagePush.do', {}, res => {
+      commit('setCouponIntegRules', {params:res.data})
     })
   },
   /**
@@ -513,7 +524,7 @@ const getters = {
   },
 
   formatSystemStore: state => ({path} = {}) => {
-    return state.data.map(item => {
+    return state.data && state.data.map(item => {
       if(path === '门店管理'){
         return {...item, typeText: item.storeType == 0 ? '集团' : item.storeType == 1 ? '4S店' : '维修店', stateText: item.state == 1 ? '正常' : '禁用'}
       }else if(path === '保养提醒设置'){

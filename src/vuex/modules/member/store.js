@@ -169,9 +169,12 @@ const actions = {
   /**
    * 会员管理 -- 分配顾问
    */
-  memberPostCounselor({commit, rootState}, {form} = {}){
+  memberPostCounselor({dispatch}, {form, path} = {}){
    return new Promise((resolve, reject)=>{
     $http.post('vipList/changeEmployee.do', form, res => {
+      setTimeout(()=>{
+        dispatch('getMemberStore', {path})
+      },1000)
       return resolve(res)
     })
    }) 
