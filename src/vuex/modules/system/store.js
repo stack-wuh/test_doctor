@@ -323,20 +323,22 @@ const actions = {
    * 会员删除
    */
   memberDelAndFresh({dispatch} , {path , row:{id}} = {}){
-    let _url = ''
+    let _url = '' , search = {}
     switch(path){
-      case '会员充值设置' : _url = 'platform/delRecharge.do'
+      case '会员充值设置' : _url = 'platform/delRecharge.do', search = {ids:id}
         break;
-      case '保养提醒设置' : _url = 'platform/delRemind.do'
+      case '保养提醒设置' : _url = 'platform/delRemind.do', search = {ids:id}
         break;
-      case '自动回复配置' : _url = 'platform/delAutoResponse.do'
+      case '自动回复配置' : _url = 'platform/delAutoResponse.do', search = {ids:id}
         break;
-      case '保险公司' : _url = 'platform/delInsurance.do'
+      case '保险公司' : _url = 'platform/delInsurance.do', search = {ids:id}
         break;
-      case '快捷回复设置' : _url = 'platform/delFastReply.do'
+      case '快捷回复设置' : _url = 'platform/delFastReply.do', search = {ids:id}
+        break;
+      case '角色管理' : _url = 'roleBackend/delRole.do', search = {id}
         break;
     }
-    $http.post( _url, {ids:id} , res => {
+    $http.post( _url, search, res => {
       setTimeout(()=>{
         dispatch('asyncHideDialog')
         dispatch('getStoresList' , {path})
