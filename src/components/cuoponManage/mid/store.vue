@@ -54,9 +54,9 @@ export default {
         id: data && data.id
       }
       this.isShow = false
+      this.$store.commit('clearSearchForm')
       setTimeout(()=>{
         this.getList({path: this.changePath, search})
-        this.$store.commit('clearSearchForm')
         this.isShow = true
       })
     }
