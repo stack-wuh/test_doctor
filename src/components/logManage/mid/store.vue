@@ -48,10 +48,10 @@ export default {
   watch:{
     pathChange(){
       this.isShow = false
-      this.getLogStore({path:this.pathChange})
+      this.$store.commit('clearSearchForm')
       setTimeout(()=>{
         this.isShow = true
-        this.$store.commit('clearSearchForm')
+        this.getLogStore({path:this.pathChange})
       })
     }
   },

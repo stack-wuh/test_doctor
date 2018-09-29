@@ -49,16 +49,16 @@ export default {
   watch:{
     pathChange(){
       this.isShow = false
-      this.getStoresList({path:this.pathChange})
+      this.$store.commit('clearSearchForm')
       setTimeout(()=>{
         this.isShow = true
-        this.$store.commit('clearSearchForm')
+        this.getStoresList({path:this.pathChange})
       })
     }
   },
   methods: {
     ...mapActions({
-      'getStoresList':'getStoresList'
+      'getStoresList':'getStoresList',
     }),
     inputChange(e){
       console.log(e)

@@ -47,11 +47,11 @@ export default {
   },
   watch:{
     pathChange(){
-      this.getServerStore({path: this.pathChange})
       this.isShow = false
+      this.$store.commit('clearSearchForm')
       setTimeout(()=>{
         this.isShow = true
-        this.$store.commit('clearSearchForm')
+        this.getServerStore({path: this.pathChange})
       })
     }
   },

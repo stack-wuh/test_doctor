@@ -49,11 +49,11 @@ export default {
   watch:{
     changePath(){
       let data = this.$route.query.data && JSON.parse(this.$route.query.data)
-      this.getMarketStore({path: this.changePath, id: data && data.id})
+      this.$store.commit('clearSearchForm')
       this.isShow = false
       setTimeout(()=>{
         this.isShow = true
-        this.$store.commit('clearSearchForm')
+        this.getMarketStore({path: this.changePath, id: data && data.id})
       })
     }
   },

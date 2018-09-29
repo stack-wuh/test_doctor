@@ -55,9 +55,10 @@ export default {
   watch:{
     changePath(){
       this.isShow = false
-      this.getList({path:this.changePath})
+      this.$store.commit('clearSearchForm')
       setTimeout(()=>{
         this.isShow = true
+        this.getList({path:this.changePath})
       })
     }
   },
