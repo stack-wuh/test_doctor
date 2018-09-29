@@ -181,6 +181,7 @@ export default {
     let data = this.$route.query.data
     data = data && JSON.parse(data)
     this.form = {...this.form, ...data}
+    console.log(data)
     this.getMemberList()
     this.getUpKeepList()
     this.getInSuranceList()
