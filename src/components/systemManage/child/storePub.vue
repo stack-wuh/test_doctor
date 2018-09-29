@@ -124,13 +124,13 @@
 import Bottom from '@/components/common/bottom'
 import MySubButton from '@/components/common/subButton'
 import {mapState, mapActions} from 'vuex'
-import {validPhone, MaxNumberValue} from '../../../utils/valid.js'
+import {validPhone, MaxNumberValue, positiveNumber,} from '../../../utils/valid.js'
 
 const rules = {
   storeName:[{required: true, message: '请编辑门店名称', trigger: 'blur'}],
   storeType:[{required: true, message: '请选择门店类型', trigger: 'change'}],
   state:[{required: true, message: '请选择门店状态', trigger: 'change'}],
-  price:[{required: true, message: '请选择门店状态', trigger: 'change'}],
+  price:[{required: true, validator:positiveNumber, trigger: 'change'}],
   descInfo:[{required: true, message: '请编辑组织描述', trigger: 'blur'}],
   address:[{required: true, message: '请编辑门店地址', trigger: 'blur'}],
   longitude:[{required: true, message: '请编辑经纬度', trigger: 'blur'}],
