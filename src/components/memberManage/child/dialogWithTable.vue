@@ -62,7 +62,11 @@ export default {
       },
     }
   },
-
+  computed:{
+    changePath(){
+      return this.$route.query.child || this.$route.query.subMenu
+    }
+  },
   methods: {
     ...mapMutations({
       'beforeClose' : 'clearMemberAddCounselor',
@@ -87,7 +91,7 @@ export default {
       }
       let result = Object.values(form).every(item => item[0])
       if(result){
-        this.handleSubmitMember({form}).then(res => {
+        this.handleSubmitMember({form, path: this.changePath}).then(res => {
           setTimeout(() => {
             this.cancel()
           }, 1000);
