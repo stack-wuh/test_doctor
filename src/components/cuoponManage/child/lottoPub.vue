@@ -130,7 +130,7 @@ export default {
         }
       })
       for(var k in data){
-        if(data[k].total < data[k].quantity){
+        if(data[k].total < data[k].quantity || data[k].quantity < 0){
           _g.toastMsg({
             type:'error',
             msg:'奖品数量编辑错误'
