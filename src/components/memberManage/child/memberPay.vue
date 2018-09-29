@@ -65,11 +65,11 @@
 import Search from '@/components/common/search'
 import SubButton from '@/components/common/subButton'
 import {mapActions, mapGetters, mapState, mapMutations} from 'vuex'
-import {MaxCouponNumber} from '../../../utils/valid.js'
+import {MaxCouponNumber, positiveNumber, validIntegral} from '../../../utils/valid.js'
 const rules = {
-  money:[{required: true, message:'请编辑充值金额', trigger:'blur'}],
-  giveMoney:[{required: true, message:'请编辑赠送金额', trigger:'blur'}],
-  integral:[{required: true, message:'请编辑赠送积分', trigger:'blur'}],
+  money:[{required: true, validator: positiveNumber,trigger:'blur'}],
+  giveMoney:[{required: true, validator: positiveNumber, trigger:'blur'}],
+  integral:[{required: true, validator: validIntegral, trigger:'blur'}],
   ids:[{required: true, validator: MaxCouponNumber, trigger:'change'}],
 }
 
