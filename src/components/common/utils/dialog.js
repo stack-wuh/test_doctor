@@ -1,4 +1,4 @@
-import {MaxNumberValue, MaxCouponNumber, validPhone, validNoNum, validEmail, validDate} from '../../../utils/valid'
+import {MaxNumberValue, MaxCouponNumber, validPhone, validNoNum, validEmail, validDate, positiveNumber, validIntegral} from '../../../utils/valid'
 
 export const forms = [
   {
@@ -602,7 +602,6 @@ export const forms = [
           {
             required:true,
             validator: MaxNumberValue,
-            // message:'请编辑折扣比例',
             trigger:'blur',
           }
         ],
@@ -615,7 +614,7 @@ export const forms = [
         rules:[
           {
             required:true,
-            message:'请编辑充值金额',
+            validator:positiveNumber,
             trigger:'blur',
           }
         ],
@@ -628,7 +627,7 @@ export const forms = [
         rules:[
           {
             required:true,
-            message:'请编辑累计金额',
+            validator:positiveNumber,
             trigger:'blur',
           }
         ],
@@ -666,7 +665,7 @@ export const forms = [
         rules:[
           {
             required:true,
-            message:'请编辑必填项',
+            validator:positiveNumber,
             trigger:'blur',
           }
         ],
@@ -678,7 +677,7 @@ export const forms = [
         rules:[
           {
             required:true,
-            message:'请编辑必填项',
+            validator:positiveNumber,
             trigger:'blur',
           }
         ],
@@ -690,7 +689,7 @@ export const forms = [
         rules:[
           {
             required:true,
-            message:'请编辑必填项',
+            validator:validIntegral,
             trigger:'blur',
           }
         ],
