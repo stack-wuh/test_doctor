@@ -77,8 +77,6 @@ const actions = {
         break;
       case '编辑抽奖模板' : _url = 'lottery/getAddCarLottery.do', search = {...rootState.search, ...search, currPageNo}
         break;
-      case '用户佣金提现' : _url = 'takeMoney/getUserTakeMoneny.do', search = {...rootState.search}
-        break;
       case '查看领取明细' : _url = 'coupon/getTakeListByUserCouponVo.do', search = {...rootState.search, ...search, currPageNo}, dispatch('getCouponSourceList')
         break;
       case '用户佣金提现' : _url = 'takeMoney/getUserTakeMoneny.do', search = {...rootState.search, ...search, currPageNo} 
