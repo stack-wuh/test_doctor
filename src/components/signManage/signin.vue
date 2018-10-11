@@ -200,6 +200,10 @@ export default {
           localStorage.setItem('isSavePwdInExpire', false)
           localStorage.setItem('saveObj', JSON.stringify({}))
         })
+        console.log('is expire')
+      }else{
+        localStorage.setItem('saveObj','')
+        localStorage.setItem('isSavePwdInExpire', false)
       }
     }
   },
