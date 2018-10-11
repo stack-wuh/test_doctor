@@ -2728,8 +2728,8 @@ const state = {
       name:'活动中奖',
       path:'',
       params:['活动中奖'],
-      colType:'select',
-      colValue:'selection',
+      colType:'',
+      colValue:'',
       colTitle:'',
       list:[
         {
