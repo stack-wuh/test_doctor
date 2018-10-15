@@ -3,10 +3,10 @@
     <my-header class="header" />
     <section class="main">
       <Leftmenu class="left" />
-      <section class="main">
+      <section v-loading="isShowLoading" class="main">
         <section class="sub">
           <transition name="fade">
-              <router-view v-loading="isShowLoading" />
+              <router-view  />
           </transition>
         </section>
       </section>
