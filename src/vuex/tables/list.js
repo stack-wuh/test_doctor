@@ -50,6 +50,8 @@
    marketActivePub,
    couponMemberParise,
    marketPrevSend,
+   carFeedPubAndFresh,
+   serveSettingState,
   } from './click.js'
   import {moveUpItem, moveDown} from '../../utils/global'
 const state = {
@@ -3219,22 +3221,22 @@ const state = {
         {
           key:'姓名',
           type:'default',
-          prop:'',
+          prop:'userName',
         },
         {
           key:'联系电话',
           type:'default',
-          prop:'',
+          prop:'phone',
         },
         {
           key:'车牌',
           type:'default',
-          prop:'name',
+          prop:'plateNum',
         },
         {
           key:'当前里程',
           type:'default',
-          prop:'name',
+          prop:'currentMileage',
         },
         {
           key:'专项名称',
@@ -3244,27 +3246,27 @@ const state = {
         {
           key:'检测总数',
           type:'default',
-          prop:'name',
+          prop:'detectionNum',
         },
         {
           key:'严重',
           type:'default',
-          prop:'name',
+          prop:'serious',
         },
         {
           key:'轻微',
           type:'default',
-          prop:'name',
+          prop:'slight',
         },
         {
           key:'良好',
           type:'default',
-          prop:'name',
+          prop:'good',
         },
         {
           key:'检测日期',
           type:'default',
-          prop:'name',
+          prop:'detectionTimeStr',
         },
         {
           key:'操作',
@@ -3276,6 +3278,7 @@ const state = {
               text:'查看详情',
               type:'',
               size:'small',
+              click:jump2Other
             },
           ]
         },
@@ -3292,12 +3295,12 @@ const state = {
         {
           key:'名称',
           type:'default',
-          prop:'',
+          prop:'name',
         },
         {
           key:'正常状态图片',
-          type:'default',
-          prop:'',
+          type:'image',
+          prop:'pictrue',
         },
         {
           key:'操作',
@@ -3335,12 +3338,14 @@ const state = {
         {
           key:'专项检测名称',
           type:'default',
-          prop:'',
+          prop:'name',
         },
         {
-          key:'状态',
-          type:'default',
-          prop:'',
+          key: '状态',
+          type:'switch',
+          prop:'state',
+          pickValue:'state',
+          change:serveSettingState
         },
         {
           key:'操作',
@@ -3348,11 +3353,6 @@ const state = {
           fix:'right',
           width:'220px',
           list:[
-            {
-              text:'关闭',
-              type:'',
-              size:'small',
-            },
             {
               text:'编辑',
               type:'',
@@ -3499,6 +3499,7 @@ const state = {
               text:'发布',
               type:'',
               size:'small',
+              click:carFeedPubAndFresh
             }
           ]
         },

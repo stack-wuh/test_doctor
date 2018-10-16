@@ -1892,26 +1892,31 @@ const state = {
           key:'姓名',
           value:'',
           type:'default',
+          prop:'userName',
         },
         {
           key:'联系电话',
           value:'',
           type:'default',
+          prop:'phone',
         },
         {
           key:'车牌',
           value:'',
           type:'default',
+          prop:'plateNum',
         },
         {
           key:'检测开始时间',
           value:'',
           type:'date',
+          prop:'detectionTimeStart',
         },
         {
           key:'检测结束时间',
           type:'date',
           value:'',
+          prop:'detectionTimeEnd',
         }
       ]
     },
