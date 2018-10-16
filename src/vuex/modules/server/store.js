@@ -31,6 +31,14 @@ const actions = {
         break;
       case '保险服务' : _url = 'insurances/init.do', search = {...rootState.search, currPageNo}
         break;
+      case '检修记录' : _url = 'repairRecord/init.do', search = {...rootState.search, currPageNo}
+        break;
+      case '检修项配置' : _url = 'maintenanceItem/init.do', search = {...rootState.search, currPageNo}
+        break;
+      case '专项检测配置' : _url = 'detection/init.do', search = {...rootState.search, currPageNo}
+        break;
+      case '检修记录详情' : _url = 'repairRecord/selectByOne.do', search = {...search}
+        break;
     }
     return new Promise((resolve, reject) => {
       $http.post(_url, NotNull(search), res => {
@@ -85,6 +93,17 @@ const actions = {
       })
     })
   },
+  /** 
+   * 养车知识 -- 发布
+  */
+  carFeedPunAndFresh({comit}, {id} = {}){
+    return new Promise((resolve, reject) => {
+      $http.post('raisingBackend/pubRaising.do', {id}, res => {
+        return resolve(res)
+      })
+    })
+  },
+
   /**
    * 抽取
    * 客户服务模块全部的删除事件
@@ -123,6 +142,7 @@ const actions = {
     endTime,
     number,
     remark,
+    type
   }} = {}){
     $http.post('bookingTime/insert.do', {
       id,
@@ -130,6 +150,7 @@ const actions = {
       endTime,
       number,
       remark,
+      type
     }, res => {
       setTimeout(()=>{
         dispatch('asyncHideDialog')
@@ -151,6 +172,17 @@ const actions = {
         offer,
         remarks
       }, res => {
+        return resolve(res)
+      })
+    })
+  },
+
+  /**
+   * 客户服务 --- 车辆检测 --- 专项检测配置
+   */
+  serveSettingStateChange(context, {id, state} = {}){
+    return new Promise((resolve, reject) => {
+      $http.post('detection/closeData.do', {id, state}, res => {
         return resolve(res)
       })
     })
@@ -182,6 +214,8 @@ const getters = {
         return {...item, rankTime: `${item.startTime}至${item.endTime}`}
       }else if(path === '保险服务'){
         return {...item, stateText: item.state === 0 ? '未确认' : '已确认'}
+      }else if(path === '专项检测配置'){
+        return {...item, stateText: item.state === 0 ? '已关闭' : '已开启'}
       }else{
         return {...item}
       }
