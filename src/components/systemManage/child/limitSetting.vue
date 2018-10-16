@@ -25,12 +25,18 @@
         <section class="item">{{item.menuName}}</section>
         <section class="item-nav" v-if="item.subMenu" v-for="(list,lindex) in item.subMenu" >
           <div>
-            <span class="title"><el-checkbox :indeterminate="list.isIndeterminate" v-model="list.checkAll" @change="handleClickChangeForFirst(index,lindex,$event)" ></el-checkbox> {{list.menuName}} </span>
+            <span class="title">
+              <!-- <el-checkbox :indeterminate="list.isIndeterminate" v-model="list.checkAll" @change="handleClickChangeForFirst(index,lindex,$event)" ></el-checkbox> -->
+              {{list.menuName}} 
+            </span>
             <el-checkbox  v-for="(ll, ld) in list.authorityList" :key="ld" :label="ll.name" @change="handleClickOneChose(index, ld, $event, ll.id)" v-model="ll.isAuth" ></el-checkbox>
           </div>
           <section class="sub-item-nav" v-if="list.authorityMenuList" v-for="(sub,sid) in list.authorityMenuList" :key="sid">
             <div v-if="isFatherChange" >
-              <span class="title"><el-checkbox :indeterminate="sub.isIndeterminate" v-model="sub.checkAll" @change="handleClickChangeForChild(index,lindex,sid,$event)" ></el-checkbox> {{sub.menuName}}</span>
+              <span class="title">
+                <!-- <el-checkbox :indeterminate="sub.isIndeterminate" v-model="sub.checkAll" @change="handleClickChangeForChild(index,lindex,sid,$event)" ></el-checkbox> -->
+                {{sub.menuName}}
+              </span>
                 <el-checkbox v-for="(ll, ld) in sub.authorityList" @change="handleClickOneChose(index, ld, $event, ll.id)" :key="ld" :label="ll.name" v-model="ll.isAuth"></el-checkbox>
             </div>
           </section>
@@ -44,6 +50,7 @@
 import {limit , baseObj} from '../../../utils/limit.js'
 import MyBottom from '@/components/common/bottom'
 import {mapActions, mapGetters, mapState, mapMutations} from 'vuex'
+import {throttle} from '@/utils/global.js'
 export default {
   name: 'limitSetting',
   components:{
@@ -63,7 +70,8 @@ export default {
       baseObj , 
       isFatherChange:true,
       roleId:'',
-      list:[]
+      list:[],
+      count:0
     }
   },
   computed:{
@@ -83,7 +91,7 @@ export default {
      * 一级权限管理
      */
     handleClickOneChose(index, lindex, val, id){
-      this.handleAccredit({form:{authorityId: id, roleId: this.roleId}})
+       this.handleAccredit({form:{authorityId: id, roleId: this.roleId}})
     },
 
     /**
