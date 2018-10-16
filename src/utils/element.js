@@ -26,6 +26,8 @@ import {
   Message , 
   MessageBox ,
   Switch ,
+  Carousel,
+  CarouselItem,
 } from 'element-ui'
 
 Vue.use(Button)
@@ -50,6 +52,8 @@ Vue.use(Radio)
 Vue.use(RadioGroup)
 Vue.use(Loading)
 Vue.use(Switch)
+Vue.use(Carousel)
+Vue.use(CarouselItem)
 
 
 Vue.prototype.$ELEMENT = {size:'small',zIndex:90000}
