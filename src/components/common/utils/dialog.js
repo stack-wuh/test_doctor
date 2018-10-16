@@ -242,7 +242,8 @@ export const forms = [
         rules:[
           {
             required:true,
-            validator:validDate,
+            // validator:validDate,
+            message:'请编辑出生日期',
             trigger:'change'
           }
         ],
@@ -523,7 +524,7 @@ export const forms = [
             value:0,
           },
           {
-            label:'保养用户',
+            label:'保养顾问',
             value:1
           },
           {
