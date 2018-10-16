@@ -52,6 +52,7 @@ const ServeStore = resolve => require(['@/components/serveManage/mid/store'],res
 const ServeInsurePub = resolve => require(['@/components/serveManage/child/insurePub'],resolve)
 const ServeQuestionPub = resolve => require(['@/components/serveManage/child/questionPub'],resolve)
 const ServeCarFeedPub = resolve => require(['@/components/serveManage/child/carFeed'], resolve)
+const ServerOverhual = resolve => require(['@/components/serveManage/child/overhual'], resolve)
 
 const SellingStore = resolve => require(['@/components/sellingManage/mid/store'],resolve)
 
@@ -275,6 +276,11 @@ export default new Router({
                   path:'/serve/carfeed/pub',
                   name:'serveCarfeedPub',
                   component:ServeCarFeedPub
+                },
+                {
+                  path: '/serve/overhual',
+                  name:'serveOverhual',
+                  component: ServerOverhual
                 }
               ],
             },
