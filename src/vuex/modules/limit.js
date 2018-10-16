@@ -1,5 +1,5 @@
 import $http from '../../utils/axios'
-import {_g, NotNull, getObj, getQueryString} from '../../utils/global'
+import {_g, NotNull, getObj, getQueryString, throttle} from '../../utils/global'
 import {list} from '../../utils/menu'
 const state = {
   data:[],
@@ -18,16 +18,28 @@ const actions = {
       })  
     })
   },
-
   /**
    * 点击按钮, 角色授权
    */
   handleAccredit({dispatch}, {form} = {}){
+    var startTime = localStorage.getItem('startTime'), now = +new Date()
+    var authorityId = localStorage.getItem('startFormId')
+    if(now - startTime < 2000 && authorityId !== form.authorityId){
+      _g.toastMsg({
+        type: 'error',
+        msg:'请勿重复操作权限!'
+      })
+      return
+    }
     return new Promise((resolve, reject) => {
       $http.post('authorityBackend/authSet.do', form, res => {
         setTimeout(()=>{
           dispatch('getLimitStore')
         },100)
+        if(res.status === 0){
+          localStorage.setItem('startTime', + new Date())
+          localStorage.setItem('startFormId', form.authorityId)
+        }
         return resolve(res)
       })
     })
