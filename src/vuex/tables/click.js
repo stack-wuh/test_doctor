@@ -1,7 +1,8 @@
 import { _g} from '../../utils/global'
 import $http from '../../utils/axios'
 /**
- * 表格内按钮事件
+ * 表格内按
+ * 钮事件
  * 抽取页面组件按钮
  * 打开dialog对话框
  * dialog对话框的visible由vuex控制
@@ -20,6 +21,7 @@ export const openDialog = (params,text,row) => {
                         row = {...row, couponId:row.couponIds ? row.couponIds.split(',').map(item => Number(item)) : []}
         break;
     case '员工列表' : window.$store.dispatch('getDepartmentList'), window.$store.dispatch('getRoleList')
+      row = {...row, sex: Number(row.sex)}
         break;
   }
    window.$store.commit('handleOpenDialog',{params,text,row}) 
@@ -73,6 +75,8 @@ export const jump2Other = (params ,types ,row) => {
     case '养车知识' : rootPath = '/serve/carfeed/pub', child = '编辑养车知识', data = JSON.stringify(row)
       break;
     case '角色管理' : rootPath = '/system/limit/setting', child = '编辑用户权限', data = JSON.stringify(row)
+      break;
+    case '检修记录' : rootPath = '/serve/overhual', child = '检修记录详情', data = JSON.stringify(row)
       break;
     default : rootPath = '/index'
   }
@@ -258,4 +262,34 @@ export const couponMemberParise = (params, text, row) => {
 export const marketPrevSend = (params, status, row) => {
   let {subMenu, child} = params
   window.$store.dispatch('marketPrevSend', {row, path: child || subMenu})
+}
+
+/**
+ * 客户服务 -- 养车知识 -- 发布
+ */
+export const carFeedPubAndFresh = (params, status, row) => {
+  let {subMenu, child} = params
+  window.$confirm('该操作将文章推送到前台,请确认?', '提示', {
+    confirmButtonText:'确认',
+    cancelButtonText:'取消',
+    type:'warning',
+  }).then(()=> {
+    window.$store.dispatch('carFeedPunAndFresh', {id: row.id})
+  }).catch(()=> {
+    _g.toastMsg({
+      type: 'error',
+      msg:'操作已取消'
+    })
+  })
+}
+
+/**
+ * 专项检测配置 -- 切换状态
+ */
+export const serveSettingState = (params, row) => {
+ let {subMenu, child} = params
+ console.log(row)
+ switch(child || subMenu){
+   case '专项检测配置' : return window.$store.dispatch('serveSettingStateChange', {id: row.id, state: row.state}) 
+ }
 }
