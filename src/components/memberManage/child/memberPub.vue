@@ -97,8 +97,8 @@ const rules = {
   upkeepEmployeeId:[{required:false,message:'请选择保养顾问',trigger:['blur','change']}],
   renewEmployeeId:[{required:false,message:'请选择续保顾问',trigger:['blur','change']}],
   safeEmployeeId:[{required:false,message:'请选择保险顾问',trigger:['blur','change']}],
-  insuranceStart:[{required:true,validator: validDate,trigger:['blur','change']}],
-  lastMaintainTime:[{required:true,validator: validDate,trigger:['blur','change']}],
+  insuranceStart:[{required:true, message:'请编辑保险购买日期',trigger:['blur','change']}],
+  lastMaintainTime:[{required:true, message: '请编辑上次保养日期',trigger:['blur','change']}],
   maintainIntervalKm:[{required:true,message:'请编辑保养间隔公里数',trigger:['blur','change']}],
   memberId:[{required:true,message:'请选择会员等级',trigger:['blur','change']}],
   integral:[{required:true,message:'请编辑会员积分',trigger:['blur','change']}],
@@ -156,7 +156,6 @@ export default {
       if(submit){
         this.$refs.myForm.validate(valid => {
           if(valid){
-            console.log(this.form)
             this.handleSubMember({path: this.$route.query.child || this.$route.query.subMenu, form: this.form})
             .then(res => {
               this.cancel()
@@ -180,8 +179,8 @@ export default {
   created(){
     let data = this.$route.query.data
     data = data && JSON.parse(data)
-    this.form = {...this.form, ...data}
-    console.log(data)
+    this.form = {...this.form, ...data, insuranceStart: data.insuranceStart.slice(0,10), lastMaintainTime: data.lastMaintainTime.slice(0,10)}
+    console.log(data, this.form)
     this.getMemberList()
     this.getUpKeepList()
     this.getInSuranceList()
