@@ -475,7 +475,7 @@ const actions = {
       case '员工列表' : _url = 'employee/bannedEmployee.do'
         break;
       case '自动回复配置' : _url = 'platform/updateAutoResponse.do'
-        break;
+        break
     }
     $http.post(_url, {id, state, status})
   },
