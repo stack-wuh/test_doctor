@@ -226,8 +226,10 @@ const actions = {
       default : search = {}
     }
     $http.post('coupon/grantCoupon.do', {...search, ...rootState.tableHeader}, res => {
-      dispatch('getCouponStore', {path})
-      commit('clearTableHeaderForm')
+      setTimeout(()=> {
+        dispatch('getCouponStore', {path})
+        commit('clearTableHeaderForm')
+      }, 1000)
     })
   },
 
