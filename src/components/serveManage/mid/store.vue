@@ -10,6 +10,9 @@
       </my-table>
       <my-bottom @getCurrent="getCurrent" type="pagination" :total="total" :currentPage="currentPage" />
     </section>
+    <my-dialog-with-table>
+      <my-add-form v-show="dialogCanShowForm" slot="form-area"></my-add-form>
+    </my-dialog-with-table>
   </section>
 </template>
 
@@ -18,6 +21,8 @@ import MyTable from '@/components/common/myTable'
 import Search from '@/components/common/search'
 import MyButton from '@/components/common/myButton'
 import MyBottom from '@/components/common/bottom'
+import MyDialogWithTable from '../subchild/dialogWithTable'
+import MyAddForm from '../subchild/addForm'
 import {mapActions, mapGetters, mapState} from 'vuex'
 export default {
   name: 'store',
@@ -26,6 +31,8 @@ export default {
     Search ,
     MyButton ,
     MyBottom,
+    MyDialogWithTable,
+    MyAddForm,
   },
   data () {
     return {
@@ -36,7 +43,8 @@ export default {
     ...mapState({
       'data': state => state.Server.data,
       'total': state => state.Server.total,
-      'currentPage': state => state.Server.currPageNo
+      'currentPage': state => state.Server.currPageNo,
+      'dialogCanShowForm': state => state.Server.dialogCanShowForm
     }),
     ...mapGetters({
       'formatServerStore':'formatServerStore'
