@@ -547,59 +547,73 @@ export default {
               children: [
                 {
                   label: "库存报表",
-                  mid_path: "/mid/container"
+                  mid_path: "/mid/container",
+                  path:'/selling/store',
                 },
                 {
                   label: "出入库明细表",
-                  mid_path: "/mid/container"
+                  mid_path: "/mid/container",
+                  path:'/selling/store',
                 },
                 {
                   label: "盘点明细表",
-                  mid_path: "/mid/container"
+                  mid_path: "/mid/container",
+                  path:'/selling/store',
                 },
                 {
                   label: "日报月报",
-                  mid_path: "/mid/container"
+                  mid_path: "/mid/container",
+                  path:'/selling/store',
                 },
                 {
                   label: "员工绩效表",
-                  mid_path: "/mid/container"
+                  mid_path: "/mid/container",
+                  path:'/selling/store',
                 },
                 {
                   label: "销售统计表",
-                  mid_path: "/mid/container"
+                  mid_path: "/mid/container",
+                  path:'/selling/store',
                 },
                 {
                   label: "商品销售统计",
-                  mid_path: "/mid/container"
+                  mid_path: "/mid/container",
+                  path:'/selling/store',
                 },
                 {
                   label: "项目销售统计",
-                  mid_path: "/mid/container"
+                  mid_path: "/mid/container",
+                  path:'/selling/store',
                 },
                 {
                   label: "采购明细表",
-                  mid_path: "/mid/container"
+                  mid_path: "/mid/container",
+                  path:'/selling/store',
                 },
                 {
                   label: "挂账单据明细表",
-                  mid_path: "/mid/container"
+                  mid_path: "/mid/container",
+                  path:'/selling/store',
                 },
                 {
                   label: "挂账还款明细表",
-                  mid_path: "/mid/container"
+                  mid_path: "/mid/container",
+                  path:'/selling/store',
                 },
                 {
                   label: "营业额统计表",
-                  mid_path: "/mid/container"
+                  mid_path: "/mid/container",
+                  path:'/selling/store',
                 },
                 {
                   label: "收款统计",
-                  mid_path: "/mid/container"
+                  mid_path: "/mid/container",
+                  path:'/selling/store',
                 },
                 {
                   label: "付款统计",
-                  mid_path: "/mid/container"
+                  mid_path: "/mid/container",
+                  path:'/selling/store',
                 }
               ]
             }
