@@ -9,7 +9,7 @@
         <el-form label-width="140px"> 
           <section :class="[$route.query.child == '会员卡积分规则' ? 'inline-box' : 'block-box']" v-for="(item,index) in formatFormItem" :key="index">
             <el-form-item :label="item.label">
-              <el-input clearable v-if="item.type == 'input'" class="my-input-220" v-model="item.value" ></el-input><span class="tips">{{item.tips}}</span>
+              <el-input clearable v-if="item.type == 'input'" :disabled="item.disabled" class="my-input-220" v-model="item.value" ></el-input><span class="tips">{{item.tips}}</span>
               <el-select @change="item.change" clearable v-if="item.type == 'select'" v-model="item.value">
                 <el-option v-for="(list,lid) in item.list" :label="list.label" :value="list.value" :key="lid"></el-option>
               </el-select>
@@ -142,7 +142,7 @@ export default {
               value: "",
               prop: "firstConcern",
               tips: "永久一次",
-              disabled: true
+              disabled: false
             },
             {
               label: "完善个人信息",
@@ -150,7 +150,7 @@ export default {
               value: "",
               prop: "improvePersonal",
               tips: "永久一次",
-              disabled: true
+              disabled: false
             },
             {
               label: "完善车辆信息",
@@ -158,7 +158,7 @@ export default {
               value: "",
               prop: "improveVehicle",
               tips: "永久一次",
-              disabled: true
+              disabled: false
             },
             {
               label: "分享活动",
@@ -166,7 +166,7 @@ export default {
               value: "",
               prop: "sharingActivities",
               tips: "每次",
-              disabled: true
+              disabled: false
             },
             {
               label: "登录/每日访问",
@@ -174,7 +174,7 @@ export default {
               value: "",
               prop: "dailyAccess",
               tips: "每天三次",
-              disabled: true
+              disabled: false
             },
             {
               label: "抽奖活动",
@@ -182,7 +182,7 @@ export default {
               value: "",
               prop: "luckyDraw",
               tips: "每次",
-              disabled: true
+              disabled: false
             },
             {
               label: "推荐有礼",
@@ -190,7 +190,7 @@ export default {
               value: "",
               prop: "recommend",
               tips: "每个活动每次",
-              disabled: true
+              disabled: false
             },
             {
               label: "在线预约",
@@ -198,7 +198,7 @@ export default {
               value: "",
               prop: "appointment",
               tips: "每天一次",
-              disabled: true
+              disabled: false
             },
             {
               label: "在线预定",
@@ -206,7 +206,7 @@ export default {
               value: "",
               prop: "booking",
               tips: "每天一次",
-              disabled: true
+              disabled: false
             },
             {
               label: "意见反馈",
@@ -214,7 +214,7 @@ export default {
               value: "",
               prop: "feedback",
               tips: "采纳奖励",
-              disabled: true
+              disabled: false
             },
             {
               label: "问卷调查",
@@ -222,7 +222,7 @@ export default {
               value: "",
               prop: "survey",
               tips: "每次",
-              disabled: true
+              disabled: false
             },
             {
               label: "续保询价",
@@ -230,7 +230,7 @@ export default {
               value: "",
               prop: "renewInquiry",
               tips: "每天一次",
-              disabled: true
+              disabled: false
             }
           ]
         },
@@ -268,7 +268,8 @@ export default {
               value: "",
               list: [],
               prop: "pushContent",
-              style: "width:320px"
+              style: "width:320px",
+              disabled: false
             },
             {
               label: "是否推送",
