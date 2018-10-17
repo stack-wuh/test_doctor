@@ -1,5 +1,5 @@
 <template>
-  <section class="wrapper signin">
+  <section v-loading="isShowLoading" class="wrapper signin">
     <section class="left-content">
       <section :class="'img-item-' + index" class="img-list" v-for="(item,index) in imgs" :key="index">
         <img v-if="index < 4" :src="item.url" alt="logo">
@@ -121,7 +121,8 @@ export default {
   },
   computed:{
     ...mapState({
-      'form':'form'
+      'form':'form',
+      'isShowLoading':'isShowLoading'
     })
   },
   methods: {
