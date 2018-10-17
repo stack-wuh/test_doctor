@@ -10,6 +10,7 @@ import {
   handleCouponMemberSend,
   handleSelectChangeForTable,
   jump2DiaolgForServeCarDialog,
+  serveDialogToggleForSetting,
 } from './click'
 const state = {
   list:[
@@ -62,7 +63,7 @@ const state = {
     {
       name:'新增',
       desc:'单独一个新增按钮,路由跳转到指定的页面',
-      params:['员工列表','专项检测配置','消息中心'],
+      params:['员工列表','消息中心'],
       btn:[
         {
           text:'新增',
@@ -103,6 +104,21 @@ const state = {
           isAuth:1,
         }
       ]
+    },
+    {
+      name:'新增',
+      desc:'定制单独一个新增按钮,打开dialog对话框',
+      params:['专项检测配置'],
+      btn:[
+        {
+          text:'新增',
+          type:'',
+          size:'small',
+          style:'',
+          click:serveDialogToggleForSetting,
+          isAuth:1,
+        }
+      ],
     },
     {
       name:'新增',
@@ -168,7 +184,7 @@ const state = {
     {
       name:'导出',
       desc:'单独导出按钮',
-      params:['精品订单管理','充值明细','消费明细','用户奖励','员工奖励','保险服务','检修记录','业务结算','活动中奖'],
+      params:['精品订单管理','充值明细','消费明细','用户奖励','员工奖励','保险服务','检修记录','业务结算','活动中奖','库存报表','出入库明细表','盘点明细表','日报月报','员工绩效表','销售统计表','商品销售统计','项目销售统计','采购明细表','挂账单据明细表','挂账还款明细表'],
       btn:[
         {
           text:'导出',
