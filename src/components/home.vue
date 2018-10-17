@@ -1,9 +1,9 @@
 <template>
   <section class="home" >
     <my-header class="header" />
-    <section class="main">
+    <section v-loading="isShowLoading" class="main">
       <Leftmenu class="left" />
-      <section v-loading="isShowLoading" class="main">
+      <section  class="main">
         <section class="sub">
           <transition name="fade">
               <router-view  />
