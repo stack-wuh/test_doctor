@@ -52,6 +52,7 @@
    marketPrevSend,
    carFeedPubAndFresh,
    serveSettingState,
+   handleToggleStateForServeCar,
   } from './click.js'
   import {moveUpItem, moveDown} from '../../utils/global'
 const state = {
@@ -3312,11 +3313,13 @@ const state = {
               text:'查看项目操作列表',
               type:'',
               size:'small',
+              click: handleToggleStateForServeCar
             },
             {
               text:'编辑',
               type:'',
               size:'small',
+              click: handleToggleStateForServeCar
             },
             {
               text:'删除',

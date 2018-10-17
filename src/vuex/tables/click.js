@@ -288,8 +288,16 @@ export const carFeedPubAndFresh = (params, status, row) => {
  */
 export const serveSettingState = (params, row) => {
  let {subMenu, child} = params
- console.log(row)
  switch(child || subMenu){
    case '专项检测配置' : return window.$store.dispatch('serveSettingStateChange', {id: row.id, state: row.state}) 
  }
+}
+
+/**
+ * 客户服务 -- 车辆检测 -- 检修项配置
+ * 查看项目操作
+ */
+export const handleToggleStateForServeCar = (params, text, row) =>{
+  window.$store.dispatch('serveSettingItemList', {row})
+  window.$store.commit('serverCarStateToggle',{params, text, row})
 }

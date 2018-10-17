@@ -3,7 +3,11 @@ import {_g, NotNull} from '../../../utils/global'
 const state = {
   data:[],
   total:0,
-  currPageNo:1
+  currPageNo:1,
+  dialogVisible: false,
+  dialog_arr:[],
+  dialogCanshowForm: false,
+  dialogCanShowFooter: false,
 }
 
 const actions = {
@@ -186,6 +190,17 @@ const actions = {
         return resolve(res)
       })
     })
+  },
+  /**
+   * 客户服务 -- 车辆检测 -- 检修项配置
+   * 查看项目操作列表
+   */
+  serveSettingItemList({commit}, {row:{id}} = {}){
+    return new Promise((resolve, reject) => {
+      $http.post('maintenanceItem/showList.do', {id}, res => {
+        commit('setServeSettingItemList', {params: res.data})
+      })
+    })
   }
 }
 const mutations = {
@@ -194,10 +209,28 @@ const mutations = {
     state.total = params.total
     state.currPageNo = params.pageNum
   },
+  /**
+   * 客户服务 -- 车辆检测
+   * 对话框各种开关
+   * @param {*} state 
+   * @param {*} param1 
+   */
+  serverCarStateToggle(state,{params, text, row} = {}){
+    console.log(params, text, row)
+    state.dialogVisible = !state.dialogVisible
+    state.dialog_arr = []
+    if(text === '新增' || text === '编辑'){
+      state.dialogCanShowFooter = !state.dialogCanShowFooter
+      state.dialogCanshowForm = !state.dialogCanShowFooter
+    }
+  },
+  setServeSettingItemList(state, {params} = {}){
+    state.dialog_arr = params
+  }
 }
 
 const getters = {
-  formatServerStore: (state,rootState,rootGetters) => ({path} = {}) => {
+  formatServerStore: (state, rootState, rootGetters) => ({path} = {}) => {
     return state.data.map(item => {
       if(path === '救援服务'){
         return {...item, statusText: item.status == 0 ? '未确认' : item.status == 1 ? '已确认' : '已取消'}
@@ -216,6 +249,15 @@ const getters = {
         return {...item, stateText: item.state === 0 ? '未确认' : '已确认'}
       }else if(path === '专项检测配置'){
         return {...item, stateText: item.state === 0 ? '已关闭' : '已开启'}
+      }else{
+        return {...item}
+      }
+    })
+  },
+  formatDialogTable: (state, rootState, rootGetters) => ({path} = {}) => {
+    return state.dialog_arr.map(item => {
+      if(path === '检修项配置'){
+        return {...item, statusText: item.status === 1 ? '状态良好' : item.status === 2 ? '轻微磨损或老化' : '严重磨损或老化'}
       }else{
         return {...item}
       }

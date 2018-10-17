@@ -155,6 +155,7 @@ export const jump2Detail = params => {
       case '活动中奖': return location.href = window.rootPath + '/activitiesDraws/userLotteryInfoReport.do' + _str
       case '预约管理' : return location.href = window.rootPath + '/bookingBackend/delete.do' + _str
       case '保险服务' : return location.href = window.rootPath + '/insurances/exports.do' + _str
+      case '检修记录' : return location.href = window.rootPath + '/repairRecord/exports.do' + _str 
     }
    }else{
     window.$route.push({path:'/mid/container', query:{path:'/unlimit'}})
@@ -243,4 +244,11 @@ export const handleCouponMemberSend = ({params, choose, text} = {}) => {
       msg:'操作错误或已取消',
     })
   })
+}
+
+/**
+ * 定制 -- 客户服务 -- 车辆检测 -- 检修项配置  --- 打开dialog
+ */
+export const jump2DiaolgForServeCarDialog = ({params, text} = {}) => {
+  window.$store.commit('serverCarStateToggle', {params, text})
 }

@@ -9,6 +9,7 @@ import {
   handleDialogForCoupon,
   handleCouponMemberSend,
   handleSelectChangeForTable,
+  jump2DiaolgForServeCarDialog,
 } from './click'
 const state = {
   list:[
@@ -61,7 +62,7 @@ const state = {
     {
       name:'新增',
       desc:'单独一个新增按钮,路由跳转到指定的页面',
-      params:['员工列表','检修项配置','专项检测配置','消息中心'],
+      params:['员工列表','专项检测配置','消息中心'],
       btn:[
         {
           text:'新增',
@@ -72,7 +73,8 @@ const state = {
           isAuth:1,
         }
       ]
-    },{
+    },
+    {
       name:'新增',
       desc:'单独一个新增按钮,出现dialog对话框',
       params:['部门管理','会员卡等级设置','分享与消费奖励规则'],
@@ -83,6 +85,21 @@ const state = {
           size:'small',
           style:'',
           click:jump2AddWithDialog,
+          isAuth:1,
+        }
+      ]
+    },
+    {
+      name:'新增',
+      desc:'定制单独一个新增按钮,出现dialog对话框',
+      params:['检修项配置'],
+      btn:[
+        {
+          text:'新增',
+          type:'',
+          size:'small',
+          style:'',
+          click:jump2DiaolgForServeCarDialog,
           isAuth:1,
         }
       ]
