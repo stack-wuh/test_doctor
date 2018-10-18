@@ -24,7 +24,7 @@ const actions = {
   handleAccredit({dispatch}, {form} = {}){
     var startTime = localStorage.getItem('startTime'), now = +new Date()
     var authorityId = localStorage.getItem('startFormId')
-    if(now - startTime < 2000 && authorityId !== form.authorityId){
+    if(now - startTime < 2000 && authorityId == form.authorityId){
       _g.toastMsg({
         type: 'error',
         msg:'请勿重复操作权限!'
