@@ -1,6 +1,6 @@
 module.exports = {
   lintOnSave: false,
-  outputDir:'static',
+  outputDir:'./static',
   baseUrl:'/',
   devServer:{
     open:true,
