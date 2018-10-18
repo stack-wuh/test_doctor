@@ -254,9 +254,9 @@ export const jump2DiaolgForServeCarDialog = ({params, text} = {}) => {
 }
 
 /**
- * 定制 -- 客户服务 -- 车辆检测
+ * 定制 -- 客户服务 -- 车辆检测 -- 专项检测配置
  * 专项检修配置 -- 打开dialog
  */
 export const serveDialogToggleForSetting = ({params, text} = {}) => {
-  console.log(params, text)
+  window.$store.commit('setSettingOneState')
 }

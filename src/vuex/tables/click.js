@@ -301,3 +301,10 @@ export const handleToggleStateForServeCar = (params, text, row) =>{
   window.$store.dispatch('serveSettingItemList', {row})
   window.$store.commit('serverCarStateToggle',{params, text, row})
 }
+
+/**
+ * 客户服务 -- 车辆检测 -- 专项检测配置
+ */
+export const handlerForSettingOne = (params, text, row) => {
+  window.$store.commit('setSettingOneState', {row})
+}

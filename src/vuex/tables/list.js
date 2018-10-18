@@ -53,8 +53,8 @@
    carFeedPubAndFresh,
    serveSettingState,
    handleToggleStateForServeCar,
+   handlerForSettingOne,
   } from './click.js'
-  import {moveUpItem, moveDown} from '../../utils/global'
 const state = {
   data:[
     {
@@ -3360,6 +3360,7 @@ const state = {
               text:'编辑',
               type:'',
               size:'small',
+              click:handlerForSettingOne
             },
             {
               text:'删除',

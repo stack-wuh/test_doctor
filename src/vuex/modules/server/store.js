@@ -6,8 +6,11 @@ const state = {
   currPageNo:1,
   dialogVisible: false,
   dialog_arr:[],
+  dialog_row: {},
   dialogCanshowForm: false,
   dialogCanShowFooter: false,
+
+  isShowSettingOneDialog: false
 }
 
 const actions = {
@@ -226,6 +229,14 @@ const mutations = {
   },
   setServeSettingItemList(state, {params} = {}){
     state.dialog_arr = params
+  },
+
+  /**
+   * 专项检测 -- 编辑/新增 
+   */
+  setSettingOneState(state, {row} = {}){
+    state.isShowSettingOneDialog = !state.isShowSettingOneDialog
+    state.dialog_row = row
   }
 }
 
