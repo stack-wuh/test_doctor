@@ -13,6 +13,7 @@
     <my-dialog-with-table>
       <my-add-form v-show="dialogCanShowForm" slot="form-area"></my-add-form>
     </my-dialog-with-table>
+    <MyAddFormForSettingOne></MyAddFormForSettingOne>
   </section>
 </template>
 
@@ -23,6 +24,7 @@ import MyButton from '@/components/common/myButton'
 import MyBottom from '@/components/common/bottom'
 import MyDialogWithTable from '../subchild/dialogWithTable'
 import MyAddForm from '../subchild/addForm'
+import MyAddFormForSettingOne from '../subchild/addForSettingOne'
 import {mapActions, mapGetters, mapState} from 'vuex'
 export default {
   name: 'store',
@@ -33,6 +35,7 @@ export default {
     MyBottom,
     MyDialogWithTable,
     MyAddForm,
+    MyAddFormForSettingOne,
   },
   data () {
     return {
