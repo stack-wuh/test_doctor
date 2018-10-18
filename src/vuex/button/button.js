@@ -184,7 +184,7 @@ const state = {
     {
       name:'导出',
       desc:'单独导出按钮',
-      params:['精品订单管理','充值明细','消费明细','用户奖励','员工奖励','保险服务','检修记录','业务结算','活动中奖','库存报表','出入库明细表','盘点明细表','日报月报','员工绩效表','销售统计表','商品销售统计','项目销售统计','采购明细表','挂账单据明细表','挂账还款明细表'],
+      params:['精品订单管理','充值明细','消费明细','用户奖励','员工奖励','保险服务','检修记录','业务结算','活动中奖','库存报表','出入库明细表','盘点明细表','日报月报','员工绩效表','销售统计表','商品销售统计','项目销售统计','采购明细表','挂账单据明细表','挂账还款明细表', '用户统计', '车辆统计','业务统计','活动统计'],
       btn:[
         {
           text:'导出',
@@ -327,6 +327,47 @@ const state = {
           size:'small',
           style:'',
           click:handleCouponMemberSend,
+          isAuth:1,
+        },
+      ]
+    },
+    {
+      name:'提成日报',
+      desc:'提成日报定制模板',
+      params:['提成日报'],
+      btn:[
+        {
+          text:'请选择员工',
+          type:'select',
+          size:'small',
+          style:'width:140px;',
+          prop:'couponList',
+          key:'couponID',
+          list:[],
+          change:handleSelectChangeForTable
+        },
+        {
+          text:'发放',
+          type:'',
+          size:'small',
+          style:'',
+          click:'',
+          isAuth:1,
+        },
+        {
+          text:'配置项目提成',
+          type:'',
+          size:'small',
+          style:'',
+          click:'',
+          isAuth:1,
+        },
+        {
+          text:'配置提成员工',
+          type:'',
+          size:'small',
+          style:'',
+          click:'',
           isAuth:1,
         },
       ]
