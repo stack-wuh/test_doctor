@@ -1270,7 +1270,7 @@ const state = {
         {
           key:'会员等级',
           type:'default',
-          prop:'grade',
+          prop:'memberName',
         },
         {
           key:'会员积分',
@@ -1379,7 +1379,7 @@ const state = {
         {
           key:'保险购买时间',
           type:'default',
-          prop:'insuranceStart',
+          prop:'insuranceStarts',
         },
         {
           key:'保险到期',
@@ -1399,7 +1399,7 @@ const state = {
         {
           key:'上次保养日期',
           type:'default',
-          prop:'lastMaintainTime',
+          prop:'lastMaintainTimes',
         },
         {
           key:'保养到期',
