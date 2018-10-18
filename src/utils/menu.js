@@ -380,36 +380,43 @@ export const list = [
       {
         label: "用户统计",
         mid_path: "/mid/container",
+        path:'/statistic/store',
         isAuth:1,
       },
       {
         label: "车辆统计",
         mid_path: "/mid/container",
+        path:'/statistic/store',
         isAuth:1,
       },
       {
         label: "业务统计",
         mid_path: "/mid/container",
+        path:'/statistic/store',
         isAuth:1,
       },
       {
         label: "活动统计",
         mid_path: "/mid/container",
+        path:'/statistic/store',
         isAuth:1,
       },
       {
         label: "会员统计",
         mid_path: "/mid/container",
+        path:'/statistic/store',
         isAuth:1,
       },
       {
         label: "提成日报",
         mid_path: "/mid/container",
+        path:'/statistic/store',
         isAuth:1,
       },
       {
-        label: "门店经营诊断",
+        label: "客户资料完整度",
         mid_path: "/mid/container",
+        path:'/statistic/store',
         isAuth:1,
       }
     ]
