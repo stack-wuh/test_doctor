@@ -62,6 +62,14 @@ const LogVersion = resolve => require(['@/components/logManage/mid/version'], re
 const LogMsgPub = resolve => require(['@/components/logManage/sub/msgPub'], resolve)
 const LogMsgDetail = resolve => require(['@/components/logManage/sub/msgDetail'], resolve)
 
+const StatisticIndex = resolve => require(['@/components/statisticManage/mid/store'], resolve)
+const StatisticUser = resolve => require(['@/components/statisticManage/views/users'], resolve)
+const StatisticCar = resolve => require(['@/components/statisticManage/views/cars'], resolve)
+const StatisticMember = resolve => require(['@/components/statisticManage/views/member'], resolve)
+const StatisticBusiness = resolve => require(['@/components/statisticManage/views/business'], resolve)
+const StatisticActivity = resolve => require(['@/components/statisticManage/views/activity'], resolve)
+const StatisticPayment = resolve => require(['@/components/statisticManage/views/payment'], resolve)
+
 export default new Router({
   mode: 'history',
   base: process.env.BASE_URL,
@@ -327,6 +335,41 @@ export default new Router({
                   path:'/log/msg/detail',
                   name:'logMsgDetail',
                   component:LogMsgDetail,
+                }
+              ]
+            },
+            {
+              path:'/statistic',
+              component:StatisticIndex,
+              redirect:'/statistic/store',
+              children:[
+                {
+                  path:'/statistic/store',
+                  components:StatisticIndex,
+                },
+                {
+                  path:'/statistic/user',
+                  component: StatisticUser
+                },
+                {
+                  path:'/statistic/car',
+                  component: StatisticCar
+                },
+                {
+                  path:'/statistic/member',
+                  component: StatisticMember
+                },
+                {
+                  path:'/statistic/business',
+                  component: StatisticBusiness
+                },
+                {
+                  path:'/statistic/activity',
+                  component: StatisticActivity
+                },
+                {
+                  path:'/statistic/payment',
+                  component: StatisticPayment
                 }
               ]
             }
