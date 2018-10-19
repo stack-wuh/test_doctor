@@ -142,7 +142,9 @@ export default {
   },
   created() {
     this.$nextTick(() => {
-      this.chartsInit();
+      setTimeout(() => {
+        this.chartsInit()
+      }, 1000)
     });
     this.clock()
     // this.getLimits()
