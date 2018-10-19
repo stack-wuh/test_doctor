@@ -252,6 +252,13 @@ export const handleCouponMemberSend = ({params, choose, text} = {}) => {
 export const jump2DiaolgForServeCarDialog = ({params, text} = {}) => {
   window.$store.commit('serverCarStateToggle', {params, text})
 }
+/**
+ * 定制 -- 客户服务 -- 车辆检测 -- 检修项配置 -- 新增/编辑
+ * @param {*} param0 
+ */
+export const dialogToggleForServerCarForm = ({params, text} = {}) => {
+  window.$store.commit('serverCarStateToggle', {params, text})
+}
 
 /**
  * 定制 -- 客户服务 -- 车辆检测 -- 专项检测配置

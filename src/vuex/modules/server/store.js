@@ -8,7 +8,6 @@ const state = {
   dialog_arr:[],
   dialog_row: {},
   dialogCanshowForm: false,
-  dialogCanShowFooter: false,
 
   isShowSettingOneDialog: false
 }
@@ -220,11 +219,11 @@ const mutations = {
    */
   serverCarStateToggle(state,{params, text, row} = {}){
     console.log(params, text, row)
-    state.dialogVisible = !state.dialogVisible
     state.dialog_arr = []
     if(text === '新增' || text === '编辑'){
-      state.dialogCanShowFooter = !state.dialogCanShowFooter
-      state.dialogCanshowForm = !state.dialogCanShowFooter
+      state.dialogCanshowForm = !state.dialogCanshowForm
+    }else{
+      state.dialogVisible = !state.dialogVisible
     }
   },
   setServeSettingItemList(state, {params} = {}){

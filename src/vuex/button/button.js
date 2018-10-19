@@ -11,6 +11,7 @@ import {
   handleSelectChangeForTable,
   jump2DiaolgForServeCarDialog,
   serveDialogToggleForSetting,
+  dialogToggleForServerCarForm,
 } from './click'
 const state = {
   list:[
@@ -100,7 +101,7 @@ const state = {
           type:'',
           size:'small',
           style:'',
-          click:jump2DiaolgForServeCarDialog,
+          click:dialogToggleForServerCarForm,
           isAuth:1,
         }
       ]
