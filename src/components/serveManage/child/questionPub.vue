@@ -160,8 +160,16 @@ export default {
       console.log(this.lists)
     },
     cancel(){
-
+      this.$refs.myForm.resetFields()
+      setTimeout(()=> {
+        this.$router.go(-2)
+      }, 1000)
     }
+  },
+  created(){
+    let data = this.$route.query.data
+    data && (data = JSON.parse(data))
+    console.log(data)
   }
 }
 </script>
