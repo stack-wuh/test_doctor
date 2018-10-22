@@ -45,7 +45,9 @@ const actions = {
         break;
       case '检修记录详情' : _url = 'repairRecord/selectByOne.do', search = {...search}
         break;
-      case '明细查询' : _url = 'questionnaire/getUserList.do', search = {...search}
+      case '明细查询' : _url = 'questionnaire/getUserList.do', search = {...search, ...rootState.search}
+        break;
+      case '问卷统计' : _url = 'questionnaire/QuestionList.do', search = {...search}
         break;
     }
     return new Promise((resolve, reject) => {
@@ -205,13 +207,24 @@ const actions = {
         commit('setServeSettingItemList', {params: res.data})
       })
     })
+  },
+
+  /**
+   * 客户服务 -- 问卷调查 -- 发布
+   */
+  serverQuesSend({commit}, {row:{id}}){
+    return new Promise((resolve, reject) => {
+      $http.post('questionnaire/publish.do', {id}, res => {
+        return resolve(res)
+      })
+    })
   }
 }
 const mutations = {
   setServerStore(state, {params} = {}){
-    state.data = params.list
-    state.total = params.total
-    state.currPageNo = params.pageNum
+    state.data = params && params.list
+    state.total = params && params.total
+    state.currPageNo = params && params.pageNum
   },
   /**
    * 客户服务 -- 车辆检测
@@ -242,7 +255,7 @@ const mutations = {
 
 const getters = {
   formatServerStore: (state, rootState, rootGetters) => ({path} = {}) => {
-    return state.data.map(item => {
+    return state.data && state.data.map(item => {
       if(path === '救援服务'){
         return {...item, statusText: item.status == 0 ? '未确认' : item.status == 1 ? '已确认' : '已取消'}
       }else if(path === '意见反馈'){

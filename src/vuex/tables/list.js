@@ -54,6 +54,7 @@
    serveSettingState,
    handleToggleStateForServeCar,
    handlerForSettingOne,
+   handleQuesPub,
   } from './click.js'
 const state = {
   data:[
@@ -3676,6 +3677,7 @@ const state = {
               text:'发布',
               type:'',
               size:'small',
+              click:handleQuesPub
             },
             {
               text:'问卷统计',

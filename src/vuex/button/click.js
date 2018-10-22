@@ -156,6 +156,7 @@ export const jump2Detail = params => {
       case '预约管理' : return location.href = window.rootPath + '/bookingBackend/delete.do' + _str
       case '保险服务' : return location.href = window.rootPath + '/insurances/exports.do' + _str
       case '检修记录' : return location.href = window.rootPath + '/repairRecord/exports.do' + _str 
+      case '明细查询' : return location.href = window.rootPath + '/questionnaire/exports.do' + _str
     }
    }else{
     window.$route.push({path:'/mid/container', query:{path:'/unlimit'}})

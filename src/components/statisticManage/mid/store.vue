@@ -8,12 +8,15 @@
     <section>
       <my-card v-if="canShowCards.includes(path)"></my-card>
       <my-search v-if="isShow" ></my-search>
-      <my-table v-if="isShow" :header="true" :list="[{}]" >
+      <my-table v-if="isShow && showType === 3" :header="true" :list="list({path})" >
         <span slot="title">{{ $route.query.child || $route.query.subMenu}}列表</span>
           <div slot="right">
             <my-button></my-button>
           </div>
       </my-table>
+      <my-bottom v-if="isShow && showType === 3" :total="total" :currPageNo="currPageNo" ></my-bottom>
+      <bar-chart v-if="showType === 1" ></bar-chart>
+      <line-chart v-if="showType === 2" ></line-chart>
     </section>
   </section>
 </template>
@@ -23,8 +26,13 @@ import MyCard from '../child/cards';
 import MySearch from '@/components/common/search'
 import MyTable from '@/components/common/myTable'
 import MyButton from '@/components/common/myButton'
+import MyBottom from '@/components/common/bottom'
 
-import {mapActions, mapState, mapGetters} from 'vuex'
+import BarChart from '@/components/common/charts/barChart'
+import LineChart from '@/components/common/charts/lineChart'
+
+
+import {mapActions, mapState, mapGetters, mapMutations} from 'vuex'
 
 const canShowCards = ['用户统计', '车辆统计', '会员统计']
 
@@ -35,6 +43,9 @@ export default {
     MySearch,
     MyTable,
     MyButton,
+    MyBottom,
+    BarChart,
+    LineChart,
   },
   data () {
     return {
@@ -44,11 +55,18 @@ export default {
   },
 
   computed:{
+    ...mapState({
+      'total': state => state.Statistic.total,
+      'currPageNo': state => state.Statistic.currPageNo,
+      'showType': state => {
+        return state.search.showType ? state.search.showType : 3 
+      }
+    }),
     path(){
       return this.$route.query.child || this.$route.query.subMenu
     },
     ...mapGetters({
-      'list': 'formatCouponStore'
+      'list': 'formatStatistic'
     })
   },
 
@@ -56,11 +74,21 @@ export default {
     path(){
       this.isShow = false
       this.$store.commit('clearSearchForm')
-      this.isShow = true
+      setTimeout(()=> {
+        this.isShow = true
+        this.getStore({path: this.path})
+      })
     }
   },
 
-  methods: {}
+  methods: {
+    ...mapActions({
+      'getStore': 'getStatisticStore'
+    })
+  },
+  created(){
+    this.getStore({path: this.path})
+  }
 }
 </script>
 

@@ -313,3 +313,21 @@ export const handleToggleStateForServeCar = (params, text, row) =>{
 export const handlerForSettingOne = (params, text, row) => {
   window.$store.commit('setSettingOneState', {row})
 }
+
+/**
+ * 客户服务 -- 问卷调查 -- 发布
+ */
+export const handleQuesPub = (params, text, row) => {
+  window.$confirm('该操作将推送至前台,请确认?', '提示', {
+    confirmButtonText:'确认',
+    cancelButtonText:'取消',
+    type:'warning'
+  }).then(() => {
+    window.$store.dispatch('serverQuesSend', {params, row})
+  }).catch(() => {
+    _g.toastMsg({
+      type:'error',
+      msg:'操作已取消或失败'
+    })
+  })
+}

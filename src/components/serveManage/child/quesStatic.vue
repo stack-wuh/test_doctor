@@ -28,6 +28,7 @@
 </template>
 
 <script>
+import {mapActions} from 'vuex'
 export default {
   name: '',
 
@@ -37,9 +38,17 @@ export default {
   },
 
   methods: {
+    ...mapActions({
+      'getInfo': 'getServerStore'
+    }),
     handleCancel(){
       this.$router.go(-2)
     }
+  },
+  created(){
+    let data = this.$route.query.data
+    data && (data = JSON.parse(data))
+    this.getInfo({path:'问卷统计', search: {id: data.id}})
   }
 }
 </script>

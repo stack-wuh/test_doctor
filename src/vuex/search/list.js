@@ -2761,7 +2761,7 @@ const state = {
         {
           key:'统计方式',
           type:'select',
-          prop:'',
+          prop:'showType',
           list:[
             {
               label:'柱状图',
@@ -2954,22 +2954,22 @@ const state = {
         {
           key:'姓名',
           type:'default',
-          prop:'',
+          prop:'name',
         },
         {
           key:'联系电话',
           type:'default',
-          prop:'',
+          prop:'phone',
         },
         {
-          key:'开始时间',
+          key:'开始日期',
           type:'date',
-          prop:'',
+          prop:'joinTimeStr',
         },
         {
-          key:'结束时间',
+          key:'结束日期',
           type:'date',
-          prop:''
+          prop:'joinTimeEnd'
         }
       ]
     },
