@@ -53,6 +53,8 @@ const ServeInsurePub = resolve => require(['@/components/serveManage/child/insur
 const ServeQuestionPub = resolve => require(['@/components/serveManage/child/questionPub'],resolve)
 const ServeCarFeedPub = resolve => require(['@/components/serveManage/child/carFeed'], resolve)
 const ServerOverhual = resolve => require(['@/components/serveManage/child/overhual'], resolve)
+const ServerQuesStatic = resolve => require(['@/components/serveManage/child/quesStatic'], resolve)
+
 
 const SellingStore = resolve => require(['@/components/sellingManage/mid/store'],resolve)
 
@@ -289,6 +291,11 @@ export default new Router({
                   path: '/serve/overhual',
                   name:'serveOverhual',
                   component: ServerOverhual
+                },
+                {
+                  path: '/serve/ques/static',
+                  name:'SererQuesStatic',
+                  component: ServerQuesStatic
                 }
               ],
             },
