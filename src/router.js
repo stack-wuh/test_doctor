@@ -65,12 +65,7 @@ const LogMsgPub = resolve => require(['@/components/logManage/sub/msgPub'], reso
 const LogMsgDetail = resolve => require(['@/components/logManage/sub/msgDetail'], resolve)
 
 const StatisticIndex = resolve => require(['@/components/statisticManage/mid/store'], resolve)
-const StatisticUser = resolve => require(['@/components/statisticManage/views/users'], resolve)
-const StatisticCar = resolve => require(['@/components/statisticManage/views/cars'], resolve)
-const StatisticMember = resolve => require(['@/components/statisticManage/views/member'], resolve)
-const StatisticBusiness = resolve => require(['@/components/statisticManage/views/business'], resolve)
-const StatisticActivity = resolve => require(['@/components/statisticManage/views/activity'], resolve)
-const StatisticPayment = resolve => require(['@/components/statisticManage/views/payment'], resolve)
+
 
 export default new Router({
   mode: 'history',
@@ -353,30 +348,6 @@ export default new Router({
                 {
                   path:'/statistic/store',
                   components:StatisticIndex,
-                },
-                {
-                  path:'/statistic/user',
-                  component: StatisticUser
-                },
-                {
-                  path:'/statistic/car',
-                  component: StatisticCar
-                },
-                {
-                  path:'/statistic/member',
-                  component: StatisticMember
-                },
-                {
-                  path:'/statistic/business',
-                  component: StatisticBusiness
-                },
-                {
-                  path:'/statistic/activity',
-                  component: StatisticActivity
-                },
-                {
-                  path:'/statistic/payment',
-                  component: StatisticPayment
                 }
               ]
             }
