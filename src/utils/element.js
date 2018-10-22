@@ -28,6 +28,7 @@ import {
   Switch ,
   Carousel,
   CarouselItem,
+  Progress,
 } from 'element-ui'
 
 Vue.use(Button)
@@ -54,6 +55,7 @@ Vue.use(Loading)
 Vue.use(Switch)
 Vue.use(Carousel)
 Vue.use(CarouselItem)
+Vue.use(Progress)
 
 
 Vue.prototype.$ELEMENT = {size:'small',zIndex:90000}
