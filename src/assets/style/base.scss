@@ -16,6 +16,9 @@ html , body , #app{
 a{
   text-decoration: none;
 }
+strong{
+  font-weight: normal;
+}
 #app{
   .wrapper{
     box-sizing: border-box;

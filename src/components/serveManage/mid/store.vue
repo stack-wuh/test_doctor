@@ -3,7 +3,7 @@
     <section class="content">
       <search @inputChange="getServerStore({path:pathChange})" v-if="isShow" :name="$route.query.child || $route.query.subMenu" />
       <my-table v-if="isShow" :list="formatServerStore({path: pathChange})"  header="true" :params=" $route.query.child ||$route.query.subMenu" >
-        <span slot="title">{{$route.query.subMenu}}列表</span>
+        <span slot="title">{{ $route.query.child || $route.query.subMenu}}列表</span>
         <div slot="right">
             <my-button ></my-button>
         </div>

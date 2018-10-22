@@ -45,6 +45,8 @@ const actions = {
         break;
       case '检修记录详情' : _url = 'repairRecord/selectByOne.do', search = {...search}
         break;
+      case '明细查询' : _url = 'questionnaire/getUserList.do', search = {...search}
+        break;
     }
     return new Promise((resolve, reject) => {
       $http.post(_url, NotNull(search), res => {
@@ -218,7 +220,6 @@ const mutations = {
    * @param {*} param1 
    */
   serverCarStateToggle(state,{params, text, row} = {}){
-    console.log(params, text, row)
     state.dialog_arr = []
     if(text === '新增' || text === '编辑'){
       state.dialogCanshowForm = !state.dialogCanshowForm
