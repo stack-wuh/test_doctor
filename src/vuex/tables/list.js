@@ -3670,6 +3670,7 @@ const state = {
               text:'编辑',
               type:'',
               size:'small',
+              click:jump2Other
             },
             {
               text:'发布',
@@ -3680,12 +3681,63 @@ const state = {
               text:'问卷统计',
               type:'',
               size:'small',
+              click:jump2Other
             },
             {
               text:'明细调查',
               type:'',
               size:'small',
+              click: jump2Other
             },
+          ]
+        },
+      ]
+    },
+    {
+      name:'问卷调查明细查询',
+      path:'',
+      params:['明细查询'],
+      coltype:'',
+      colValue:'',
+      colTitle:'',
+      list:[
+        {
+          key:'参与人手机',
+          type:'default',
+          prop:'questionnaireTitle',
+        },
+        {
+          key:'姓名',
+          type:'default',
+          prop:'columnType',
+        },
+        {
+          key:'车牌',
+          type:'default',
+          prop:'validate',
+        },
+        {
+          key:'车架号',
+          type:'default',
+          prop:'releaseDates',
+        },
+        {
+          key:'参与时间',
+          type:'default',
+          prop:'activeStateText',
+        },
+        {
+          key:'操作',
+          type:'button',
+          fix:'right',
+          width:'220px',
+          list:[
+            {
+              text:'详情',
+              type:'',
+              size:'small',
+              click:jump2Other
+            }
           ]
         },
       ]

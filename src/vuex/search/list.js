@@ -2946,6 +2946,33 @@ const state = {
         }
       ]
     },
+    {
+      name:'明细查询',
+      params:['明细查询'],
+      type:'',
+      list:[
+        {
+          key:'姓名',
+          type:'default',
+          prop:'',
+        },
+        {
+          key:'联系电话',
+          type:'default',
+          prop:'',
+        },
+        {
+          key:'开始时间',
+          type:'date',
+          prop:'',
+        },
+        {
+          key:'结束时间',
+          type:'date',
+          prop:''
+        }
+      ]
+    },
   ],
   btnList:[
     {
