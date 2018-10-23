@@ -566,11 +566,6 @@ export default {
                   path:'/selling/store',
                 },
                 {
-                  label: "员工绩效表",
-                  mid_path: "/mid/container",
-                  path:'/selling/store',
-                },
-                {
                   label: "销售统计表",
                   mid_path: "/mid/container",
                   path:'/selling/store',
