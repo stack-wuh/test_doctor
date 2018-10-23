@@ -4375,7 +4375,7 @@ const state = {
         {
           key:'支付方式',
           type:'default',
-          prop:'payType',
+          prop:'payTypeText',
         },
         {
           key:'付款时间',
@@ -4390,7 +4390,7 @@ const state = {
         {
           key:'订单状态',
           type:'default',
-          prop:'checkStatus',
+          prop:'checkStatusText',
         },
         {
           key:'备注',
@@ -5168,52 +5168,42 @@ const state = {
         {
           key:'出入库时间',
           type:'default',
-          prop:'',
+          prop:'date',
         },
         {
           key:'出入库类型',
           type:'default',
-          prop:'',
-        },
-        {
-          key:'出入库',
-          type:'default',
-          prop:'',
+          prop:'name',
         },
         {
           key:'商品名称',
           type:'default',
-          prop:'',
+          prop:'goodsName',
         },
         {
           key:'商品单位',
           type:'default',
-          prop:'',
-        },
-        {
-          key:'车品牌',
-          type:'default',
-          prop:'',
+          prop:'goodsUnit',
         },
         {
           key:'车型号',
           type:'default',
-          prop:'',
+          prop:'carModel',
         },
         {
           key:'仓库名称',
           type:'default',
-          prop:'',
+          prop:'repositoryName',
         },
         {
           key:'出入库数量',
           type:'default',
-          prop:'',
+          prop:'num',
         },
         {
           key:'备注',
           type:'default',
-          prop:'',
+          prop:'remark',
         },
       ]
     },
@@ -5228,57 +5218,57 @@ const state = {
         {
           key:'盘点单号',
           type:'default',
-          prop:'',
+          prop:'checkNo',
         },
         {
           key:'盘点日期',
           type:'default',
-          prop:'',
+          prop:'checkDate',
         },
         {
           key:'仓库名称',
           type:'default',
-          prop:'',
+          prop:'repositoryName',
         },
         {
           key:'商品编号',
           type:'default',
-          prop:'',
+          prop:'goodNo',
         },
         {
           key:'商品名称',
           type:'default',
-          prop:'',
+          prop:'goodName',
         },
         {
           key:'商品单位',
           type:'default',
-          prop:'',
+          prop:'goodUnit',
         },
         {
           key:'总库存数量',
           type:'default',
-          prop:'',
+          prop:'sumNum',
         },
         {
           key:'在途数量',
           type:'default',
-          prop:'',
+          prop:'loadNum',
         },
         {
           key:'可盘点库存数量',
           type:'default',
-          prop:'',
+          prop:'repositoryNum',
         },
         {
           key:'本次盘点数量',
           type:'default',
-          prop:'',
+          prop:'num',
         },
         {
           key:'库存差异数',
           type:'default',
-          prop:'',
+          prop:'diffNum',
         },
       ]
     },
@@ -5293,77 +5283,27 @@ const state = {
         {
           key:'商品名称',
           type:'default',
-          prop:'',
+          prop:'goodName',
         },
         {
-          key:'车品牌',
+          key:'车型',
           type:'default',
-          prop:'',
-        },
-        {
-          key:'车型号',
-          type:'default',
-          prop:'',
+          prop:'carModel',
         },
         {
           key:'仓库名称',
           type:'default',
-          prop:'',
+          prop:'repositoryName',
         },
         {
           key:'入库数量',
           type:'default',
-          prop:'',
+          prop:'inNum',
         },
         {
           key:'出库数量',
           type:'default',
-          prop:'',
-        },
-      ]
-    },
-    {
-      name:'员工绩效表',
-      path:'',
-      params:['员工绩效表'],
-      colType:'',
-      colValue:'',
-      colTitle:'',
-      list:[
-        {
-          key:'员工姓名',
-          type:'default',
-          prop:'',
-        },
-        {
-          key:'手机号',
-          type:'default',
-          prop:'',
-        },
-        {
-          key:'施工提成',
-          type:'default',
-          prop:'',
-        },
-        {
-          key:'销售提成',
-          type:'default',
-          prop:'',
-        },
-        {
-          key:'合计提成',
-          type:'default',
-          prop:'',
-        },
-        {
-          key:'操作',
-          type:'button',
-          list:[
-            {
-              text:'查看明细',
-              type:'text',
-            }
-          ]
+          prop:'outNum',
         },
       ]
     },
@@ -5378,37 +5318,37 @@ const state = {
         {
           key:'业务单号',
           type:'default',
-          prop:'',
+          prop:'businessNo',
         },
         {
           key:'开单日期',
           type:'default',
-          prop:'',
+          prop:'orderTime',
         },
         {
           key:'客户名称',
           type:'default',
-          prop:'',
+          prop:'userName',
         },
         {
           key:'车牌号',
           type:'default',
-          prop:'',
+          prop:'plateNum',
         },
         {
           key:'车型',
           type:'default',
-          prop:'',
+          prop:'carModel',
         },
         {
           key:'商品销售',
           type:'default',
-          prop:'',
+          prop:'goodsSale',
         },
         {
           key:'项目销售',
           type:'default',
-          prop:'',
+          prop:'projectSale',
         },
       ]
     },
@@ -5423,43 +5363,58 @@ const state = {
         {
           key:'商品编号',
           type:'default',
-          prop:'',
+          prop:'goodsCode',
         },
         {
           key:'商品名称',
           type:'default',
-          prop:'',
+          prop:'goodsName',
         },
         {
           key:'规则',
           type:'default',
-          prop:'',
+          prop:'carType',
         },
         {
           key:'单位',
           type:'default',
-          prop:'',
+          prop:'goodsUnit',
         },
         {
           key:'销售',
           type:'default',
-          prop:'',
+          prop:'num',
         },
         {
           key:'单价(元)',
           type:'default',
-          prop:''
+          prop:'salePrice'
         },
         {
           key:'销售金额(元)',
           type:'default',
-          prop:'',
+          prop:'saleMoney',
         },
         {
           key:'优惠金额(元)',
           type:'default',
-          prop:'',
+          prop:'discount',
         },
+        {
+          key:'客户姓名',
+          type:'default',
+          prop:'userName'
+        },
+        {
+          key:'电话',
+          type:'default',
+          prop:'phone'
+        },
+        {
+          key:'销售人员名称',
+          type:'default',
+          prop:'salerName'
+        }
       ]
     },
     {
@@ -5473,27 +5428,47 @@ const state = {
         {
           key:'项目名称',
           type:'default',
-          prop:'',
+          prop:'projectName',
         },
         {
           key:'销售数量',
           type:'default',
-          prop:'',
+          prop:'saleNum',
         },
         {
           key:'单价(元)',
           type:'default',
-          prop:''
+          prop:'price'
         },
         {
           key:'销售金额(元)',
           type:'default',
-          prop:'',
+          prop:'totalSalePrice',
         },
         {
           key:'优惠金额(元)',
           type:'default',
-          prop:'',
+          prop:'discountAmount',
+        },
+        {
+          key:'客户姓名',
+          type:'default',
+          prop:'userName',
+        },
+        {
+          key:'联系电话',
+          type:'default',
+          prop:'phone',
+        },
+        {
+          key:'销售人员',
+          type:'default',
+          prop:'salerName',
+        },
+        {
+          key:'施工人员',
+          type:'default',
+          prop:'Constructor',
         },
       ]
     },
@@ -5508,52 +5483,52 @@ const state = {
         {
           key:'采购单号',
           type:'default',
-          prop:'',
+          prop:'purchaseCode',
         },
         {
           key:'商品编号',
           type:'default',
-          prop:'',
+          prop:'goodsCode',
         },
         {
           key:'商品名称',
           type:'default',
-          prop:'',
+          prop:'goodsName',
         },
         {
           key:'车型',
           type:'default',
-          prop:'',
+          prop:'carBrand',
         },
         {
           key:'规格',
           type:'default',
-          prop:'',
+          prop:'carType',
         },
         {
           key:'单位',
           type:'default',
-          prop:'',
+          prop:'goodsUnit',
         },
         {
           key:'采购价格(元)',
           type:'default',
-          prop:''
+          prop:'price'
         },
         {
           key:'采购数量',
           type:'default',
-          prop:'',
+          prop:'num',
         },
         {
           key:'采购金额(元)',
           type:'default',
-          prop:'',
+          prop:'totalPrice',
         },
         {
           key:'采购日期',
           type:'default',
-          prop:'',
+          prop:'purchaseDate',
         }
       ]
     },
@@ -5568,57 +5543,52 @@ const state = {
         {
           key:'车牌号',
           type:'default',
-          prop:'',
+          prop:'plateNum',
         },
         {
           key:'用户名',
           type:'default',
-          prop:'',
+          prop:'userName',
         },
         {
           key:'联系电话',
           type:'default',
-          prop:'',
+          prop:'phone',
         },
         {
           key:'销售单号',
           type:'default',
-          prop:'',
+          prop:'payCode',
         },
         {
           key:'应付金额',
           type:'default',
-          prop:'',
+          prop:'totalMoney',
         },
         {
           key:'挂账总金额',
           type:'default',
-          prop:'',
+          prop:'totalMoney2',
         },
         {
           key:'剩余未还挂账',
           type:'default',
-          prop:''
-        },
-        {
-          key:'优惠金额',
-          type:'default',
-          prop:'',
+          prop:'repayMoney'
         },
         {
           key:'挂账状态',
           type:'default',
-          prop:'',
+          prop:'stateText',
         },
         {
           key:'挂账时间',
           type:'default',
-          prop:'',
+          prop:'time',
         },
         {
           key:'最后还款日期',
           type:'default',
-          prop:''
+          prop:'endDate'
         }
       ]
     },
@@ -5638,27 +5608,52 @@ const state = {
         {
           key:'车牌号',
           type:'default',
-          prop:'',
+          prop:'plateNum',
         },
         {
-          key:'用户名',
+          key:'客户姓名',
           type:'default',
-          prop:'',
+          prop:'userName',
+        },
+        {
+          key:'联系电话',
+          type:'default',
+          prop:'phone'
         },
         {
           key:'还款金额',
           type:'default',
-          prop:'',
+          prop:'totalMoney',
+        },
+        {
+          key:'收款单号',
+          type:'default',
+          prop:'payCode',
         },
         {
           key:'还款时间',
           type:'default',
-          prop:'',
+          prop:'endDate',
         },
         {
-          key:'支付方式',
+          key:'挂账时间',
           type:'default',
-          prop:'',
+          prop:'time',
+        },
+        {
+          key:'挂账总金额',
+          type:'default',
+          prop:'totalMoney2'
+        },
+        {
+          key:'剩余未还挂账',
+          type:'default',
+          prop:'repayMoney',
+        },
+        {
+          key:'挂账状态',
+          type:'default',
+          prop:'stateText',
         },
         {
           key:'操作人',
@@ -5678,12 +5673,12 @@ const state = {
         {
           key:'结算方式',
           type:'default',
-          prop:'',
+          prop:'payType',
         },
         {
           key:'金额',
           type:'default',
-          prop:'',
+          prop:'money',
         }
       ]
     },

@@ -2599,38 +2599,69 @@ const state = {
           key:'商品类名',
           value:'',
           type:'default',
+          prop:'goodsName',
         },
         {
           key:'起点时间',
           value:'',
           type:'date',
+          prop:'startTime',
         },
         {
           key:'终点时间',
           value:'',
-          type:'date'
+          type:'date',
+          prop:'endTime',
         }
       ]
     },
     {
       name:'盘点明细表',
-      params:['盘点明细表','采购明细表'],
+      params:['盘点明细表'],
       type:'',
       list:[
         {
           key:'商品名称',
           value:'',
           type:'default',
+          prop:'goodName',
         },
         {
           key:'起点时间',
           value:'',
           type:'date',
+          prop:'startTime',
         },
         {
           key:'终点时间',
           value:'',
-          type:'date'
+          type:'date',
+          prop:'endTime',
+        }
+      ]
+    },
+    {
+      name:'采购明细表',
+      params:['采购明细表'],
+      type:'',
+      list:[
+        {
+          key:'商品名称',
+          value:'',
+          type:'default',
+          prop:'goodsName',
+        },
+        {
+          key:'起点时间',
+          value:'',
+          type:'date',
+          prop:'startTime',
+        },
+        {
+          key:'终点时间',
+          value:'',
+          type:'date',
+          prop:'endTime',
         }
       ]
     },
@@ -2643,48 +2674,25 @@ const state = {
           key:'商品名称',
           value:'',
           type:'default',
+          prop:'goodName',
         },
         {
           key:'仓库名称',
           value:'',
           type:'default',
+          prop:'repositoryName',
         },
         {
           key:'起点时间',
           value:'',
           type:'date',
+          prop:'startTime',
         },
         {
           key:'终点时间',
-          value:'',
-          type:'date'
-        }
-      ]
-    },
-    {
-      name:'员工绩效表',
-      params:['员工绩效表'],
-      type:'',
-      list:[
-        {
-          key:'员工姓名',
-          value:'',
-          type:'default',
-        },
-        {
-          key:'联系电话',
-          value:'',
-          type:'default',
-        },
-        {
-          key:'起点时间',
           value:'',
           type:'date',
-        },
-        {
-          key:'终点时间',
-          value:'',
-          type:'date'
+          prop:'endTime',
         }
       ]
     },
@@ -2694,24 +2702,28 @@ const state = {
       type:'',
       list:[
         {
-          key:'客户编号',
+          key:'客户名称',
           value:'',
           type:'default',
+          prop:'userName'
         },
         {
-          key:'商品名称',
+          key:'业务单号',
           value:'',
           type:'default',
+          prop:'businessNo',
         },
         {
           key:'起点时间',
           value:'',
           type:'date',
+          prop:'startTime',
         },
         {
           key:'终点时间',
           value:'',
-          type:'date'
+          type:'date',
+          prop:'endTime',
         }
       ]
     },
@@ -2746,21 +2758,25 @@ const state = {
           key:'商品编号',
           value:'',
           type:'default',
+          prop:'',
         },
         {
           key:'商品名称',
           value:'',
           type:'default',
+          prop:'',
         },
         {
           key:'起点时间',
           value:'',
           type:'date',
+          prop:'',
         },
         {
           key:'终点时间',
           value:'',
-          type:'date'
+          type:'date',
+          prop:'',
         }
       ]
     },
@@ -2794,34 +2810,34 @@ const state = {
         {
           key:'车牌号',
           type:'default',
-          prop:'',
+          prop:'plateNum',
         },
         {
           key:'起点时间',
           type:'date',
-          prop:'',
+          prop:'startendDate',
         },
         {
           key:'终点时间',
           type:'date',
-          prop:'',
+          prop:'endendDate',
         }
       ]
     },
     {
       name:'收付款统计',
-      params:['收款统计','付款统计'],
+      params:['收款统计','付款统计','营业额统计表'],
       type:'',
       list:[
         {
           key:'起点时间',
           type:'date',
-          prop:'',
+          prop:'startcreateDate',
         },
         {
           key:'终点时间',
           type:'date',
-          prop:'',
+          prop:'endCreateDate',
         }
       ]
     },

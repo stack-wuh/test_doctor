@@ -67,7 +67,29 @@ const actions = {
         break;
       case '库存报表' : _url = 'StorageReport/getStorageReportList.do', search = {...search, currPageNo, ...rootState.search}
         break;
-      case '' : _url = '', search = {...search, currPageNo, ...rootSatte.search}
+      case '出入库明细表' : _url = 'OutOrInfoDetail/OutOrInfoDetailList.do', search = {...search, currPageNo, ...rootState.search}
+        break;
+      case '盘点明细表' : _url = 'reportManage/inventoryList.do', search = {...search, currPageNo, ...rootState.search}
+        break;
+      case '日报月报' : _url = 'reportManage/inOutStockList.do', search = {...search, currPageNo, ...rootState.search}
+        break;
+      case '销售统计表' : _url = 'reportManage/customerConsumptionList.do', search = {...search, currPageNo, ...rootState.search}
+        break;
+      case '商品销售统计' : _url = 'projectSales/goodsInit.do', search = {...search, currPageNo, ...rootState.search}
+        break;
+      case '项目销售统计' : _url = 'projectSales/projectInit.do', search = {...search, currPageNo, ...rootState.search}
+        break;
+      case '采购明细表' : _url = 'reportManage/purchaseDetails.do', search = {...search, currPageNo, ...rootState.search}
+        break;
+      case '挂账单据明细表' : _url = 'reportManage/accountsList.do', search = {...search, currPageNo, ...rootState.search}
+        break;
+      case '挂账还款明细表' : _url = 'reportManage/accountsList.do', search = {...search, currPageNo, ...rootState.search}
+        break;
+      case '营业额统计表' : _url = 'reportManage/turnoverList.do', search = {...search, currPageNo, ...rootState.search}
+        break;
+      case '收款统计' : _url = 'reportManage/gatherList.do', search = {...search, currPageNo, ...rootState.search}
+        break;
+      case '付款统计' : _url = 'reportManage/paymentList.do', search = {...search, currPageNo, ...rootState.search}
         break;
     }
     return new Promise((resolve, reject) => {
@@ -112,7 +134,13 @@ const getters = {
         return {...item, isFastOrderText: item.isFastOrder === 0 ? '否' : '是', isShowShopText: item.isShowShop === 0 ? '否' : '是', isShareMoneyText: item.isShareMoney === 0 ? '否' : '是', isEmployeeAwardText: item.isEmployeeAward === 0 ? '否' :' 是'}
       }else if(path === '项目设置'){
         return {...item, isShareMoneyText: item.isShareMoney === 0 ? '否' : '是', isFastOrderText: item.isFastOrder === 0 ? '否' : '是', isEmployeeAwardText: item.isEmployeeAward === 0 ? '否' : '是'}
-      }else{
+      }else if(path === '挂账单据明细表'){
+        return {...item, stateText: item.state === 0 ? '未通过' : '已通过'}
+      }else if(path === '挂账还款明细表'){
+        return {...item, stateText:item.state === 0 ? '全部未还' : item.state === 1 ? '部分已还' : '全部已还'}
+      }else if(path === '付款管理'){
+        return {...item, checkStatusText: item.checkStatus === 0 ? '未通过' : '已通过'}
+      }else{  
         return {...item}
       }
     })

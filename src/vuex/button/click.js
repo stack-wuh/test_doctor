@@ -157,6 +157,17 @@ export const jump2Detail = params => {
       case '保险服务' : return location.href = window.rootPath + '/insurances/exports.do' + _str
       case '检修记录' : return location.href = window.rootPath + '/repairRecord/exports.do' + _str 
       case '明细查询' : return location.href = window.rootPath + '/questionnaire/exports.do' + _str
+      case '库存报表' : return location.href = window.rootPath + '/StorageReport/exportStorageReportList.do' + _str
+      case '出入库明细表' : return location.href = window.rootPath + '/OutOrInfoDetail/exportOutOrInfoDetailList.do' + _str
+      case '盘点明细表' : return location.href = window.rootPath + '/reportManage/exportInventory.do' + _str
+      case '日报月报' : return location.href = window.rootPath + '/reportManage/exportInoutStock.do' + _str
+      case '销售统计表' : return location.href = window.rootPath + '/reportManage/exportCustomerConsumption.do' + _str
+      case '商品销售统计' : return location.href = window.rootPath + '/projectSales/exportGoods.do' + _str
+      case '项目销售统计' : return location.href = window.rootPath + '/projectSales/exportProject.do' + _str
+      case '采购明细表' : return location.href = window.rootPath + '/reportManage/exportPurchaseDetails.do' + _str
+      case '挂账单据明细表' : return location.href = window.rootPath + '/reportManage/exportAccountsList.do' + _str
+      case '挂账还款明细表' : return location.href = window.rootPath + '/reportManage/eportRepayment.do' + _str
+      default : return _g.toastMsg({type: 'error', msg: '导出失败'})
     }
    }else{
     window.$route.push({path:'/mid/container', query:{path:'/unlimit'}})
