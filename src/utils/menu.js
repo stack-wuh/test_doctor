@@ -547,55 +547,55 @@ export const list = [
       },
       {
         label: "平台配置管理",
-        isAuth:1,
+        isAuth:0,
         children: [
           {
             label: "供应商设置",
             mid_path: "/mid/container",
             path:'/selling/store',
-            isAuth:1,
+            isAuth:0,
           },
           {
             label: "仓库设置",
             mid_path: "/mid/container",
             path:'/selling/store',
-            isAuth:1,
+            isAuth:0,
           },
           {
             label: "商品分类设置",
             mid_path: "/mid/container",
             path:'/selling/store',
-            isAuth:1,
+            isAuth:0,
           },
           {
             label: "商品设置",
             mid_path: "/mid/container",
             path:'/selling/store',
-            isAuth:1,
+            isAuth:0,
           },
           {
             label: "项目分类设置",
             mid_path: "/mid/container",
             path:'/selling/store',
-            isAuth:1,
+            isAuth:0,
           },
           {
             label: "项目设置",
             mid_path: "/mid/container",
             path:'/selling/store',
-            isAuth:1,
+            isAuth:0,
           },
           {
             label: "物流公司配置",
             mid_path: "/mid/container",
             path:'/selling/store',
-            isAuth:1,
+            isAuth:0,
           },
           {
             label: "支付方式配置",
             mid_path: "/mid/container",
             path:'/selling/store',
-            isAuth:1,
+            isAuth:0,
           }
         ]
       },

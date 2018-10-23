@@ -1330,4 +1330,892 @@ export const forms = [
       ranl:'',
     }
   },
+  {
+    name:'供应商设置',
+    list:[
+      {
+        key:'供应商名称',
+        type:'input',
+        prop:'name',
+        disabled: false,
+        rules:[
+          {
+            required:true,
+            message:'请编辑用户姓名',
+            trigger:'blur',
+          }
+        ],
+      },
+      {
+        key: '联系人',
+        type:'input',
+        prop:'ranl',
+        disabled: false,
+        rules:[
+          {
+            required: true,
+            message:'请编辑联系电话',
+            trigger:'blur',
+          }
+        ],
+      },
+      {
+        key: '联系电话',
+        type:'input',
+        prop:'ranl',
+        disabled: false,
+        rules:[
+          {
+            required: true,
+            message:'请编辑联系电话',
+            trigger:'blur',
+          }
+        ],
+      },
+      {
+        key: 'QQ号',
+        type:'input',
+        prop:'ranl',
+        disabled: false,
+        rules:[
+          {
+            required: true,
+            message:'请编辑联系电话',
+            trigger:'blur',
+          }
+        ],
+      },
+      {
+        key: '主要业务',
+        type:'input',
+        prop:'ranl',
+        disabled: false,
+        rules:[
+          {
+            required: true,
+            message:'请编辑联系电话',
+            trigger:'blur',
+          }
+        ],
+      },
+      {
+        key: '地址',
+        type:'input',
+        prop:'ranl',
+        disabled: false,
+        rules:[
+          {
+            required: true,
+            message:'请编辑联系电话',
+            trigger:'blur',
+          }
+        ],
+      },
+      {
+        key: '备注',
+        type:'input',
+        prop:'ranl',
+        disabled: false,
+        rules:[
+          {
+            required: true,
+            message:'请编辑联系电话',
+            trigger:'blur',
+          }
+        ],
+      },
+    ],
+    myForm:{
+      name:'',
+      ranl:'',
+    }
+  },
+  {
+    name:'仓库设置',
+    list:[
+      {
+        key:'仓库名称',
+        type:'input',
+        prop:'name',
+        disabled: false,
+        rules:[
+          {
+            required:true,
+            message:'请编辑用户姓名',
+            trigger:'blur',
+          }
+        ],
+      },
+      {
+        key: '仓库联系人',
+        type:'input',
+        prop:'ranl',
+        disabled: false,
+        rules:[
+          {
+            required: true,
+            message:'请编辑联系电话',
+            trigger:'blur',
+          }
+        ],
+      },
+      {
+        key: '联系电话',
+        type:'input',
+        prop:'ranl',
+        disabled: false,
+        rules:[
+          {
+            required: true,
+            message:'请编辑联系电话',
+            trigger:'blur',
+          }
+        ],
+      },
+      {
+        key: '地址',
+        type:'input',
+        prop:'ranl',
+        disabled: false,
+        rules:[
+          {
+            required: true,
+            message:'请编辑联系电话',
+            trigger:'blur',
+          }
+        ],
+      },
+      {
+        key: '简介',
+        type:'input',
+        prop:'ranl',
+        disabled: false,
+        rules:[
+          {
+            required: true,
+            message:'请编辑联系电话',
+            trigger:'blur',
+          }
+        ],
+      },
+    ],
+    myForm:{
+      name:'',
+      ranl:'',
+    }
+  },
+  {
+    name:'商品分类设置',
+    list:[
+      {
+        key:'商品类型名称',
+        type:'input',
+        prop:'name',
+        disabled: false,
+        rules:[
+          {
+            required:true,
+            message:'请编辑用户姓名',
+            trigger:'blur',
+          }
+        ],
+      },
+      {
+        key: '联系人',
+        type:'input',
+        prop:'ranl',
+        disabled: false,
+        rules:[
+          {
+            required: true,
+            message:'请编辑联系电话',
+            trigger:'blur',
+          }
+        ],
+      },
+      {
+        key: '联系电话',
+        type:'input',
+        prop:'ranl',
+        disabled: false,
+        rules:[
+          {
+            required: true,
+            message:'请编辑联系电话',
+            trigger:'blur',
+          }
+        ],
+      },
+      {
+        key: '备注',
+        type:'input',
+        prop:'ranl',
+        disabled: false,
+        rules:[
+          {
+            required: true,
+            message:'请编辑联系电话',
+            trigger:'blur',
+          }
+        ],
+      },
+    ],
+    myForm:{
+      name:'',
+      ranl:'',
+    }
+  },
+  {
+    name:'商品设置',
+    list:[
+      {
+        key:'商品类型',
+        type:'select',
+        prop:'name',
+        disabled: false,
+        list:[{
+          label:'aaa',
+          value:1
+        }],
+        rules:[
+          {
+            required:true,
+            message:'请编辑用户姓名',
+            trigger:'blur',
+          }
+        ],
+      },
+      {
+        key: '商品编码',
+        type:'input',
+        prop:'ranl',
+        disabled: false,
+        rules:[
+          {
+            required: true,
+            message:'请编辑联系电话',
+            trigger:'blur',
+          }
+        ],
+      },
+      {
+        key: '商品名称',
+        type:'input',
+        prop:'ranl',
+        disabled: false,
+        rules:[
+          {
+            required: true,
+            message:'请编辑联系电话',
+            trigger:'blur',
+          }
+        ],
+      },
+      {
+        key: '商品单位',
+        type:'input',
+        prop:'ranl',
+        disabled: false,
+        rules:[
+          {
+            required: true,
+            message:'请编辑联系电话',
+            trigger:'blur',
+          }
+        ],
+      },
+      {
+        key: '车牌号',
+        type:'input',
+        prop:'ranl',
+        disabled: false,
+        rules:[
+          {
+            required: true,
+            message:'请编辑联系电话',
+            trigger:'blur',
+          }
+        ],
+      },
+      {
+        key: '车型',
+        type:'input',
+        prop:'ranl',
+        disabled: false,
+        rules:[
+          {
+            required: true,
+            message:'请编辑联系电话',
+            trigger:'blur',
+          }
+        ],
+      },
+      {
+        key: '规格',
+        type:'input',
+        prop:'ranl',
+        disabled: false,
+        rules:[
+          {
+            required: true,
+            message:'请编辑联系电话',
+            trigger:'blur',
+          }
+        ],
+      },
+      {
+        key: '采购价',
+        type:'input',
+        prop:'ranl',
+        disabled: false,
+        rules:[
+          {
+            required: true,
+            message:'请编辑联系电话',
+            trigger:'blur',
+          }
+        ],
+      },
+      {
+        key: '销售价',
+        type:'input',
+        prop:'ranl',
+        disabled: false,
+        rules:[
+          {
+            required: true,
+            message:'请编辑联系电话',
+            trigger:'blur',
+          }
+        ],
+      },
+      {
+        key: '是否快速开单',
+        type:'select',
+        prop:'ranl',
+        list:[
+          {
+            label: '是',
+            value: 1
+          },
+          {
+            label: '否',
+            value:0
+          }
+        ],
+        disabled: false,
+        rules:[
+          {
+            required: true,
+            message:'请编辑联系电话',
+            trigger:'blur',
+          }
+        ],
+      },
+      {
+        key: '是否商城展示',
+        type:'select',
+        prop:'ranl',
+        disabled: false,
+        list:[
+          {
+            label: '是',
+            value: 1
+          },
+          {
+            label: '否',
+            value:0
+          }
+        ],
+        rules:[
+          {
+            required: true,
+            message:'请编辑联系电话',
+            trigger:'blur',
+          }
+        ],
+      },
+      {
+        key: '是否分红',
+        type:'select',
+        prop:'ranl',
+        disabled: false,
+        list:[
+          {
+            label: '是',
+            value: 1
+          },
+          {
+            label: '否',
+            value:0
+          }
+        ],
+        rules:[
+          {
+            required: true,
+            message:'请编辑联系电话',
+            trigger:'blur',
+          }
+        ],
+      },
+      {
+        key: '是否员工奖励',
+        type:'select',
+        prop:'ranl',
+        disabled: false,
+        list:[
+          {
+            label: '是',
+            value: 1
+          },
+          {
+            label: '否',
+            value:0
+          }
+        ],
+        rules:[
+          {
+            required: true,
+            message:'请编辑联系电话',
+            trigger:'blur',
+          }
+        ],
+      },
+      {
+        key: '销售奖励',
+        type:'input',
+        prop:'ranl',
+        disabled: false,
+        rules:[
+          {
+            required: true,
+            message:'请编辑联系电话',
+            trigger:'blur',
+          }
+        ],
+      },
+      {
+        key: '施工奖励',
+        type:'input',
+        prop:'ranl',
+        disabled: false,
+        rules:[
+          {
+            required: true,
+            message:'请编辑联系电话',
+            trigger:'blur',
+          }
+        ],
+      },
+    ],
+    myForm:{
+      name:'',
+      ranl:'',
+    }
+  },
+  {
+    name:'项目分类设置',
+    list:[
+      {
+        key:'项目类型名称',
+        type:'input',
+        prop:'name',
+        disabled: false,
+        rules:[
+          {
+            required:true,
+            message:'请编辑用户姓名',
+            trigger:'blur',
+          }
+        ],
+      },
+      {
+        key: '备注',
+        type:'textarea',
+        rows:'3',
+        prop:'ranl',
+        disabled: false,
+        rules:[
+          {
+            required: true,
+            message:'请编辑联系电话',
+            trigger:'blur',
+          }
+        ],
+      },
+    ],
+    myForm:{
+      name:'',
+      ranl:'',
+    }
+  },
+  {
+    name:'项目设置',
+    list:[
+      {
+        key:'项目类型名称',
+        type:'input',
+        prop:'name',
+        disabled: false,
+        rules:[
+          {
+            required:true,
+            message:'请编辑用户姓名',
+            trigger:'blur',
+          }
+        ],
+      },
+      {
+        key:'项目名称',
+        type:'input',
+        prop:'name',
+        disabled: false,
+        rules:[
+          {
+            required:true,
+            message:'请编辑用户姓名',
+            trigger:'blur',
+          }
+        ],
+      },
+      {
+        key:'推荐工时',
+        type:'input',
+        prop:'name',
+        disabled: false,
+        rules:[
+          {
+            required:true,
+            message:'请编辑用户姓名',
+            trigger:'blur',
+          }
+        ],
+      },
+      {
+        key:'销售单价',
+        type:'input',
+        prop:'name',
+        disabled: false,
+        rules:[
+          {
+            required:true,
+            message:'请编辑用户姓名',
+            trigger:'blur',
+          }
+        ],
+      },
+      {
+        key:'工时单价',
+        type:'input',
+        prop:'name',
+        disabled: false,
+        rules:[
+          {
+            required:true,
+            message:'请编辑用户姓名',
+            trigger:'blur',
+          }
+        ],
+      },
+      {
+        key:'总成本',
+        type:'input',
+        prop:'name',
+        disabled: false,
+        rules:[
+          {
+            required:true,
+            message:'请编辑用户姓名',
+            trigger:'blur',
+          }
+        ],
+      },
+      {
+        key:'是否分红',
+        type:'select',
+        prop:'name',
+        list:[
+          {
+            label:'是',
+            value: 1
+          },
+          {
+            label: '否',
+            value: 0
+          }
+        ],
+        disabled: false,
+        rules:[
+          {
+            required:true,
+            message:'请编辑用户姓名',
+            trigger:'blur',
+          }
+        ],
+      },
+      {
+        key: '是否快速开单',
+        type:'select',
+        prop:'ranl',
+        list:[
+          {
+            label: '是',
+            value: 1
+          },
+          {
+            label: '否',
+            value:0
+          }
+        ],
+        disabled: false,
+        rules:[
+          {
+            required: true,
+            message:'请编辑联系电话',
+            trigger:'blur',
+          }
+        ],
+      },
+      {
+        key: '是否员工奖励',
+        type:'select',
+        prop:'ranl',
+        disabled: false,
+        list:[
+          {
+            label: '是',
+            value: 1
+          },
+          {
+            label: '否',
+            value:0
+          }
+        ],
+        rules:[
+          {
+            required: true,
+            message:'请编辑联系电话',
+            trigger:'blur',
+          }
+        ],
+      },
+      {
+        key:'销售奖励',
+        type:'input',
+        prop:'name',
+        disabled: false,
+        rules:[
+          {
+            required:true,
+            message:'请编辑用户姓名',
+            trigger:'blur',
+          }
+        ],
+      },
+      {
+        key:'施工奖励',
+        type:'input',
+        prop:'name',
+        disabled: false,
+        rules:[
+          {
+            required:true,
+            message:'请编辑用户姓名',
+            trigger:'blur',
+          }
+        ],
+      },
+      {
+        key: '备注',
+        type:'textarea',
+        rows:'3',
+        prop:'ranl',
+        disabled: false,
+        rules:[
+          {
+            required: true,
+            message:'请编辑联系电话',
+            trigger:'blur',
+          }
+        ],
+      },
+    ],
+    myForm:{
+      name:'',
+      ranl:'',
+    }
+  },
+  {
+    name:'物流公司配置',
+    list:[
+      {
+        key:'物流公司名称',
+        type:'input',
+        prop:'name',
+        disabled: false,
+        rules:[
+          {
+            required:true,
+            message:'请编辑用户姓名',
+            trigger:'blur',
+          }
+        ],
+      },
+      {
+        key:'仓库联系人',
+        type:'input',
+        prop:'name',
+        disabled: false,
+        rules:[
+          {
+            required:true,
+            message:'请编辑用户姓名',
+            trigger:'blur',
+          }
+        ],
+      },
+      {
+        key:'联系电话',
+        type:'input',
+        prop:'name',
+        disabled: false,
+        rules:[
+          {
+            required:true,
+            message:'请编辑用户姓名',
+            trigger:'blur',
+          }
+        ],
+      },
+      {
+        key:'地址',
+        type:'input',
+        prop:'name',
+        disabled: false,
+        rules:[
+          {
+            required:true,
+            message:'请编辑用户姓名',
+            trigger:'blur',
+          }
+        ],
+      },
+      {
+        key: '备注',
+        type:'textarea',
+        rows:'3',
+        prop:'ranl',
+        disabled: false,
+        rules:[
+          {
+            required: true,
+            message:'请编辑联系电话',
+            trigger:'blur',
+          }
+        ],
+      },
+    ],
+    myForm:{
+      name:'',
+      ranl:'',
+    }
+  },
+  {
+    name:'支付方式配置',
+    list:[
+      {
+        key:'支付方式名称',
+        type:'input',
+        prop:'name',
+        disabled: false,
+        rules:[
+          {
+            required:true,
+            message:'请编辑用户姓名',
+            trigger:'blur',
+          }
+        ],
+      },
+      {
+        key:'支付说明',
+        type:'input',
+        prop:'name',
+        disabled: false,
+        rules:[
+          {
+            required:true,
+            message:'请编辑用户姓名',
+            trigger:'blur',
+          }
+        ],
+      },
+      {
+        key: '备注',
+        type:'textarea',
+        rows:'3',
+        prop:'ranl',
+        disabled: false,
+        rules:[
+          {
+            required: true,
+            message:'请编辑联系电话',
+            trigger:'blur',
+          }
+        ],
+      },
+    ],
+    myForm:{
+      name:'',
+      ranl:'',
+    }
+  },
+  {
+    name:'支付方式配置',
+    list:[
+      {
+        key:'支付方式名称',
+        type:'input',
+        prop:'name',
+        disabled: false,
+        rules:[
+          {
+            required:true,
+            message:'请编辑用户姓名',
+            trigger:'blur',
+          }
+        ],
+      },
+      {
+        key:'支付说明',
+        type:'input',
+        prop:'name',
+        disabled: false,
+        rules:[
+          {
+            required:true,
+            message:'请编辑用户姓名',
+            trigger:'blur',
+          }
+        ],
+      },
+      {
+        key: '备注',
+        type:'textarea',
+        rows:'3',
+        prop:'ranl',
+        disabled: false,
+        rules:[
+          {
+            required: true,
+            message:'请编辑联系电话',
+            trigger:'blur',
+          }
+        ],
+      },
+    ],
+    myForm:{
+      name:'',
+      ranl:'',
+    }
+  },
 ]
