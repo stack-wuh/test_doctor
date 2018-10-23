@@ -56,7 +56,9 @@ const ServerOverhual = resolve => require(['@/components/serveManage/child/overh
 const ServerQuesStatic = resolve => require(['@/components/serveManage/child/quesStatic'], resolve)
 
 
-const SellingStore = resolve => require(['@/components/sellingManage/mid/store'],resolve)
+const SellingStore = resolve => require(['@/components/sellingManage/mid/store'], resolve)
+const SellingBusiness = resolve => require(['@/components/sellingManage/child/business'], resolve)
+
 
 const LogStore = resolve => require(['@/components/logManage/mid/store'], resolve)
 const LogConcat = resolve => require(['@/components/logManage/mid/concat'], resolve)
@@ -304,6 +306,11 @@ export default new Router({
                   path:'/selling/store',
                   name:'sellingStore',
                   component:SellingStore
+                },
+                {
+                  path: '/selling/business',
+                  name:'sellingBusiness',
+                  component: SellingBusiness
                 }
               ],
             },
