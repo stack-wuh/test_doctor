@@ -8,6 +8,7 @@ export const  clearSearchForm = ({path, menu} = {}) => {
       case '用品管理' : return window.$store.dispatch('getUseStore', {path})
       case '市场推广' : return window.$store.dispatch('getMarketStore', {path})
       case '客户服务' : return window.$store.dispatch('getServerStore', {path})
+      case '进存销' : return window.$store.dispatch('getSellingStore', {path})
     }
   })
 }
@@ -33,5 +34,7 @@ export const handleSearchList = ({path, menu} = {}) => {
     return window.$store.dispatch('getMarketStore', {path})
   }else if(menu === '客户服务'){
     return window.$store.dispatch('getServerStore', {path})
+  }else if(menu === '进存销'){
+    return window.$store.dispatch('getSellingStore', {path})
   }
 }

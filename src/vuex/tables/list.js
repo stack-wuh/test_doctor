@@ -3755,57 +3755,52 @@ const state = {
         {
           key:'业务单号',
           type:'default',
-          prop:'',
+          prop:'orderCode',
         },
         {
           key:'订单日期',
           type:'default',
-          prop:'',
+          prop:'orderDate',
         },
         {
           key:'会员名称',
           type:'default',
-          prop:'',
-        },
-        {
-          key:'会员名称',
-          type:'default',
-          prop:'',
+          prop:'orderDate',
         },
         {
           key:'会员电话',
           type:'default',
-          prop:'',
+          prop:'phone',
         },
         {
           key:'车型',
           type:'default',
-          prop:'',
+          prop:'carModel',
         },
         {
           key:'车牌号',
           type:'default',
-          prop:'',
+          prop:'plateNum',
         },
         {
           key:'订单状态',
           type:'default',
-          prop:'',
+          prop:'orderStatusText',
         },
         {
           key:'结算状态',
           type:'default',
-          prop:'',
+          prop:'payStatusText',
         },
         {
           key:'出库状态',
           type:'default',
-          prop:'',
+          prop:'repositoryStatusText',
         },
         {
           key:'是否挂账',
           type:'default',
-          prop:'',
+          prop:'accountPayStautsText',
         },
         {
           key:'操作',
@@ -3831,42 +3826,42 @@ const state = {
         {
           key:'收款单号',
           type:'default',
-          prop:'',
+          prop:'payCode',
         },
         {
           key:'业务单号',
           type:'default',
-          prop:'',
+          prop:'orderCode',
         },
         {
           key:'姓名',
           type:'default',
-          prop:'',
+          prop:'realName',
         },
         {
           key:'电话号码',
           type:'default',
-          prop:'',
+          prop:'phone',
         },
         {
           key:'车牌号',
           type:'default',
-          prop:'',
+          prop:'plateNum',
         },
         {
           key:'订单日期',
           type:'default',
-          prop:'',
+          prop:'orderDate',
         },
         {
           key:'结算日期',
           type:'default',
-          prop:'',
+          prop:'payDate',
         },
         {
           key:'订单状态',
           type:'default',
-          prop:'',
+          prop:'payStatusText',
         },
         {
           key:'操作',
@@ -3892,32 +3887,37 @@ const state = {
         {
           key:'商品出库单号',
           type:'default',
-          prop:'',
+          prop:'outRepositoryCode',
         },
         {
           key:'仓库名称',
           type:'default',
-          prop:'',
+          prop:'repositoryName',
         },
         {
           key:'出库日期',
           type:'default',
-          prop:'',
+          prop:'outRepositoryDate',
         },
         {
           key:'退货状态',
           type:'default',
-          prop:'',
+          prop:'backStatusText',
         },
         {
-          key:'状态订单',
+          key:'业务出库单状态',
           type:'default',
-          prop:'',
+          prop:'statusText',
+        },
+        {
+          key:'审核状态',
+          type:'default',
+          prop:'checkStatusText'
         },
         {
           key:'备注',
           type:'default',
-          prop:'',
+          prop:'remark',
         },
         {
           key:'操作',
@@ -3943,27 +3943,32 @@ const state = {
         {
           key:'商品退货单号',
           type:'default',
-          prop:'',
+          prop:'backCode',
         },
         {
           key:'仓库名称',
           type:'default',
-          prop:'',
+          prop:'repositoryName',
         },
         {
           key:'退货日期',
           type:'default',
-          prop:'',
+          prop:'backDate',
         },
         {
           key:'状态订单',
           type:'default',
-          prop:'',
+          prop:'statusText',
+        },
+        {
+          key:'审核状态',
+          type:'default',
+          prop:'checkStatusText'
         },
         {
           key:'退货原因',
           type:'default',
-          prop:'',
+          prop:'remark',
         },
         {
           key:'操作',
@@ -3989,47 +3994,47 @@ const state = {
         {
           key:'套餐名称',
           type:'default',
-          prop:'',
+          prop:'packageName',
         },
         {
           key:'原价',
           type:'default',
-          prop:'',
+          prop:'oldPrice',
         },
         {
           key:'销售价',
           type:'default',
-          prop:'',
+          prop:'packagePrice',
         },
         {
           key:'套餐销售量',
           type:'default',
-          prop:'',
+          prop:'num',
         },
         {
           key:'未消费金额',
           type:'default',
-          prop:'',
+          prop:'unConsume',
         },
         {
           key:'是否分红',
           type:'default',
-          prop:'',
+          prop:'isShareText',
         },
         {
           key:'是否员工奖励',
           type:'default',
-          prop:'',
+          prop:'isEmployeeAwardText',
         },
         {
           key:'套餐状态',
           type:'default',
-          prop:'',
+          prop:'packageStatusText',
         },
         {
           key:'备注',
           type:'default',
-          prop:'',
+          prop:'remark',
         },
         {
           key:'操作',
@@ -4055,57 +4060,62 @@ const state = {
         {
           key:'套餐销售单号',
           type:'default',
-          prop:'',
+          prop:'saleNo',
         },
         {
           key:'销售日期',
           type:'default',
-          prop:'',
+          prop:'createDate',
         },
         {
           key:'套餐名称',
           type:'default',
-          prop:'',
+          prop:'name',
         },
         {
           key:'会员名称',
           type:'default',
-          prop:'',
+          prop:'userName',
+        },
+        {
+          key:'会员电话',
+          type:'default',
+          prop:'phone',
         },
         {
           key:'车型',
           type:'default',
-          prop:'',
+          prop:'carModel',
         },
         {
           key:'车牌号',
           type:'default',
-          prop:'',
+          prop:'plateNum',
         },
         {
           key:'销售金额',
           type:'default',
-          prop:'',
+          prop:'packagePrice',
         },
         {
           key:'实收金额',
           type:'default',
-          prop:'',
+          prop:'takeMoney',
         },
         {
           key:'开始有效期',
           type:'default',
-          prop:'',
+          prop:'startDate',
         },
         {
           key:'结束有效期',
           type:'default',
-          prop:'',
+          prop:'endDate',
         },
         {
           key:'销售人员',
           type:'default',
-          prop:'',
+          prop:'employeeName',
         },
         {
           key:'操作',
@@ -4131,32 +4141,32 @@ const state = {
         {
           key:'会员姓名',
           type:'default',
-          prop:'',
+          prop:'userName',
         },
         {
           key:'会员电话',
           type:'default',
-          prop:'',
+          prop:'phone',
         },
         {
           key:'车牌号',
           type:'default',
-          prop:'',
+          prop:'plateNum',
         },
         {
           key:'套餐名称',
           type:'default',
-          prop:'',
+          prop:'name',
         },
         {
           key:'开始有效期',
           type:'default',
-          prop:'',
+          prop:'startDate',
         },
         {
           key:'结束有效期',
           type:'default',
-          prop:'',
+          prop:'endDate',
         },
         {
           key:'状态',
@@ -4192,27 +4202,32 @@ const state = {
         {
           key:'采购订单号',
           type:'default',
-          prop:'',
+          prop:'purchaseCode',
         },
         {
           key:'采购日期',
           type:'default',
-          prop:'',
+          prop:'purchaseDate',
         },
         {
           key:'采购人',
           type:'default',
-          prop:'',
+          prop:'realName',
         },
         {
           key:'供应商',
           type:'default',
-          prop:'',
+          prop:'supplierName',
         },
         {
           key:'入库状态',
           type:'default',
-          prop:'',
+          prop:'repositoryStatusText',
+        },
+        {
+          key:'审核状态',
+          type:'default',
+          prop:'checkStatusText',
         },
         {
           key:'备注',
@@ -4243,42 +4258,42 @@ const state = {
         {
           key:'采购入库订单号',
           type:'default',
-          prop:'',
+          prop:'storageCode',
         },
         {
           key:'入库日期',
           type:'default',
-          prop:'',
+          prop:'storageDate',
         },
         {
           key:'供应商',
           type:'default',
-          prop:'',
+          prop:'supplierName',
         },
         {
           key:'仓库名称',
           type:'default',
-          prop:'',
+          prop:'repositoryName',
         },
         {
           key:'退货状态',
           type:'default',
-          prop:'',
+          prop:'backStatusText',
         },
         {
           key:'结算状态',
           type:'default',
-          prop:'',
+          prop:'payStatusText',
         },
         {
           key:'订单状态',
           type:'default',
-          prop:'',
+          prop:'checkStatusText',
         },
         {
           key:'备注',
           type:'default',
-          prop:'',
+          prop:'remark',
         },
         {
           key:'操作',
@@ -4355,32 +4370,32 @@ const state = {
         {
           key:'付款单号',
           type:'default',
-          prop:'',
+          prop:'payCode',
         },
         {
           key:'支付方式',
           type:'default',
-          prop:'',
+          prop:'payType',
         },
         {
           key:'付款时间',
           type:'default',
-          prop:'',
+          prop:'updateDate',
         },
         {
           key:'付款金额',
           type:'default',
-          prop:'',
+          prop:'paidMoney',
         },
         {
           key:'订单状态',
           type:'default',
-          prop:'',
+          prop:'checkStatus',
         },
         {
           key:'备注',
           type:'default',
-          prop:'',
+          prop:'remark',
         },
         {
           key:'操作',
@@ -4406,22 +4421,22 @@ const state = {
         {
           key:'挂账还款单号',
           type:'default',
-          prop:'',
+          prop:'accountPayCode',
         },
         {
           key:'订单日期',
           type:'default',
-          prop:'',
+          prop:'updateDate',
         },
         {
           key:'订单状态',
           type:'default',
-          prop:'',
+          prop:'statusText',
         },
         {
           key:'备注',
           type:'default',
-          prop:'',
+          prop:'remark',
         },
         {
           key:'操作',
@@ -4447,37 +4462,37 @@ const state = {
         {
           key:'调拨发起单号',
           type:'default',
-          prop:'',
+          prop:'outputCode',
         },
         {
           key:'发送仓库',
           type:'default',
-          prop:'',
+          prop:'outputName',
         },
         {
           key:'接收仓库',
           type:'default',
-          prop:'',
+          prop:'inputName',
         },
         {
           key:'出库日期',
           type:'default',
-          prop:'',
+          prop:'outputDate',
         },
         {
           key:'接收状态',
           type:'default',
-          prop:'',
+          prop:'receiveStatusText',
         },
         {
           key:'订单状态',
           type:'default',
-          prop:'',
+          prop:'checkStatusText',
         },
         {
           key:'备注',
           type:'default',
-          prop:'',
+          prop:'remark',
         },
         {
           key:'操作',
@@ -4503,32 +4518,32 @@ const state = {
         {
           key:'调拨接收单号',
           type:'default',
-          prop:'',
+          prop:'inputCode',
         },
         {
           key:'发送仓库',
           type:'default',
-          prop:'',
+          prop:'outputName',
         },
         {
           key:'接收仓库',
           type:'default',
-          prop:'',
+          prop:'inputName',
         },
         {
           key:'入库日期',
           type:'default',
-          prop:'',
+          prop:'inputDate',
         },
         {
           key:'订单状态',
           type:'default',
-          prop:'',
+          prop:'checkStatus',
         },
         {
           key:'备注',
           type:'default',
-          prop:'',
+          prop:'remark',
         },
         {
           key:'操作',
@@ -4554,37 +4569,37 @@ const state = {
         {
           key:'盘点单号',
           type:'default',
-          prop:'',
+          prop:'checkNo',
         },
         {
           key:'盘点日期',
           type:'default',
-          prop:'',
+          prop:'checkDate',
         },
         {
           key:'盘点人员',
           type:'default',
-          prop:'',
+          prop:'realName',
         },
         {
           key:'仓库',
           type:'default',
-          prop:'',
+          prop:'repositoryName',
         },
         {
           key:'订单状态',
           type:'default',
-          prop:'',
+          prop:'statusText',
         },
         {
           key:'创建时间',
           type:'default',
-          prop:'',
+          prop:'createDate',
         },
         {
           key:'备注',
           type:'default',
-          prop:'',
+          prop:'remark',
         },
         {
           key:'操作',
@@ -4610,42 +4625,42 @@ const state = {
         {
           key:'供应商名称',
           type:'default',
-          prop:'',
+          prop:'supplierName',
         },
         {
           key:'联系人',
           type:'default',
-          prop:'',
+          prop:'contactName',
         },
         {
           key:'联系电话',
           type:'default',
-          prop:'',
+          prop:'contactPhone',
         },
         {
           key:'QQ',
           type:'default',
-          prop:'',
+          prop:'qqNumber',
         },
         {
           key:'微信',
           type:'default',
-          prop:'',
+          prop:'wxNumber',
         },
         {
           key:'主要业务',
           type:'default',
-          prop:'',
+          prop:'mainWork',
         },
         {
           key:'地址',
           type:'default',
-          prop:'',
+          prop:'address',
         },
         {
           key:'备注',
           type:'default',
-          prop:'',
+          prop:'remark',
         },
         {
           key:'操作',
@@ -4671,27 +4686,27 @@ const state = {
         {
           key:'仓库名称',
           type:'default',
-          prop:'',
+          prop:'repositoryName',
         },
         {
           key:'联系人',
           type:'default',
-          prop:'',
+          prop:'contactName',
         },
         {
           key:'联系电话',
           type:'default',
-          prop:'',
+          prop:'contactPhone',
         },
         {
           key:'地址',
           type:'default',
-          prop:'',
+          prop:'address',
         },
         {
           key:'备注',
           type:'default',
-          prop:'',
+          prop:'remark',
         },
         {
           key:'操作',
@@ -4717,17 +4732,22 @@ const state = {
         {
           key:'商品分类名称',
           type:'default',
-          prop:'',
+          prop:'goodsClassificationName',
         },
         {
           key:'联系人',
           type:'default',
-          prop:'',
+          prop:'contactName',
+        },
+        {
+          key:'联系电话',
+          type:'default',
+          prop:'contactPhone'
         },
         {
           key:'备注',
           type:'default',
-          prop:'',
+          prop:'remark',
         },
         {
           key:'操作',
@@ -4763,12 +4783,12 @@ const state = {
         { 
           key:'商品编码',
           type:'default',
-          prop:'',
+          prop:'goodsCode',
         },
         { 
           key:'商品名称',
           type:'default',
-          prop:'',
+          prop:'goodsName',
         },
         { 
           key:'单位',
@@ -4778,47 +4798,62 @@ const state = {
         { 
           key:'车品牌',
           type:'default',
-          prop:'',
+          prop:'carBrand',
         },
         { 
           key:'车型',
           type:'default',
-          prop:'',
+          prop:'carModel',
+        },
+        {
+          key:'库存数目',
+          type:'default',
+          prop:'repositoryNum'
+        },
+        {
+          key:'出库数目',
+          type:'default',
+          prop:'outRepositoryNum'
         },
         { 
           key:'规格',
           type:'default',
-          prop:'',
+          prop:'carType',
         },
         { 
           key:'采购价',
           type:'default',
-          prop:'',
+          prop:'takePrice',
         },
         { 
           key:'销售价',
           type:'default',
-          prop:'',
+          prop:'salePrice',
+        },
+        {
+          key:'是否快速出单',
+          type:'default',
+          prop:'isFastOrderText',
         },
         { 
           key:'是否商城展示',
           type:'default',
-          prop:'',
+          prop:'isShowShopText',
         },
         { 
           key:'是否分红',
           type:'default',
-          prop:'',
+          prop:'isShareMoneyText',
         },
         { 
           key:'是否员工奖励',
           type:'default',
-          prop:'',
+          prop:'isEmployeeAwardText',
         },
         {
           key:'备注',
           type:'default',
-          prop:'',
+          prop:'remark',
         },
         {
           key:'操作',
@@ -4851,7 +4886,7 @@ const state = {
         {
           key:'项目分类',
           type:'default',
-          prop:'',
+          prop:'projectName',
         },
         { 
           key:'是否员工奖励',
@@ -4861,7 +4896,7 @@ const state = {
         {
           key:'备注',
           type:'default',
-          prop:'',
+          prop:'remark',
         },
         {
           key:'操作',
@@ -4899,37 +4934,47 @@ const state = {
         {
           key:'项目名称',
           type:'default',
-          prop:'',
+          prop:'projectName',
         },
         {
           key:'推荐工时',
           type:'default',
-          prop:'',
+          prop:'time',
         },
         {
-          key:'单价',
+          key:'销售单价',
           type:'default',
-          prop:'',
+          prop:'salePriceUnit',
+        },
+        {
+          key:'工时单价',
+          type:'default',
+          prop:'timePriceUnit',
         },
         {
           key:'总成本',
           type:'default',
-          prop:'',
+          prop:'totalPrice',
         },
         {
           key:'是否分红',
           type:'default',
-          prop:'',
+          prop:'isShareMoneyText',
+        },
+        {
+          key:'是否快速开单',
+          type:'default',
+          prop:'isFastOrderText'
         },
         { 
           key:'是否员工奖励',
           type:'default',
-          prop:'',
+          prop:'isEmployeeAwardText',
         },
         {
           key:'备注',
           type:'default',
-          prop:'',
+          prop:'remark',
         },
         {
           key:'操作',
@@ -4962,27 +5007,27 @@ const state = {
         {
           key:'物流公司',
           type:'default',
-          prop:'',
+          prop:'logisticsName',
         },
         {
           key:'姓名',
           type:'default',
-          prop:'',
+          prop:'contactName',
         },
         {
           key:'联系电话',
           type:'default',
-          prop:'',
+          prop:'contactPhone',
         },
         {
           key:'地址',
           type:'default',
-          prop:'',
+          prop:'address',
         },
         {
           key:'备注',
           type:'default',
-          prop:'',
+          prop:'remark',
         },
         {
           key:'操作',
@@ -5015,17 +5060,17 @@ const state = {
         {
           key:'支付方式',
           type:'default',
-          prop:'',
+          prop:'payType',
         },
         {
           key:'支付说明',
           type:'default',
-          prop:'',
+          prop:'payInfo',
         },
         {
           key:'备注',
           type:'default',
-          prop:'',
+          prop:'remark',
         },
       ]
     },
@@ -5040,27 +5085,27 @@ const state = {
         {
           key:'仓库名称',
           type:'default',
-          prop:'',
+          prop:'repositoryName',
         },
         {
           key:'商品类名',
           type:'default',
-          prop:'',
+          prop:'goodsName',
         },
         {
           key:'商品名称',
           type:'default',
-          prop:'',
+          prop:'goodsClassificationName',
         },
         {
           key:'商品规格',
           type:'default',
-          prop:'',
+          prop:'carType',
         },
         {
           key:'商品单位',
           type:'default',
-          prop:'',
+          prop:'goodsUnit',
         },
         {
           key:'车品牌',
@@ -5070,27 +5115,27 @@ const state = {
         {
           key:'车型号',
           type:'default',
-          prop:'',
+          prop:'carModel',
         },
         {
           key:'总库存量',
           type:'default',
-          prop:'',
+          prop:'allNum',
         },
         {
           key:'库存数量',
           type:'default',
-          prop:'',
+          prop:'repositoryNum',
         },
         {
           key:'在途数量',
           type:'default',
-          prop:'',
+          prop:'loadNum',
         },
         {
           key:'备注',
           type:'default',
-          prop:'',
+          prop:'remark',
         },
         {
           key:'操作',

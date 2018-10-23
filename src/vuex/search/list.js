@@ -1967,31 +1967,37 @@ const state = {
           key:'业务单号',
           value:'',
           type:'default',
+          prop:'orderCode'
         },
         {
           key:'会员名称',
           value:'',
           type:'default',
+          prop:'realName',
         },
         {
           key:'会员电话',
           value:'',
-          type:'default'
+          type:'default',
+          prop:'phone',
         },
         {
           key:'车牌号',
           value:'',
-          type:'default'
+          type:'default',
+          prop:'plateNum',
         },
         {
           key:'开始时间',
           value:'',
-          type:'date'
+          type:'date',
+          prop:'startDate',
         },
         {
           key:'结束时间',
           value:'',
-          type:'date'
+          type:'date',
+          prop:'endDate',
         },
       ]
     },
@@ -2075,36 +2081,43 @@ const state = {
           key:'业务单号',
           value:'',
           type:'default',
+          prop:'orderCode',
         },
         {
           key:'会员名称',
           value:'',
           type:'default',
+          prop:'realName',
         },
         {
           key:'会员电话',
           value:'',
           type:'default',
+          prop:'phone',
         },
         {
           key:'车牌号',
           value:'',
           type:'default',
+          prop:'plateNum',
         },
         {
           key:'开始时间',
           value:'',
-          type:'date'
+          type:'date',
+          prop:'startDate',
         },
         {
           key:'结束时间',
           value:'',
-          type:'date'
+          type:'date',
+          prop:'endDate',
         },
         {
           key:'回复状态',
           value:'',
           type:'select',
+          prop:'orderStatus',
           list:[
             {
               label:'已结算',
@@ -2127,16 +2140,19 @@ const state = {
           key:'商品出库单号',
           value:'',
           type:'default',
+          prop:'outRepositoryCode'
         },
         {
           key:'开始时间',
           value:'',
           type:'date',
+          prop:'startDate',
         },
         {
           key:'结束时间',
           value:'',
           type:'date',
+          prop:'endDate',
         }
       ]
     },
@@ -2149,16 +2165,19 @@ const state = {
           key:'商品退货单号',
           value:'',
           type:'default',
+          prop:'backCode',
         },
         {
           key:'开始时间',
           value:'',
           type:'date',
+          prop:'startDate',
         },
         {
           key:'结束时间',
           value:'',
           type:'date',
+          prop:'endDate',
         }
       ]
     },
@@ -2171,11 +2190,13 @@ const state = {
           key:'套餐名称',
           value:'',
           type:'default',
+          prop:'packageName'
         },
         {
           key:'套餐状态',
           value:'',
           type:'select',
+          prop:'packageStatus',
           list:[
             {
               label:'已启用',
@@ -2245,26 +2266,31 @@ const state = {
           key:'套餐名称',
           value:'',
           type:'default',
+          prop:'name',
         },
         {
           key:'会员名称',
           value:'',
           type:'default',
+          prop:'userName',
         },
         {
           key:'会员电话',
           value:'',
           type:'default',
+          prop:'phone',
         },
         {
           key:'车牌号',
           value:'',
           type:'default',
+          prop:'plateNum',
         },
         {
           key:'是否停用',
           value:'',
           type:'select',
+          prop:'state',
           list:[
             {
               label:'已启用',
@@ -2287,34 +2313,103 @@ const state = {
           key:'采购订单号',
           value:'',
           type:'default',
+          prop:'purchaseCode',
         },
         {
           key:'开始时间',
           value:'',
           type:'date',
+          prop:'startTime',
         },
         {
           key:'结束时间',
           value:'',
           type:'date',
+          prop:'endTime',
         }
       ]
     },
     {
       name:'财务管理',
-      params:['付款管理','挂账还款','调拨发起','调拨接收','日常盘点'],
+      params:['付款管理','挂账还款'],
       list:[
         {
           key:'订单号',
           type:'default',
+          prop:'payCode',
         },
         {
           key:'开始时间',
           type:'date',
+          prop:'startDate'
         },
         {
           key:'结束时间',
           type:'date',
+          prop:'endDate',
+        }
+      ],
+    },
+    {
+      name:'财务管理',
+      params:['调拨发起','日常盘点'],
+      list:[
+        {
+          key:'订单号',
+          type:'default',
+          prop:'outputCode',
+        },
+        {
+          key:'开始时间',
+          type:'date',
+          prop:'startDate'
+        },
+        {
+          key:'结束时间',
+          type:'date',
+          prop:'endDate',
+        }
+      ],
+    },
+    {
+      name:'财务管理',
+      params:['调拨接收'],
+      list:[
+        {
+          key:'订单号',
+          type:'default',
+          prop:'inputCode',
+        },
+        {
+          key:'开始时间',
+          type:'date',
+          prop:'startDate'
+        },
+        {
+          key:'结束时间',
+          type:'date',
+          prop:'endDate',
+        }
+      ],
+    },
+    {
+      name:'财务管理',
+      params:['日常盘点'],
+      list:[
+        {
+          key:'订单号',
+          type:'default',
+          prop:'checkNo',
+        },
+        {
+          key:'开始时间',
+          type:'date',
+          prop:'startDate'
+        },
+        {
+          key:'结束时间',
+          type:'date',
+          prop:'endDate',
         }
       ],
     },
@@ -2325,11 +2420,18 @@ const state = {
         {
           key:'供应商名称',
           type:'default',
+          prop:'supplierName'
         },
         {
           key:'联系人姓名',
-          type:'date',
+          type:'default',
+          prop:'contactName'
         },
+        {
+          key:'联系人电话',
+          type:'default',
+          prop:'contactPhone'
+        }
       ],
     },
     {
@@ -2339,18 +2441,22 @@ const state = {
         {
           key:'仓库名称',
           type:'default',
+          prop:'repositoryName',
         },
         {
           key:'联系电话',
           type:'default',
+          prop:'contactPhone',
         },
         {
           key:'仓库管理员',
           type:'default',
+          prop:'contactName',
         },
         {
           key:'地址',
           type:'default',
+          prop:'address',
         },
       ],
     },
@@ -2360,7 +2466,8 @@ const state = {
       list:[
         {
           key:'商品类型',
-          type:'default'
+          type:'default',
+          prop:'goodsClassificationName'
         }
       ]
     },
@@ -2370,15 +2477,18 @@ const state = {
       list:[
         {
           key:'商品类型',
-          type:'default'
+          type:'default',
+          prop:'classificationId',
         },
         {
           key:'商品名称',
-          type:'default'
+          type:'default',
+          prop:'goodsName'
         },
         {
           key:'是否展示',
           type:'select',
+          prop:'isShowShop',
           list:[
             {
               label:'是',
@@ -2398,7 +2508,8 @@ const state = {
       list:[
         {
           key:'项目类型',
-          type:'default'
+          type:'default',
+          prop:'projectName'
         }
       ]
     },
@@ -2409,10 +2520,12 @@ const state = {
         {
           key:'项目类型',
           type:'default',
+          prop:'projectTypeId',
         },
         {
           key:'项目名称',
           type:'default',
+          prop:'projectName'
         }
       ]
     },
@@ -2423,18 +2536,22 @@ const state = {
         {
           key:'物流公司名称',
           type:'default',
+          prop:'logisticsName',
         },
         {
           key:'联系电话',
           type:'default',
+          prop:'contactPhone',
         },
         {
           key:'仓库管理员',
           type:'default',
+          prop:'contactName',
         },
         {
           key:'地址',
           type:'default',
+          prop:'address',
         }
       ]
     },
@@ -2457,16 +2574,19 @@ const state = {
           key:'商品类名',
           value:'',
           type:'default',
+          prop:'goodsClassificationName',
         },
         {
           key:'商品名称',
           value:'',
           type:'default',
+          prop:'goodsName',
         },
         {
           key:'仓库名称',
           value:'',
-          type:'default'
+          type:'default',
+          prop:'repositoryName',
         }
       ]
     },

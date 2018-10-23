@@ -1,13 +1,14 @@
 <template>
   <section class="father">
       <section class="content">
-        <Search />
+        <Search v-if="isShow" :name="changePath" @inputChange="getSellingStore({path: changePath})" />
         <my-table v-if="isShow" :list="list({path: changePath})" header="true" :params="changePath" >
           <span slot="title">{{changePath}}列表</span>
           <div slot="right">
             <my-button></my-button>
           </div>
         </my-table>
+        <my-bottom @getCurrent="getCurrentPage" :total="total" :currentPage="currPageNo"></my-bottom>
       </section>
   </section>
 </template>
@@ -16,6 +17,7 @@
 import Search from '@/components/common/search'
 import MyTable from '@/components/common/myTable'
 import MyButton from '@/components/common/myButton'
+import MyBottom from '@/components/common/bottom'
 
 import {mapActions, mapState, mapMutations, mapGetters} from 'vuex'
 
@@ -25,6 +27,7 @@ export default {
     Search ,
     MyTable ,
     MyButton ,
+    MyBottom,
   },
   data () {
     return {
@@ -56,7 +59,11 @@ export default {
   methods: {
     ...mapActions({
       'getSellingStore': 'getSellingStore'
-    })
+    }),
+    getCurrentPage(e){
+      console.log(e)
+      this.getSellingStore({path: this.changePath, currPageNo: e})
+    }
   },
   created(){
     this.getSellingStore({path: this.changePath})
