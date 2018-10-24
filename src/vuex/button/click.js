@@ -122,6 +122,43 @@ export const jump2Detail = params => {
      })
    })
  }
+ 
+ /**
+  * 表格头部按钮点击事件 
+  * 下架 
+  * @param {*} param0 
+  */
+ export const DownAndFreshWithAll = ({params , choose, text} = {}) => {
+  let {menu ,subMenu ,child} = params
+  let result = window.$store.getters.formatLimitByButton({menu, subMenu, child, text})
+  let path = child || subMenu
+  if(!result){
+    window.$route.push({path: '/mid/container', query: {path: '/unlimit'}})
+    return
+  }
+   if(!choose.length){
+    _g.toastMsg({
+      type:'error',
+      msg:'请勾选操作对象后删除'
+    })
+    return
+   }
+   window.$confirm('该操作将下架该条信息,确认继续?' , '提示' , {
+     confirmButtonText:'确定',
+     cancelButtonText:'取消',
+     type:'warning',
+   }).then(()=>{
+     switch(menu){
+       case '客户服务' : window.$store.dispatch('serverModulesDelAndFresh', {path, row:{id: choose}})
+        break;
+      }
+   }).catch(()=>{
+     _g.toastMsg({
+       type:'info',
+       msg:'操作错误或已取消',
+     })
+   })
+ }
 
  /**
   * 导出数据为表格

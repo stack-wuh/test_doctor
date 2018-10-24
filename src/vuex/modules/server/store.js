@@ -132,6 +132,10 @@ const actions = {
         break;
       case '预约时间管理' : _url = 'bookingTime/delete.do'
         break;
+      case '问卷调查' : _url = 'questionnaire/updateActivity.do'
+        break;
+      case '养车知识' : _url = 'raisingBackend/delRaising.do'
+        break;
     }
     return new Promise((resolve,reject) => {
       $http.post(_url, {ids: id}, res => {
@@ -218,7 +222,18 @@ const actions = {
         return resolve(res)
       })
     })
-  }
+  },
+
+  /**
+   * 客户服务 ---  问卷调查 --- 编辑问卷
+   */
+  serverQuestionPub({commit}, {form}){
+    return new Promise((resolve, reject) => {
+      $http.post('questionnaire/addQuestion.do', form, res => {
+          return resolve(res)
+      })
+    })
+  },
 }
 const mutations = {
   setServerStore(state, {params} = {}){
@@ -250,7 +265,8 @@ const mutations = {
   setSettingOneState(state, {row} = {}){
     state.isShowSettingOneDialog = !state.isShowSettingOneDialog
     state.dialog_row = row
-  }
+  },
+
 }
 
 const getters = {

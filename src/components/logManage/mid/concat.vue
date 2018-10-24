@@ -184,41 +184,43 @@ export default {
 @import '../../../assets/style/color.scss';
 @import '../../../assets/style/mixin.scss';
 .wrapper{
-.inline-block{
-  .form-item{
-    @include flex-box();
-  }
-}
-.img-list{
-  @include flex-box(row, nowrap, space-between, center);
-  margin-bottom:15px;
-  .list-nav{
-    @include flex-box(column, wrap, flex-start);
-    width: 140px;
-    small{
-      color: #ccc;
+  padding: 20px;
+  background-color: #fff;
+  .inline-block{
+    .form-item{
+      @include flex-box();
     }
   }
-  .list{
-    flex:1;
-    @include flex-box(column, wrap, center, center);
-    img[alt="logo"]{
+  .img-list{
+    @include flex-box(row, nowrap, space-between, center);
+    margin-bottom:15px;
+    .list-nav{
+      @include flex-box(column, wrap, flex-start);
+      width: 140px;
+      small{
+        color: #ccc;
+      }
+    }
+    .list{
+      flex:1;
+      @include flex-box(column, wrap, center, center);
+      img[alt="logo"]{
+        width: 120px;
+        height: 120px;
+      }
+      .img-desc{
+        margin-top:4px;
+        padding:2px 10px;
+        border:1px solid #333;
+      }
+    }
+  }
+  .btn-area{
+    margin-top:40px;
+    text-align:center;
+    .el-button{
       width: 120px;
-      height: 120px;
-    }
-    .img-desc{
-      margin-top:4px;
-      padding:2px 10px;
-      border:1px solid #333;
     }
   }
-}
-.btn-area{
-  margin-top:40px;
-  text-align:center;
-  .el-button{
-    width: 120px;
-  }
-}
 }
 </style>

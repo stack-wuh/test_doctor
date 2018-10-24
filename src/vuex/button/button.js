@@ -11,6 +11,7 @@ import {
   handleSelectChangeForTable,
   serveDialogToggleForSetting,
   dialogToggleForServerCarForm,
+  DownAndFreshWithAll
 } from './click'
 const state = {
   list:[
@@ -452,6 +453,7 @@ const state = {
           type:'',
           size:'small',
           style:'',
+          click: DownAndFreshWithAll
         }
       ]
     },
