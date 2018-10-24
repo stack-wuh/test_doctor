@@ -70,7 +70,425 @@ export default {
       baseObj , 
       isFatherChange:true,
       roleId:'',
-      list:[],
+      list:[
+        {
+          id: 22,
+          menuName: '用品管理',
+          subMenu:[
+            {
+              menuName: '汽车精品管理',
+              id: 23,
+              parentId: 22,
+              authorityList:[
+                {
+                  isAuth: true,
+                  name:'新增',
+                  id: 18,
+                },
+                {
+                  isAuth: true,
+                  name: '删除',
+                  id:19
+                },
+                {
+                  isAuth: true,
+                  name:'修改',
+                  id: 20
+                },
+                {
+                  isAuth: true,
+                  name:'查看',
+                },
+              ]
+            },
+            {
+              menuName: '精品订单管理',
+              id: 23,
+              parentId: 22,
+              authorityList:[
+                {
+                  isAuth: true,
+                  name:'新增',
+                  id: 18,
+                },
+                {
+                  isAuth: true,
+                  name: '删除',
+                  id:19
+                },
+                {
+                  isAuth: true,
+                  name:'修改',
+                  id: 20
+                },
+                {
+                  isAuth: true,
+                  name:'查看',
+                },
+              ]
+            },
+            {
+              menuName: '配件大类管理',
+              id: 23,
+              parentId: 22,
+              authorityList:[
+                {
+                  isAuth: true,
+                  name:'新增',
+                  id: 18,
+                },
+                {
+                  isAuth: true,
+                  name: '删除',
+                  id:19
+                },
+                {
+                  isAuth: true,
+                  name:'修改',
+                  id: 20
+                },
+                {
+                  isAuth: true,
+                  name:'查看',
+                },
+              ]
+            },
+          ]
+        },
+        {
+          id: 22,
+          menuName: '系统管理',
+          subMenu:[
+            {
+              menuName: '门店管理',
+              id: 23,
+              parentId: 22,
+              authorityList:[
+                {
+                  isAuth: true,
+                  name:'新增',
+                  id: 18,
+                },
+                {
+                  isAuth: true,
+                  name: '删除',
+                  id:19
+                },
+                {
+                  isAuth: true,
+                  name:'修改',
+                  id: 20
+                },
+                {
+                  isAuth: true,
+                  name:'查看',
+                },
+              ]
+            },
+            {
+              menuName: '部门管理',
+              id: 23,
+              parentId: 22,
+              authorityList:[
+                {
+                  isAuth: true,
+                  name:'新增',
+                  id: 18,
+                },
+                {
+                  isAuth: true,
+                  name: '删除',
+                  id:19
+                },
+                {
+                  isAuth: true,
+                  name:'修改',
+                  id: 20
+                },
+                {
+                  isAuth: true,
+                  name:'查看',
+                },
+              ]
+            },
+            {
+              menuName: '角色管理',
+              id: 23,
+              parentId: 22,
+              authorityList:[
+                {
+                  isAuth: true,
+                  name:'新增',
+                  id: 18,
+                },
+                {
+                  isAuth: true,
+                  name: '删除',
+                  id:19
+                },
+                {
+                  isAuth: true,
+                  name:'修改',
+                  id: 20
+                },
+                {
+                  isAuth: true,
+                  name:'查看',
+                },
+              ]
+            },
+            {
+              menuName: '员工列表',
+              id: 23,
+              parentId: 22,
+              authorityList:[
+                {
+                  isAuth: true,
+                  name:'新增',
+                  id: 18,
+                },
+                {
+                  isAuth: true,
+                  name: '删除',
+                  id:19
+                },
+                {
+                  isAuth: true,
+                  name:'修改',
+                  id: 20
+                },
+                {
+                  isAuth: true,
+                  name:'查看',
+                },
+              ]
+            },
+            {
+              menuName: '平台配置',
+              id: 23,
+              parentId: 22,
+              authorityMenuList:[
+                {
+                  menuName: '会员卡等级设置',
+                  authorityList:[
+                                  {
+                                    isAuth: true,
+                                    name:'新增',
+                                    id: 18,
+                                  },
+                                  {
+                                    isAuth: true,
+                                    name: '删除',
+                                    id:19
+                                  },
+                                  {
+                                    isAuth: true,
+                                    name:'修改',
+                                    id: 20
+                                  },
+                                  {
+                                    isAuth: true,
+                                    name:'查看',
+                                  },
+                                ]
+                },
+                {
+                  menuName: '会员卡积分规则',
+                  authorityList:[
+                                  {
+                                    isAuth: true,
+                                    name:'新增',
+                                    id: 18,
+                                  },
+                                  {
+                                    isAuth: true,
+                                    name: '删除',
+                                    id:19
+                                  },
+                                  {
+                                    isAuth: true,
+                                    name:'修改',
+                                    id: 20
+                                  },
+                                  {
+                                    isAuth: true,
+                                    name:'查看',
+                                  },
+                                ]
+                },
+                {
+                  menuName: '会员充值设置',
+                  authorityList:[
+                                  {
+                                    isAuth: true,
+                                    name:'新增',
+                                    id: 18,
+                                  },
+                                  {
+                                    isAuth: true,
+                                    name: '删除',
+                                    id:19
+                                  },
+                                  {
+                                    isAuth: true,
+                                    name:'修改',
+                                    id: 20
+                                  },
+                                  {
+                                    isAuth: true,
+                                    name:'查看',
+                                  },
+                                ]
+                },
+                {
+                  menuName: '分享与消费奖励规则',
+                  authorityList:[
+                                {
+                                  isAuth: true,
+                                  name:'新增',
+                                  id: 18,
+                                },
+                                {
+                                  isAuth: true,
+                                  name: '删除',
+                                  id:19
+                                },
+                                {
+                                  isAuth: true,
+                                  name:'修改',
+                                  id: 20
+                                },
+                                {
+                                  isAuth: true,
+                                  name:'查看',
+                                },
+                              ]
+                },
+                {
+                  menuName: '保养提醒设置',
+                  authorityList:[
+                                  {
+                                    isAuth: true,
+                                    name:'新增',
+                                    id: 18,
+                                  },
+                                  {
+                                    isAuth: true,
+                                    name: '删除',
+                                    id:19
+                                  },
+                                  {
+                                    isAuth: true,
+                                    name:'修改',
+                                    id: 20
+                                  },
+                                  {
+                                    isAuth: true,
+                                    name:'查看',
+                                  },
+                                ]
+                },
+                {
+                  menuName: '自动回复设置',
+                  authorityList:[
+                                  {
+                                    isAuth: true,
+                                    name:'新增',
+                                    id: 18,
+                                  },
+                                  {
+                                    isAuth: true,
+                                    name: '删除',
+                                    id:19
+                                  },
+                                  {
+                                    isAuth: true,
+                                    name:'修改',
+                                    id: 20
+                                  },
+                                  {
+                                    isAuth: true,
+                                    name:'查看',
+                                  },
+                                ]
+                },
+                {
+                  menuName: '保险公司',
+                  authorityList:[
+                                  {
+                                    isAuth: true,
+                                    name:'新增',
+                                    id: 18,
+                                  },
+                                  {
+                                    isAuth: true,
+                                    name: '删除',
+                                    id:19
+                                  },
+                                  {
+                                    isAuth: true,
+                                    name:'修改',
+                                    id: 20
+                                  },
+                                  {
+                                    isAuth: true,
+                                    name:'查看',
+                                  },
+                                ]
+                },
+                {
+                  menuName: '快捷回复设置',
+                  authorityList:[
+                                  {
+                                    isAuth: true,
+                                    name:'新增',
+                                    id: 18,
+                                  },
+                                  {
+                                    isAuth: true,
+                                    name: '删除',
+                                    id:19
+                                  },
+                                  {
+                                    isAuth: true,
+                                    name:'修改',
+                                    id: 20
+                                  },
+                                  {
+                                    isAuth: true,
+                                    name:'查看',
+                                  },
+                                ]
+                },
+                {
+                  menuName: '关注后消息推送',
+                  authorityList:[
+                                  {
+                                    isAuth: true,
+                                    name:'新增',
+                                    id: 18,
+                                  },
+                                  {
+                                    isAuth: true,
+                                    name: '删除',
+                                    id:19
+                                  },
+                                  {
+                                    isAuth: true,
+                                    name:'修改',
+                                    id: 20
+                                  },
+                                  {
+                                    isAuth: true,
+                                    name:'查看',
+                                  },
+                                ]
+                }
+              ]
+            },
+          ]
+        },
+      ],
       count:0
     }
   },
@@ -78,9 +496,6 @@ export default {
     ...mapState({
       'store': state => state.Limit.data
     }),
-    ...mapGetters({
-      // 'store': 'formatLimitStore'
-    })
   },
   methods: {
     ...mapActions({

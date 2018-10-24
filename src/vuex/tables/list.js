@@ -1241,7 +1241,7 @@ const state = {
         {
           key:'用户状态',
           type:'default',
-          prop:'attentionState',
+          prop:'attentionStateText',
         },
         {
           key:'姓名',

@@ -358,7 +358,7 @@ const getters = {
     return state.list.map(item => {
       switch(path){
         case '积分管理' : return {...item, typeText: item.type == 1 ? '增加' : '减少'}
-        case '会员列表' : return {...item, sexText: item.sex == 0 ? '女' : '男'}
+        case '会员列表' : return {...item, sexText: item.sex == 0 ? '女' : '男', attentionStateText: item.attentionState === 0 ? '未关注' : '已关注'}
         case '车辆管理' : return {...item, insuranceStateText: item.insuranceState == 1 ? '已到期' : '未到期',maintainStateText: item.maintainState == 1 ? '已到期' : '未到期'}
         default : return {...item}
       }

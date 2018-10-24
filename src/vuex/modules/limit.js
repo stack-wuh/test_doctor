@@ -35,7 +35,7 @@ const actions = {
       $http.post('authorityBackend/authSet.do', form, res => {
         setTimeout(()=>{
           dispatch('getLimitStore')
-        },1000)
+        },500)
         if(res.status === 0){
           localStorage.setItem('startTime', + new Date())
           localStorage.setItem('startFormId', form.authorityId)
