@@ -285,13 +285,13 @@ export const list = [
         label: "推荐有礼",
         mid_path: "/mid/container",
         path:'/market',
-        isAuth: 1,
+        isAuth: 0,
       },
       {
         label: "摇一摇活动",
         mid_path: "/mid/container",
         path:'/market',
-        isAuth: 1,
+        isAuth: 0,
       }
     ]
   },
@@ -349,25 +349,25 @@ export const list = [
       },
       {
         label: "车辆检测",
-        isAuth:1,
+        isAuth: 0,
         children: [
           {
             label: "检修记录",
             mid_path: "/mid/container",
             path:'/serve',
-            isAuth:1,
+            isAuth:0,
           },
           {
             label: "检修项配置",
             mid_path: "/mid/container",
             path:'/serve',
-            isAuth:1,
+            isAuth:0,
           },
           {
             label: "专项检测配置",
             mid_path: "/mid/container",
             path:'/serve',
-            isAuth:1,
+            isAuth:0,
           }
         ]
       }
