@@ -4643,11 +4643,6 @@ const state = {
           prop:'qqNumber',
         },
         {
-          key:'微信',
-          type:'default',
-          prop:'wxNumber',
-        },
-        {
           key:'主要业务',
           type:'default',
           prop:'mainWork',
@@ -4670,6 +4665,7 @@ const state = {
               text:'编辑',
               type:'',
               size:'small',
+              click: openDialog
             },
           ]
         },
@@ -4716,6 +4712,7 @@ const state = {
               text:'编辑',
               type:'',
               size:'small',
+              click: openDialog
             },
           ]
         },
@@ -4757,11 +4754,7 @@ const state = {
               text:'编辑',
               type:'',
               size:'small',
-            },
-            {
-              text:'删除',
-              type:'',
-              size:'small',
+              click: openDialog
             }
           ]
         },
@@ -4865,11 +4858,7 @@ const state = {
               text:'编辑',
               type:'',
               size:'small',
-            },
-            {
-              text:'删除',
-              type:'',
-              size:'small',
+              click: openDialog
             }
           ]
         },
@@ -4888,11 +4877,6 @@ const state = {
           type:'default',
           prop:'projectName',
         },
-        { 
-          key:'是否员工奖励',
-          type:'default',
-          prop:'',
-        },
         {
           key:'备注',
           type:'default',
@@ -4908,11 +4892,7 @@ const state = {
               text:'编辑',
               type:'',
               size:'small',
-            },
-            {
-              text:'删除',
-              type:'',
-              size:'small',
+              click:openDialog
             }
           ]
         },
@@ -4929,7 +4909,7 @@ const state = {
         {
           key:'项目分类',
           type:'default',
-          prop:'',
+          prop:'projectIdName',
         },
         {
           key:'项目名称',
@@ -4986,11 +4966,7 @@ const state = {
               text:'编辑',
               type:'',
               size:'small',
-            },
-            {
-              text:'删除',
-              type:'',
-              size:'small',
+              click: openDialog
             }
           ]
         },
@@ -5039,11 +5015,7 @@ const state = {
               text:'编辑',
               type:'',
               size:'small',
-            },
-            {
-              text:'删除',
-              type:'',
-              size:'small',
+              click:openDialog
             }
           ]
         },
@@ -5071,6 +5043,20 @@ const state = {
           key:'备注',
           type:'default',
           prop:'remark',
+        },
+        {
+          key:'操作',
+          type:'button',
+          fix:'right',
+          width:'120px',
+          list:[
+            {
+              text:'编辑',
+              type:'',
+              size:'small',
+              click:openDialog
+            }
+          ]
         },
       ]
     },

@@ -108,11 +108,11 @@ export const jump2Detail = params => {
          break;
        case '卡券管理' : window.$store.dispatch('couponModulesDelAndFresh', {path:params.child || params.subMenu, row:{id: choose}})
          break;
-       case '客户服务' : window.$store.dispatch('serverModulesDelAndFresh', {path: params.child || params.subMenu, row:{id: choose}})
-         break;
        case '市场推广' : window.$store.dispatch('marketDelAndFresh', {path, row: {id: choose}})
         break;
        case '客户服务' : window.$store.dispatch('serverModulesDelAndFresh', {path, row:{id: choose}})
+        break;
+       case '进存销' : window.$store.dispatch('sellingDelAndFresh', {path, row: {id: choose}})
         break;
       }
    }).catch(()=>{
@@ -184,6 +184,8 @@ export const jump2Detail = params => {
      case '会员列表' : return window.$store.commit('handleDialogWithImport', {visible: true})
      case '查看领取明细' : return window.$store.commit('handleDialogWithImport', {visible: true})
      case '用户卡券管理' : return window.$store.commit('handleDialogWithImport', {visible: true})
+     case '商品设置' : return window.$store.commit('handleDialogWithImport', {visible: true})
+     case '项目设置' : return window.$store.commit('handleDialogWithImport', {visible: true})
    }
  }
 

@@ -30,6 +30,8 @@ export const state = {
   activesList:[], //活动栏目下拉 -- select
   level_List:[], // 会员等级
   activitiesList:[], // 普通会员 -- 活动栏目 -- 下拉
+  goodsTypeList:[], // 商品类型下拉
+  projectList:[], //项目类型下拉
 }
 
 export const mutations = {
@@ -230,6 +232,20 @@ export const mutations = {
    */
   setMarketActivies(state, {params} = {}){
     state.activitiesList = params
+  },
+
+  /**
+   * 保存商品类型下拉列表
+   */
+  setGoodsTypeList(state, {params}){
+    state.goodsTypeList = params
+  },
+
+  /**
+   * 保存项目类型下拉列表
+   */
+  setProjectsList(state, {params}){
+    state.projectList = params
   }
 }
 
@@ -437,6 +453,30 @@ export const actions = {
         return resolve(res)
       })
     })
+  },
+
+  /**
+   * 进存销 -- 平台配置管理 -- 商品设置 -- 商品类型 --- select
+   */
+  getGoodsTypeList({commit}){
+    return new Promise((resolve, reject) => {
+      $http.post('good/selectGoodClassification.do', {}, res => {
+        commit('setGoodsTypeList', {params: res.data})
+        return resolve(res)
+      })
+    })
+  },
+
+  /**
+   * 进存销 -- 平台配置管理  -- 项目配置 -- 项目类型 --- select
+   */
+  getProjectsList({commit}){
+    return new Promise((resolve, reject) => {
+      $http.post('project/selectProjectTypeList.do', {}, res => {
+        commit('setProjectsList', {params: res.data})
+        return resolve(res)
+      })
+    })
   }
 }
 
@@ -478,5 +518,11 @@ export const getters = {
     return state.activitiesList.map(item => {
       return {label: item, value: item}
     })
+  },
+  formatGoodsTypeList(state){
+    return state.goodsTypeList
+  },
+  formatProjectList(state){
+    return state.projectList
   }
 }

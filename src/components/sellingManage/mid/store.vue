@@ -10,6 +10,7 @@
         </my-table>
         <my-bottom @getCurrent="getCurrentPage" :total="total" :currentPage="currPageNo"></my-bottom>
       </section>
+      <import-with-dialog title="上传文件"></import-with-dialog>
   </section>
 </template>
 
@@ -18,7 +19,7 @@ import Search from '@/components/common/search'
 import MyTable from '@/components/common/myTable'
 import MyButton from '@/components/common/myButton'
 import MyBottom from '@/components/common/bottom'
-
+import ImportWithDialog from '@/components/memberManage/child/dialogWithImport'
 import {mapActions, mapState, mapMutations, mapGetters} from 'vuex'
 
 export default {
@@ -28,6 +29,7 @@ export default {
     MyTable ,
     MyButton ,
     MyBottom,
+    ImportWithDialog,
   },
   data () {
     return {

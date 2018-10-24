@@ -1199,7 +1199,7 @@ export const forms = [
         rules:[
           {
             required:false,
-            message:'请编辑联系电话',
+            validator: validPhone,
             trigger:'blur',
           }
         ],
@@ -1319,7 +1319,7 @@ export const forms = [
         rules:[
           {
             required: true,
-            message:'请编辑联系电话',
+            message:'请编辑排序',
             trigger:'blur',
           }
         ],
@@ -1336,12 +1336,12 @@ export const forms = [
       {
         key:'供应商名称',
         type:'input',
-        prop:'name',
+        prop:'supplierName',
         disabled: false,
         rules:[
           {
             required:true,
-            message:'请编辑用户姓名',
+            message:'请编辑供应商名称',
             trigger:'blur',
           }
         ],
@@ -1349,12 +1349,12 @@ export const forms = [
       {
         key: '联系人',
         type:'input',
-        prop:'ranl',
+        prop:'contactName',
         disabled: false,
         rules:[
           {
             required: true,
-            message:'请编辑联系电话',
+            message:'请编辑联系人名称',
             trigger:'blur',
           }
         ],
@@ -1362,12 +1362,12 @@ export const forms = [
       {
         key: '联系电话',
         type:'input',
-        prop:'ranl',
+        prop:'contactPhone',
         disabled: false,
         rules:[
           {
             required: true,
-            message:'请编辑联系电话',
+            validator:validPhone,
             trigger:'blur',
           }
         ],
@@ -1375,12 +1375,12 @@ export const forms = [
       {
         key: 'QQ号',
         type:'input',
-        prop:'ranl',
+        prop:'qqNumber',
         disabled: false,
         rules:[
           {
             required: true,
-            message:'请编辑联系电话',
+            message:'请编辑QQ号',
             trigger:'blur',
           }
         ],
@@ -1388,12 +1388,12 @@ export const forms = [
       {
         key: '主要业务',
         type:'input',
-        prop:'ranl',
+        prop:'mainWork',
         disabled: false,
         rules:[
           {
             required: true,
-            message:'请编辑联系电话',
+            message:'请编辑主要业务',
             trigger:'blur',
           }
         ],
@@ -1401,33 +1401,39 @@ export const forms = [
       {
         key: '地址',
         type:'input',
-        prop:'ranl',
+        prop:'address',
         disabled: false,
         rules:[
           {
             required: true,
-            message:'请编辑联系电话',
+            message:'请编辑地址',
             trigger:'blur',
           }
         ],
       },
       {
         key: '备注',
-        type:'input',
-        prop:'ranl',
+        type:'textarea',
+        prop:'remark',
         disabled: false,
+        rows:'3',
         rules:[
           {
-            required: true,
-            message:'请编辑联系电话',
+            required: false,
+            message:'请编辑备注',
             trigger:'blur',
           }
         ],
       },
     ],
     myForm:{
-      name:'',
-      ranl:'',
+      supplierName:'',
+      contactName:'',
+      contactPhone:'',
+      qqNumber:'',
+      mainWork:'',
+      address:'',
+      remark:'',
     }
   },
   {
@@ -1436,12 +1442,12 @@ export const forms = [
       {
         key:'仓库名称',
         type:'input',
-        prop:'name',
+        prop:'repositoryName',
         disabled: false,
         rules:[
           {
             required:true,
-            message:'请编辑用户姓名',
+            message:'请编辑仓库名称',
             trigger:'blur',
           }
         ],
@@ -1449,12 +1455,12 @@ export const forms = [
       {
         key: '仓库联系人',
         type:'input',
-        prop:'ranl',
+        prop:'contactName',
         disabled: false,
         rules:[
           {
             required: true,
-            message:'请编辑联系电话',
+            message:'请编辑仓库联系人',
             trigger:'blur',
           }
         ],
@@ -1462,12 +1468,12 @@ export const forms = [
       {
         key: '联系电话',
         type:'input',
-        prop:'ranl',
+        prop:'contactPhone',
         disabled: false,
         rules:[
           {
             required: true,
-            message:'请编辑联系电话',
+            validator:validPhone,
             trigger:'blur',
           }
         ],
@@ -1475,12 +1481,12 @@ export const forms = [
       {
         key: '地址',
         type:'input',
-        prop:'ranl',
+        prop:'address',
         disabled: false,
         rules:[
           {
             required: true,
-            message:'请编辑联系电话',
+            message:'请编辑地址',
             trigger:'blur',
           }
         ],
@@ -1488,20 +1494,23 @@ export const forms = [
       {
         key: '简介',
         type:'input',
-        prop:'ranl',
+        prop:'remark',
         disabled: false,
         rules:[
           {
-            required: true,
-            message:'请编辑联系电话',
+            required: false,
+            message:'请编辑简介',
             trigger:'blur',
           }
         ],
       },
     ],
     myForm:{
-      name:'',
-      ranl:'',
+      remark:'',
+      address:'',
+      contactPhone:'',
+      contactName:'',
+      repositoryName:'',
     }
   },
   {
@@ -1510,12 +1519,12 @@ export const forms = [
       {
         key:'商品类型名称',
         type:'input',
-        prop:'name',
+        prop:'goodsClassificationName',
         disabled: false,
         rules:[
           {
             required:true,
-            message:'请编辑用户姓名',
+            message:'请编辑商品类型名称',
             trigger:'blur',
           }
         ],
@@ -1523,12 +1532,12 @@ export const forms = [
       {
         key: '联系人',
         type:'input',
-        prop:'ranl',
+        prop:'contactName',
         disabled: false,
         rules:[
           {
             required: true,
-            message:'请编辑联系电话',
+            message:'请编辑联系人',
             trigger:'blur',
           }
         ],
@@ -1536,295 +1545,12 @@ export const forms = [
       {
         key: '联系电话',
         type:'input',
-        prop:'ranl',
+        prop:'contactPhone',
         disabled: false,
         rules:[
           {
             required: true,
-            message:'请编辑联系电话',
-            trigger:'blur',
-          }
-        ],
-      },
-      {
-        key: '备注',
-        type:'input',
-        prop:'ranl',
-        disabled: false,
-        rules:[
-          {
-            required: true,
-            message:'请编辑联系电话',
-            trigger:'blur',
-          }
-        ],
-      },
-    ],
-    myForm:{
-      name:'',
-      ranl:'',
-    }
-  },
-  {
-    name:'商品设置',
-    list:[
-      {
-        key:'商品类型',
-        type:'select',
-        prop:'name',
-        disabled: false,
-        list:[{
-          label:'aaa',
-          value:1
-        }],
-        rules:[
-          {
-            required:true,
-            message:'请编辑用户姓名',
-            trigger:'blur',
-          }
-        ],
-      },
-      {
-        key: '商品编码',
-        type:'input',
-        prop:'ranl',
-        disabled: false,
-        rules:[
-          {
-            required: true,
-            message:'请编辑联系电话',
-            trigger:'blur',
-          }
-        ],
-      },
-      {
-        key: '商品名称',
-        type:'input',
-        prop:'ranl',
-        disabled: false,
-        rules:[
-          {
-            required: true,
-            message:'请编辑联系电话',
-            trigger:'blur',
-          }
-        ],
-      },
-      {
-        key: '商品单位',
-        type:'input',
-        prop:'ranl',
-        disabled: false,
-        rules:[
-          {
-            required: true,
-            message:'请编辑联系电话',
-            trigger:'blur',
-          }
-        ],
-      },
-      {
-        key: '车牌号',
-        type:'input',
-        prop:'ranl',
-        disabled: false,
-        rules:[
-          {
-            required: true,
-            message:'请编辑联系电话',
-            trigger:'blur',
-          }
-        ],
-      },
-      {
-        key: '车型',
-        type:'input',
-        prop:'ranl',
-        disabled: false,
-        rules:[
-          {
-            required: true,
-            message:'请编辑联系电话',
-            trigger:'blur',
-          }
-        ],
-      },
-      {
-        key: '规格',
-        type:'input',
-        prop:'ranl',
-        disabled: false,
-        rules:[
-          {
-            required: true,
-            message:'请编辑联系电话',
-            trigger:'blur',
-          }
-        ],
-      },
-      {
-        key: '采购价',
-        type:'input',
-        prop:'ranl',
-        disabled: false,
-        rules:[
-          {
-            required: true,
-            message:'请编辑联系电话',
-            trigger:'blur',
-          }
-        ],
-      },
-      {
-        key: '销售价',
-        type:'input',
-        prop:'ranl',
-        disabled: false,
-        rules:[
-          {
-            required: true,
-            message:'请编辑联系电话',
-            trigger:'blur',
-          }
-        ],
-      },
-      {
-        key: '是否快速开单',
-        type:'select',
-        prop:'ranl',
-        list:[
-          {
-            label: '是',
-            value: 1
-          },
-          {
-            label: '否',
-            value:0
-          }
-        ],
-        disabled: false,
-        rules:[
-          {
-            required: true,
-            message:'请编辑联系电话',
-            trigger:'blur',
-          }
-        ],
-      },
-      {
-        key: '是否商城展示',
-        type:'select',
-        prop:'ranl',
-        disabled: false,
-        list:[
-          {
-            label: '是',
-            value: 1
-          },
-          {
-            label: '否',
-            value:0
-          }
-        ],
-        rules:[
-          {
-            required: true,
-            message:'请编辑联系电话',
-            trigger:'blur',
-          }
-        ],
-      },
-      {
-        key: '是否分红',
-        type:'select',
-        prop:'ranl',
-        disabled: false,
-        list:[
-          {
-            label: '是',
-            value: 1
-          },
-          {
-            label: '否',
-            value:0
-          }
-        ],
-        rules:[
-          {
-            required: true,
-            message:'请编辑联系电话',
-            trigger:'blur',
-          }
-        ],
-      },
-      {
-        key: '是否员工奖励',
-        type:'select',
-        prop:'ranl',
-        disabled: false,
-        list:[
-          {
-            label: '是',
-            value: 1
-          },
-          {
-            label: '否',
-            value:0
-          }
-        ],
-        rules:[
-          {
-            required: true,
-            message:'请编辑联系电话',
-            trigger:'blur',
-          }
-        ],
-      },
-      {
-        key: '销售奖励',
-        type:'input',
-        prop:'ranl',
-        disabled: false,
-        rules:[
-          {
-            required: true,
-            message:'请编辑联系电话',
-            trigger:'blur',
-          }
-        ],
-      },
-      {
-        key: '施工奖励',
-        type:'input',
-        prop:'ranl',
-        disabled: false,
-        rules:[
-          {
-            required: true,
-            message:'请编辑联系电话',
-            trigger:'blur',
-          }
-        ],
-      },
-    ],
-    myForm:{
-      name:'',
-      ranl:'',
-    }
-  },
-  {
-    name:'项目分类设置',
-    list:[
-      {
-        key:'项目类型名称',
-        type:'input',
-        prop:'name',
-        disabled: false,
-        rules:[
-          {
-            required:true,
-            message:'请编辑用户姓名',
+            validator:validPhone,
             trigger:'blur',
           }
         ],
@@ -1833,20 +1559,319 @@ export const forms = [
         key: '备注',
         type:'textarea',
         rows:'3',
-        prop:'ranl',
+        prop:'remark',
         disabled: false,
         rules:[
           {
-            required: true,
-            message:'请编辑联系电话',
+            required: false,
+            message:'请编辑备注',
             trigger:'blur',
           }
         ],
       },
     ],
     myForm:{
-      name:'',
-      ranl:'',
+      goodsClassificationName:'',
+      contactName:'',
+      remark:'',
+      contactPhone:'',
+    }
+  },
+  {
+    name:'商品设置',
+    list:[
+      {
+        key:'商品类型',
+        type:'select',
+        prop:'classificationId',
+        disabled: false,
+        list:[{
+          label:'aaa',
+          value:1
+        }],
+        rules:[
+          {
+            required:true,
+            message:'请选择商品类型',
+            trigger:'blur',
+          }
+        ],
+      },
+      {
+        key: '商品编码',
+        type:'input',
+        prop:'goodsCode',
+        disabled: false,
+        rules:[
+          {
+            required: true,
+            message:'请编辑商品编码',
+            trigger:'blur',
+          }
+        ],
+      },
+      {
+        key: '商品名称',
+        type:'input',
+        prop:'goodsName',
+        disabled: false,
+        rules:[
+          {
+            required: true,
+            message:'请编辑商品名称',
+            trigger:'blur',
+          }
+        ],
+      },
+      {
+        key: '商品单位',
+        type:'input',
+        prop:'goodsUnit',
+        disabled: false,
+        rules:[
+          {
+            required: true,
+            message:'请编辑商品单位',
+            trigger:'blur',
+          }
+        ],
+      },
+      {
+        key: '车品牌',
+        type:'input',
+        prop:'carBrand',
+        disabled: false,
+        rules:[
+          {
+            required: true,
+            message:'请编辑车品牌',
+            trigger:'blur',
+          }
+        ],
+      },
+      {
+        key: '车型',
+        type:'input',
+        prop:'carModel',
+        disabled: false,
+        rules:[
+          {
+            required: true,
+            message:'请编辑车型',
+            trigger:'blur',
+          }
+        ],
+      },
+      {
+        key: '规格',
+        type:'input',
+        prop:'carType',
+        disabled: false,
+        rules:[
+          {
+            required: true,
+            message:'请编辑规格',
+            trigger:'blur',
+          }
+        ],
+      },
+      {
+        key: '采购价',
+        type:'input',
+        prop:'takePrice',
+        disabled: false,
+        rules:[
+          {
+            required: true,
+            message:'请编辑采购价',
+            trigger:'blur',
+          }
+        ],
+      },
+      {
+        key: '销售价',
+        type:'input',
+        prop:'salePrice',
+        disabled: false,
+        rules:[
+          {
+            required: true,
+            message:'请编辑销售价',
+            trigger:'blur',
+          }
+        ],
+      },
+      {
+        key: '是否快速开单',
+        type:'select',
+        prop:'isFastOrder',
+        list:[
+          {
+            label: '是',
+            value: 1
+          },
+          {
+            label: '否',
+            value:0
+          }
+        ],
+        disabled: false,
+        rules:[
+          {
+            required: true,
+            message:'请选择是否快速开单',
+            trigger:'blur',
+          }
+        ],
+      },
+      {
+        key: '是否商城展示',
+        type:'select',
+        prop:'isShowShop',
+        disabled: false,
+        list:[
+          {
+            label: '是',
+            value: 1
+          },
+          {
+            label: '否',
+            value:0
+          }
+        ],
+        rules:[
+          {
+            required: true,
+            message:'请选择是否商城展示',
+            trigger:'blur',
+          }
+        ],
+      },
+      {
+        key: '是否分红',
+        type:'select',
+        prop:'isShareMoney',
+        disabled: false,
+        list:[
+          {
+            label: '是',
+            value: 1
+          },
+          {
+            label: '否',
+            value:0
+          }
+        ],
+        rules:[
+          {
+            required: true,
+            message:'请选择是否分红',
+            trigger:'blur',
+          }
+        ],
+      },
+      {
+        key: '是否员工奖励',
+        type:'select',
+        prop:'isEmployeeAward',
+        disabled: false,
+        list:[
+          {
+            label: '是',
+            value: 1
+          },
+          {
+            label: '否',
+            value:0
+          }
+        ],
+        rules:[
+          {
+            required: true,
+            message:'请选择是否员工奖励',
+            trigger:'blur',
+          }
+        ],
+      },
+      {
+        key: '销售奖励',
+        type:'input',
+        prop:'saleAward',
+        disabled: false,
+        rules:[
+          {
+            required: true,
+            message:'请编辑销售奖励',
+            trigger:'blur',
+          }
+        ],
+      },
+      {
+        key: '施工奖励',
+        type:'input',
+        prop:'workAward',
+        disabled: false,
+        rules:[
+          {
+            required: true,
+            message:'请编辑施工奖励',
+            trigger:'blur',
+          }
+        ],
+      },
+    ],
+    myForm:{
+      classificationId:'',
+      goodsName:'',
+      goodsUnit:'',
+      carBrand:'',
+      carModel:'',
+      carType:'',
+      takePrice:'',
+      salePrice:'',
+      isFastOrder:'',
+      isShowShop:'',
+      isShareMoney:'',
+      isEmployeeAward:'',
+      saleAward:'',
+      workAward:'',
+      goodsCode:'',
+    }
+  },
+  {
+    name:'项目分类设置',
+    list:[
+      {
+        key:'项目名称',
+        type:'input',
+        prop:'projectName',
+        disabled: false,
+        rules:[
+          {
+            required:true,
+            message:'请编辑项目名称',
+            trigger:'blur',
+          }
+        ],
+      },
+      {
+        key: '备注',
+        type:'textarea',
+        rows:'3',
+        prop:'remark',
+        disabled: false,
+        rules:[
+          {
+            required: false,
+            message:'请编辑备注',
+            trigger:'blur',
+          }
+        ],
+      },
+    ],
+    myForm:{
+      projectName:'',
+      remark:'',
     }
   },
   {
@@ -1854,13 +1879,14 @@ export const forms = [
     list:[
       {
         key:'项目类型名称',
-        type:'input',
-        prop:'name',
+        type:'select',
+        prop:'projectId',
         disabled: false,
+        list:[],
         rules:[
           {
             required:true,
-            message:'请编辑用户姓名',
+            message:'请选择项目类型',
             trigger:'blur',
           }
         ],
@@ -1868,12 +1894,12 @@ export const forms = [
       {
         key:'项目名称',
         type:'input',
-        prop:'name',
+        prop:'projectName',
         disabled: false,
         rules:[
           {
             required:true,
-            message:'请编辑用户姓名',
+            message:'请编辑项目名称',
             trigger:'blur',
           }
         ],
@@ -1881,12 +1907,12 @@ export const forms = [
       {
         key:'推荐工时',
         type:'input',
-        prop:'name',
+        prop:'time',
         disabled: false,
         rules:[
           {
             required:true,
-            message:'请编辑用户姓名',
+            message:'请编辑推荐工时',
             trigger:'blur',
           }
         ],
@@ -1894,12 +1920,12 @@ export const forms = [
       {
         key:'销售单价',
         type:'input',
-        prop:'name',
+        prop:'salePriceUnit',
         disabled: false,
         rules:[
           {
             required:true,
-            message:'请编辑用户姓名',
+            message:'请编辑销售单价',
             trigger:'blur',
           }
         ],
@@ -1907,12 +1933,12 @@ export const forms = [
       {
         key:'工时单价',
         type:'input',
-        prop:'name',
+        prop:'timePriceUnit',
         disabled: false,
         rules:[
           {
             required:true,
-            message:'请编辑用户姓名',
+            message:'请编辑工时单价',
             trigger:'blur',
           }
         ],
@@ -1920,12 +1946,12 @@ export const forms = [
       {
         key:'总成本',
         type:'input',
-        prop:'name',
+        prop:'totalPrice',
         disabled: false,
         rules:[
           {
             required:true,
-            message:'请编辑用户姓名',
+            message:'请编辑总成本',
             trigger:'blur',
           }
         ],
@@ -1933,7 +1959,7 @@ export const forms = [
       {
         key:'是否分红',
         type:'select',
-        prop:'name',
+        prop:'isShareMoney',
         list:[
           {
             label:'是',
@@ -1948,7 +1974,7 @@ export const forms = [
         rules:[
           {
             required:true,
-            message:'请编辑用户姓名',
+            message:'请选择是否分红',
             trigger:'blur',
           }
         ],
@@ -1956,7 +1982,7 @@ export const forms = [
       {
         key: '是否快速开单',
         type:'select',
-        prop:'ranl',
+        prop:'isFastOrder',
         list:[
           {
             label: '是',
@@ -1971,7 +1997,7 @@ export const forms = [
         rules:[
           {
             required: true,
-            message:'请编辑联系电话',
+            message:'请选择是否快速开单',
             trigger:'blur',
           }
         ],
@@ -1979,7 +2005,7 @@ export const forms = [
       {
         key: '是否员工奖励',
         type:'select',
-        prop:'ranl',
+        prop:'isEmployeeAward',
         disabled: false,
         list:[
           {
@@ -1994,7 +2020,7 @@ export const forms = [
         rules:[
           {
             required: true,
-            message:'请编辑联系电话',
+            message:'请选择是否员工奖励',
             trigger:'blur',
           }
         ],
@@ -2002,12 +2028,12 @@ export const forms = [
       {
         key:'销售奖励',
         type:'input',
-        prop:'name',
+        prop:'saleAward',
         disabled: false,
         rules:[
           {
             required:true,
-            message:'请编辑用户姓名',
+            message:'请编辑销售奖励',
             trigger:'blur',
           }
         ],
@@ -2015,12 +2041,12 @@ export const forms = [
       {
         key:'施工奖励',
         type:'input',
-        prop:'name',
+        prop:'workAward',
         disabled: false,
         rules:[
           {
             required:true,
-            message:'请编辑用户姓名',
+            message:'请编辑施工奖励',
             trigger:'blur',
           }
         ],
@@ -2029,20 +2055,30 @@ export const forms = [
         key: '备注',
         type:'textarea',
         rows:'3',
-        prop:'ranl',
+        prop:'remark',
         disabled: false,
         rules:[
           {
-            required: true,
-            message:'请编辑联系电话',
+            required: false,
+            message:'请编辑备注',
             trigger:'blur',
           }
         ],
       },
     ],
     myForm:{
-      name:'',
-      ranl:'',
+      projectId:'',
+      projectName:'',
+      time:'',
+      salePriceUnit:'',
+      timePriceUnit:'',
+      totalPrice:'',
+      isShareMoney:'',
+      isFastOrder:'',
+      isEmployeeAward:'',
+      saleAward:'',
+      workAward:'',
+      remark:'',
     }
   },
   {
@@ -2051,12 +2087,12 @@ export const forms = [
       {
         key:'物流公司名称',
         type:'input',
-        prop:'name',
+        prop:'logisticsName',
         disabled: false,
         rules:[
           {
             required:true,
-            message:'请编辑用户姓名',
+            message:'请编辑物流公司名称',
             trigger:'blur',
           }
         ],
@@ -2064,12 +2100,12 @@ export const forms = [
       {
         key:'仓库联系人',
         type:'input',
-        prop:'name',
+        prop:'contactName',
         disabled: false,
         rules:[
           {
             required:true,
-            message:'请编辑用户姓名',
+            message:'请编辑仓库联系人',
             trigger:'blur',
           }
         ],
@@ -2077,12 +2113,12 @@ export const forms = [
       {
         key:'联系电话',
         type:'input',
-        prop:'name',
+        prop:'contactPhone',
         disabled: false,
         rules:[
           {
             required:true,
-            message:'请编辑用户姓名',
+            validator: validPhone,
             trigger:'blur',
           }
         ],
@@ -2090,12 +2126,12 @@ export const forms = [
       {
         key:'地址',
         type:'input',
-        prop:'name',
+        prop:'address',
         disabled: false,
         rules:[
           {
             required:true,
-            message:'请编辑用户姓名',
+            message:'请编辑地址',
             trigger:'blur',
           }
         ],
@@ -2104,20 +2140,73 @@ export const forms = [
         key: '备注',
         type:'textarea',
         rows:'3',
-        prop:'ranl',
+        prop:'remark',
         disabled: false,
         rules:[
           {
-            required: true,
-            message:'请编辑联系电话',
+            required: false,
+            message:'请编辑备注',
             trigger:'blur',
           }
         ],
       },
     ],
     myForm:{
-      name:'',
-      ranl:'',
+      logisticsName:'',
+      contactName:'',
+      contactPhone:'',
+      address:'',
+      remark:'',
+    }
+  },
+  {
+    name:'支付方式配置',
+    list:[
+      {
+        key:'支付方式名称',
+        type:'input',
+        prop:'payType',
+        disabled: false,
+        rules:[
+          {
+            required:true,
+            message:'请编辑支付方式',
+            trigger:'blur',
+          }
+        ],
+      },
+      {
+        key:'支付说明',
+        type:'input',
+        prop:'payInfo',
+        disabled: false,
+        rules:[
+          {
+            required:true,
+            message:'请编辑支付说明',
+            trigger:'blur',
+          }
+        ],
+      },
+      {
+        key: '备注',
+        type:'textarea',
+        rows:'3',
+        prop:'remark',
+        disabled: false,
+        rules:[
+          {
+            required: false,
+            message:'请编辑备注',
+            trigger:'blur',
+          }
+        ],
+      },
+    ],
+    myForm:{
+      payType:'',
+      payInfo:'',
+      remark:'',
     }
   },
   {
@@ -2157,57 +2246,8 @@ export const forms = [
         disabled: false,
         rules:[
           {
-            required: true,
-            message:'请编辑联系电话',
-            trigger:'blur',
-          }
-        ],
-      },
-    ],
-    myForm:{
-      name:'',
-      ranl:'',
-    }
-  },
-  {
-    name:'支付方式配置',
-    list:[
-      {
-        key:'支付方式名称',
-        type:'input',
-        prop:'name',
-        disabled: false,
-        rules:[
-          {
-            required:true,
-            message:'请编辑用户姓名',
-            trigger:'blur',
-          }
-        ],
-      },
-      {
-        key:'支付说明',
-        type:'input',
-        prop:'name',
-        disabled: false,
-        rules:[
-          {
-            required:true,
-            message:'请编辑用户姓名',
-            trigger:'blur',
-          }
-        ],
-      },
-      {
-        key: '备注',
-        type:'textarea',
-        rows:'3',
-        prop:'ranl',
-        disabled: false,
-        rules:[
-          {
-            required: true,
-            message:'请编辑联系电话',
+            required: false,
+            message:'请编辑备注',
             trigger:'blur',
           }
         ],

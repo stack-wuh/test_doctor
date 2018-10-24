@@ -53,7 +53,9 @@ export default {
   methods: {
     ...mapActions({
       'couponReciverList': 'couponReciverList',
-      'couponMember': 'couponImportExcel'
+      'couponMember': 'couponImportExcel',
+      'goodsImport':'platformGoodsImport',
+      'platformProjectImport':'platformProjectImport'
     }),
     beforeClose(){
       this.handleHideDialog()
@@ -76,6 +78,8 @@ export default {
         case '会员列表' : return this.$store.dispatch('memberInfoImport', {path: this.pathChange, form:{fileName: this.fileList.map(item => item.response.data)}}).then(res => this.handleHideDialog())
         case '查看领取明细' : return this.couponReciverList({path: this.pathChange, form: {fileName: this.fileList.map(item => item.response.data)}}).then(res => res.status == 0 && this.handleHideDialog())
         case '用户卡券管理' : return this.couponMember({path: this.pathChange, form: {fileName: this.fileList.map(item => item.response.data)}}).then(res => res.status == 0 && this.handleHideDialog())
+        case '商品设置' : return  this.goodsImport({path: this.pathChange, form: {fileName: this.fileList.map(item => item.response.data)}}).then(res => res.status == 0 && this.handleHideDialog())
+        case '项目设置' : return  this.platformProjectImport({path: this.pathChange, form: {fileName: this.fileList.map(item => item.response.data)}}).then(res => res.status == 0 && this.handleHideDialog())
       }
     }
   }

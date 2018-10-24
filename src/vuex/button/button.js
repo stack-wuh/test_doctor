@@ -9,7 +9,6 @@ import {
   handleDialogForCoupon,
   handleCouponMemberSend,
   handleSelectChangeForTable,
-  jump2DiaolgForServeCarDialog,
   serveDialogToggleForSetting,
   dialogToggleForServerCarForm,
 } from './click'
@@ -490,7 +489,7 @@ const state = {
     {
       name:'新增删除导出',
       desc:'业务出库模块定制',
-      params:['业务出库','业务退货','商品设置','项目设置'],
+      params:['业务出库','业务退货'],
       btn:[
         {
           text:'新增',
@@ -504,12 +503,41 @@ const state = {
           type:'',
           size:'',
           style:'',
+          click:DelAndFreshWithAll
         },
         {
           text:'导出',
           type:'',
           size:'',
           style:'',
+        }
+      ]
+    },
+    {
+      name:'新增删除导入',
+      desc:'业务出库模块定制',
+      params:['商品设置', '项目设置'],
+      btn:[
+        {
+          text:'新增',
+          type:'',
+          size:'',
+          style:'',
+          click:jump2AddWithDialog
+        },
+        {
+          text:'删除',
+          type:'',
+          size:'',
+          style:'',
+          click:DelAndFreshWithAll
+        },
+        {
+          text:'导入',
+          type:'',
+          size:'',
+          style:'',
+          click:importExcelWithDialog,
         }
       ]
     },

@@ -43,6 +43,8 @@ export default {
       'departList':'formatDepList',
       'roleList' : 'formatRoleList',
       'couponList': 'formatCouponList',
+      'goodsTypeList': 'formatGoodsTypeList',
+      'projectsList': 'formatProjectList'
     }),
     visibleDialog(){
       return this.$store.state.dialogVisible
@@ -71,6 +73,10 @@ export default {
           return {...item, list: this.roleList}
         }else if(item.key === '员工角色'){
           return {...item, list: this.roleList}
+        }else if(item.key === '商品类型'){
+          return {...item, list: this.goodsTypeList}
+        }else if(item.key === '项目类型名称'){
+          return {...item, list: this.projectsList}
         }else{
           return {...item}
         }
@@ -102,7 +108,15 @@ export default {
       'feedBackPut' : 'feedBackPut',
       'handerServerCarFeed': 'carFeedPubAndFresh',
       'userSharePubAndFresh':'userSharePubAndFresh',
-      'handleServerTime':'serverPrevTimePubAndFresh'
+      'handleServerTime':'serverPrevTimePubAndFresh',
+      'handlePlatformProvider': 'platformProviderPub',
+      'platformRepositoryPub':'platformRepositoryPub',
+      'platformGoodsTypePub':'platformGoodsTypePub',
+      'platformGoodsPub':'platformGoodsPub',
+      'platformProjectTypePub':'platformProjectTypePub',
+      'platformLogisiticPub':'platformLogisiticPub',
+      'platformPayPub':'platformPayPub',
+      'platformProjectPub':'platformProjectPub'
     }),
     /**
      * dialog对话框
@@ -157,6 +171,22 @@ export default {
           case '分享与消费奖励规则': this.userSharePubAndFresh({path: this.rootPath, form: this.myForm})
             break;
           case '预约时间管理' : this.handleServerTime({path: this.rootPath, form: this.myForm})
+            break;
+          case '供应商设置' : this.handlePlatformProvider({path: this.rootPath, form: this.myForm})
+            break;
+          case '仓库设置' : this.platformRepositoryPub({path: this.rootPath, form: this.myForm})
+            break;
+          case '商品分类设置' : this.platformGoodsTypePub({path: this.rootPath, form: this.myForm})
+            break;
+          case '商品设置' : this.platformGoodsPub({path: this.rootPath, form: this.myForm})
+            break;
+          case '项目分类设置' : this.platformProjectTypePub({path: this.rootPath, form: this.myForm})
+            break;
+          case '物流公司配置' : this.platformLogisiticPub({path: this.rootPath, form: this.myForm})
+            break;
+          case '支付方式配置' : this.platformPayPub({path: this.rootPath, form: this.myForm})
+            break;
+          case '项目设置' : this.platformProjectPub({path: this.rootPath, form: this.myForm})
             break;
         }
         setTimeout(()=>{

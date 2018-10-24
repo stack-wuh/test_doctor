@@ -16,6 +16,12 @@ const mutations = {
 }
 
 const actions = {
+  /**
+   * 抽取进销存模块内全部的get事件
+   * params {path} 路由地址
+   * params {search} 钩子里面的搜索条件
+   * params {currPageNo} 页码 
+   */
   getSellingStore({commit, rootState, dispatch}, {path, search, currPageNo = 1}){
     let _url = null
     switch(path){
@@ -55,11 +61,13 @@ const actions = {
         break;
       case '商品分类设置' : _url = 'goodClassification/getGoodClassification.do', search = {...search, currPageNo, ...rootState.search}
         break;
-      case '商品设置' : _url = 'good/getGoodList.do', search = {...search, currPageNo, ...rootState.search}
+      case '商品设置' : _url = 'good/getGoodList.do', search = {...search, currPageNo, ...rootState.search},
+                        dispatch('getGoodsTypeList')
         break;
       case '项目分类设置' : _url = 'projectType/getProjectList.do', search = {...search, currPageNo, ...rootState.search}
         break;
-      case '项目设置' : _url = 'project/getProjectInfoList.do', search = {...search, currPageNo, ...rootState.search}
+      case '项目设置' : _url = 'project/getProjectInfoList.do', search = {...search, currPageNo, ...rootState.search},
+                      dispatch('getProjectsList')
         break;
       case '物流公司配置' : _url = 'logistics/getLogisticsList.do', search = {...search, currPageNo, ...rootState.search}
         break;
@@ -96,6 +104,313 @@ const actions = {
       $http.post(_url, NotNull(search), res => {
         commit('setSellingStore', {params: res.data})
         return resolve(res)
+      })
+    })
+  },
+
+  /**
+   * 抽取进存销模块内全部的删除事件
+   * @param {*} param0 
+   * @param {*} param1 
+   */
+  sellingDelAndFresh({dispatch}, {path, row: {id }}){
+    let _url = ''
+    switch(path){
+      case '供应商设置' : _url = 'supplier/delSupplier.do'
+        break;
+      case '仓库设置' : _url = 'repository/delRepository.do'
+        break;
+      case '商品分类设置' : _url = 'goodClassification/delGoodClassification.do'
+        break;
+      case '商品设置' : _url = 'good/delGood.do'
+        break;
+      case '项目分类设置' : _url = 'projectType/delete.do'
+        break;
+      case '物流公司配置' : _url = 'logistics/delete.do'
+        break;
+      case '支付方式配置' : _url = 'payType/delete.do'
+        break;
+      case '项目设置' : _url = 'project/delete.do'
+        break;
+    }
+    return new Promise((resolve,reject) => {
+      $http.post(_url, {ids: id}, res => {
+        setTimeout(()=>{
+          dispatch('getSellingStore',{path})
+        },1000)
+        return resolve(res)
+      })
+    })
+  },
+
+  /**
+   * 进销存 -- 平台配置管理 --- 供应商设置 -- 新增/编辑
+   */
+  platformProviderPub({dispatch}, {form:{
+    supplierName,
+    contactName,
+    contactPhone,
+    qqNumber,
+    mainWork,
+    address,
+    remark,
+    id,
+  }, path}){
+    return new Promise((resolve, reject) => {
+      $http.post('supplier/saveOrUpdateSupplier.do', {
+        supplierName,
+        contactName,
+        contactPhone,
+        qqNumber,
+        mainWork,
+        address,
+        remark,
+        id,
+      }, res => {
+        setTimeout(()=> {
+          dispatch('asyncHideDialog')
+          dispatch('getSellingStore', {path })
+        }, 1000)
+      })
+    })
+  },
+
+  /**
+   * 进存销 -- 平台配置管理 -- 仓库设置 -- 新增/编辑
+   */
+  platformRepositoryPub({dispatch}, {form: {
+    repositoryName,
+    contactName,
+    contactPhone,
+    address,
+    remark,
+    id,
+  }, path}){
+    return new Promise((resolve, reject) => {
+      $http.post('repository/saveOrUpdateRepository.do', {
+        repositoryName,
+        contactName,
+        contactPhone,
+        address,
+        remark,
+        id,
+      }, res => {
+        setTimeout(()=> {
+          dispatch('asyncHideDialog')
+          dispatch('getSellingStore', {path })
+        }, 1000)
+      })
+    })
+  },
+
+  /**
+   * 进存销 --- 平台配置管理 --- 商品分类设置 -- 新增/编辑
+   */
+  platformGoodsTypePub({dispatch}, {form: {
+    goodsClassificationName,
+    contactName,
+    contactPhone,
+    remark,
+    id,
+  }, path}){
+    return new Promise((resolve, reject) => {
+      $http.post('goodClassification/saveOrUpdateGoodClassification.do', {
+        goodsClassificationName,
+        contactName,
+        contactPhone,
+        remark,
+        id,
+      }, res => {
+        setTimeout(()=> {
+          dispatch('asyncHideDialog')
+          dispatch('getSellingStore', {path })
+        }, 1000)
+      })
+    })
+  },
+
+  /**
+   * 进存销 --- 平台配置管理 --- 商品设置 -- 新增/编辑
+   */
+  platformGoodsPub({dispatch}, {form: {
+    classificationId,
+    goodsName,
+    goodsUnit,
+    goodsCode,
+    carBrand,
+    carModel,
+    carType,
+    takePrice,
+    salePrice,
+    isFastOrder,
+    isShowShop,
+    isShareMoney,
+    isEmployeeAward,
+    saleAward,
+    workAward,
+    id,
+  }, path}){
+    return new Promise((resolve, reject) => {
+      $http.post('good/saveOrUpdateGood.do', {
+        classificationId,
+        goodsName,
+        goodsUnit,
+        goodsCode,
+        carBrand,
+        carModel,
+        carType,
+        takePrice,
+        salePrice,
+        isFastOrder,
+        isShowShop,
+        isShareMoney,
+        isEmployeeAward,
+        saleAward,
+        workAward,
+        id,
+      }, res => {
+        setTimeout(()=> {
+          dispatch('asyncHideDialog')
+          dispatch('getSellingStore', {path })
+        }, 1000)
+      })
+    })
+  },
+
+  /**
+   * 进存销 -- 平台配置管理 -- 商品设置 -- 导入
+   */
+  platformGoodsImport({dispatch}, {form: {fileName}, path}){
+    return new Promise((resolve, reject) => {
+      $http.post('good/import.do', {fileName: fileName.toString()}, res => {
+        return resolve(res)
+      })
+    })
+  },
+
+  /**
+   * 进存销 -- 平台配置管理 --- 项目设置 -- 导入
+   */
+  platformProjectImport({dispatch}, {form: {fileName}, path}){
+    return new Promise((resolve, reject) => {
+      $http.post('project/import.do', {fileName: fileName.toString()}, res => {
+        return resolve(res)
+      })
+    })
+  },
+
+  /**
+   * 进存销 --- 平台配置管理 -- 项目分类设置 -- 新增/编辑
+   */
+  platformProjectTypePub({dispatch}, {form: {
+    projectName,
+    remark,
+    id,
+  }, path}){
+    return new Promise((resolve, reject) => {
+      $http.post('projectType/saveOrUpdate.do', {
+        remark,
+        projectName,
+        id,
+      }, res => {
+        setTimeout(() => {
+          dispatch('asyncHideDialog')
+          dispatch('getSellingStore', {path })
+        }, 1000)
+      })
+    })
+  },
+
+  /**
+   * 进存销 --- 平台配偶管理 -- 物流公司 -- 新增/编辑
+   */
+  platformLogisiticPub({dispatch}, {form: {
+    logisticsName,
+    contactName,
+    contactPhone,
+    address,
+    remark,
+    id,
+  }, path}){
+    return new Promise((resolve, reject) => {
+      $http.post('logistics/saveOrUpdate.do', {
+        logisticsName,
+        contactName,
+        contactPhone,
+        address,
+        remark,
+        id,
+      }, res => {
+        setTimeout(()=>{
+          dispatch('asyncHideDialog')
+          dispatch('getSellingStore', {path })
+        }, 1000)
+      })
+    })
+  },
+
+  /**
+   * 进存销 --- 平台配置管理 -- 支付方式 -- 新增/编辑
+   */
+  platformPayPub({dispatch}, {form: {
+    payType,
+    payInfo,
+    remark,
+    id
+  }, path}){
+    return new Promise((resolve, reject) => {
+      $http.post('payType/saveOrUpdate.do', {
+        payType,
+        payInfo,
+        remark,
+        id
+      }, res => {
+        setTimeout(()=>{
+          dispatch('asyncHideDialog')
+          dispatch('getSellingStore', {path })
+        }, 1000)
+      })
+    })
+  },
+
+  /**
+   * 进存销 --- 平台配置管理 -- 项目配置 -- 新增/编辑
+   */
+  platformProjectPub({dispatch}, {form: {
+    projectId,
+    projectName,
+    time,
+    salePriceUnit,
+    timePriceUnit,
+    totalPrice,
+    isShareMoney,
+    isFastOrder,
+    isEmployeeAward,
+    saleAward,
+    workAward,
+    remark,
+    id,
+  }, path}){
+    return new Promise((resolve, reject) => {
+      $http.post('project/saveOrUpdate.do', {
+        projectId,
+        projectName,
+        time,
+        salePriceUnit,
+        timePriceUnit,
+        totalPrice,
+        isShareMoney,
+        isFastOrder,
+        isEmployeeAward,
+        saleAward,
+        workAward,
+        remark,
+        id,
+      }, res => {
+        setTimeout(()=> {
+          dispatch('asyncHideDialog')
+          dispatch('getSellingStore', {path})
+        }, 1000)
       })
     })
   }
