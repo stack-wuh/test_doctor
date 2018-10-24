@@ -179,8 +179,7 @@ export default {
   created(){
     let data = this.$route.query.data
     data = data && JSON.parse(data)
-    this.form = {...this.form, ...data, insuranceStart: data.insuranceStart.slice(0,10), lastMaintainTime: data.lastMaintainTime.slice(0,10)}
-    console.log(data, this.form)
+    this.form = {...this.form, ...data, insuranceStart: data && data.insuranceStart && data.insuranceStart.slice(0,10), lastMaintainTime: data && data.lastMaintainTime && data.lastMaintainTime.slice(0,10)}
     this.getMemberList()
     this.getUpKeepList()
     this.getInSuranceList()

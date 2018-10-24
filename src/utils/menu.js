@@ -427,121 +427,121 @@ export const list = [
     children: [
       {
         label: "业务管理",
-        isAuth:1,
+        isAuth: 0,
         children: [
           {
             label: "业务开单",
             mid_path: "/mid/container",
             path:'/selling/store',
-            isAuth:1,
+            isAuth: 0,
           },
           {
             label: "业务结算",
             mid_path: "/mid/container",
             path:'/selling/store',
-            isAuth:1,
+            isAuth: 0,
           },
           {
             label: "业务出库",
             mid_path: "/mid/container",
             path:'/selling/store',
-            isAuth:1,
+            isAuth: 0,
           },
           {
             label: "业务退货",
             mid_path: "/mid/container",
             path:'/selling/store',
-            isAuth:1,
+            isAuth: 0,
           }
         ]
       },
       {
         label: "套餐管理",
-        isAuth:1,
+        isAuth: 0,
         children: [
           {
             label: "套餐管理",
             mid_path: "/mid/container",
             path:'/selling/store',
-            isAuth:1,
+            isAuth: 0,
           },
           {
             label: "套餐销售",
             mid_path: "/mid/container",
             path:'/selling/store',
-            isAuth:1,
+            isAuth: 0,
           },
           {
             label: "会员套餐记录",
             mid_path: "/mid/container",
             path:'/selling/store',
-            isAuth:1,
+            isAuth: 0,
           }
         ]
       },
       {
         label: "采购管理",
-        isAuth:1,
+        isAuth: 0,
         children: [
           {
             label: "采购订单",
             mid_path: "/mid/container",
             path:'/selling/store',
-            isAuth:1,
+            isAuth: 0,
           },
           {
             label: "采购入库",
             mid_path: "/mid/container",
             path:'/selling/store',
-            isAuth:1,
+            isAuth: 0,
           },
           {
             label: "采购退货",
             mid_path: "/mid/container",
             path:'/selling/store',
-            isAuth:1,
+            isAuth: 0,
           }
         ]
       },
       {
         label: "财务管理",
-        isAuth:1,
+        isAuth: 0,
         children: [
           {
             label: "付款管理",
             mid_path: "/mid/container",
             path:'/selling/store',
-            isAuth:1,
+            isAuth: 0,
           },
           {
             label: "挂账还款",
             mid_path: "/mid/container",
             path:'/selling/store',
-            isAuth:1,
+            isAuth: 0,
           }
         ]
       },
       {
         label: "仓库管理",
-        isAuth:1,
+        isAuth:0,
         children: [
           {
             label: "调拨发起",
             mid_path: "/mid/container",
             path:'/selling/store',
-            isAuth:1,
+            isAuth:0,
           },
           {
             label: "调拨接收",
             mid_path: "/mid/container",
             path:'/selling/store',
-            isAuth:1,
+            isAuth:0,
           },
           {
             label: "日常盘点",
             mid_path: "/mid/container",
             path:'/selling/store',
-            isAuth:1,
+            isAuth:0,
           }
         ]
       },
