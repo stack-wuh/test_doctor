@@ -24,14 +24,14 @@ const actions = {
   handleAccredit({dispatch}, {form} = {}){
     var startTime = localStorage.getItem('startTime'), now = +new Date()
     var authorityId = localStorage.getItem('startFormId')
+    if(now - startTime < 2000 && authorityId == form.authorityId){
+      _g.toastMsg({
+        type: 'error',
+        msg:'请勿重复操作权限!'
+      })
+      return
+    }
     return new Promise((resolve, reject) => {
-      if(now - startTime < 2000 && authorityId == form.authorityId){
-        _g.toastMsg({
-          type: 'error',
-          msg:'请勿重复操作权限!'
-        })
-        return reject(new Error('no touch in time'))
-      }
       $http.post('authorityBackend/authSet.do', form, res => {
         if(res.status === 0){
           localStorage.setItem('startTime', + new Date())
@@ -44,9 +44,9 @@ const actions = {
         }
       })
     }).catch(err => {
-      setTimeout(()=> {
-        dispatch('getLimitStore')
-      }, 500)
+        setTimeout(()=> {
+          dispatch('getLimitStore')
+        }, 500)
     })
   },
 
