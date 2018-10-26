@@ -70,10 +70,10 @@
               <el-input v-model="form['referee']" class="box-input" ></el-input>
             </el-form-item>
           </section>
-            <el-form-item  label="积分比例" prop="lntegralProportion">
+            <!-- <el-form-item  label="积分比例" prop="lntegralProportion">
               <el-input v-model="form['lntegralProportion']" class="my-input-220 margin-rg-15" placeholder="编辑积分比例"></el-input>
               <span class="c999">积分比例取值范围:大于0且小于1</span>
-            </el-form-item>
+            </el-form-item> -->
           <section class="inline-box">
             <el-form-item class="box-item" label="服务开始时间" prop="serviceStart">
               <el-date-picker class="box-input" v-model="form['serviceStart']" value-format="yyyy-MM-dd" ></el-date-picker>
@@ -141,7 +141,7 @@ const rules = {
   contacts:[{required: true, message: '请编辑联系人', trigger: 'blur'}],
   telephone:[{required: true, validator: validPhone, trigger: 'blur'}],
   referee:[{required: true, message: '请编辑推荐人', trigger: 'blur'}],
-  lntegralProportion:[{required: true, validator: MaxNumberValue, trigger: 'blur'}],
+  // lntegralProportion:[{required: true, validator: MaxNumberValue, trigger: 'blur'}],
   serviceStart:[{required: true, message: '请选择服务开始日期', trigger: 'change'}],
   serviceEnd:[{required: true, message: '请选择服务结束日期', trigger: 'change'}],
   wifiName:[{required: true, message: '请编辑wifi名称', trigger: 'blur'}],
@@ -174,7 +174,7 @@ export default {
         contacts:'',
         telephone:'',
         referee:'',
-        lntegralProportion:'',
+        // lntegralProportion:'',
         serviceStart:'',
         serviceEnd:'',
         wifiName:'',

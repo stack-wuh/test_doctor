@@ -33,15 +33,20 @@ const actions = {
     }
     return new Promise((resolve, reject) => {
       $http.post('authorityBackend/authSet.do', form, res => {
-        setTimeout(()=>{
-          dispatch('getLimitStore')
-        },500)
         if(res.status === 0){
           localStorage.setItem('startTime', + new Date())
           localStorage.setItem('startFormId', form.authorityId)
         }
-        return resolve(res)
+        if(res.status === 0){
+          return resolve(res)
+        }else{
+          return reject(res)
+        }
       })
+    }).catch(err => {
+      setTimeout(()=> {
+        dispatch('getLimitStore')
+      }, 500)
     })
   },
 

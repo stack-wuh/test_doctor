@@ -134,7 +134,7 @@ export default {
               value: "",
               prop: "ruleIntegra",
               tips: "一个积分可抵扣金额(元)",
-              disabled: true
+              disabled: false
             },
             {
               label: "首次关注",

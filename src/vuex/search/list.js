@@ -754,31 +754,25 @@ const state = {
         {
           key:'日志号',
           type:'input',
-          prop:'orderNum',
+          prop:'id',
           value:'',
         },
         {
-          key:'用户ID',
+          key:'用户名称',
           type:'input',
-          prop:'realName',
-          value:'',
-        },
-        {
-          key:'模块名称',
-          type:'input',
-          prop:'phone',
+          prop:'name',
           value:'',
         },
         {
           key:'开始日期',
           type:'date',
-          prop:'startCreateTime',
+          prop:'startTime',
           value:'',
         },
         {
           key:'结束日期',
           type:'date',
-          prop:'endCreateTime',
+          prop:'endTime',
           value:'',
         },
       ]

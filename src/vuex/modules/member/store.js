@@ -68,6 +68,15 @@ const actions = {
       }
         break;
     }
+    if(path === '会员充值'){
+      if(!search.phone){
+        _g.toastMsg({
+          type:'error',
+          msg: '请输入联系电话'
+        })
+        return
+      }
+    }
     $http.post(_url, NotNull(search), res => {
       switch(path){
         case '积分管理' : return commit('setMemberStore', {params: res.data.info, tempArr1: res.data.businessType || []})
