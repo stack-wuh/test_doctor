@@ -2736,7 +2736,7 @@ const state = {
               valid:3,
               rules:'status',
               value:[0,1],
-              texts:['领取','确认','已领取'],
+              texts:['确认','领取','已领取'],
               styles:[
                 {
                   color:STYLES['PRIMARY']

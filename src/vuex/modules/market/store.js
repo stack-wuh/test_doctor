@@ -24,7 +24,7 @@ const actions = {
         break;
       case '精准获客' : _url = 'ordinaryActivities/accurateGuests.do', search = {...rootState.search, currPageNo, id}
         break;
-      case '报名查询' : _url = 'ordinaryActivities/signUpList.do', search = {...rootState.search, currPageNo}, dispatch('getActiveList')
+      case '报名查询' : _url = 'ordinaryActivities/signUpList.do', search = {...rootState.search, currPageNo, id}, dispatch('getActiveList')
         break;
       case '活动中奖' : _url = 'activitiesDraws/userLotteryInfo.do', search = {...rootState.search, currPageNo}
         break;
@@ -62,7 +62,7 @@ const actions = {
   },
   
   /**
-   * 市场退管 -- 普通活动 -- 编辑/新增
+   * 市场推广 -- 普通活动 -- 编辑/新增
    */
   marketActivePutAndPost({dispatch}, {path, form:{
     date,
@@ -117,9 +117,9 @@ const actions = {
   /**
    * 市场推广 -- 普通活动 -- 报名查询 -- 领取
    */
-  marketPrevSend({dispatch}, {path, row:{id,status}} = {}){
+  marketPrevSend({dispatch}, {path, row:{id,status}, query}){
     $http.post('ordinaryActivities/takeSignUp.do', {id, status}, res => {
-      dispatch('getMarketStore', {path})
+      dispatch('getMarketStore', {path, id: query.id})
     })
   },
 

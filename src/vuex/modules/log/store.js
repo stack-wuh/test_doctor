@@ -73,7 +73,7 @@ const actions = {
     }).catch(err => {
       _g.toastMsg({
         type:'error',
-        msg:'改操作已取消或操作错误!'
+        msg:'该操作已取消或操作错误!'
       })
     })
   },

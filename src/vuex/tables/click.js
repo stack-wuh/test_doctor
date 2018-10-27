@@ -33,7 +33,7 @@ export const openDialog = (params,text,row) => {
  * params
  * 
  */
-export const jump2Other = (params ,types ,row) => {
+export const jump2Other = (params ,types ,row, index, query) => {
   let {menu , subMenu ,child , path} = params
   let rootPath = '' , other = '' , data = ''
   switch(child || subMenu){
@@ -264,9 +264,9 @@ export const couponMemberParise = (params, text, row) => {
 /**
  * 市场推广 -- 普通活动 -- 报名查询 -- 发放
  */
-export const marketPrevSend = (params, status, row) => {
+export const marketPrevSend = (params, status, row, query) => {
   let {subMenu, child} = params
-  window.$store.dispatch('marketPrevSend', {row, path: child || subMenu})
+  window.$store.dispatch('marketPrevSend', {row, path: child || subMenu, query: {id: query.id}})
 }
 
 /**
