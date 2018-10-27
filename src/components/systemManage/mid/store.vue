@@ -3,7 +3,7 @@
     <section class="content">
       <search @inputChange="getStoresList({path:pathChange})" v-if="isShow" :name="$route.query.child || $route.query.subMenu" />
       <my-table v-if="isShow" :list="formatSystemStore({path: pathChange})"  header="true" :params=" $route.query.child ||$route.query.subMenu" >
-        <span slot="title">{{pathChange === '员工列表' ? '关注用户' : pathChange}}列表</span>
+        <span slot="title">{{pathChange === '员工列表' ? '关注用户' : pathChange | formatTitle}}</span>
         <div slot="right">
             <my-button  ></my-button>
         </div>
@@ -33,9 +33,18 @@ export default {
       isShow:true,
     }
   },
+  filters:{
+    formatTitle(value){
+      let reg = '列表'
+      if(value.search(reg) === -1){
+        value = value + '列表'
+      }
+      return value
+    }
+  },
   computed:{
     pathChange(){
-      return  this.$route.query.child || this.$route.query.subMenu
+      return this.$route.query.child || this.$route.query.subMenu
     },
     ...mapGetters({
       'list':'formatStoreDataList',

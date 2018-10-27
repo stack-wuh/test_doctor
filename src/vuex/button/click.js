@@ -68,7 +68,7 @@ export const jump2Detail = params => {
    if(result){
     window.$store.commit('handleOpenDialog',{params,text,row})
       switch(child || subMenu){
-        case '部门管理' : return window.$store.dispatch('getDepartmentList')
+        // case '部门管理' : return window.$store.dispatch('getDepartmentList')
         case '角色管理' : return window.$store.dispatch('getRoleList')
         case '会员充值设置' : return window.$store.dispatch('getCouponList')
       }
@@ -92,11 +92,11 @@ export const jump2Detail = params => {
    if(!choose.length){
     _g.toastMsg({
       type:'error',
-      msg:'请勾选操作对象后删除'
+      msg:`请勾选操作对象后${text}`
     })
     return
    }
-   window.$confirm('该操作将删除多条信息,确认继续?' , '提示' , {
+   window.$confirm(`该操作将${text}多条信息,确认继续?` , '提示' , {
      confirmButtonText:'确定',
      cancelButtonText:'取消',
      type:'warning',
@@ -139,7 +139,7 @@ export const jump2Detail = params => {
    if(!choose.length){
     _g.toastMsg({
       type:'error',
-      msg:'请勾选操作对象后删除'
+      msg:'请勾选操作对象后下架'
     })
     return
    }
@@ -179,10 +179,10 @@ export const jump2Detail = params => {
     switch(child || subMenu){
       case '门店管理' : return location.href = window.rootPath + '/store/outStore.do' + _str;
       case '精品订单管理' : return location.href = window.rootPath + '/quality/outQulity.do' + _str;
+      case '精品订单详情' : return location.href = window.rootPath + '/quality/outQulity.do' + _str;
       case '充值明细' : return location.href = window.rootPath + '/detail/exportRecharge.do' + _str;
       case '消费明细' : return location.href = window.rootPath + '/detail/exportConsumerDetails.do' + _str;
       case '查看领取明细' : return location.href = window.rootPath + '/coupon/getTakeListByUserCouponVoForReport.do' + _str;
-      case '员工奖励' : return location.href = window.rootPath + '/employeeReward/employeeRewardListReport.do' + _str;
       case '用户卡券管理' : return location.href = window.rootPath + '/coupon/getTakeListByUserCouponVoForReport.do' + _str;
       case '用户奖励' : return location.href = window.rootPath + '/coupon/userCouponListReport.do' + _str;
       case '员工奖励' : return location.href = window.rootPath + '/employeeReward/employeeRewardListReport.do' + _str;

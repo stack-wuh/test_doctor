@@ -108,6 +108,8 @@ const getters = {
         return {...item, lists:item.reserved1 && item.reserved1.split(',')}
       }else if(path == '系统消息'){
         return {...item, typeText: item.type == 0 ? '公告' : '提醒'}
+      }else if(path === '操作日志'){
+        return {...item, typeText: item.type === 0 ? '查看' : item.type === 1 ? '新增' : item.type === 2 ? '修改' : '删除'}
       }else{
         return {...item}
       }

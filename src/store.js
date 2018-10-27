@@ -22,6 +22,7 @@ import Limit from './vuex/modules/limit'
 import Statistic from './vuex/modules/statistic/store'
 import Selling from './vuex/modules/selling/store'
 
+import Select from './vuex/select'
 
 export default new Vuex.Store({
   state ,
@@ -43,6 +44,7 @@ export default new Vuex.Store({
     Limit,
     Statistic,
     Selling,
+    Select,
   },
   plugins:[MyLog]
 })

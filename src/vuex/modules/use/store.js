@@ -19,6 +19,8 @@ const actions = {
         break;
       case '配件大类管理' : _url = 'quality/getPartsList.do' , search = {...rootState.search ,search, currPageNo}
         break;
+      case '精品订单详情' : _url = 'quality/getOrderList.do', search = {...rootState.search, id: search.data.id, currPageNo}
+        break;
     }
     $http.post(_url , NotNull(search),res => {
       commit('setUseStore' ,{data:res.data})
@@ -121,7 +123,7 @@ const getters = {
    * 计算初始data
    */
   useData(state){
-    return state.data
+    return state.data && state.data
   },
   /**
    * 过滤data之后输出
@@ -132,6 +134,8 @@ const getters = {
           case '汽车精品管理' : return {...item ,pushText:item.recommend == 0 ? '否' : '是' ,changeText:item.supportIntegralChange == 0 ? '否' : '是' ,saleText:item.commodityState == 1? '在售': '停售' ,dropText:item.whetherDrop == 1? '是': '否' } ;
           case '精品订单管理' : return {...item , stateText:item.state == 0 ? '未支付' : item.state == 1 ? '待提货' :'已提货'} ;
           case '配件大类管理' : return {...item}
+          case '精品订单详情' : return {...item, stateText: item.state === 0 ? '未支付' : item.state === 1 ? '待提货' : '已提货'}
+          default : return {...item}
         }
     })
   },

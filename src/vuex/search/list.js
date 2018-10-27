@@ -317,6 +317,75 @@ const state = {
       ]
     },
     {
+      name:'精品订单详情',
+      params:['精品订单详情'],
+      type:'',
+      list:[
+        {
+          key:'订单编号',
+          type:'input',
+          prop:'orderNum',
+          value:'',
+        },
+        {
+          key:'姓名',
+          type:'input',
+          prop:'name',
+          value:'',
+        },
+        {
+          key:'联系电话',
+          type:'input',
+          prop:'telephone',
+          value:'',
+        },
+        {
+          key:'状态',
+          type:'select',
+          prop:'state',
+          value:'',
+          list:[
+            {
+              label:'未支付',
+              value:'0'
+            },
+            {
+              label:'已支付',
+              value:1
+            },
+            {
+              label:'已提货',
+              value:2
+            }
+          ],
+        },
+        {
+          key:'订单开始日期',
+          type:'date',
+          value:'',
+          prop:'orderDate',
+        },
+        {
+          key:'订单结束日期',
+          type:'date',
+          value:'',
+          prop:'orderEnd',
+        },
+        {
+          key:'提货开始日期',
+          type:'date',
+          value:'',
+          prop:'deliveryDate',
+        },
+        {
+          key:'提货结束日期',
+          type:'date',
+          value:'',
+          prop:'deliveryEnd',
+        }
+      ]
+    },
+    {
       name:'配件大类管理',
       params:['配件大类管理'],
       type:'',

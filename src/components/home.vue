@@ -31,11 +31,17 @@ export default {
   computed:{
     ...mapState({
       'isShowLoading':'isShowLoading'
-    })
+    }),
+    pathChange(){
+      return this.$route.query.child || this.$route.query.subMenu
+    }
   },
   watch:{
     '$route'(to,from){
-      console.log(to,from)
+      this.$store.commit('clearSearchForm')
+    },
+    pathChange(){
+      this.$store.commit('clearSearchForm')
     }
   },
   methods: {},

@@ -1,6 +1,5 @@
 import $http from '../../utils/axios'
-import {_g, NotNull, getObj, getQueryString, throttle} from '../../utils/global'
-import {list} from '../../utils/menu'
+import {_g, getQueryString} from '../../utils/global'
 const state = {
   data:[],
   limits:[], //登陆者权限列表

@@ -13,7 +13,7 @@ import $http from '../../utils/axios'
 export const openDialog = (params,text,row) => {
   let {subMenu, child} = params
   switch(child || subMenu){
-    case '部门管理' : window.$store.dispatch('getDepartmentList')  //获得上级部门列表
+    case '部门管理' : window.$store.dispatch('getSysDepartList',{search:{id: row.id}})  //获得上级部门列表
         break;
     case '关注用户列表' : window.$store.dispatch('getDepartmentList'), window.$store.dispatch('getRoleList') // 获得部门列表 / 角色列表
         break;
@@ -43,7 +43,7 @@ export const jump2Other = (params ,types ,row) => {
       break ;
     case '自动回复配置' : rootPath = '/system/store/reply'  , child = '自动回复配置' , data = JSON.stringify(row)
       break ;
-    case '汽车精品管理' : rootPath = types == '编辑' ? '/use/pub' : '' , child = types == '编辑' ? '编辑汽车精品信息' :'' , data = JSON.stringify(row)
+    case '汽车精品管理' : rootPath = types == '编辑' ? '/use/pub' : '/use/store' , child = types == '编辑' ? '编辑汽车精品信息' :'精品订单详情' , data = JSON.stringify(row)
       break ; 
     case '会员列表' : rootPath = '/member/pub' , child = '编辑会员信息', data = JSON.stringify(row)
       break ;

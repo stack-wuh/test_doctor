@@ -288,7 +288,7 @@ const state = {
         {
           key:'头像',
           type:'image',
-          prop:'wxPic',
+          prop:'headPic',
         },
         {
           key:'微信昵称',
@@ -802,7 +802,7 @@ const state = {
           key:'首图',
           value:'',
           prop:'',
-          type:'image',
+          type:'firstPicture',
         },
         {
           key:'类别',
@@ -1005,7 +1005,115 @@ const state = {
           ]
         },
       ]
-    },   
+    }, 
+    {
+      name:'精品订单管理详情',
+      path:'',
+      type:'精品订单管理详情',
+      params:['精品订单详情'],
+      colType:'',
+      colValue:'',
+      list:[
+        {
+          key:'订单号',
+          value:'',
+          prop:'orderNum',
+          type:'default',
+        },
+        {
+          key:'姓名',
+          value:'',
+          prop:'name',
+          type:'default',
+        },
+        {
+          key:'联系电话',
+          value:'',
+          prop:'telephone',
+          type:'default',
+        },
+        {
+          key:'商品名称',
+          value:'',
+          prop:'commodityName',
+          type:'default',
+        },
+        {
+          key:'商品单价',
+          value:'',
+          prop:'commodityPrice',
+          type:'default',
+        },
+        {
+          key:'数量',
+          value:'',
+          prop:'amount',
+          type:'default',
+        },
+        {
+          key:'支付金额',
+          value:'',
+          prop:'paymentMoney',
+          type:'default',
+        },
+        {
+          key:'扣除积分',
+          value:'',
+          prop:'deductionIntegral',
+          type:'default',
+        },
+        {
+          key:'下单日期',
+          value:'',
+          prop:'orderDate',
+          type:'default',
+        },
+        {
+          key:'提货日期',
+          value:'',
+          prop:'deliveryDate',
+          type:'default',
+        },
+        {
+          key:'操作人',
+          value:'',
+          prop:'employeeId',
+          type:'default'
+        },
+        {
+          key:'状态',
+          value:'',
+          prop:'stateText',
+          type:'default'
+        },
+        {
+          key:'操作',
+          type:'button',
+          fix:'right',
+          width:'140px',
+          list:[
+            {
+              valid:2,
+              value:0,
+              texts:['未支付','已支付','已提货'],
+              styles:[
+                {
+                  color:STYLES['ERROR']
+                },
+                {
+                  color:STYLES['PRIMARY']
+                },
+                {
+                  color:STYLES['SUCCESS']
+                }
+              ],
+              rules:'state',
+              click:handleTakeGood
+            },
+          ]
+        },
+      ]
+    },     
     {
       name:'配件大类管理',
       path:'',
@@ -1062,7 +1170,7 @@ const state = {
         {
           key:'操作类型',
           type:'default',
-          prop:'type',
+          prop:'typeText',
         },
         {
           key:'模块名称',
@@ -1763,7 +1871,7 @@ const state = {
           prop:'couponValue',
         }, 
         {
-          key:'有效期',
+          key:'有效期(天)',
           type:'default',
           prop:'vaildDays',
         }, 
@@ -2031,7 +2139,7 @@ const state = {
           prop:'couponValue',
         },
         {
-          key:'有效期',
+          key:'有效期(天)',
           type:'default',
           prop:'vaildDays',
         },
@@ -2625,11 +2733,10 @@ const state = {
           type:'button',
           list:[
             {
-              // text:'领取',
               valid:3,
               rules:'status',
               value:[0,1],
-              texts:['领取','确认','已确认'],
+              texts:['领取','确认','已领取'],
               styles:[
                 {
                   color:STYLES['PRIMARY']

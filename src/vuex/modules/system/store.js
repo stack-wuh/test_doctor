@@ -52,6 +52,7 @@ const actions = {
       case '门店管理' : _url = '/store/getStoreList.do' , search = {...rootState.search, currPageNo}
         break ;
       case '部门管理' : _url = '/department/getDepartmentList.do', search = {...rootState.search, currPageNo}
+              dispatch('getSysDepartList',{search: {}})
         break ;
       case '员工列表' : _url = 'employee/getEmployeeList.do' , search = {...rootState.search, search, currPageNo}
         break;

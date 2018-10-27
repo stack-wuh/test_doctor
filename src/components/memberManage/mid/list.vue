@@ -3,7 +3,7 @@
     <section class="content">
       <search @inputChange="getList({path:pathChange})" v-if="isShow" :name="pathChange" />
       <my-table v-if="isShow" :list="list({path: pathChange})"  header="true" :params="pathChange" >
-        <span slot="title">{{pathChange}}列表</span>
+        <span slot="title">{{pathChange | formatTitle}}</span>
         <div slot="right">
             <my-button  ></my-button>
         </div>
@@ -40,6 +40,15 @@ export default {
       visibleDialog:false,
     }
   },
+  filters:{
+    formatTitle(value){
+      let reg = '列表'
+      if(value.search(reg) === -1){
+        value = value + '列表'
+      }
+      return value
+    }
+  },
   computed:{
     pathChange(){
       return  this.$route.query.child || this.$route.query.subMenu
@@ -64,15 +73,12 @@ export default {
         this.isShow = true
         this.getList({path: this.pathChange})  
       })
-    }
+    },
   },
   methods: {
     ...mapActions({
       'getList':'getMemberStore'
     }),
-    inputChange(e){
-      console.log(e)
-    },
     getCurrent(value){
       this.getList({path: this.pathChange, currPageNo: value})
     },
@@ -82,7 +88,7 @@ export default {
   },
   created(){
     this.getList({path:this.pathChange})
-  }
+  },
 }
 </script>
 

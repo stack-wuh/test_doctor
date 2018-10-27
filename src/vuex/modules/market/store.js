@@ -42,11 +42,13 @@ const actions = {
    * 市场推广模块内容全部的删除事件
    */
   marketDelAndFresh({dispatch}, {row, row:{id}, path}){
-    let _url = ''
+    let _url = '', search = {}
     switch(path){
       case '报名查询' : _url = 'ordinaryActivities/delSignUp.do'
         break;
       case '普通活动' : _url = 'ordinaryActivities/banActivities.do'
+        break;
+      case '活动抽奖' : _url = 'ordinaryActivities/banActivities.do'
         break;
     }
     return new Promise((resolve, reject) => {

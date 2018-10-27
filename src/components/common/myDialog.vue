@@ -26,7 +26,7 @@
 
 <script>
 import {forms} from './utils/dialog.js'
-import {mapActions, mapMutations, mapGetters} from 'vuex'
+import {mapActions, mapMutations, mapGetters, mapState} from 'vuex'
 export default {
   name: 'myDialog',
   
@@ -46,6 +46,9 @@ export default {
       'goodsTypeList': 'formatGoodsTypeList',
       'projectsList': 'formatProjectList'
     }),
+    ...mapState({
+      'department':state => state.Select.department
+    }),
     visibleDialog(){
       return this.$store.state.dialogVisible
     },
@@ -58,7 +61,7 @@ export default {
     formatList(){
       return this.list && this.list.map(item => {
         if(item.key == '上级部门'){
-          return {...item ,list: this.departList}
+          return {...item ,list: this.department}
         }else if(item.key == '角色类型'){
           if(!item.picker){
             return {...item, list: this.roleList}
