@@ -297,6 +297,26 @@ export const carFeedPubAndFresh = (params, status, row) => {
 }
 
 /**
+ * 市场推广 -- 普通活动 -- 发布
+ */
+export const serveActivePostAndFresh = (params, status, row) => {
+  let {subMenu, child} = params
+  let path = child || subMenu
+  window.$confirm('该操作将活动推送到前台,请确认?', '提示', {
+    confirmButtonText:'确认',
+    cancelButtonText:'取消',
+    type:'warning',
+  }).then(()=> {
+    window.$store.dispatch('marketActivePubAndFresh', {path, id: row.id})
+  }).catch(()=> {
+    _g.toastMsg({
+      type: 'error',
+      msg:'操作已取消'
+    })
+  })
+}
+
+/**
  * 专项检测配置 -- 切换状态
  */
 export const serveSettingState = (params, row) => {

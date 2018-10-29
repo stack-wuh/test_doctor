@@ -50,6 +50,12 @@ export const jump2Detail = params => {
             break;
       case '养车知识' : rootPath = '/serve/carfeed/pub', child = '编辑养车知识'
             break;
+      case '调拨发起' : rootPath = '/selling/store/pub', child = '编辑调拨发起'
+            break;
+      case '调拨接收' : rootPath = '/selling/store/pub', child = '编辑调拨接收'
+            break;
+      case '日常盘点' : rootPath = '/selling/store/pub', child = '编辑日常盘点'
+            break;
       default : rootPath = '/index'
     }
     window.$route.push({path:'/mid/container',query:{path:rootPath , menu , subMenu ,child}})

@@ -63,7 +63,6 @@ export default {
       'getSellingStore': 'getSellingStore'
     }),
     getCurrentPage(e){
-      console.log(e)
       this.getSellingStore({path: this.changePath, currPageNo: e})
     }
   },

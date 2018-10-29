@@ -56,6 +56,7 @@
    handlerForSettingOne,
    handleQuesPub,
    handleShakeState,
+   serveActivePostAndFresh,
   } from './click.js'
 const state = {
   data:[
@@ -2607,6 +2608,10 @@ const state = {
               size:'small',
               click:jump2Other,
             },
+            {
+              text: '发布',
+              click: serveActivePostAndFresh
+            }
           ]
         },
       ]

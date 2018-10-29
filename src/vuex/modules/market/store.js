@@ -112,7 +112,9 @@ const actions = {
    */
   marketActivePubAndFresh({dispatch}, {path, id} = {}){
     $http.post('ordinaryActivities/releaseActivities.do', {id}, res => {
-      dispatch('getMarketStore', {path})
+      setTimeout(() => {
+        dispatch('getMarketStore', {path})
+      }, 1000)
     })
   },
 

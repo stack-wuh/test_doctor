@@ -46,12 +46,12 @@
                 </el-form-item>
                 <el-form-item prop="minTime">
                     <el-select placeholder="平均单词浏览最小时间" v-model="form.minTime">
-                      <el-option label="1分钟" value="1"></el-option>
+                      <el-option label="1分钟" :value="1"></el-option>
                     </el-select>
                 </el-form-item>
                 <el-form-item prop="maxTime">
                   <el-select placeholder="平均单词浏览最大时间" v-model="form.maxTime">
-                    <el-option label="1小时" value="60"></el-option>
+                    <el-option label="1小时" :value="60"></el-option>
                   </el-select>
                 </el-form-item>
                 <el-form-item prop="isok">
