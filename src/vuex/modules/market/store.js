@@ -28,6 +28,8 @@ const actions = {
         break;
       case '活动中奖' : _url = 'activitiesDraws/userLotteryInfo.do', search = {...rootState.search, currPageNo}
         break;
+      case '摇一摇中奖' : _url = 'rockIngActivities/userRockingList.do', search = {...rootState.search, currPageNo}
+        break;
     }
     return new Promise((resolve, reject) => {
       $http.post(_url, NotNull(search), res =>{
@@ -160,7 +162,49 @@ const actions = {
         return resolve(res)
       })
     })
-  }
+  },
+
+  /**
+   *   市场推广 -- 摇一摇活动 -- 编辑/新增 -- 活动列表 
+   */
+  getShackActive({dispatch}){
+    return new Promise((resolve, reject) => {
+      $http.post('activitiesDraws/activitiesDrawsSelect.do', {}, res => {
+        return resolve(res)
+      })
+    })
+  },
+
+  /**
+   * 市场推广 -- 摇一摇活动 -- 新增/编辑
+   */
+  marketShakePub({dispatch}, {form}){
+    return new Promise((resovle, reject) => {
+      $http.post('rockIngActivities/addRockIngActivities.do', form, res => {
+
+      })
+    })
+  },
+  /**
+   * 市场推广 -- 摇一摇活动 --- 获取编辑内容
+   */
+  marketShakeEdit({dispatch}, {row: {id }}){
+    return new Promise((resolve, reject) => {
+      $http.post('rockIngActivities/updateRockIngActivitiesInfo.do', {id}, res => {
+        return resolve(res)
+      })
+    })
+  },
+  /**
+   * 市场推广 -- 摇一摇活动 -- 开启
+   */
+  marketShakeStateChange({dispatch}, {path, row, row: {id }}){
+    return new Promise((resolve, reject) => {
+      $http.post('rockIngActivities/start.do', {id}, res => {
+        dispatch('getMarketStore', {path, })
+      })
+    })
+  },
 }
 
 const mutations = {
@@ -187,6 +231,10 @@ const getters = {
         return {...item,  columnTypeText: item.columnType === 0 ? '养车' : '养车', validate: `${item.startTimeForString} 至 ${item.endTimeForString}`, stateText: item.state === 0 ? '未开始' : item.state === 1 ? '进行中' : '已结束'}
       }else if(path === '活动中奖'){
         return  {...item, statusText: item.status === 0 ? '未领取' : '已领取', typeText: item.type === 0 ? '电子代金券' : '实物卡券'}
+      }else if(path === '摇一摇中奖'){
+        return {...item, statusText: item.status === 1 ? '已领取' : '未领取'}
+      }else if(path === '摇一摇活动'){
+        return {...item, activeStateText: item.activeState === 1 ? '进行中' : '已结束'}
       }else{
         return {...item}
       }

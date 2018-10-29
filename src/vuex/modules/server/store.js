@@ -9,7 +9,7 @@ const state = {
   dialog_row: {},
   dialogCanshowForm: false,
 
-  isShowSettingOneDialog: false
+  isShowSettingOneDialog: false,
 }
 
 const actions = {
@@ -39,9 +39,11 @@ const actions = {
         break;
       case '检修记录' : _url = 'repairRecord/init.do', search = {...rootState.search, currPageNo}
         break;
-      case '检修项配置' : _url = 'maintenanceItem/init.do', search = {...rootState.search, currPageNo}
+      case '检修项配置' : _url = 'maintenanceItem/init.do', search = {...rootState.search, currPageNo},
+                    dispatch('getServeCarSetting')
         break;
-      case '专项检测配置' : _url = 'detection/init.do', search = {...rootState.search, currPageNo}
+      case '专项检测配置' : _url = 'detection/init.do', search = {...rootState.search, currPageNo},
+                    dispatch('getServeCarSettingOne')
         break;
       case '检修记录详情' : _url = 'repairRecord/selectByOne.do', search = {...search}
         break;
@@ -234,6 +236,32 @@ const actions = {
       })
     })
   },
+
+    /**
+   * 客户服务 -- 车辆检测 专项检测配置 -- 编辑/新增 
+   *  获取row中的id
+   */
+  handleSettingOneState({commit}, {row} = {}){
+    commit('setSettingOneState', {row})
+  },
+  serverCarSettingOnePub({dispatch}, {form}){
+    return new Promise((resolve, reject) => {
+      $http.post('detection/insertOrUpdate.do', NotNull(form), res => {
+        return resolve(res)
+      })
+    })
+  },
+
+  /**
+   * 客户服务 -- 车辆检测 -- 检修项配置 -- 编辑/新增
+   */
+  serverCarSettingPub({dispatch}, {form}){
+    return new Promise((resolve, reject) => {
+      $http.post('maintenanceItem/insertOrUpdate.do', form, res => {
+        return resolve(res)
+      })
+    })
+  }
 }
 const mutations = {
   setServerStore(state, {params} = {}){
@@ -260,17 +288,17 @@ const mutations = {
   },
 
   /**
-   * 专项检测 -- 编辑/新增 
+   * 客户服务 -- 车辆检测 专项检测配置 -- 编辑/新增 
    */
   setSettingOneState(state, {row} = {}){
-    state.isShowSettingOneDialog = !state.isShowSettingOneDialog
     state.dialog_row = row
+    state.isShowSettingOneDialog = !state.isShowSettingOneDialog
   },
 
 }
 
 const getters = {
-  formatServerStore: (state, rootState, rootGetters) => ({path} = {}) => {
+  formatServerStore: (state) => ({path} = {}) => {
     return state.data && state.data.map(item => {
       if(path === '救援服务'){
         return {...item, statusText: item.status == 0 ? '未确认' : item.status == 1 ? '已确认' : '已取消'}

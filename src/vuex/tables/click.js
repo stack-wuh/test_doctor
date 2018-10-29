@@ -63,7 +63,8 @@ export const jump2Other = (params ,types ,row, index, query) => {
       break ; 
     case '摇一摇活动' :
             rootPath = types == '编辑' ? '/market/shake/pub' : types == '中奖查询' ? '/market/store' : '' ,
-            child = types == '编辑' ? '编辑摇一摇活动' : types == '中奖查询' ? '摇一摇中奖' : ''
+            child = types == '编辑' ? '编辑摇一摇活动' : types == '中奖查询' ? '摇一摇中奖' : '',
+            data = JSON.stringify(row)
       break ;
     case '保险服务' : rootPath = '/serve/insure/pub' , child = '编辑保险服务',
             data = JSON.stringify(row)
@@ -215,6 +216,7 @@ export const handleSwitchChange = (params, row) => {
  export const handleDelAndFresh = (params, text, row) => {
    let {subMenu, child} = params
    let {id} = row
+   let search = {ids: id}
    let _url = '', dispatch =''
    window.$confirm('该操作将删除此条信息,请确认?','提示',{
      confirmButtonText:'确定',
@@ -227,10 +229,16 @@ export const handleSwitchChange = (params, row) => {
       case '系统消息' : _url = 'message/delMessageCenter.do', dispatch = 'getLogStore'
         break;
       case '养车知识分类': _url = 'raisingBackend/delRaisingType.do', dispatch = 'getServerStore'
-        break
+        break;
+      case '专项检测配置' : _url = 'detection/delete.do', dispatch = 'getServerStore', search = {id}
+        break;
+      case '检修项配置' : _url = 'maintenanceItem/delete.do', dispatch = 'getServerStore', search = {id}
+        break;
     }
-    $http.post(_url, {ids:id}, res => {
-      window.$store.dispatch(dispatch, {path: child || subMenu})
+    $http.post(_url, search, res => {
+      setTimeout(() => {
+        window.$store.dispatch(dispatch, {path: child || subMenu})
+      }, 1000)
     })
    }).catch(()=>{
      _g.toastMsg({
@@ -311,7 +319,7 @@ export const handleToggleStateForServeCar = (params, text, row) =>{
  * 客户服务 -- 车辆检测 -- 专项检测配置
  */
 export const handlerForSettingOne = (params, text, row) => {
-  window.$store.commit('setSettingOneState', {row})
+  window.$store.dispatch('handleSettingOneState', {row})
 }
 
 /**
@@ -328,6 +336,25 @@ export const handleQuesPub = (params, text, row) => {
     _g.toastMsg({
       type:'error',
       msg:'操作已取消或失败'
+    })
+  })
+}
+
+/**
+ * 市场推广 -- 摇一摇活动 -- 开启
+ */
+export const handleShakeState = (params, text, row) => {
+  let path = params.child || params.subMenu
+  window.$confirm('该操作将开启活动, 请确认?', '提示', {
+    confirmButtonText: '确认',
+    confirmCancelText: '取消',
+    type: 'warning'
+  }).then(() => {
+    window.$store.dispatch('marketShakeStateChange', {path, row})
+  }).catch(() => {
+    _g.toastMsg({
+      type: 'error',
+      msg: '操作已取消或失败'
     })
   })
 }

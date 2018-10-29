@@ -1755,12 +1755,40 @@ const state = {
           value:'',
           type:'select',
           prop:'type',
+          list:[
+            {
+              label: '保险',
+              value: 0
+            },
+            {
+              label: '保养维护',
+              value: 1
+            }
+          ]
         },
         {
           key:'推荐状态',
           value:'',
           type:'select',
           prop:'currentState',
+          list:[
+            {
+              label: '待确认',
+              value: 0
+            },
+            {
+              label: '已确认',
+              value: 1
+            },
+            {
+              label: '已领取',
+              value: 2
+            },
+            {
+              label: '已失效',
+              value: 3
+            }
+          ]
         },
         {
           key:'推荐开始日期',
@@ -1804,6 +1832,16 @@ const state = {
           value:'',
           type:'select',
           prop:'activeState',
+          list:[
+            {
+              label: '进行中',
+              value: 1
+            },
+            {
+              label: '已结束',
+              value: 0
+            }
+          ]
         }
       ],
     },
@@ -1816,11 +1854,13 @@ const state = {
           key:'参与人姓名',
           value:'',
           type:'default',
+          prop:'name'
         },
         {
           key:'参与人联系电话',
           value:'',
           type:'default',
+          prop: 'phone'
         },
       ],
     },

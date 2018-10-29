@@ -204,6 +204,8 @@ export const jump2Detail = params => {
       case '采购明细表' : return location.href = window.rootPath + '/reportManage/exportPurchaseDetails.do' + _str
       case '挂账单据明细表' : return location.href = window.rootPath + '/reportManage/exportAccountsList.do' + _str
       case '挂账还款明细表' : return location.href = window.rootPath + '/reportManage/eportRepayment.do' + _str
+      case '推荐有礼' : return location.href = window.rootPath + '/recommendingGift/recommendingGiftListReport.do' + _str
+      case '摇一摇中奖' : return location.href = window.rootPath + '/rockIngActivities/userRockingListReport.do' + _str
       default : return _g.toastMsg({type: 'error', msg: '导出失败'})
     }
    }else{

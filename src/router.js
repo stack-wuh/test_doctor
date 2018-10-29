@@ -58,6 +58,7 @@ const ServerQuesStatic = resolve => require(['@/components/serveManage/child/que
 
 const SellingStore = resolve => require(['@/components/sellingManage/mid/store'], resolve)
 const SellingBusiness = resolve => require(['@/components/sellingManage/child/business'], resolve)
+const SellingStorePub = resolve => require(['@/components/sellingManage/child/stores/store'], resolve)
 
 
 const LogStore = resolve => require(['@/components/logManage/mid/store'], resolve)
@@ -311,6 +312,11 @@ export default new Router({
                   path: '/selling/business',
                   name:'sellingBusiness',
                   component: SellingBusiness
+                },
+                {
+                  path:'/selling/store/pub',
+                  name:'sellingStorePub',
+                  component: SellingStorePub
                 }
               ],
             },

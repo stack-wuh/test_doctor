@@ -55,6 +55,7 @@
    handleToggleStateForServeCar,
    handlerForSettingOne,
    handleQuesPub,
+   handleShakeState,
   } from './click.js'
 const state = {
   data:[
@@ -3004,13 +3005,13 @@ const state = {
         {
           key:'活动状态',
           type:'default',
-          prop:'activeState',
+          prop:'activeStateText',
         },
         {
           key:'操作',
           type:'button',
           fix:'right',
-          width:'160px',
+          width:'200px',
           list:[
             {
               text:'编辑',
@@ -3019,9 +3020,19 @@ const state = {
               click:jump2Other
             },
             {
-              text:'开启',
-              type:'',
-              size:'small',
+              valid: 3,
+              rules: 'activeState',
+              value:[0],
+              texts:['开启', '已开启'],
+              styles:[
+                {
+                  color: STYLES['PRIMARY']
+                },
+                {
+                  color: STYLES['SUCCESS']
+                }
+              ],
+              click: handleShakeState
             },
             {
               text:'中奖查询',
@@ -3044,50 +3055,50 @@ const state = {
         {
           key:'名次',
           type:'default',
-          prop:'',
+          prop:'place',
         },
         {
           key:'奖项',
           type:'default',
-          prop:'',
+          prop:'reserved5',
         },
         {
-          key:'奖品名称',
+          key: '奖励名称',
           type:'default',
-          prop:'name',
+          prop:'reserved1'
         },
         {
-          key:'用户名',
-          type:'default',
-          prop:'name',
+          key: '用户名',
+          type: 'default',
+          prop: 'reserved2'
         },
         {
           key:'联系电话',
           type:'default',
-          prop:'name',
+          prop:'reserved3',
         },
         {
           key:'摇一摇积分',
           type:'default',
-          prop:'name',
+          prop:'integral',
         },
         {
           key:'参与时间',
           type:'default',
-          prop:'name',
+          prop:'reserved4',
         },
         {
           key:'状态',
           type:'default',
-          prop:'name',
+          prop:'statusText',
         },
-        {
-          key:'操作',
-          type:'button',
-          fix:'right',
-          width:'160px',
-          list:[]
-        },
+        // {
+        //   key:'操作',
+        //   type:'button',
+        //   fix:'right',
+        //   width:'160px',
+        //   list:[]
+        // },
       ]
     },
     {
@@ -3433,6 +3444,7 @@ const state = {
               text:'删除',
               type:'',
               size:'small',
+              click: handleDelAndFresh
             },
           ]
         },
@@ -3474,6 +3486,7 @@ const state = {
               text:'删除',
               type:'',
               size:'small',
+              click: handleDelAndFresh
             },
           ]
         },
