@@ -38,3 +38,11 @@ export const handleSearchList = ({path, menu} = {}) => {
     return window.$store.dispatch('getSellingStore', {path})
   }
 }
+
+
+/**
+ * 会员充值 -- 重置事件 -- 定制
+ */
+export const handleClearSearch = ({path, menu} = {}) => {
+  window.$store.commit('clearSearchForm')
+}

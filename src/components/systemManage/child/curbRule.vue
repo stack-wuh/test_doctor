@@ -389,7 +389,7 @@ export default {
      * 编辑/保存
      */
     memberCouponRuleToggle() {
-      this.form[0].list.map(item => (item.disabled = !item.disabled));
+      // this.form[0].list.map(item => (item.disabled = !item.disabled));
     },
     memberCouponCancel() {},
     /**
