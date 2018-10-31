@@ -4522,9 +4522,20 @@ const state = {
           type:'button',
           list:[
             {
-              text:'编辑',
-              type:'',
+              valid: 3,
+              value: [0, 1],
+              rules:'status',
+              texts:['编辑', '查看'],
+              styles:[
+                {
+                  color: STYLES['PRMARY']
+                },
+                {
+                  color: STYLES['PRIMARY']
+                }
+              ],
               size:'small',
+              click: jump2Other
             },
           ]
         },
@@ -4563,9 +4574,10 @@ const state = {
           type:'button',
           list:[
             {
-              text:'编辑',
+              text:'查看',
               type:'',
               size:'small',
+              click: jump2Other,
             },
           ]
         },

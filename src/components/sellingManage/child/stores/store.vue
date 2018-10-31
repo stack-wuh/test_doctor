@@ -22,7 +22,7 @@
     <section class="table-area">
       <p class="table-area__title">
         <span>商品列表</span>
-        <el-button v-if="!disabled" @click="handleOpenDialog" type="primary" >{{pathChange === '编辑调拨接收' ? '搜索' : '添加'}}</el-button>
+        <el-button v-if="!disabled" @click="handleOpenDialog" type="primary" >{{pathChange === '编辑调拨接收' || pathChange === '编辑付款管理' ? '搜索' : '添加'}}</el-button>
       </p>
       <el-table :data="list" border stripe>
         <el-table-column v-if="item.type === 'default'" align="center" v-for="(item, index) in tableList" :label="item.label" :prop="item.field"></el-table-column>
@@ -208,28 +208,28 @@ const forms = [
     params:['编辑付款管理'],
     list:[
       {
+        label: '采购入库单',
+        field: 'storageCode',
+        type: 'input',
+        rules:[{required: true, message: '请编辑采购入库单号', trigger: 'change'}],
+      },
+      {
         label: '供应商',
-        field: 'outputCode',
+        field: 'supplierId',
         type: 'select',
         rules:[{required: true, message: '请选择供应商', trigger: 'blur'}],
       },
       {
         label: '付款人',
-        field: 'outputRepositoryId',
+        field: 'userId',
         type: 'select',
         rules:[{required: true, message: '请选择付款人', trigger: 'change'}],
       },
       {
         label: '支付方式',
-        field: 'inputRepositoryId',
+        field: 'payType',
         type: 'select',
         rules:[{required: true, message: '请选择支付方式', trigger: 'change'}],
-      },
-      {
-        label: '采购入库单',
-        field: 'employeeId',
-        type: 'input',
-        rules:[{required: true, message: '请编辑采购入库单', trigger: 'change'}],
       },
       {
         label: '备注',
@@ -483,27 +483,32 @@ const tables = [
       {
         label: '入库数量',
         type:'default' ,
-        field: 'allotNun',
+        field: 'repositoryNum',
       },
       {
         label: '采购单价',
         type:'default' ,
-        field: 'receiveNum',
+        field: 'takePrice',
       },
       {
         label: '应付金额',
-        type:'input' ,
-        field: 'num',
+        type:'default' ,
+        field: 'storageTotalPrice',
       },
       {
         label: '已付金额',
-        type:'input' ,
-        field: 'num',
+        type:'default' ,
+        field: 'price',
+      },
+      {
+        label: '本次实付金额',
+        type:'input',
+        field: 'alreadyPrice',
       },
       {
         label: '未付金额',
-        type:'input' ,
-        field: 'num',
+        type:'default' ,
+        field: 'unpayNum',
       },
       {
         label: '操作',
@@ -588,7 +593,9 @@ export default {
       'employees': state => state.Select.employeeList,
       'SellingStoreGoods': state => state.Select.sellingStore.SellingStoreGoods,
       'total': state => state.Select.sellingStore.total,
-      'currPageNo': state => state.Select.sellingStore.currPageNo
+      'currPageNo': state => state.Select.sellingStore.currPageNo,
+      'providerList': state => state.Select.providerList,
+      'payTypeList': state => state.Select.payTypeList
     }),
     formList(){
      let data = this.forms.filter(item => item.params.includes(this.pathChange)) && 
@@ -602,6 +609,12 @@ export default {
           item = Object.assign(item, {list: this.employees})
         }else if(item.field === 'repositoryId'){
           item = Object.assign(item, {list: this.stores})
+        }else if(item.field === 'supplierId'){
+          item = Object.assign(item, {list: this.providerList})
+        }else if(item.field === 'payType'){
+          item = Object.assign(item, {list: this.payTypeList})
+        }else if(item.field === 'userId'){
+          item = Object.assign(item, {list: this.employees})
         }
       })
       return data
@@ -641,7 +654,12 @@ export default {
       'sellingStoreReciverPost': 'sellingStoreReciverPost',
       'sellingStoreReciverPut': 'sellingStoreReciverPut',
       'sellingStoreCheckPost': 'sellingStoreCheckPost',
-      'sellingStoreCheckPut': 'sellingStoreCheckPut'
+      'sellingStoreCheckPut': 'sellingStoreCheckPut',
+      'getProviderList': 'getProviderList',
+      'getPayTypeList': 'getPayTypeList',
+      'sellingFinancePayPut': 'sellingFinancePayPut',
+      'sellingFinancePayPost': 'sellingFinancePayPost',
+      'sellingFinancePayInfo': 'sellingFinancePayInfo'
     }),
     /**
      * select框change事件
@@ -676,7 +694,7 @@ export default {
         }else{
           _g.toastMsg({
             type: 'error',
-            msg: '请编辑调拨发起单'
+            msg: '请编辑调拨发起单后搜索'
           })
         }
       }else if(this.pathChange === '编辑日常盘点'){
@@ -687,9 +705,25 @@ export default {
         }else{
           _g.toastMsg({
             type: 'error',
-            msg: '请先选择仓库'
+            msg: '请选择仓库后搜索'
           })
         }
+      }else if(this.pathChange === '编辑付款管理'){
+        if(this.formList.form && this.formList.form.storageCode){
+          this.sellingFinancePayPut({storageCode: this.formList.form.storageCode}).then(res => {
+            if(res.status === 0){
+              this.formList.form.storageCode = res.data.storage.storageCode
+              this.list = res.data.list.map(item => {
+                return {...item, unpayNum: item.storageTotalPrice - item.price, alreadyPrice: 0}
+              })
+            }
+          })
+        }else{
+        _g.toastMsg({
+          type: 'error',
+          msg: '请编辑采购入库单后搜索'
+        })
+      }
       }
     },
     /**
@@ -733,6 +767,8 @@ export default {
           return {outputInfoId: item.id, num: Number(item.num)}
         }else if(this.pathChange === '编辑日常盘点'){
           return {repositoryGoodId: item.id, repositoryNum: item.repositoryNum, loadNum: item.loadNum, num: item.num}
+        }else if(this.pathChange === '编辑付款管理'){
+          return {storageInfoId: item.id, alreadyPrice: item.alreadyPrice}
         }
       })
       if(!this.list.length) {
@@ -760,6 +796,11 @@ export default {
               res.status === 0 && this.handleClickCancel()
             })
           }
+          if(this.pathChange === '编辑付款管理'){
+            this.sellingFinancePayPost({form}).then(res => {
+              res.status === 0 && this.handleClickCancel()
+            })
+          }
         }else{
           _g.toastMsg({
             type: 'error',
@@ -784,14 +825,26 @@ export default {
     handleChangeInput(){
       if(this.pathChange === '编辑日常盘点'){
         this.list.map(item => {
-          item = Object.assign(item, {reduceNum: item.num - item.repositoryNum})
+          item = Object.assign(item, {reduceNum: (item.num - item.repositoryNum).toFixed(2)})
+        })
+      }else if(this.pathChange === '编辑付款管理'){
+        this.list.map(item =>{
+          let unpayNum = Number.parseFloat(item.storageTotalPrice) - Number.parseFloat(item.price) - Number.parseFloat(item.alreadyPrice)
+          item = Object.assign(item, {unpayNum})
         })
       }
     }
   },
   created(){
-    this.getSellingStores()
-    this.getEmployeeList()
+
+    if(this.pathChange === '编辑付款管理'){
+      this.getProviderList()
+      this.getPayTypeList()
+      this.getEmployeeList()
+    }else {
+      this.getSellingStores()
+      this.getEmployeeList()
+    }
     Object.keys(this.formList.form).map(item => {
       this.formList.form[item] = ''
     })
@@ -811,6 +864,13 @@ export default {
           this.formList.form = {...this.formList.form, ...res.data.check}
           this.list = res.data.list.map(item => {
              return item = Object.assign(item, {reduceNum: item.num - item.repositoryNum})
+          })
+        })
+      }else if(this.pathChange === '编辑付款管理'){
+        this.sellingFinancePayInfo({id: this.query.id}).then(res =>{
+          this.formList.form = {...this.formList.form, ...res.data.pay}
+          this.list = res.data.list.map(item => {
+            return {...item, unpayNum: Number.parseFloat(item.storageTotalPrice) - Number.parseFloat(item.price), alreadyPrice: 0}
           })
         })
       }

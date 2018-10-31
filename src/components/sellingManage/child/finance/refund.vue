@@ -1,7 +1,7 @@
 <template>
   <section class="store-wrapper">
     <section class="form-area">
-      <el-form class="my-form" label-width="100px">
+      <el-form class="my-form" ref="myForm" :model="form" label-width="120px">
         <el-form-item label="收款单号">
           <el-input @change="handleChange" style="width: 34%;" v-model="payCode"></el-input>
         </el-form-item>
@@ -9,18 +9,21 @@
           <section class="form-item" v-if="item.type !== 'textarea'" v-for="(item, index) in formList" :key="index">
             <el-form-item :label="item.label" :prop="item.field" :rules="item.rules" >
               <el-input :disabled="item.disabled" v-if="item.type === 'default'" v-model="form[item.field]" :placeholder="'请编辑' + item.label"></el-input>
-              <el-select v-if="item.type === 'select'" v-model="form[item.field]" :placeholder="'请选择' + item.label">
+              <el-select :disabled="item.disabled" v-if="item.type === 'select'" v-model="form[item.field]" :placeholder="'请选择' + item.label">
                 <el-option v-for="(sub, sid) in item.list" :label="sub.label" :value="sub.value"></el-option>
               </el-select>
             </el-form-item>
           </section>
         </section>
         <el-form-item v-if="item.type === 'textarea'" v-for="(item, index) in formList" :key="index" :label="item.label" :prop="item.field">
-          <el-input style="width: 78%;" type="textarea" :rows="3" v-model="form[item.field]" ></el-input>
+          <el-input :disabled="item.disabled" style="width: 78%;" type="textarea" :rows="3" v-model="form[item.field]" ></el-input>
         </el-form-item>
       </el-form>
     </section>
-    <my-sub-button @handleSubmit="submit" @handleCancel="cancel" ></my-sub-button>
+    <section v-if="query" class="btn-area">
+      <el-button @click="cancel" type="danger" size="small" >返回</el-button>
+    </section>
+    <my-sub-button v-if="!query" @handleSubmit="submit" @handleCancel="cancel" ></my-sub-button>
   </section>
 </template>
 
@@ -58,12 +61,14 @@ const forms = [
     label: '支付方式',
     field: 'payType',
     type: 'select',
+    disabled: false,
     rules:[{required: true, message: '请选择支付方式', trigger: 'change'}]
   },
   {
     label: '本次支付金额',
     field: 'price',
     type: 'default',
+    disabled: false,
     rules: [{required: true, message: '请编辑支付金额', trigger: 'blur'}]
   },
   {
@@ -71,6 +76,7 @@ const forms = [
     field: 'remark',
     type: 'textarea',
     rows: 3,
+    disabled: false,
     rules: [{required: true, message:'请编辑备注', trigger: 'blur'}]
   }
 ]
@@ -105,25 +111,37 @@ export default {
           return {...item}
         }
       })
+    },
+    query(){
+      let data = this.$route.query.data
+      data = data && JSON.parse(data)
+      return data
     }
   },
   methods: {
     ...mapActions({
       'getSellingFinance': 'getSellingFinance',
-      'getPayTypeList': 'getPayTypeList'
+      'getPayTypeList': 'getPayTypeList',
+      'getProviderList' : 'getProviderList',
+      'sellingStoreRefundPost': 'sellingStoreRefundPost',
+      'sellingStoreRefundPut': 'sellingStoreRefundPut'
     }),
     /**
      * 根据收款单号 搜索 挂账还款内容
      */
     handleChange(){
       this.getSellingFinance({payCode: this.payCode}).then(res => {
-        console.log(res)
+        this.form = {...this.form, ...res.data, payId: res.data.id}
       })
     },
     submit(){
       this.$refs.myForm.validate(valid => {
         if(valid){
-          console.log(this.form)
+          this.sellingStoreRefundPost({form: this.form}).then(res => {
+            res.status === 0 && (
+              this.cancel()
+            )
+          })
         }else{
           _g.toastMsg({
             type: 'error',
@@ -143,6 +161,17 @@ export default {
   },
   created(){
     this.getPayTypeList()
+    this.getProviderList()
+    if(this.query && this.query.id){
+      let _arr = JSON.parse(JSON.stringify(this.formList)).map(item => {
+        return {...item, disabled: true}
+      })
+      this.forms = _arr
+      this.sellingStoreRefundPut({id: this.query.id}).then(res => {
+        this.form = {...this.form, ...res.data}
+        this.payCode = this.form.payCode
+      })
+    }
   }
 }
 </script>
@@ -168,7 +197,7 @@ export default {
   .btn-area{
     height: 50px;
     padding-right: 20px;
-    text-align: right;
+    text-align: center;
     background-color: #fff;
   }
 }

@@ -135,7 +135,11 @@ const actions = {
       case '调拨发起' : _url = 'repositoryOutput/delOutput.do'
         break;
       case '调拨接收' : _url = 'repositoryInput/delInput.do'
-        break
+        break;
+      case '挂账还款' : _url = 'accountPay/delAccountPay.do'
+        break;
+      case '付款管理' : _url = 'pay/delPay.do'
+        break;
     }
     return new Promise((resolve,reject) => {
       $http.post(_url, {ids: id}, res => {
@@ -553,6 +557,90 @@ const actions = {
       })
     })
   },
+
+  /**
+   * 进存销 -- 财务管理 -- 挂账还款 -- 新增
+   */
+  sellingStoreRefundPost({dispatch}, {form: {
+    payId,
+    payType,
+    price,
+    remark
+  }}){
+    return new Promise((resolve, reject) => {
+      $http.post('accountPay/addAccountPay.do', {
+        payId,
+        payType,
+        price,
+        remark
+      }, res => {
+        return resolve(res)
+      })
+    })
+  },
+
+  /**
+   * 进存销 -- 财务管理 -- 挂账还款 -- 查看
+   * 根据id获取内容
+   */
+  sellingStoreRefundPut({dispatch}, {id}){
+    return new Promise((resolve, reject) => {
+      $http.post('accountPay/accountPayInfo.do', {id}, res => {
+        return resolve(res)
+      })
+    })
+  },
+  /**
+   * 进存销 -- 财务管理 -- 付款管理 -- 获取新增的内容
+   */
+  sellingFinancePayPut({dispatch}, {storageCode}){
+    return new Promise((resolve, reject) => {
+      $http.post('pay/getStorageInfo.do', {storageCode}, res => {
+        return resolve(res)
+      })
+    })
+  },
+
+  /**
+   * 进存销 -- 财务管理 -- 付款管理 -- 新增/编辑
+   */
+  sellingFinancePayPost({dispatch}, {
+    form:{
+      storageId,
+      supplierId,
+      payType,
+      userId,
+      remark,
+      data,
+      status,
+    }
+  }){
+    return new Promise((resolve, reject) => {
+      $http.post('pay/addPay.do', {
+        storageId,
+        supplierId,
+        payType,
+        userId,
+        remark,
+        data,
+        status,
+      }, res => {
+        return resolve(res)
+      })
+    })
+  },
+
+  /**
+   * 进存销 -- 财务管理  -- 付款管理 -- 获取付款单详情
+   * 根据id获取付款单详情
+   */
+  sellingFinancePayInfo({dispatch}, {id}){
+    return new Promise((resolve, reject) => {
+      $http.post('pay/getPayInfo.do', {id}, res => {
+        return resolve(res)
+      })
+    })
+  }
 }
 
 const getters = {

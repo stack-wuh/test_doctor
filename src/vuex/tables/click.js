@@ -92,6 +92,8 @@ export const jump2Other = (params ,types ,row, index, query) => {
       break;
     case '付款管理' : rootPath = '/selling/store/pub', child = '编辑付款管理', data = JSON.stringify(row)
       break;
+    case '挂账还款' : rootPath = '/selling/refund/pub', child = '查看挂账还款', data = JSON.stringify(row)
+      break;
     default : rootPath = '/index'
   }
   window.$route.push({path:'/mid/container',query:Object.assign(params,{path:rootPath ,child , data})})

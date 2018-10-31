@@ -16,6 +16,7 @@ const state = {
     list: []
   },
   payTypeList: [],
+  providerList: [],
 }
 
 const mutations = {
@@ -67,10 +68,16 @@ const mutations = {
     }
   },
   /**
-   * 进存销 -- 财务管理 -- select
+   * 进存销 -- 财务管理 -- 支付方式 -- select
    */
   setPayTypeList(state, {params}){
     state.payTypeList = params
+  },
+  /**
+   * 进存销 -- 财务管理 -- 供应商 -- select
+   */
+  setProviderList(state, {params}){
+    state.providerList = params
   }
 }
 
@@ -174,7 +181,21 @@ const actions = {
         return resolve(res)
       })
     })
+  },
+  
+  /**
+   * 进存销 -- 财务管理 -- 供应商 -- select
+   * providerList: Array
+   */
+  getProviderList({commit}){
+    return new Promise((resolve, reject) => {
+      $http.post('purchaseOrder/getSupplierDrop.do', {}, res => {
+        commit('setProviderList', {params: res.data})
+        return resolve(res)
+      })
+    })
   }
+
 }
 
 const getters = {
