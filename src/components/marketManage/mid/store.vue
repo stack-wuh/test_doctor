@@ -8,7 +8,7 @@
             <my-button></my-button>
           </div>
         </my-table>
-        <my-bottom @getCurrentPage="getCurrentPage" :total="total" :currentPage="currPageNo" />
+        <my-bottom @getCurrent="getCurrentPage" :total="total" :currentPage="currPageNo" />
       </section>
   </section>
 </template>
