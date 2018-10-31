@@ -2455,7 +2455,7 @@ const state = {
     },
     {
       name:'财务管理',
-      params:['调拨发起','日常盘点'],
+      params:['调拨发起'],
       list:[
         {
           key:'订单号',
@@ -2463,14 +2463,35 @@ const state = {
           prop:'outputCode',
         },
         {
-          key:'开始时间',
+          key:'开始日期',
           type:'date',
-          prop:'startDate'
+          prop:'startTime'
         },
         {
-          key:'结束时间',
+          key:'结束日期',
           type:'date',
-          prop:'endDate',
+          prop:'endTime',
+        }
+      ],
+    },
+    {
+      name:'财务管理',
+      params:['日常盘点'],
+      list:[
+        {
+          key:'盘点单号',
+          type:'default',
+          prop:'checkNo',
+        },
+        {
+          key:'开始日期',
+          type:'date',
+          prop:'startTime'
+        },
+        {
+          key:'结束日期',
+          type:'date',
+          prop:'endTime',
         }
       ],
     },
@@ -2484,14 +2505,14 @@ const state = {
           prop:'inputCode',
         },
         {
-          key:'开始时间',
+          key:'开始日期',
           type:'date',
-          prop:'startDate'
+          prop:'startTime'
         },
         {
-          key:'结束时间',
+          key:'结束日期',
           type:'date',
-          prop:'endDate',
+          prop:'endTime',
         }
       ],
     },

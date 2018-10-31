@@ -132,6 +132,10 @@ const actions = {
         break;
       case '项目设置' : _url = 'project/delete.do'
         break;
+      case '调拨发起' : _url = 'repositoryOutput/delOutput.do'
+        break;
+      case '调拨接收' : _url = 'repositoryInput/delInput.do'
+        break
     }
     return new Promise((resolve,reject) => {
       $http.post(_url, {ids: id}, res => {
@@ -413,7 +417,142 @@ const actions = {
         }, 1000)
       })
     })
-  }
+  },
+
+  /**
+   * 进存销 -- 仓库管理 -- 调拨发起 -- 新增/编辑
+   */
+  sellingStoreSendPost({dispatch}, {form, form:{
+    id,
+    outputRepositoryId,
+    inputRepositoryId,
+    outputDate,
+    takeGoodsDate,
+    employeeId,
+    remark,
+    status,
+    data
+  }}){
+    let _url = form.id ? 'repositoryOutput/updateOutput.do' : 'repositoryOutput/addOutput.do'
+    return new Promise((resolve, reject) => {
+      $http.post(_url, {
+        id,
+        outputRepositoryId,
+        inputRepositoryId,
+        outputDate,
+        takeGoodsDate,
+        employeeId,
+        remark,
+        status,
+        data
+      }, res => {
+        return resolve(res)
+      })
+    })
+  },
+
+  /**
+   * 进存销 -- 仓库管理 -- 调拨发起 -- 获取编辑的内容
+   */
+  sellingStoreSendPut({dispatch}, {id}){
+    return new Promise((resolve, reject) => {
+      $http.post('repositoryOutput/getOutputInfo.do', {id}, res => {
+        return resolve(res)
+      })
+    })
+  },
+  
+  /**
+   * 进存销 -- 仓库管理 -- 调拨接收 -- 新增
+   */
+  sellingStoreReciverPost({dispatch}, {form:{
+    outputRepositoryId,
+    inputRepositoryId,
+    inputDate,
+    employeeId,
+    remark,
+    status,
+    data,
+    id,
+  }}){
+    return new Promise((resolve, reject) => {
+      let _url = id ? 'repositoryInput/upInput.do' : 'repositoryInput/addInput.do'
+      $http.post(_url, {
+        outputRepositoryId,
+        inputRepositoryId,
+        inputDate,
+        employeeId,
+        remark,
+        status,
+        data,
+        id
+      }, res => {
+        return resolve(res)
+      })
+    })
+  },
+
+  /**
+   * 进存销 -- 仓库管理-- 调拨接收 -- 获取编辑内容
+   */
+  sellingStoreReciverPut({dispatch}, {id}){
+    return new Promise((resolve, reject) => {
+      $http.post('repositoryInput/getInputInfo.do', {id}, res => {
+        return resolve(res)
+      })
+    })
+  },
+
+  /**
+   * 进存销 -- 仓库管理 -- 日常盘点 -- 新增/编辑
+   */
+  sellingStoreCheckPost({dispatch}, {form:{
+    repositoryId,
+    employeeId,
+    checkDate,
+    remark,
+    status,
+    data,
+    id
+  }}){
+    return new Promise((resolve, reject) => {
+      let _url = id ? 'check/updatCheck.do' : 'check/addCheck.do'
+      $http.post(_url, {
+        repositoryId,
+        employeeId,
+        checkDate,
+        remark,
+        status,
+        data,
+        id
+      }, res => {
+        return resolve(res)
+      })
+    })
+  },
+
+  /**
+   * 进存销 -- 仓库管理 -- 日常盘点 -- 获取编辑内容
+   */
+  sellingStoreCheckPut({dispatch}, {id}){
+    return new Promise((resolve, reject) => {
+      $http.post('check/getCheckInfo.do', {id}, res => {
+        return resolve(res)
+      })
+    })
+  },
+
+  /**
+   * 进存销 -- 财务管理 -- 挂账还款 
+   *  根据收款单号获取内容
+   */
+  getSellingFinance({dispatch}, {payCode}){
+    return new Promise((resolve, reject) => {
+      $http.post('accountPay/getPayOrderInfo.do', {payCode}, res => {
+        return resolve(res)
+      })
+    })
+  },
 }
 
 const getters = {

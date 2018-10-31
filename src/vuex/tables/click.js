@@ -84,6 +84,14 @@ export const jump2Other = (params ,types ,row, index, query) => {
                      child = 
                       types === '编辑' ? '编辑问卷' : types === '问卷统计' ? '问卷统计' : '明细查询' , data = JSON.stringify(row)
       break;
+    case '调拨发起' : rootPath = '/selling/store/pub', child = '编辑调拨发起', data = JSON.stringify(row)
+      break;
+    case '调拨接收' : rootPath = '/selling/store/pub', child = '编辑调拨接收', data = JSON.stringify(row)
+      break;
+    case '日常盘点' : rootPath = '/selling/store/pub', child = '编辑日常盘点', data = JSON.stringify(row)
+      break;
+    case '付款管理' : rootPath = '/selling/store/pub', child = '编辑付款管理', data = JSON.stringify(row)
+      break;
     default : rootPath = '/index'
   }
   window.$route.push({path:'/mid/container',query:Object.assign(params,{path:rootPath ,child , data})})

@@ -161,11 +161,6 @@ const state = {
           fix:'right',
           width:'180px',
           list:[
-            // {
-            //   text:'查看',
-            //   type:'text',
-            //   size:'small',
-            // },
             {
               text:'编辑',
               type:'text',
@@ -4624,9 +4619,20 @@ const state = {
           type:'button',
           list:[
             {
-              text:'编辑',
-              type:'',
+              valid: 3,
+              value: [0, 1],
+              rules: 'status',
+              texts:['编辑', '查看'],
+              styles:[
+                {
+                  color: STYLES['PRIMARY']
+                },
+                {
+                  color: STYLES['PRIMARY']
+                }
+              ],
               size:'small',
+              click: jump2Other
             },
           ]
         },
@@ -4663,7 +4669,7 @@ const state = {
         {
           key:'订单状态',
           type:'default',
-          prop:'checkStatus',
+          prop:'checkStatusText',
         },
         {
           key:'备注',
@@ -4675,9 +4681,20 @@ const state = {
           type:'button',
           list:[
             {
-              text:'编辑',
-              type:'',
+              valid: 3,
+              value: [0, 1],
+              rules: 'status',
+              texts:['编辑', '查看'],
+              styles:[
+                {
+                  color: STYLES['PRIMARY']
+                },
+                {
+                  color: STYLES['PRIMARY']
+                }
+              ],
               size:'small',
+              click: jump2Other
             },
           ]
         },
@@ -4731,9 +4748,20 @@ const state = {
           type:'button',
           list:[
             {
-              text:'编辑',
-              type:'',
+              valid: 3,
+              value: [0, 1],
+              rules:'status',
+              texts:['编辑', '查看'],
+              styles:[
+                {
+                  color: STYLES['PRIMARY']
+                },
+                {
+                  color: STYLES['PRIMARY']
+                }
+              ],
               size:'small',
+              click: jump2Other
             },
           ]
         },
