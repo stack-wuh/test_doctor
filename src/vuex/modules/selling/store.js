@@ -140,6 +140,8 @@ const actions = {
         break;
       case '付款管理' : _url = 'pay/delPay.do'
         break;
+      case '采购订单' : _url = 'purchaseOrder/delPurchaseOrder.do'
+        break;
     }
     return new Promise((resolve,reject) => {
       $http.post(_url, {ids: id}, res => {
@@ -640,6 +642,156 @@ const actions = {
         return resolve(res)
       })
     })
+  },
+
+  /**
+   * 进存销 -- 采购管理 -- 采购订单 -- 新增/编辑
+   */
+  sellingFinancePost({dispatch},{form:{
+    takerId,
+    supplierId,
+    logisticsId,
+    purchaseDate,
+    price,
+    remark,
+    data,
+    status,
+    id
+  }}){
+    return new Promise((resolve, reject) => {
+      let _url = id ? 'purchaseOrder/updatePurchaseOrder.do' : 'purchaseOrder/addPurchaseOrder.do'
+      $http.post(_url, {
+        takerId,
+        supplierId,
+        logisticsId,
+        purchaseDate,
+        price,
+        remark,
+        data,
+        status,
+        id
+      }, res => {
+        return resolve(res)
+      })
+    })
+  },
+
+  /**
+   * 进存销 -- 采购管理 -- 采购订单 -- 编辑
+   *  根据id获取编辑详情
+   */
+  getSellingFinanceOrderInfo({dispatch}, {id}){
+    return new Promise((resolve, reject) => {
+      $http.post('purchaseOrder/getPurchaseOrderInfo.do', {id}, res => {
+        return resolve(res)
+      })
+    })
+  },
+  
+  /**
+   * 进存销 -- 采购管理 -- 采购入库 -- 新增
+   * 根据采购订单获取新增内容
+   */
+  getSellingFinanceInputInfo({dispatch}, {purchaseCode}){
+    return new Promise((resolve, reject) => {
+      $http.post('storage/getPurchaseInfoList.do', {purchaseCode}, res =>{
+        return resolve(res)
+      })
+    })
+  },
+
+  /**
+   * 进存销 -- 采购管理 -- 采购入库 -- 新增
+   */
+  sellingFinanceInputPost({dispatch}, {form:{
+    id,
+    storageDate,
+    supplierId,
+    repositoryId,
+    remark,
+    status,
+    data,
+  }}){
+    return new Promise((resolve, reject) => {
+      let _url = id ? 'storage/updateStroeAndInfo.do' : 'storage/addStorage.do'
+      $http.post(_url, {
+        id,
+        storageDate,
+        supplierId,
+        repositoryId,
+        remark,
+        status,
+        data,
+      }, res => {
+        return resolve(res)
+      })
+    })
+  },
+
+  /**
+   * 进存销 -- 采购管理 -- 采购入库 -- 编辑
+   * 根据id获取采购入库的详情
+   */
+  getSellingFinanceInputPutInfo({dispatch}, {id}){
+    return new Promise((resolve, reject) => {
+      $http.post('storage/getStroageInfo.do', {id}, res => {
+        return resolve(res)
+      })
+    })
+  },
+
+  /**
+   * 进存销 -- 采购管理 -- 采购退货 -- 新增
+   * 根据采购订单号获取新增的内容
+   */
+  getSellingFinanceBackPostInfo({dispatch}, {purchaseCode}){
+    return new Promise((resolve, reject) => {
+      $http.post('purchaseBack/getPurchaseInfo.do', {purchaseCode}, res => {
+        return resolve(res)
+      })
+    })
+  },
+
+  /**
+   * 进存销 -- 采购管理 -- 采购退货 -- 新增/编辑
+   */
+  sellingFinanceBackPost({dispatch}, {form: {
+    purchasId,
+    backDate,
+    backerId,
+    repositoryId,
+    remark,
+    status,
+    data,
+    id,
+  }}){
+    return new Promise((resolve, reject) => {
+      let _url = id ? 'purchaseBack/updatePurchaseBack.do' : 'purchaseBack/addPurchaseBack.do'
+      $http.post(_url, {
+        purchasId,
+        backDate,
+        backerId,
+        repositoryId,
+        remark,
+        status,
+        data,
+        id,
+      }, res => {
+        return resolve(res)
+      })
+    })
+  },
+
+  /**
+   * 进存销 -- 采购管理 -- 采购退货 -- 编辑
+   * 根据id获取编辑内容
+   */
+  getSellingFinanceBackInfo({dispatch}, {id}){
+    return new Promise((resolve, reject) => {
+      $http.post('purchaseBack/getPurchaseBackInfo.do', {id}, res => {
+        return resolve(res)
+      })
+    })
   }
 }
 
@@ -662,6 +814,8 @@ const getters = {
         return {...item, checkStatusText: item.checkStatus === 0 ? '未通过' : '已通过', repositoryStatusText: item.repositoryStatus === 0 ? '未出库' : '已出库'}
       }else if(path === '采购入库'){
         return {...item, backStatusText: item.backStatus === 0 ? '未退货' : '已退货', payStatusText: item.payStatus === 0 ? '未结算' : '已结算', checkStatusText: item.checkStatus === 0 ? '未审核' : item.checkStatus === 1 ? '已审核' : '待审核'}
+      }else if(path === '采购退货'){
+        return {...item, checkStatusText: item.checkStatus === 0 ? '不通过' : item.checkStatus === 1 ? '已通过' : '待处理'}
       }else if(path === '挂账还款'){
         return {...item, statusText: item.status === 0 ? '未通过' : '已通过'}
       }else if(path === '调拨发起'){

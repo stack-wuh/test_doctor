@@ -1,6 +1,5 @@
 import $http from '../../../utils/axios'
 import {_g, NotNull} from '../../../utils/global'
-import { marketPrevSend } from '../../tables/click';
 const state = {
  data:[],
  total:0,

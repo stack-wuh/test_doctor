@@ -17,6 +17,7 @@ const state = {
   },
   payTypeList: [],
   providerList: [],
+  logisticList:[],
 }
 
 const mutations = {
@@ -78,6 +79,13 @@ const mutations = {
    */
   setProviderList(state, {params}){
     state.providerList = params
+  },
+
+  /**
+   * 进存销 -- 财务管理 -- 物流公司 -- select
+   */
+  setLogisticList(state, {params}){
+    state.logisticList = params
   }
 }
 
@@ -194,8 +202,33 @@ const actions = {
         return resolve(res)
       })
     })
-  }
+  },
 
+  /**
+   * 进存销 -- 采购管理 -- 采购订单 -- 新增
+   * 获取商品列表
+   */
+  getPurchaseList({commit}, {currPageNo = 1}){
+    return new Promise((resolve, reject) => {
+      $http.post('purchaseOrder/getGoodList.do', {currPageNo}, res => {
+        commit('setSellingGoodsList', {params: res.data})
+        return resolve(res)
+      })
+    })
+  },
+
+  /**
+   * 进存销 -- 采购管理 -- 采购订单 -- 物流公司 -- select
+   * logisticList: Array
+   */
+  getLogisticList({commit}){
+    return new Promise((resolve, reject) => {
+      $http.post('purchaseOrder/getLogisticsDrop.do', {}, res => {
+        commit('setLogisticList', {params: res.data})
+        return resolve(res)
+      })
+    })
+  }
 }
 
 const getters = {

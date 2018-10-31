@@ -4352,16 +4352,27 @@ const state = {
         {
           key:'备注',
           type:'default',
-          prop:'',
+          prop:'remark',
         },
         {
           key:'操作',
           type:'button',
           list:[
             {
-              text:'编辑',
-              type:'',
+              valid: 3,
+              value:[0, 1],
+              rules: 'status',
+              texts: ['编辑', '查看'],
+              styles:[
+                {
+                  color: STYLES['PRIMARY']
+                },
+                {
+                  color: STYLES['PRIMARY']
+                }
+              ],
               size:'small',
+              click: jump2Other
             },
           ]
         },
@@ -4420,9 +4431,20 @@ const state = {
           type:'button',
           list:[
             {
-              text:'编辑',
-              type:'',
+              valid: 3,
+              value: [0, 1],
+              rules:'status',
+              texts:['编辑', '查看'],
+              styles:[
+                {
+                  color: STYLES['PRIMARY']
+                },
+                {
+                  color: STYLES['PRIMARY']
+                }
+              ],
               size:'small',
+              click: jump2Other
             },
           ]
         },
@@ -4439,41 +4461,52 @@ const state = {
         {
           key:'采购退货单号',
           type:'default',
-          prop:'',
+          prop:'backCode',
         },
         {
           key:'退货日期',
           type:'default',
-          prop:'',
+          prop:'backDate',
         },
         {
           key:'退货仓库',
           type:'default',
-          prop:'',
+          prop:'repositoryName',
         },
         {
           key:'退货人员',
           type:'default',
-          prop:'',
+          prop:'realName',
         },
         {
           key:'订单状态',
           type:'default',
-          prop:'',
+          prop:'checkStatusText',
         },
         {
           key:'备注',
           type:'default',
-          prop:'',
+          prop:'remark',
         },
         {
           key:'操作',
           type:'button',
           list:[
             {
-              text:'编辑',
-              type:'',
+              valid: 3,
+              value: [0, 1],
+              rules:'status',
+              texts:['编辑', '查看'],
+              styles:[
+                {
+                  color: STYLES['PRIMARY']
+                },
+                {
+                  color: STYLES['PRIMARY']
+                }
+              ],
               size:'small',
+              click: jump2Other
             },
           ]
         },

@@ -22,7 +22,7 @@
     <section class="table-area">
       <p class="table-area__title">
         <span>商品列表</span>
-        <el-button v-if="!disabled" @click="handleOpenDialog" type="primary" >{{pathChange === '编辑调拨接收' || pathChange === '编辑付款管理' ? '搜索' : '添加'}}</el-button>
+        <el-button v-if="!disabled" @click="handleOpenDialog" type="primary" >{{rules_arr1.includes(pathChange) ? '搜索' : '添加'}}</el-button>
       </p>
       <el-table :data="list" border stripe>
         <el-table-column v-if="item.type === 'default'" align="center" v-for="(item, index) in tableList" :label="item.label" :prop="item.field"></el-table-column>
@@ -247,6 +247,146 @@ const forms = [
       takeGoodsDate: '',
       employeeId: '',
       remark: '',
+    }
+  },
+  {
+    title: '采购订单',
+    params:['编辑采购订单'],
+    list:[
+      {
+        label: '采购人',
+        field: 'takerId',
+        type: 'select',
+        rules:[{required: true, message: '请选择采购人', trigger: 'change'}],
+      },
+      {
+        label: '采购日期',
+        field: 'purchaseDate',
+        type: 'date',
+        rules:[{required: true, message: '请选择采购日期', trigger: 'blur'}],
+      },
+      {
+        label: '供应商名称',
+        field: 'supplierId',
+        type: 'select',
+        rules:[{required: true, message: '请选择供应商名称', trigger: 'change'}],
+      },
+      {
+        label: '物流公司',
+        field: 'logisticsId',
+        type: 'select',
+        rules:[{required: true, message: '请选择支付方式', trigger: 'change'}],
+      },
+      {
+        label: '运费',
+        field: 'price',
+        type: 'input',
+        rules:[{required: true, message: '请编辑运费', trigger: 'input'}],
+      },
+      {
+        label: '备注',
+        field: 'remark',
+        type: 'textarea',
+        rows: '3',
+        rules:[{required: true, message: '请编辑备注', trigger: 'blur'}],
+      }
+    ],
+    form:{
+      outputCode: '',
+      outputRepositoryId: '',
+      inputRepositoryId: '',
+      outputDate: '',
+      takeGoodsDate: '',
+      employeeId: '',
+      remark: '',
+    }
+  },
+  {
+    title: '采购入库',
+    params:['编辑采购入库'],
+    list:[
+      {
+        label: '采购订单',
+        field: 'purchaseCode',
+        type: 'input',
+        rules:[{required: true, message: '请编辑采购订单', trigger: 'input'}],
+      },
+      {
+        label: '入库日期',
+        field: 'storageDate',
+        type: 'date',
+        rules:[{required: true, message: '请选择入库日期', trigger: 'change'}],
+      },
+      {
+        label: '供应商名称',
+        field: 'supplierId',
+        type: 'select',
+        rules:[{required: true, message: '请选择供应商名称', trigger: 'change'}],
+      },
+      {
+        label: '仓库名称',
+        field: 'repositoryId',
+        type: 'select',
+        rules:[{required: true, message: '请选择仓库', trigger: 'change'}],
+      },
+      {
+        label: '备注',
+        field: 'remark',
+        type: 'textarea',
+        rows: '3',
+        rules:[{required: true, message: '请编辑备注', trigger: 'blur'}],
+      }
+    ],
+    form:{
+      remark: '',
+      storageDate: '',
+      supplierId: '',
+      repositoryId: '',
+
+    }
+  },
+  {
+    title: '采购退货',
+    params:['编辑采购退货'],
+    list:[
+      {
+        label: '采购订单',
+        field: 'purchaseCode',
+        type: 'input',
+        rules:[{required: true, message: '请编辑采购订单', trigger: 'input'}],
+      },
+      {
+        label: '退货日期',
+        field: 'backDate',
+        type: 'date',
+        rules:[{required: true, message: '请选择入库日期', trigger: 'change'}],
+      },
+      {
+        label: '退货人',
+        field: 'backerId',
+        type: 'select',
+        rules:[{required: true, message: '请选择供应商名称', trigger: 'change'}],
+      },
+      {
+        label: '仓库名称',
+        field: 'repositoryId',
+        type: 'select',
+        rules:[{required: true, message: '请选择仓库', trigger: 'change'}],
+      },
+      {
+        label: '备注',
+        field: 'remark',
+        type: 'textarea',
+        rows: '3',
+        rules:[{required: true, message: '请编辑备注', trigger: 'blur'}],
+      }
+    ],
+    form:{
+      remark: '',
+      storageDate: '',
+      supplierId: '',
+      repositoryId: '',
+
     }
   },
 ]
@@ -521,6 +661,231 @@ const tables = [
       }
     ]
   },
+  {
+    title: '采购订单',
+    params:['编辑采购订单'],
+    list:[
+      {
+        label: '商品编码',
+        type: 'default',
+        field: 'goodsCode'
+      },
+      {
+        label: '商品名称',
+        type:'default' ,
+        field: 'goodsName',
+      },
+      {
+        label: '单位',
+        type:'default' ,
+        field: 'goodsUnit',
+      },
+      {
+        label: '车品牌',
+        type:'default' ,
+        field: 'carBrand',
+      },
+      {
+        label: '车型',
+        type:'default' ,
+        field: 'carModel',
+      },
+      {
+        label: '规格',
+        type:'default' ,
+        field: 'carType',
+      },
+      {
+        label: '采购数量',
+        type:'input' ,
+        field: 'repositoryNum',
+      },
+      {
+        label: '采购单价',
+        type:'default' ,
+        field: 'takePrice',
+      },
+      {
+        label: '采购总价',
+        type: 'default',
+        field: 'totalPrice',
+      },
+      {
+        label: '备注',
+        type:'default' ,
+        field: 'remark',
+      },
+      {
+        label: '操作',
+        type: 'button',
+        list:[
+          {
+            text: '删除'
+          }
+        ]
+      }
+    ]
+  },
+  {
+    title: '采购入库',
+    params:['编辑采购入库'],
+    list:[
+      {
+        label: '商品编码',
+        type: 'default',
+        field: 'goodsCode'
+      },
+      {
+        label: '商品名称',
+        type:'default' ,
+        field: 'goodsName',
+      },
+      {
+        label: '单位',
+        type:'default' ,
+        field: 'goodsUnit',
+      },
+      {
+        label: '车品牌',
+        type:'default' ,
+        field: 'carBrand',
+      },
+      {
+        label: '车型',
+        type:'default' ,
+        field: 'carModel',
+      },
+      {
+        label: '规格',
+        type:'default' ,
+        field: 'carType',
+      },
+      {
+        label: '采购数量',
+        type:'default' ,
+        field: 'purchaseNum',
+      },
+      {
+        label: '采购单价',
+        type:'default' ,
+        field: 'purchasePrice',
+      },
+      {
+        label: '采购总价',
+        type: 'default',
+        field: 'purchaseTotalPrice',
+      },
+      {
+        label: '已付金额',
+        type: 'default',
+        field: 'price',
+      },
+      {
+        label: '已入库数量',
+        type: 'default',
+        field: 'addNum',
+      },
+      {
+        label: '已退货数量',
+        type: 'default',
+        field: 'backNum',
+      },
+      {
+        label: '入库数量',
+        type: 'input',
+        field: 'repositoryNum',
+      },
+      {
+        label: '操作',
+        type: 'button',
+        list:[
+          {
+            text: '删除'
+          }
+        ]
+      }
+    ]
+  },
+  {
+    title: '采购退货',
+    params:['编辑采购退货'],
+    list:[
+      {
+        label: '商品名称',
+        type: 'default',
+        field: 'goodsClassificationName',
+      },
+      {
+        label: '商品名称',
+        type:'default' ,
+        field: 'goodsName',
+      },
+      {
+        label: '单位',
+        type:'default' ,
+        field: 'goodsUnit',
+      },
+      {
+        label: '车品牌',
+        type:'default' ,
+        field: 'carBrand',
+      },
+      {
+        label: '车型',
+        type:'default' ,
+        field: 'carModel',
+      },
+      {
+        label: '规格',
+        type:'default' ,
+        field: 'carType',
+      },
+      {
+        label: '采购数量',
+        type:'default' ,
+        field: 'purchaseNum',
+      },
+      {
+        label: '采购单价',
+        type: 'default',
+        field: 'purchasePrice'
+      },
+      {
+        label: '采购总价',
+        type: 'default',
+        field: 'purchaseTotalPrice'
+      },
+      {
+        label: '已退货数量',
+        type:'default' ,
+        field: 'backNum',
+      },
+      {
+        label: '入库数量',
+        type: 'default',
+        field: 'repositoryNum',
+      },
+      {
+        label: '可退货数量',
+        type: 'default',
+        field: 'returnableNum',
+      },
+      {
+        label: '本次退货数量',
+        type: 'input',
+        field: 'thisBackNum',
+      },
+      {
+        label: '操作',
+        type: 'button',
+        list:[
+          {
+            text: '删除'
+          }
+        ]
+      }
+    ]
+  },
 ]
 const dialogTable = [
   {
@@ -585,6 +950,8 @@ export default {
       dialogTable,
       list:[], // 页面中的表格
       temp_select:[], // dialog -- 表格选择的临时数组
+
+      rules_arr1: ['编辑调拨接收', '编辑付款管理', '编辑采购入库', '编辑采购退货'],
     }
   },
   computed:{
@@ -595,7 +962,8 @@ export default {
       'total': state => state.Select.sellingStore.total,
       'currPageNo': state => state.Select.sellingStore.currPageNo,
       'providerList': state => state.Select.providerList,
-      'payTypeList': state => state.Select.payTypeList
+      'payTypeList': state => state.Select.payTypeList,
+      'logisticList': state => state.Select.logisticList
     }),
     formList(){
      let data = this.forms.filter(item => item.params.includes(this.pathChange)) && 
@@ -614,6 +982,12 @@ export default {
         }else if(item.field === 'payType'){
           item = Object.assign(item, {list: this.payTypeList})
         }else if(item.field === 'userId'){
+          item = Object.assign(item, {list: this.employees})
+        }else if(item.field === 'takerId'){
+          item = Object.assign(item, {list: this.employees})
+        }else if(item.field === 'logisticsId'){
+          item = Object.assign(item, {list: this.logisticList})
+        }else if(item.field === 'backerId'){
           item = Object.assign(item, {list: this.employees})
         }
       })
@@ -641,6 +1015,10 @@ export default {
       }else{
         return true
       }
+    },
+    canShowButton(){
+      let arr = ['编辑采购订单']
+      return arr.includes(this.pathChange)
     }
   },
   methods: {
@@ -659,7 +1037,18 @@ export default {
       'getPayTypeList': 'getPayTypeList',
       'sellingFinancePayPut': 'sellingFinancePayPut',
       'sellingFinancePayPost': 'sellingFinancePayPost',
-      'sellingFinancePayInfo': 'sellingFinancePayInfo'
+      'sellingFinancePayInfo': 'sellingFinancePayInfo',
+      'getPurchaseList': 'getPurchaseList',
+      'getLogisticList': 'getLogisticList',
+      'sellingFinancePost': 'sellingFinancePost',
+      'getSellingFinanceOrderInfo': 'getSellingFinanceOrderInfo',
+      'getSellingFinanceInputInfo': 'getSellingFinanceInputInfo',
+      'sellingFinanceInputPost': 'sellingFinanceInputPost',
+      'getSellingFinanceInputPutInfo': 'getSellingFinanceInputPutInfo',
+      'getSellingFinanceBackPostInfo': 'getSellingFinanceBackPostInfo',
+      'sellingFinanceBackPost': 'sellingFinanceBackPost',
+      'sellingFinanceBackPost': 'sellingFinanceBackPost',
+      'getSellingFinanceBackInfo': 'getSellingFinanceBackInfo'
     }),
     /**
      * select框change事件
@@ -719,11 +1108,50 @@ export default {
             }
           })
         }else{
-        _g.toastMsg({
-          type: 'error',
-          msg: '请编辑采购入库单后搜索'
+          _g.toastMsg({
+            type: 'error',
+            msg: '请编辑采购入库单后搜索'
+          })
+        }
+      }else if(this.pathChange === '编辑采购订单'){
+        this.getPurchaseList({currPageNo: 1}).then(res => {
+          this.visibleDialog = true
+          this.SellingStoreGoods.map(item => {
+            item = Object.assign(item, {repositoryNum: 0, totalPrice: Number.parseFloat(item.repositoryNum ? item.repositoryNum : 0) * Number.parseFloat(item.takePrice)})
+          })
         })
-      }
+      }else if(this.pathChange === '编辑采购入库'){
+        if(this.formList.form && this.formList.form.purchaseCode){
+          this.getSellingFinanceInputInfo({purchaseCode: this.formList.form.purchaseCode}).then(res => {
+            if(res.status === 0){
+              this.list = res.data.infoList.map(item => {
+                return {...item, repositoryNum: item.repositoryNum ? item.repositoryNum : 0}
+              })
+              this.formList.form.purchaseCode = res.data.purchaseOrder.purchaseCode
+            }
+          })
+        }else{
+          _g.toastMsg({
+            type: 'error',
+            msg: '请编辑采购订单后搜索'
+          })
+        }
+      }else if(this.pathChange === '编辑采购退货'){
+        if(this.formList.form && this.formList.form.purchaseCode){
+          this.getSellingFinanceBackPostInfo({purchaseCode: this.formList.form.purchaseCode}).then(res => {
+            if(res.status === 0){
+              this.list = res.data.list.map(item => {
+                return {...item, thisBackNum: item.thisBackNum ? item.thisBackNum : 0}
+              })
+              // this.formList.form.purchaseCode = res.data.storage.purchaseCode
+            }
+          })
+        }else{
+          _g.toastMsg({
+            type: 'error',
+            msg: '请编辑采购订单后搜索'
+          })
+        }
       }
     },
     /**
@@ -750,7 +1178,11 @@ export default {
      * 分页
      */
     getCurrent(e){
-      this.getSellingGoodsList({outputRepositoryId: this.formList.form.outputRepositoryId, currPageNo: e})
+      if(this.pathChange === '编辑采购订单'){
+        this.getPurchaseList({currPageNo: e})
+      }else{
+        this.getSellingGoodsList({outputRepositoryId: this.formList.form.outputRepositoryId, currPageNo: e})
+      }
     },
     /**
      * 删除商品列表的item
@@ -769,6 +1201,12 @@ export default {
           return {repositoryGoodId: item.id, repositoryNum: item.repositoryNum, loadNum: item.loadNum, num: item.num}
         }else if(this.pathChange === '编辑付款管理'){
           return {storageInfoId: item.id, alreadyPrice: item.alreadyPrice}
+        }else if(this.pathChange === '编辑采购订单'){
+          return {goodsId: item.id, num: item.num, price: item.price, totalPrice: item.totalPrice, remark: item.remark}
+        }else if(this.pathChange === '编辑采购入库'){
+          return {purchaseInfoId: item.id, price: item.price, backNum: item.backNum, repositoryNum: item.repositoryNum}
+        }else if(this.pathChange === '编辑采购退货'){
+          return {purchaseInfoId: item.id, thisBackNum: item.thisBackNum}
         }
       })
       if(!this.list.length) {
@@ -798,6 +1236,21 @@ export default {
           }
           if(this.pathChange === '编辑付款管理'){
             this.sellingFinancePayPost({form}).then(res => {
+              res.status === 0 && this.handleClickCancel()
+            })
+          }
+          if(this.pathChange === '编辑采购订单'){
+            this.sellingFinancePost({form}).then(res => {
+              res.status === 0 && this.handleClickCancel()
+            })
+          }
+          if(this.pathChange === '编辑采购入库'){
+            this.sellingFinanceInputPost({form}).then(res => {
+              res.status === 0 && this.handleClickCancel()
+            })
+          }
+          if(this.pathChange === '编辑采购退货'){
+            this.sellingFinanceBackPost({form}).then(res => {
               res.status === 0 && this.handleClickCancel()
             })
           }
@@ -832,15 +1285,26 @@ export default {
           let unpayNum = Number.parseFloat(item.storageTotalPrice) - Number.parseFloat(item.price) - Number.parseFloat(item.alreadyPrice)
           item = Object.assign(item, {unpayNum})
         })
+      }else if(this.pathChange === '编辑采购订单'){
+        this.list.map(item => {
+          let totalPrice = item.repositoryNum * Number.parseFloat(item.takePrice)
+          item = Object.assign(item, {totalPrice})
+        })
       }
     }
   },
   created(){
-
     if(this.pathChange === '编辑付款管理'){
       this.getProviderList()
       this.getPayTypeList()
       this.getEmployeeList()
+    }else if(this.pathChange === '编辑采购订单'){
+      this.getProviderList()
+      this.getLogisticList()
+      this.getEmployeeList()
+    }else if(this.pathChange === '编辑采购入库'){
+      this.getProviderList()
+      this.getSellingStores()
     }else {
       this.getSellingStores()
       this.getEmployeeList()
@@ -872,6 +1336,21 @@ export default {
           this.list = res.data.list.map(item => {
             return {...item, unpayNum: Number.parseFloat(item.storageTotalPrice) - Number.parseFloat(item.price), alreadyPrice: 0}
           })
+        })
+      }else if(this.pathChange === '编辑采购订单'){
+        this.getSellingFinanceOrderInfo({id: this.query.id}).then(res => {
+          this.formList.form = {...this.formList.form, ...res.data.purchaseOrder}
+          this.list = res.data.goodsList
+        })
+      }else if(this.pathChange === '编辑采购入库'){
+        this.getSellingFinanceInputPutInfo({id: this.query.id}).then(res => {
+          this.list = res.data.list
+          this.formList.form = {...this.formList.form, ...res.data.storeage}
+        })
+      }else if(this.pathChange === '编辑采购退货'){
+        this.getSellingFinanceBackInfo({id: this.query.id}).then(res => {
+          this.list = res.data.list
+          this.formList.form = {...this.formList.form, ...res.data.purchaseBack}
         })
       }
     }

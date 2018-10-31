@@ -60,6 +60,12 @@ export const jump2Detail = params => {
             break;
       case '付款管理' : rootPath = '/selling/store/pub', child = '编辑付款管理'
             break;
+      case '采购订单' : rootPath = '/selling/store/pub', child = '编辑采购订单'
+            break;
+      case '采购入库' : rootPath = '/selling/store/pub', child = '编辑采购入库'
+            break;
+      case '采购退货' : rootPath = '/selling/store/pub', child = '编辑采购退货'
+            break;
       default : rootPath = '/index'
     }
     window.$route.push({path:'/mid/container',query:{path:rootPath , menu , subMenu ,child}})
