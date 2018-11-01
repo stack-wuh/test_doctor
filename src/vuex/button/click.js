@@ -212,7 +212,7 @@ export const jump2Detail = params => {
       case '意见反馈' : return location.href = window.rootPath + '/feedback/export.do' + _str
       case '报名查询' : return location.href = window.rootPath + '/ordinaryActivities/takeSignUpListReport.do' + _str
       case '活动中奖': return location.href = window.rootPath + '/activitiesDraws/userLotteryInfoReport.do' + _str
-      case '预约管理' : return location.href = window.rootPath + '/bookingBackend/delete.do' + _str
+      case '预约管理' : return location.href = window.rootPath + '/bookingBackend/exports.do' + _str
       case '保险服务' : return location.href = window.rootPath + '/insurances/exports.do' + _str
       case '检修记录' : return location.href = window.rootPath + '/repairRecord/exports.do' + _str 
       case '明细查询' : return location.href = window.rootPath + '/questionnaire/exports.do' + _str
@@ -232,6 +232,7 @@ export const jump2Detail = params => {
       case '业务出库' : return location.href = window.rootPath + '/outRepository/report.do' + _str
       case '业务结算' : return location.href = window.rootPath + '/bussinessOrder/report.do' + _str
       case '业务开单' : return location.href = window.rootPath + '/bussinessOrder/report.do' + _str
+      case '救援服务' : return location.href = window.rootPath + '/rescueBackend/outRescue.do' + _str
       default : return _g.toastMsg({type: 'error', msg: '导出失败'})
     }
    }else{

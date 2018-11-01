@@ -26,7 +26,7 @@
         <section class="item-nav" v-if="item.subMenu" v-for="(list,lindex) in item.subMenu" >
           <div>
             <span class="title">
-              <!-- <el-checkbox :indeterminate="list.isIndeterminate" v-model="list.checkAll" @change="handleClickChangeForFirst(index,lindex,$event)" ></el-checkbox> -->
+              <el-checkbox :indeterminate="list.isIndeterminate" v-model="list.checkAll" @change="handleClickTopChooseAll(index,lindex,$event)" ></el-checkbox>
               {{list.menuName}} 
             </span>
             <el-checkbox  v-for="(ll, ld) in list.authorityList" :key="ld" :label="ll.name" @change="handleClickOneChose(index, ld, $event, ll.id)" v-model="ll.isAuth" ></el-checkbox>
@@ -34,7 +34,11 @@
           <section class="sub-item-nav" v-if="list.authorityMenuList" v-for="(sub,sid) in list.authorityMenuList" :key="sid">
             <div v-if="isFatherChange" >
               <span class="title">
-                <!-- <el-checkbox :indeterminate="sub.isIndeterminate" v-model="sub.checkAll" @change="handleClickChangeForChild(index,lindex,sid,$event)" ></el-checkbox> -->
+
+
+
+                
+                <el-checkbox :indeterminate="sub.isIndeterminate" v-model="sub.checkAll" @change="handleClickTopChoose(index,lindex,sid,$event)" ></el-checkbox>
                 {{sub.menuName}}
               </span>
                 <el-checkbox v-for="(ll, ld) in sub.authorityList" @change="handleClickOneChose(index, ld, $event, ll.id)" :key="ld" :label="ll.name" v-model="ll.isAuth"></el-checkbox>
@@ -502,12 +506,27 @@ export default {
       'getLimitStore':'getLimitStore',
       'handleAccredit':'handleAccredit'
     }),
+
     /**
      * 一级权限管理
+     */
+    handleClickTopChoose(index, lindex, val, id){
+      console.log(index, lindex, val, id)
+      console.log(this.list[index]['subMenu'][lindex])
+    },
+    /**
+     * 一级权限全选事件
+     */
+    handleClickTopChooseAll(index, lindex){
+
+    },
+    /**
+     * 低级权限管理
      */
     handleClickOneChose(index, lindex, val, id){
        this.handleAccredit({form:{authorityId: id, roleId: this.roleId}})
     },
+
 
     /**
      * 二级权限管理
@@ -541,6 +560,7 @@ export default {
           list.authorityList && list.authorityList.map(sub => {
             sub.isAuth = sub.isAuth == 1 ? true : false
           })
+          list.isAuthor = list.authorityList && list.authorityList.every(ss => ss.isAuth)
           list.authorityMenuList && list.authorityMenuList.map(sub => {
               sub.authorityList && sub.authorityList.map(ss => {
                 ss.isAuth = ss.isAuth == 1 ? true : false
@@ -549,6 +569,7 @@ export default {
         })
         return {id: item.id, menuName: item.menuName, subMenu: item.authorityMenuList}
       })
+      console.log(this.list)
     })
   }
 }

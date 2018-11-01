@@ -2,15 +2,16 @@ export const  clearSearchForm = ({path, menu} = {}) => {
   window.$store.commit('clearSearchForm')
   setTimeout(()=>{
     switch(menu){
-      case '卡券管理' : return window.$store.dispatch('getCouponStore', {path})
-      case '会员管理' : return window.$store.dispatch('getMemberStore', {path})
-      case '系统管理' : return window.$store.dispatch('getStoresList', {path})
-      case '用品管理' : return window.$store.dispatch('getUseStore', {path})
-      case '市场推广' : return window.$store.dispatch('getMarketStore', {path})
-      case '客户服务' : return window.$store.dispatch('getServerStore', {path})
-      case '进存销' : return window.$store.dispatch('getSellingStore', {path})
+      case '卡券管理' : return window.$store.dispatch('getCouponStore', {path })
+      case '会员管理' : return window.$store.dispatch('getMemberStore', {path })
+      case '系统管理' : return window.$store.dispatch('getStoresList', {path })
+      case '用品管理' : return window.$store.dispatch('getUseStore', {path })
+      case '市场推广' : return window.$store.dispatch('getMarketStore', {path })
+      case '客户服务' : return window.$store.dispatch('getServerStore', {path })
+      case '进存销' : return window.$store.dispatch('getSellingStore', {path })
+      case '日志管理' : return window.$store.dispatch('getLogStore', {path })
     }
-  })
+  }, 100)
 }
 
 export const searchFormList = ({path} = {}) => {
@@ -25,17 +26,19 @@ export const handleSearchList = ({path, menu} = {}) => {
       return window.$store.dispatch('getCouponStore', {path })
     }
   }else if(menu === '会员管理'){
-      return window.$store.dispatch('getMemberStore', {path})
+      return window.$store.dispatch('getMemberStore', {path })
   }else if(menu === '系统管理'){
-      return window.$store.dispatch('getStoresList', {path})
+      return window.$store.dispatch('getStoresList', {path })
   }else if(menu === '用品管理'){
-    return window.$store.dispatch('getUseStore', {path})
+    return window.$store.dispatch('getUseStore', {path })
   }else if(menu === '市场推广'){
-    return window.$store.dispatch('getMarketStore', {path})
+    return window.$store.dispatch('getMarketStore', {path })
   }else if(menu === '客户服务'){
-    return window.$store.dispatch('getServerStore', {path})
+    return window.$store.dispatch('getServerStore', {path })
   }else if(menu === '进存销'){
-    return window.$store.dispatch('getSellingStore', {path})
+    return window.$store.dispatch('getSellingStore', {path })
+  }else if(menu === '日志管理'){
+    return window.$store.dispatch('getLogStore', {path })
   }
 }
 
