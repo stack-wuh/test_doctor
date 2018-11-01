@@ -99,7 +99,11 @@ export const jump2Other = (params ,types ,row, index, query) => {
     case '采购入库' : rootPath = '/selling/store/pub', child = '编辑采购入库', data = JSON.stringify(row)
       break;
     case '采购退货' : rootPath = '/selling/store/pub', child = '编辑采购退货', data = JSON.stringify(row)
+      break;
+    case '会员套餐记录' : rootPath = '/selling/store', child = '会员套餐记录详情', data = JSON.stringify(row)
       break; 
+    case '业务退货' : rootPath = '/selling/store/pub', child = '编辑业务退货', data = JSON.stringify(row)
+      break;
     default : rootPath = '/index'
   }
   window.$route.push({path:'/mid/container',query:Object.assign(params,{path:rootPath ,child , data})})
@@ -393,4 +397,13 @@ export const handleShakeState = (params, text, row) => {
       msg: '操作已取消或失败'
     })
   })
+}
+
+
+/**
+ * 进存销 -- 套餐管理 -- 会员套餐记录
+ */
+export const handleSellingMemberChange = (params, text, row) => {
+  let path = params.child || params.subMenu
+  window.$store.dispatch('sellingMealMemberUpdate', {path, id: row.id})
 }

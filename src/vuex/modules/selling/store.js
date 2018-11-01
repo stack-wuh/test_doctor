@@ -22,7 +22,7 @@ const actions = {
    * params {search} 钩子里面的搜索条件
    * params {currPageNo} 页码 
    */
-  getSellingStore({commit, rootState, dispatch}, {path, search, currPageNo = 1}){
+  getSellingStore({commit, rootState, dispatch}, {path, search, currPageNo = 1, query}){
     let _url = null
     switch(path){
       case '业务开单' : _url = 'bussinessOrder/getBussinessOrderList.do', search = {...search, currPageNo, ...rootState.search}
@@ -99,6 +99,8 @@ const actions = {
         break;
       case '付款统计' : _url = 'reportManage/paymentList.do', search = {...search, currPageNo, ...rootState.search}
         break;
+      case '会员套餐记录详情' : _url = 'packageUseInfo/detail.do', search = {id: query.id, currPageNo}
+        break;
     }
     return new Promise((resolve, reject) => {
       $http.post(_url, NotNull(search), res => {
@@ -141,6 +143,12 @@ const actions = {
       case '付款管理' : _url = 'pay/delPay.do'
         break;
       case '采购订单' : _url = 'purchaseOrder/delPurchaseOrder.do'
+        break;
+      case '套餐管理' : _url = 'packageManage/delete.do'
+        break;
+      case '业务退货' : _url = 'back/delete.do'
+        break;
+      case '业务开单' : _url = 'bussinessOrder/delete.do'
         break;
     }
     return new Promise((resolve,reject) => {
@@ -792,7 +800,95 @@ const actions = {
         return resolve(res)
       })
     })
-  }
+  },
+
+  /**
+   * 进存销 -- 套餐管理 -- 会员套餐记录 -- 停用
+   */
+  sellingMealMemberUpdate({dispatch}, {id, path}){
+    return new Promise((resolve, reject) => {
+      $http.post('packageUseInfo/update.do', {id}, res => {
+        setTimeout(() => {
+          dispatch('getSellingStore', {path})
+        }, 1000)
+      })
+    })
+  },
+
+  /**
+   * 进存销 -- 套餐管理 -- 套餐销售 -- 新增
+   * 获取页面内容 -- 根据车牌或者是手机号
+   */
+  getSellingMealSaleInfo({dispatch}, {condition}){
+    return new Promise((resolve, reject) => {
+      $http.post('bussinessOrder/getUserInfo.do', {condition}, res => {
+        return resolve(res)
+      })
+    })
+  },
+
+  /**
+   * 进存销 -- 套餐管理 -- 套餐销售 -- 新增
+   */
+  sellingMealSalePost({dispatch}, {form: {
+    saleNo,
+    userId,
+    packageId,
+    startDates,
+    endDates,
+    salerId,
+    packagePrice,
+    takeMoney,
+    payType,
+    status,
+    ids,
+  }}){
+    return new Promise((resolve, reject) => {
+      $http.post('packageSale/saveDraft.do', {
+        saleNo,
+        userId,
+        packageId,
+        startDates,
+        endDates,
+        salerId,
+        packagePrice,
+        takeMoney,
+        payType,
+        status,
+        ids,
+      }, res => {
+        return resolve(res)
+      })
+    })
+  },
+
+  /**
+   * 进存销 -- 业务管理 -- 业务退货 -- 新增
+   */
+  sellingBusinessBackPost({dispatch}, {form:{ 
+    status,
+    outRepositoryCode,
+    backDate,
+    remark,
+    OrderStatus,
+    goodsData,
+    outRepositoryId,
+  }}){
+    return new Promise((resolve, reject) => {
+      $http.post('back/save.do', {
+        status,
+        outRepositoryCode,
+        backDate,
+        remark,
+        OrderStatus,
+        goodsData,
+        outRepositoryId,
+      }, res => {
+        return resolve(res)
+      })
+    })
+  },
+
 }
 
 const getters = {
@@ -809,7 +905,9 @@ const getters = {
       }else if(path === '业务退货'){
         return {...item, statusText: item.status === 0 ? '未提交' : '已提交', checkStatusText: item.checkStatus === 0 ? '未提交' : '已提交'}
       }else if(path === '会员套餐记录'){
-        return {...item, }
+        return {...item, stateText: item.state === 0 ? '未提交' : item.state === 1 ? '已提交' : '已停用' }
+      }else if(path === '会员套餐记录详情'){
+        return {...item, typeText: item.type === 0 ? '商品' : '项目'}
       }else if(path === '采购订单'){
         return {...item, checkStatusText: item.checkStatus === 0 ? '未通过' : '已通过', repositoryStatusText: item.repositoryStatus === 0 ? '未出库' : '已出库'}
       }else if(path === '采购入库'){

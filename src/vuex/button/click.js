@@ -66,6 +66,12 @@ export const jump2Detail = params => {
             break;
       case '采购退货' : rootPath = '/selling/store/pub', child = '编辑采购退货'
             break;
+      case '套餐管理' : rootPath = '/selling/meal/pub', child = '编辑套餐管理'
+            break;
+      case '套餐销售' : rootPath = '/selling/sale/pub', child = '编辑套餐销售'
+            break;
+      case '业务退货' : rootPath = '/selling/store/pub', child = '编辑业务退货'
+            break;
       default : rootPath = '/index'
     }
     window.$route.push({path:'/mid/container',query:{path:rootPath , menu , subMenu ,child}})
@@ -222,6 +228,10 @@ export const jump2Detail = params => {
       case '挂账还款明细表' : return location.href = window.rootPath + '/reportManage/eportRepayment.do' + _str
       case '推荐有礼' : return location.href = window.rootPath + '/recommendingGift/recommendingGiftListReport.do' + _str
       case '摇一摇中奖' : return location.href = window.rootPath + '/rockIngActivities/userRockingListReport.do' + _str
+      case '业务退货' : return location.href = window.rootPath + '/back/report.do' + _str 
+      case '业务出库' : return location.href = window.rootPath + '/outRepository/report.do' + _str
+      case '业务结算' : return location.href = window.rootPath + '/bussinessOrder/report.do' + _str
+      case '业务开单' : return location.href = window.rootPath + '/bussinessOrder/report.do' + _str
       default : return _g.toastMsg({type: 'error', msg: '导出失败'})
     }
    }else{

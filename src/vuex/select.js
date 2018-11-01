@@ -18,6 +18,11 @@ const state = {
   payTypeList: [],
   providerList: [],
   logisticList:[],
+  sellingSale:{
+    salesList:[],
+    total: 0,
+    currPageNo: 1,
+  }
 }
 
 const mutations = {
@@ -86,6 +91,17 @@ const mutations = {
    */
   setLogisticList(state, {params}){
     state.logisticList = params
+  },
+
+  /**
+   * 进存销 -- 套餐管理 -- 套餐销售 -- 销售列表
+   */
+  setSalesList(state, {params}){
+    state.sellingSale = {
+      salesList: params && params.list,
+      total: params && params.total,
+      currPageNo: params && params.pageNo
+    }
   }
 }
 
@@ -225,6 +241,32 @@ const actions = {
     return new Promise((resolve, reject) => {
       $http.post('purchaseOrder/getLogisticsDrop.do', {}, res => {
         commit('setLogisticList', {params: res.data})
+        return resolve(res)
+      })
+    })
+  },
+
+  /**
+   * 进存销 -- 套餐管理 -- 套餐销售 -- 获取套餐列表
+   * salesList: Array
+   */
+  getSalesList({commit}, {currPageNo = 1}){
+    return new Promise((resolve, reject) => {
+      $http.post('packageSale/init.do', {currPageNo}, res => {
+        commit('setSalesList', {params: res.data})
+        return resolve(res)
+      })
+    })
+  },
+
+  /**
+   * 进存销 -- 业务管理 -- 业务退货 -- 新增
+   * 获取新增商品列表
+   */
+  getBusinessInfo({commit}, {outRepositoryCode, currPageNo = 1}){
+    return new Promise((resolve, reject) => {
+      $http.post('back/getGoodsInfo.do', {outRepositoryCode, currPageNo}, res => {
+        commit('setSellingGoodsList', {params: res.data})
         return resolve(res)
       })
     })

@@ -1,7 +1,7 @@
 <template>
   <section class="father">
       <section class="content">
-        <Search v-if="isShow" :name="changePath" @inputChange="getSellingStore({path: changePath})" />
+        <Search v-if="isShow" :name="changePath" @inputChange="getSellingStore({path: changePath, query})" />
         <my-table v-if="isShow" :list="list({path: changePath})" header="true" :params="changePath" >
           <span slot="title">{{changePath}}列表</span>
           <div slot="right">
@@ -46,6 +46,11 @@ export default {
     }),
     changePath(){
       return this.$route.query.child ||  this.$route.query.subMenu
+    },
+    query(){
+      let data = this.$route.query && this.$route.query.data
+      data = data && JSON.parse(data)
+      return data
     }
   },
   watch:{
@@ -54,7 +59,7 @@ export default {
       this.$store.commit('clearSearchForm')
       setTimeout(()=>{
         this.isShow = true
-        this.getSellingStore({path: this.changePath})
+        this.getSellingStore({path: this.changePath, query: this.query})
       })
     }
   },
@@ -63,11 +68,11 @@ export default {
       'getSellingStore': 'getSellingStore'
     }),
     getCurrentPage(e){
-      this.getSellingStore({path: this.changePath, currPageNo: e})
+      this.getSellingStore({path: this.changePath, currPageNo: e, query: this.query})
     }
   },
   created(){
-    this.getSellingStore({path: this.changePath})
+    this.getSellingStore({path: this.changePath, query: this.query})
   }
 }
 </script>

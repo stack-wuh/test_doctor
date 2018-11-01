@@ -48,7 +48,7 @@
     <el-dialog title="选择商品" :visible.sync="visibleDialog">
       <el-table @selection-change="handleTableSelect" :data="SellingStoreGoods" border stripe>
         <el-table-column width="90px" align="center" type="selection" fixed="left"></el-table-column>
-        <el-table-column align="center" v-for="(item, index) in dialogTable" :key="index" :label="item.key" :prop="item.field"></el-table-column>
+        <el-table-column align="center" v-for="(item, index) in dialogTableList" :key="index" :label="item.key" :prop="item.field"></el-table-column>
       </el-table>
       <my-bottom type="pagination" :total="total" :currentPage='currPageNo' @getCurrent="getCurrent" ></my-bottom>
       <span slot="footer">
@@ -389,6 +389,54 @@ const forms = [
 
     }
   },
+  {
+    title: '业务退货',
+    params:['编辑业务退货'],
+    list:[
+      {
+        label: '商品出库单',
+        field: 'outRepositoryCode',
+        type: 'input',
+        rules:[{required: true, message: '请编辑商品出库单', trigger: 'input'}],
+      },
+      {
+        label: '仓库名称',
+        field: 'outRepositoryId',
+        type: 'select',
+        rules:[{required: true, message: '请选择仓库', trigger: 'input'}],
+      },
+      {
+        label: '退货日期',
+        field: 'backDate',
+        type: 'date',
+        rules:[{required: true, message: '请选择退货日期', trigger: 'change'}],
+      },
+      {
+        label: '订单状态',
+        field: 'OrderStatus',
+        type: 'select',
+        list:[
+          {
+            label: '已发货',
+            value: 1
+          },
+          {
+            label: '未发货',
+            value: 0
+          }
+        ],
+        rules:[{required: true, message: '请选择退货日期', trigger: 'change'}],
+      },
+      {
+        label: '退货原因',
+        field: 'remark',
+        type: 'textarea',
+        rows: '3',
+        rules:[{required: true, message: '请编辑备注', trigger: 'blur'}],
+      }
+    ],
+    form:{}
+  }
 ]
 const tables = [
   {
@@ -886,6 +934,61 @@ const tables = [
       }
     ]
   },
+  {
+    title: '业务退货',
+    params:['编辑业务退货'],
+    list:[
+      {
+        label: '商品名称',
+        field: 'goodName',
+        type: 'default',
+      },
+      {
+        label: '仓库名称',
+        field: 'repositoryName',
+        type: 'default',
+      },
+      {
+        label: '车品牌',
+        field: 'carBrand',
+        type: 'default',
+      },
+      {
+        label: '车型号',
+        field: 'carModel',
+        type: 'default',
+      },
+      {
+        label: '单位',
+        field: 'goodUnit',
+        type: 'default',
+      },
+      {
+        label: '销售数量',
+        field: 'saleNum',
+        type: 'default',
+      },
+      {
+        label: '出库数量',
+        field: 'outRepositoryNum',
+        type: 'default',
+      },
+      {
+        label: '退货数量',
+        field: 'backNum',
+        type: 'input',
+      },
+      {
+        label: '操作',
+        type: 'button',
+        list:[
+          {
+            text: '删除'
+          }
+        ]
+      }
+    ]
+  },
 ]
 const dialogTable = [
   {
@@ -933,6 +1036,40 @@ const dialogTable = [
     field: 'remark',
   }
 ]
+const dialogTable1 = [
+  {
+    key: '商品名称',
+    field: 'goodName',
+  },
+  {
+    key: '仓库名称',
+    field: 'repositoryName',
+  },
+  {
+    key: '车品牌',
+    field: 'carBrand',
+  },
+  {
+    key: '车型号',
+    field: 'carModel',
+  },
+  {
+    key: '单位',
+    field: 'goodUnit',
+  },
+  {
+    key: '销售数量',
+    field: 'saleNum',
+  },
+  {
+    key: '出库数量',
+    field: 'outRepositoryNum',
+  },
+  {
+    key: '退货数量',
+    field: 'backNum',
+  }
+]
 
 
 import {mapActions, mapState} from 'vuex'
@@ -948,6 +1085,7 @@ export default {
       forms,
       tables,
       dialogTable,
+      dialogTable1,
       list:[], // 页面中的表格
       temp_select:[], // dialog -- 表格选择的临时数组
 
@@ -989,6 +1127,8 @@ export default {
           item = Object.assign(item, {list: this.logisticList})
         }else if(item.field === 'backerId'){
           item = Object.assign(item, {list: this.employees})
+        }else if(item.field === 'outRepositoryId'){
+          item = Object.assign(item, {list: this.stores})
         }
       })
       return data
@@ -1019,6 +1159,13 @@ export default {
     canShowButton(){
       let arr = ['编辑采购订单']
       return arr.includes(this.pathChange)
+    },
+    dialogTableList(){
+      if(this.pathChange === '编辑业务退货'){
+        return dialogTable1
+      }else{
+        return dialogTable
+      }
     }
   },
   methods: {
@@ -1048,7 +1195,9 @@ export default {
       'getSellingFinanceBackPostInfo': 'getSellingFinanceBackPostInfo',
       'sellingFinanceBackPost': 'sellingFinanceBackPost',
       'sellingFinanceBackPost': 'sellingFinanceBackPost',
-      'getSellingFinanceBackInfo': 'getSellingFinanceBackInfo'
+      'getSellingFinanceBackInfo': 'getSellingFinanceBackInfo',
+      'getBusinessInfo': 'getBusinessInfo',
+      'sellingBusinessBackPost':'sellingBusinessBackPost'
     }),
     /**
      * select框change事件
@@ -1143,13 +1292,23 @@ export default {
               this.list = res.data.list.map(item => {
                 return {...item, thisBackNum: item.thisBackNum ? item.thisBackNum : 0}
               })
-              // this.formList.form.purchaseCode = res.data.storage.purchaseCode
             }
           })
         }else{
           _g.toastMsg({
             type: 'error',
             msg: '请编辑采购订单后搜索'
+          })
+        }
+      }else if(this.pathChange === '编辑业务退货'){
+        if(this.formList.form && this.formList.form.outRepositoryCode){
+          this.getBusinessInfo({outRepositoryCode: this.formList.form.outRepositoryCode, currPageNo: 1}).then(res => {
+            this.visibleDialog = true
+          })
+        }else {
+          _g.toastMsg({
+            type: 'error',
+            msg: '请编辑出库单后搜索'
           })
         }
       }
@@ -1207,6 +1366,8 @@ export default {
           return {purchaseInfoId: item.id, price: item.price, backNum: item.backNum, repositoryNum: item.repositoryNum}
         }else if(this.pathChange === '编辑采购退货'){
           return {purchaseInfoId: item.id, thisBackNum: item.thisBackNum}
+        }else if(this.pathChange === '编辑业务退货'){
+          return {goodId: item.goodId, num: item.backNum}
         }
       })
       if(!this.list.length) {
@@ -1251,6 +1412,12 @@ export default {
           }
           if(this.pathChange === '编辑采购退货'){
             this.sellingFinanceBackPost({form}).then(res => {
+              res.status === 0 && this.handleClickCancel()
+            })
+          }
+          if(this.pathChange === '编辑业务退货'){
+            form = {...form, goodsData: JSON.stringify(data)}
+            this.sellingBusinessBackPost({form}).then(res => {
               res.status === 0 && this.handleClickCancel()
             })
           }
@@ -1305,6 +1472,8 @@ export default {
     }else if(this.pathChange === '编辑采购入库'){
       this.getProviderList()
       this.getSellingStores()
+    }else if(this.pathChange === '编辑业务出库'){
+      this.getSellingStores()
     }else {
       this.getSellingStores()
       this.getEmployeeList()
@@ -1352,6 +1521,9 @@ export default {
           this.list = res.data.list
           this.formList.form = {...this.formList.form, ...res.data.purchaseBack}
         })
+      }else if(this.pathChange === '编辑业务退货'){
+        this.formList.form = {...this.formList.form, ...this.query, outRepositoryCode: this.query.backCode, OrderStatus: this.query.status}
+        this.getBusinessInfo({outRepositoryCode: this.query.backCode})
       }
     }
   },

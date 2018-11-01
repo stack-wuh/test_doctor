@@ -57,6 +57,7 @@
    handleQuesPub,
    handleShakeState,
    serveActivePostAndFresh,
+   handleSellingMemberChange,
   } from './click.js'
 const state = {
   data:[
@@ -2324,12 +2325,12 @@ const state = {
         {
           key:'卡券奖励',
           type:'default',
-          prop:'couponTypeText',
+          prop:'couponAward',
         },
         {
           key:'奖励类型',
           type:'default',
-          prop:'couponType',
+          prop:'couponTypeText',
         },
         {
           key:'领取用户姓名',
@@ -4095,9 +4096,20 @@ const state = {
           type:'button',
           list:[
             {
-              text:'编辑',
-              type:'',
+              valid: 3,
+              value: [0, 1],
+              rules:'status',
+              texts:['编辑', '查看'],
+              styles:[
+                {
+                  color: STYLES['PRIMARY']
+                },
+                {
+                  color: STYLES['PRIMARY']
+                }
+              ],
               size:'small',
+              click: jump2Other,
             },
           ]
         },
@@ -4107,8 +4119,8 @@ const state = {
       name:'套餐管理',
       path:'',
       params:['套餐管理'],
-      colType:'select',
-      colValue:'selection',
+      colType:'',
+      colValue:'',
       colTitle:'',
       list:[
         {
@@ -4291,7 +4303,7 @@ const state = {
         {
           key:'状态',
           type:'default',
-          prop:'',
+          prop:'stateText',
         },
         {
           key:'操作',
@@ -4301,16 +4313,58 @@ const state = {
               text:'详情',
               type:'',
               size:'small',
+              click: jump2Other
             },
             {
               text:'停用',
               type:'',
               size:'small',
+              click: handleSellingMemberChange
             }
           ]
         },
       ]
     }, 
+    {
+      name:'会员套餐记录详情',
+      path:'',
+      params:['会员套餐记录详情'],
+      colType:'',
+      colValue:'',
+      colTitle:'',
+      list:[
+        {
+          key:'名称',
+          type:'default',
+          prop:'name',
+        },
+        {
+          key:'类型',
+          type:'default',
+          prop:'typeText',
+        },
+        {
+          key:'单价',
+          type:'default',
+          prop:'price',
+        },
+        {
+          key:'数量',
+          type:'default',
+          prop:'num',
+        },
+        {
+          key:'已用数量',
+          type:'default',
+          prop:'useNum',
+        },
+        {
+          key:'可用数量',
+          type:'default',
+          prop:'unUseNum',
+        }
+      ]
+    },
     {
       name:'采购订单',
       path:'',
