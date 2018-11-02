@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "babel-plugin-component": "^1.1.1",
+    "compression-webpack-plugin": "^2.0.0",
     "element-ui": "^2.4.6",
     "vue": "^2.5.17",
     "vue-router": "^3.0.1",
@@ -35,7 +36,12 @@
       "eslint:recommended"
     ],
     "rules": {
-      "no-unused-vars":["error", { "vars": "local" }]
+      "no-unused-vars": [
+        "error",
+        {
+          "vars": "local"
+        }
+      ]
     },
     "parserOptions": {
       "parser": "babel-eslint"
