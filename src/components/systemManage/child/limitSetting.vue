@@ -26,19 +26,16 @@
         <section class="item-nav" v-if="item.subMenu" v-for="(list,lindex) in item.subMenu" >
           <div>
             <span class="title">
-              <el-checkbox :indeterminate="list.isIndeterminate" v-model="list.checkAll" @change="handleClickTopChooseAll(index,lindex,$event)" ></el-checkbox>
+              <el-checkbox v-model="list.isAuthor" @change="handleTopChoose($event, list, index, lindex)" v-if="list.authorityList" ></el-checkbox>
               {{list.menuName}} 
             </span>
-            <el-checkbox  v-for="(ll, ld) in list.authorityList" :key="ld" :label="ll.name" @change="handleClickOneChose(index, ld, $event, ll.id)" v-model="ll.isAuth" ></el-checkbox>
+              <el-checkbox  v-for="(ll, ld) in list.authorityList" :key="ld" :label="ll.name" @change="handleClickOneChose(index, ld, $event, ll.id)" v-model="ll.isAuth" ></el-checkbox>
           </div>
           <section class="sub-item-nav" v-if="list.authorityMenuList" v-for="(sub,sid) in list.authorityMenuList" :key="sid">
             <div v-if="isFatherChange" >
               <span class="title">
-
-
-
-                
-                <el-checkbox :indeterminate="sub.isIndeterminate" v-model="sub.checkAll" @change="handleClickTopChoose(index,lindex,sid,$event)" ></el-checkbox>
+                <!-- <el-checkbox :indeterminate="sub.isIndeterminate" v-model="sub.checkAll" @change="handleClickTopChoose(index,lindex,sid,$event)" ></el-checkbox> -->
+                <el-checkbox v-model="sub.isAuthor" @change="handleTopChoose($event, sub, index, lindex)"  ></el-checkbox>
                 {{sub.menuName}}
               </span>
                 <el-checkbox v-for="(ll, ld) in sub.authorityList" @change="handleClickOneChose(index, ld, $event, ll.id)" :key="ld" :label="ll.name" v-model="ll.isAuth"></el-checkbox>
@@ -52,7 +49,7 @@
 
 <script>
 import {limit , baseObj} from '../../../utils/limit.js'
-import MyBottom from '@/components/common/bottom'
+import MyBottom from '@/components/common/subButton'
 import {mapActions, mapGetters, mapState, mapMutations} from 'vuex'
 import {throttle} from '@/utils/global.js'
 export default {
@@ -500,33 +497,46 @@ export default {
     ...mapState({
       'store': state => state.Limit.data
     }),
+    query(){
+      let data = this.$route.query.data
+      data = data && JSON.parse(data)
+      return data
+    }
   },
   methods: {
     ...mapActions({
       'getLimitStore':'getLimitStore',
-      'handleAccredit':'handleAccredit'
+      'handleAccredit':'handleAccredit',
+      'handleAccreditMore': 'handleAccreditMore'
     }),
 
     /**
      * 一级权限管理
      */
-    handleClickTopChoose(index, lindex, val, id){
-      console.log(index, lindex, val, id)
-      console.log(this.list[index]['subMenu'][lindex])
+    handleTopChoose(val, list){
+      this.isFatherChange = false
+      this.isFatherChange = true
+      let authorityIds = list.authorityList.map(item => item.id).toString()
+      let form = {
+        roleId: this.query.id,
+        authorityIds,
+        status: val ? 1 : 0
+      }
+      this.handleAccreditMore({form}).then(res => {
+        if(res.status === 0){
+          setTimeout(() => {
+            this.fetchData()
+          }, 1000)
+        }
+      })
     },
-    /**
-     * 一级权限全选事件
-     */
-    handleClickTopChooseAll(index, lindex){
 
-    },
     /**
      * 低级权限管理
      */
     handleClickOneChose(index, lindex, val, id){
        this.handleAccredit({form:{authorityId: id, roleId: this.roleId}})
     },
-
 
     /**
      * 二级权限管理
@@ -549,28 +559,30 @@ export default {
      })
     },
 
+    fetchData(){
+      this.getLimitStore({form:{roleId: this.query.id}}).then(res => {
+        this.list = res.data && res.data.map(item => {
+          item.authorityMenuList && item.authorityMenuList.map(list => {
+            list.authorityList && list.authorityList.map(sub => {
+              sub.isAuth = sub.isAuth == 1 ? true : false
+            })
+            list.isAuthor = list.authorityList && list.authorityList.every(ss => ss.isAuth)
+            list.authorityMenuList && list.authorityMenuList.map(sub => {
+                sub.authorityList && sub.authorityList.map(ss => {
+                  ss.isAuth = ss.isAuth == 1 ? true : false
+                })
+                sub.isAuthor = sub.authorityList && sub.authorityList.every(ss => ss.isAuth)
+            })
+          })
+          return {id: item.id, menuName: item.menuName, subMenu: item.authorityMenuList}
+        })
+        console.log(this.list)
+      })
+    }
   },
   created(){
-    let data = this.$route.query.data && JSON.parse(this.$route.query.data)
-    this.roleId = data.id
     this.formatList()
-    this.getLimitStore({form:{roleId: data.id}}).then(res => {
-      this.list = res.data && res.data.map(item => {
-        item.authorityMenuList && item.authorityMenuList.map(list => {
-          list.authorityList && list.authorityList.map(sub => {
-            sub.isAuth = sub.isAuth == 1 ? true : false
-          })
-          list.isAuthor = list.authorityList && list.authorityList.every(ss => ss.isAuth)
-          list.authorityMenuList && list.authorityMenuList.map(sub => {
-              sub.authorityList && sub.authorityList.map(ss => {
-                ss.isAuth = ss.isAuth == 1 ? true : false
-              })
-          })
-        })
-        return {id: item.id, menuName: item.menuName, subMenu: item.authorityMenuList}
-      })
-      console.log(this.list)
-    })
+    this.fetchData()
   }
 }
 </script>
@@ -642,6 +654,9 @@ export default {
         }
       }
     }
+  }
+  .my-bottom{
+
   }
 }
 </style>
