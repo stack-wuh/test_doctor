@@ -8,7 +8,7 @@
       </div>
     </header>
     <section class="content">
-      <div class="card" v-for="(item,index) in list" :key="index">
+      <div @click="jump2Other(item)" class="card" v-for="(item,index) in list" :key="index">
         <span class="title">{{item.title}}</span>
         <span class="tips">{{item.value}}</span>
       </div>
@@ -70,27 +70,57 @@ export default {
       list: [
         {
           title: "已有会员(人)",
-          value: "1111"
+          value: "1111",
+          path: '/member/list',
+          query: {
+            menu: '会员管理',
+            subMenu: '会员列表'
+          }
         },
         {
           title: "昨日新增(人)",
-          value: "80"
+          value: "80",
+          path: '/member/list',
+          query: {
+            menu: '会员管理',
+            subMenu: '昨日新增会员'
+          }
         },
         {
           title: "本月累计(人)",
-          value: "30"
+          value: "30",
+          path: '/member/list',
+          query: {
+            menu: '会员管理',
+            subMenu: '本月会员累计'
+          }
         },
         {
           title: "总注册车辆(辆)",
-          value: 20
+          value: 20,
+          path: '/member/list',
+          query: {
+            menu: '会员管理',
+            subMenu: '车辆管理'
+          }
         },
         {
           title: "保养到期(辆)",
-          value: 20
+          value: 20,
+          path: '/member/list',
+          query: {
+            menu: '会员管理',
+            subMenu: '车辆管理',
+          }
         },
         {
           title: "保险到期(辆)",
-          value: 20
+          value: 20,
+          path: '/member/list',
+          query: {
+            menu: '会员管理',
+            subMenu: '车辆管理'
+          }
         }
       ],
       option,
@@ -127,6 +157,10 @@ export default {
       myChart.setOption(option);
     },
 
+    jump2Other(item){
+      console.log(item)
+      this.$router.push({path: item.path, query: item.query})
+    },
     /**
      * 首页时钟
      * 周期性定时器 

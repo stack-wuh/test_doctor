@@ -21,12 +21,11 @@ const SystemStorePub = resolve => require(['@/components/systemManage/child/stor
 const SystemStoreReply = resolve => require(['@/components/systemManage/child/reply'],resolve)
 const SystemShare = resolve => require(['@/components/systemManage/child/share'], resolve)
 
-const UseIndex = resolve => require(['@/components/useManage/index'],resolve)
+
 const UseStore = resolve => require(['@/components/useManage/mid/store'],resolve)
 const UsePub = resolve => require(['@/components/useManage/child/usePub'],resolve)
 
 
-const MemberIndex = resolve => require(['@/components/memberManage/index'],resolve)
 const MemberStore = resolve => require(['@/components/memberManage/mid/list'],resolve)
 const MemberPub = resolve => require(['@/components/memberManage/child/memberPub'],resolve)
 const MemberPay = resolve => require(['@/components/memberManage/child/memberPay'],resolve)
@@ -103,7 +102,7 @@ export default new Router({
           path:'/index',
           name:'index',
           component:Index
-        },
+        }
       ]
     },
     {

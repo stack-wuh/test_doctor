@@ -402,7 +402,7 @@ const state = {
     {
       name:'会员列表',
       type:'',
-      params:['会员列表'],
+      params:['会员列表', '昨日新增会员', '本月会员累计'],
       list:[
         {
           key:'姓名',

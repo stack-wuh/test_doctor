@@ -1329,7 +1329,7 @@ const state = {
       name:'会员列表',
       path:'',
       type:'会员列表',
-      params:['会员列表'],
+      params:['会员列表', '昨日新增会员', '本月会员累计'],
       colType:'select',
       colValue:'selection',
       fix:'left',
