@@ -44,6 +44,11 @@ export default {
     }),
     changePath(){
       return this.$route.query.child || this.$route.query.subMenu
+    },
+    query(){
+      let data = this.$route.query.data
+      data = data && JSON.parse(data)
+      return data
     }
   },
   watch:{
@@ -62,7 +67,7 @@ export default {
       'getMarketStore':'getMarketStore'
     }),
     getCurrentPage(val){
-      this.getMarketStore({path: this.changePath, currPageNo: val})
+      this.getMarketStore({path: this.changePath, currPageNo: val, id: data.id})
     },
   },
   created(){
