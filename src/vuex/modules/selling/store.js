@@ -889,6 +889,30 @@ const actions = {
     })
   },
 
+  /**
+   * 进存销 -- 业务管理 -- 业务出库 -- 新增/编辑
+   */
+  sellingBusinessOutPost({dispatch}, {form: {
+    status,
+    orderCode,
+    repositoryId,
+    outRepositoryDate,
+    remark,
+    goodsData,
+  }}){
+    return new Promise((resolve, reject) => {
+      $http.post('outRepository/save.do', {
+        status,
+        orderCode,
+        repositoryId,
+        outRepositoryDate,
+        remark,
+        goodsData,
+      }, res => {
+        return resolve(res)
+      })
+    })
+  }
 }
 
 const getters = {

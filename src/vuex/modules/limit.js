@@ -26,7 +26,7 @@ const actions = {
     if(now - startTime < 2000 && authorityId == form.authorityId){
       _g.toastMsg({
         type: 'error',
-        msg:'请勿重复操作权限!'
+        msg:'请勿频繁操作权限!'
       })
       return
     }
@@ -57,6 +57,18 @@ const actions = {
       $http.post('authorityBackend/getUserAuthList.do', {}, res => {
         commit('setUserLimitList', {params: res.data})
         return resolve(res.data)
+      })
+    })
+  },
+
+  /**
+   * 系统管理 -- 角色管理 -- 编辑用户权限
+   * 批量操作
+   */
+  handleAccreditMore({dispatch}, {form}){
+    return new Promise((resolve, reject) => {
+      $http.post('authorityBackend/addAuths.do', form, res => {
+          return resolve(res)
       })
     })
   }

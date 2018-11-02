@@ -62,7 +62,8 @@ const SellingStorePub = resolve => require(['@/components/sellingManage/child/st
 const SellingStoreRefund = resolve => require(['@/components/sellingManage/child/finance/refund'], resolve)
 const SellingMealPub = resolve => require(['@/components/sellingManage/child/meal/manage'], resolve)
 const SellingSalePub = resolve => require(['@/components/sellingManage/child/meal/sale'], resolve)
-
+const SellingAccount = resolve => require(['@/components/sellingManage/child/account/account'], resolve)
+const SellingOpen = resolve => require(['@/components/sellingManage/child/account/opens'], resolve)
 
 const LogStore = resolve => require(['@/components/logManage/mid/store'], resolve)
 const LogConcat = resolve => require(['@/components/logManage/mid/concat'], resolve)
@@ -335,6 +336,16 @@ export default new Router({
                   path: '/selling/sale/pub',
                   name:'sellingSalePub',
                   component: SellingSalePub
+                },
+                {
+                  path: '/selling/account',
+                  name: 'sellingAccount',
+                  component: SellingAccount
+                },
+                {
+                  path: '/selling/open',
+                  name: 'sellingOpen',
+                  component: SellingOpen
                 }
               ],
             },

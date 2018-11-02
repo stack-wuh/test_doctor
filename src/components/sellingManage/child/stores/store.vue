@@ -8,6 +8,9 @@
               <el-select :disabled="disabled" clearable @change="handleChange(item)" v-if="item.type === 'select'" v-model="formList.form[item.field]" :placeholder="'请编辑' + item.label">
                 <el-option v-if="sl" v-for="(sl, sid) in item.list" :key="sid" :label="sl.label" :value="sl.value"></el-option>
               </el-select>
+              <el-select disabled v-if="item.type === 'select1'" v-model="formList.form[item.field]" >
+                <el-option v-if="sl" v-for="(sl, sid) in item.list" :key="sid" :label="sl.label" :value="sl.value"></el-option>
+              </el-select>
               <el-input :disabled="disabled" clearable v-if="item.type === 'input'" v-model="formList.form[item.field]" :placeholder="'请编辑' + item.label"></el-input>
               <el-date-picker :disabled="disabled" v-if="item.type === 'date'" v-model="formList.form[item.field]" :placeholder="'请编辑' + item.label" value-format="yyyy-MM-dd" ></el-date-picker>
             </el-form-item>
@@ -50,7 +53,7 @@
         <el-table-column width="90px" align="center" type="selection" fixed="left"></el-table-column>
         <el-table-column align="center" v-for="(item, index) in dialogTableList" :key="index" :label="item.key" :prop="item.field"></el-table-column>
       </el-table>
-      <my-bottom type="pagination" :total="total" :currentPage='currPageNo' @getCurrent="getCurrent" ></my-bottom>
+      <my-bottom v-if="!can_show_pagination.includes(this.pathChange)" type="pagination" :total="total" :currentPage='currPageNo' @getCurrent="getCurrent" ></my-bottom>
       <span slot="footer">
         <el-button @click="handleDialogCancel" type="danger">取消</el-button>
         <el-button @click="handleDialogSubmit" type="primary">确定</el-button>
@@ -401,8 +404,8 @@ const forms = [
       },
       {
         label: '仓库名称',
-        field: 'outRepositoryId',
-        type: 'select',
+        field: 'repositoryId',
+        type: 'select1',
         rules:[{required: true, message: '请选择仓库', trigger: 'input'}],
       },
       {
@@ -436,6 +439,38 @@ const forms = [
       }
     ],
     form:{}
+  },
+  {
+    title: '业务出库',
+    params:['编辑业务出库'],
+    list:[
+      {
+        label: '业务单号',
+        field: 'orderCode',
+        type: 'input',
+        rules:[{required: true, message: '请编辑业务单号', trigger: 'input'}],
+      },
+      {
+        label: '仓库名称',
+        field: 'repositoryId',
+        type: 'select',
+        rules:[{required: true, message: '请选择仓库', trigger: 'input'}],
+      },
+      {
+        label: '出库日期',
+        field: 'outRepositoryDate',
+        type: 'date',
+        rules:[{required: true, message: '请选择出库日期', trigger: 'change'}],
+      },
+      {
+        label: '备注',
+        field: 'remark',
+        type: 'textarea',
+        rows: '3',
+        rules:[{required: true, message: '请编辑备注', trigger: 'blur'}],
+      }
+    ],
+    form: {}
   }
 ]
 const tables = [
@@ -989,6 +1024,66 @@ const tables = [
       }
     ]
   },
+  {
+    title: '业务出库',
+    params:['编辑业务出库'],
+    list:[
+      {
+        label: '商品名称',
+        field: 'goodsName',
+        type: 'default',
+      },
+      {
+        label: '单位',
+        field: 'goodsUnit',
+        type: 'default',
+      },
+      {
+        label: '车品牌',
+        field: 'carBrand',
+        type: 'default',
+      },
+      {
+        label: '车型',
+        field: 'carModel',
+        type: 'default',
+      },
+      {
+        label: '规格',
+        field: 'carType',
+        type: 'default',
+      },
+      {
+        label: '销售数量',
+        field: 'saleNum',
+        type: 'default',
+      },
+      {
+        label: '已出库数量',
+        field: 'outRepositoryNum',
+        type: 'default',
+      },
+      {
+        label: '库存数量',
+        field: 'repositoryNum',
+        type: 'default',
+      },
+      {
+        label: '出库数量',
+        field: 'backNum',
+        type: 'input',
+      },
+      {
+        label: '操作',
+        type: 'button',
+        list:[
+          {
+            text: '删除'
+          }
+        ]
+      }
+    ]
+  },
 ]
 const dialogTable = [
   {
@@ -1070,6 +1165,54 @@ const dialogTable1 = [
     field: 'backNum',
   }
 ]
+const dialogTable2 = [
+      {
+        key: '商品名称',
+        field: 'goodsName',
+        type: 'default',
+      },
+      {
+        key: '单位',
+        field: 'goodsUnit',
+        type: 'default',
+      },
+      {
+        key: '车品牌',
+        field: 'carBrand',
+        type: 'default',
+      },
+      {
+        key: '车型',
+        field: 'carModel',
+        type: 'default',
+      },
+      {
+        key: '规格',
+        field: 'carType',
+        type: 'default',
+      },
+      {
+        key: '销售数量',
+        field: 'saleNum',
+        type: 'default',
+      },
+      {
+        key: '已出库数量',
+        field: 'outRepositoryNum',
+        type: 'default',
+      },
+      {
+        key: '库存数量',
+        field: 'repositoryNum',
+        type: 'default',
+      },
+      {
+        key: '出库数量',
+        field: 'backNum',
+        type: 'input',
+      }
+]
+
 
 
 import {mapActions, mapState} from 'vuex'
@@ -1086,10 +1229,13 @@ export default {
       tables,
       dialogTable,
       dialogTable1,
+      dialogTable2,
+
       list:[], // 页面中的表格
       temp_select:[], // dialog -- 表格选择的临时数组
 
       rules_arr1: ['编辑调拨接收', '编辑付款管理', '编辑采购入库', '编辑采购退货'],
+      can_show_pagination: ['编辑业务退货'],
     }
   },
   computed:{
@@ -1101,7 +1247,8 @@ export default {
       'currPageNo': state => state.Select.sellingStore.currPageNo,
       'providerList': state => state.Select.providerList,
       'payTypeList': state => state.Select.payTypeList,
-      'logisticList': state => state.Select.logisticList
+      'logisticList': state => state.Select.logisticList,
+      'formInfo': state => state.Select.sellingStore.formInfo
     }),
     formList(){
      let data = this.forms.filter(item => item.params.includes(this.pathChange)) && 
@@ -1163,6 +1310,8 @@ export default {
     dialogTableList(){
       if(this.pathChange === '编辑业务退货'){
         return dialogTable1
+      }else if(this.pathChange === '编辑业务出库'){
+        return dialogTable2
       }else{
         return dialogTable
       }
@@ -1197,7 +1346,9 @@ export default {
       'sellingFinanceBackPost': 'sellingFinanceBackPost',
       'getSellingFinanceBackInfo': 'getSellingFinanceBackInfo',
       'getBusinessInfo': 'getBusinessInfo',
-      'sellingBusinessBackPost':'sellingBusinessBackPost'
+      'sellingBusinessBackPost':'sellingBusinessBackPost',
+      'getBusinessOutInfo': 'getBusinessOutInfo',
+      'sellingBusinessOutPost': 'sellingBusinessOutPost'
     }),
     /**
      * select框change事件
@@ -1304,6 +1455,7 @@ export default {
         if(this.formList.form && this.formList.form.outRepositoryCode){
           this.getBusinessInfo({outRepositoryCode: this.formList.form.outRepositoryCode, currPageNo: 1}).then(res => {
             this.visibleDialog = true
+            this.formList.form.repositoryId = this.formInfo.id
           })
         }else {
           _g.toastMsg({
@@ -1311,6 +1463,12 @@ export default {
             msg: '请编辑出库单后搜索'
           })
         }
+      }else if(this.pathChange === '编辑业务出库'){
+        if(this.formList.form && !this.formList.form.orderCode) return _g.toastMsg({type: 'error', msg: '请编辑业务单号后搜索'})
+        if(this.formList.form && !this.formList.form.repositoryId) return _g.toastMsg({type: 'error', msg: '请选择仓库后搜索'})
+        this.getBusinessOutInfo({orderCode: this.formList.form.orderCode, repositoryId: this.formList.form.repositoryId}).then(res => {
+            this.visibleDialog = true
+        })
       }
     },
     /**
@@ -1368,6 +1526,8 @@ export default {
           return {purchaseInfoId: item.id, thisBackNum: item.thisBackNum}
         }else if(this.pathChange === '编辑业务退货'){
           return {goodId: item.goodId, num: item.backNum}
+        }else if(this.pathChange === '编辑业务出库'){
+          return {goodId: item.goodId, num: item.backNum}
         }
       })
       if(!this.list.length) {
@@ -1417,7 +1577,13 @@ export default {
           }
           if(this.pathChange === '编辑业务退货'){
             form = {...form, goodsData: JSON.stringify(data)}
-            this.sellingBusinessBackPost({form}).then(res => {
+            this.sellingBusinessBackPost({form: {...form, outRepositoryId: this.formInfo.outRepositoryId}}).then(res => {
+              res.status === 0 && this.handleClickCancel()
+            })
+          }
+          if(this.pathChange === '编辑业务出库'){
+            form = {...form, goodsData: JSON.stringify(data)}
+            this.sellingBusinessOutPost({form}).then(res => {
               res.status === 0 && this.handleClickCancel()
             })
           }
@@ -1523,7 +1689,7 @@ export default {
         })
       }else if(this.pathChange === '编辑业务退货'){
         this.formList.form = {...this.formList.form, ...this.query, outRepositoryCode: this.query.backCode, OrderStatus: this.query.status}
-        this.getBusinessInfo({outRepositoryCode: this.query.backCode})
+        // this.getBusinessInfo({outRepositoryCode: this.query.backCode})
       }
     }
   },

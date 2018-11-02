@@ -72,6 +72,10 @@ export const jump2Detail = params => {
             break;
       case '业务退货' : rootPath = '/selling/store/pub', child = '编辑业务退货'
             break;
+      case '业务出库' : rootPath = '/selling/store/pub', child = '编辑业务出库'
+            break;
+      case '业务开单' : rootPath = '/selling/open', child = '编辑业务开单'
+            break;
       default : rootPath = '/index'
     }
     window.$route.push({path:'/mid/container',query:{path:rootPath , menu , subMenu ,child}})

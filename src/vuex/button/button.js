@@ -467,12 +467,14 @@ const state = {
           type:'',
           size:'',
           style:'',
+          click: jump2Add,
         },
         {
           text:'快速开单',
           type:'',
           size:'',
           style:'',
+          click: jump2Add,
         },
         {
           text:'导出',

@@ -10,6 +10,7 @@ const state = {
     SellingStoreGoods: [],
     total: 0,
     currPageNo: 1,
+    formInfo: {},
   },
   sellingRecivers:{
     form: {},
@@ -102,7 +103,24 @@ const mutations = {
       total: params && params.total,
       currPageNo: params && params.pageNo
     }
-  }
+  },
+
+  /**
+   * 进存销 -- 业务管理 -- 业务出库 
+   * 获取商品列表
+   */
+  setSellingGoodsList1(state, {params}){
+    state.sellingStore.SellingStoreGoods = params && params.goodsInfo
+    state.sellingStore.formInfo = params && params.repositoryInfo
+  },
+
+  /**
+   * 进存销 -- 业务管理 -- 业务出库
+   * 获取商品列表
+   */
+  setSellingGoodsOutList(state, {params}){
+    state.sellingStore.SellingStoreGoods = params
+  },
 }
 
 const actions = {
@@ -266,7 +284,20 @@ const actions = {
   getBusinessInfo({commit}, {outRepositoryCode, currPageNo = 1}){
     return new Promise((resolve, reject) => {
       $http.post('back/getGoodsInfo.do', {outRepositoryCode, currPageNo}, res => {
-        commit('setSellingGoodsList', {params: res.data})
+        commit('setSellingGoodsList1', {params: res.data})
+        return resolve(res)
+      })
+    })
+  },
+
+  /**
+   * 进存销 -- 业务管理 -- 业务出库 -- 新增
+   * 获取新增页内容
+   */
+  getBusinessOutInfo({commit}, {orderCode, repositoryId}){
+    return new Promise((resolve, reject) => {
+      $http.post('outRepository/getGoodsList.do', {orderCode, repositoryId}, res => {
+        commit('setSellingGoodsOutList', {params: res.data})
         return resolve(res)
       })
     })
