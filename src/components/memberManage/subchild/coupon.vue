@@ -122,11 +122,11 @@ export default {
           list:[
             {
               label:'男',
-              value:'1'
+              value:1
             },
             {
               label:'女',
-              value:'0'
+              value:0
             }
           ]
         },

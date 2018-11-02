@@ -3,9 +3,9 @@
     <section class="form-area">
       <el-form>
         <section class="inline-block">
-          <el-form-item v-for="(item,index) in list" :key="index" :label="item.label" class="form-item" >
-            <el-input placeholder="占位符" v-model="form[item.prop]" class="my-input-220"></el-input>
-            <el-input v-if="item.sub" placeholder="占位符" v-model="form[item.prop_sub]" class="my-input-220 margin-tp-15"></el-input>
+          <el-form-item v-for="(item,index) in list" :key="index" :label="item.label + item.tips" class="form-item" >
+            <el-input :placeholder="'请编辑' + item.label" v-model="form[item.prop]" class="my-input-220"></el-input>
+            <el-input v-if="item.sub" :placeholder="'请编辑' + item.label" v-model="form[item.prop_sub]" class="my-input-220 margin-tp-15"></el-input>
           </el-form-item> 
         </section>
       </el-form>
@@ -22,7 +22,6 @@
               :show-file-list="false"
               name='upload_file'
               :on-success="(res,file) => {return handleAvatarSuccess(res,file,index,ldx)}"
-              :before-upload="beforeAvatarUpload"
               >
               <img v-if="list.url" :src="list.url" class="avatar" alt="logo">
               <i v-else class="el-icon-plus avatar-uploader-icon"></i>
@@ -49,28 +48,32 @@ export default {
     return {
       list:[
         {
-          label:'公司名称:',
+          label:'公司名称',
           value:'武汉把图科技有限公司',
           prop:'name',
+          tips: ': ',
         },
         {
-          label:'预约热线(服务时间: 工作日全天候):',
+          label:'预约热线',
+          tips: '(服务时间: 工作日全天候): ',
           value:'手机号码: 1882739293',
           prop:'bookingHotline',
         },
         {
-          label:'电话及传真:',
+          label:'电话及传真',
           value:'电话: 027-12311332',
           sub:'传真: 027-12311332',
           prop:'phone',
-          prop_sub:'fax'
+          prop_sub:'fax',
+          tips: ': ',
         },
         {
-          label:'公司地址及邮箱:',
+          label:'公司地址及邮箱',
           value:'地址: 武汉市汉阳路18号',
           sub:'邮箱: 12312312@qq.com',
           prop:'address',
-          prop_sub:'email'
+          prop_sub:'email',
+          tips: ': ',
         }
       ],
       imgs:[
@@ -152,7 +155,6 @@ export default {
     handleAvatarSuccess(res,file, index, ldx){
       this.imgs[index].list[ldx].url = res && res.data
     },
-    beforeAvatarUpload(){},
     submit(){
       let _arr = this.imgs.map(item => {
         return item.list.map(list => {

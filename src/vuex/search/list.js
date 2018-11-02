@@ -834,6 +834,29 @@ const state = {
           value:'',
         },
         {
+          key: '模块名称',
+          type: 'select',
+          prop: 'moduleName',
+          list:[
+            {
+              label: '系统管理',
+              value: 0
+            },
+            {
+              label: '会员管理',
+              value: 1,
+            },
+            {
+              label: '卡券管理',
+              value: 2,
+            },
+            {
+              label: '用品管理',
+              value: 3
+            }
+          ]
+        },
+        {
           key:'开始日期',
           type:'date',
           prop:'startTime',

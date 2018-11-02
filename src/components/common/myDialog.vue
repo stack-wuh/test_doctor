@@ -11,7 +11,8 @@
               <el-select multiple class="my-input-320" v-if="item.type === 'select' && item.multiple" :placeholder="'请选择' + item.key" :disabled="item.disabled" v-model="myForm[item.prop]" >
                 <el-option v-if="item.list" v-for="(list,lindex) in item.list" :key="lindex" :label="list.label" :value="list.value" ></el-option>
               </el-select>
-              <el-date-picker value-format="yyyy-MM-dd" v-if="item.type == 'date'" :disabled="item.disabled" v-model="myForm[item.prop]" ></el-date-picker>
+              <el-date-picker value-format="yyyy-MM-dd" v-if="item.type == 'date'" :disabled="item.disabled" v-model="myForm[item.prop]"></el-date-picker>
+              <el-date-picker v-if="item.type === 'datetime'" type="datetime" value-format="yyyy-MM-dd hh:mm:ss" :disabled="item.disabled" v-model="myForm[item.prop]"></el-date-picker>
               <p v-if="item.tips"  class="c999" >{{item.tips}}</p>
             </el-form-item>
           </el-form>

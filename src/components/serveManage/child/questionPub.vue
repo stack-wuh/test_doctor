@@ -64,7 +64,7 @@
               <section class="item-box">
                 <section v-for="(item,index) in lists" :key="index" class="item">
                   <section class="btn-nav">
-                    <span @click="handleDelItem(index)" class="btn">删除</span>
+                    <span @click="handleDelItemQues(index)" class="btn">删除</span>
                   </section>
                   <p class="item-title">{{index+1}}.<span>{{item.title || '这里是标题哦'}}</span>【{{item.name}}】</p>
                   <section class="subarea">
@@ -162,9 +162,11 @@ export default {
       this.lists[index].value = ''
     },
 
+    handleDelItemQues(index){
+      this.lists.splice(index, 1)
+    },
     handleDelItem(index,lindex){
-      lindex ? this.lists[index].list.splice(lindex,1)
-       : this.lists.splice(index,1)
+      this.lists[index].list.splice(lindex, 1)
     },
 
     selectClick(type){
@@ -177,8 +179,6 @@ export default {
       })
       let data = {...JSON.parse(JSON.stringify(this.form)), ques_options:JSON.stringify(arr)}
       data.consumptionPush = data.consumptionPush && data.consumptionPush.toString()
-      console.log(data)
-      // return
       this.serverQuestionPub({form: data}).then(res => {
         setTimeout(() => {
           res.status === 0 && this.cancel()
@@ -195,7 +195,6 @@ export default {
   created(){
     let data = this.$route.query.data
     data && (data = JSON.parse(data))
-    console.log(data)
   }
 }
 </script>

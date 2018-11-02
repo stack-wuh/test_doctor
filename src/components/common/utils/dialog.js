@@ -1119,7 +1119,7 @@ export const forms = [
       },
       {
         key:'开始时间',
-        type:'date',
+        type:'datetime',
         prop:'startTime',
         rules:[
           {
@@ -1131,7 +1131,7 @@ export const forms = [
       },
       {
         key:'结束时间',
-        type:'date',
+        type:'datetime',
         prop:'endTime',
         rules:[
           {

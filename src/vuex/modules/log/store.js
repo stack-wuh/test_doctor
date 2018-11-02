@@ -27,7 +27,7 @@ const actions = {
         break;
       case '操作日志' : _url = 'log/userLogList.do', search = {...search, currPageNo, ...rootState.search}
         break;
-      case '联系我们' : _url = 'log/getContactUs.do'
+      case '联系我们' : _url = 'log/getContactUs.do', search = {}
         break;
       case '系统消息' : _url = 'message/getMessageCenter.do', search = {...rootState.search, currPageNo}
         break;
@@ -39,6 +39,11 @@ const actions = {
       })
     }) 
   },
+
+  /**
+   * 
+   */
+
   /**
    * 添加/编辑 版本更新日志
    */
