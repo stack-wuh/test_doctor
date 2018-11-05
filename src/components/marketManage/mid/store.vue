@@ -53,12 +53,11 @@ export default {
   },
   watch:{
     changePath(){
-      let data = this.$route.query.data && JSON.parse(this.$route.query.data)
       this.$store.commit('clearSearchForm')
       this.isShow = false
       setTimeout(()=>{
         this.isShow = true
-        this.getMarketStore({path: this.changePath, id: data && data.id})
+        this.getMarketStore({path: this.changePath, id: this.query && this.query.id})
       })
     }
   },
@@ -67,13 +66,11 @@ export default {
       'getMarketStore':'getMarketStore'
     }),
     getCurrentPage(val){
-      this.getMarketStore({path: this.changePath, currPageNo: val, id: data.id})
+      this.getMarketStore({path: this.changePath, currPageNo: val, id: this.query && this.query.id})
     },
   },
   created(){
-    let data = this.$route.query.data && JSON.parse(this.$route.query.data)
-    data && (this.temp_data = data)
-    this.getMarketStore({path: this.changePath, id: data && data.id})
+    this.getMarketStore({path: this.changePath, id: this.query && this.query.id})
   }
 }
 </script>
