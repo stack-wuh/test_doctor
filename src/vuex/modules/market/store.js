@@ -45,15 +45,17 @@ const actions = {
   marketDelAndFresh({dispatch}, {row, row:{id}, path}){
     let _url = '', search = {}
     switch(path){
-      case '报名查询' : _url = 'ordinaryActivities/delSignUp.do'
+      case '报名查询' : _url = 'ordinaryActivities/delSignUp.do', search = {ids: id}
         break;
-      case '普通活动' : _url = 'ordinaryActivities/banActivities.do'
+      case '普通活动' : _url = 'ordinaryActivities/banActivities.do', search = {ids: id}
         break;
-      case '活动抽奖' : _url = 'ordinaryActivities/banActivities.do'
+      case '活动抽奖' : _url = 'ordinaryActivities/banActivities.do', search = {ids: id}
+        break;
+      case '推荐有礼' : _url = 'recommendingGift/recommendingStateDel.do', search = {id }
         break;
     }
     return new Promise((resolve, reject) => {
-      $http.post(_url, {ids: id}, res => {
+      $http.post(_url, search, res => {
         setTimeout(() => {
           dispatch('getMarketStore', {path})
         }, 1000);
@@ -179,17 +181,36 @@ const actions = {
   /**
    * 市场推广 -- 摇一摇活动 -- 新增/编辑
    */
-  marketShakePub({dispatch}, {form}){
-    return new Promise((resovle, reject) => {
-      $http.post('rockIngActivities/addRockIngActivities.do', form, res => {
-
+  marketShakePub({dispatch}, {form: {
+    fieldName,
+    activityDateToString,
+    partakeNum,
+    displayNum,
+    winnerScore,
+    backgroundPicture,
+    data,
+    id,
+  }}){
+    let _url = id ? 'rockIngActivities/updateRockIngActivitiesInfo.do' : 'rockIngActivities/addRockIngActivities.do'
+    return new Promise((resolve, reject) => {
+      $http.post(_url, {
+        fieldName,
+        activityDateToString,
+        partakeNum,
+        displayNum,
+        winnerScore,
+        backgroundPicture,
+        data,
+        id
+      }, res => {
+        return resolve(res)
       })
     })
   },
   /**
    * 市场推广 -- 摇一摇活动 --- 获取编辑内容
    */
-  marketShakeEdit({dispatch}, {row: {id }}){
+  marketShakeEdit({dispatch}, {id }){
     return new Promise((resolve, reject) => {
       $http.post('rockIngActivities/updateRockIngActivitiesInfo.do', {id}, res => {
         return resolve(res)
@@ -206,6 +227,17 @@ const actions = {
       })
     })
   },
+
+  /**
+   * 市场推广 -- 推荐有礼 -- 领取/确认
+   */
+  marketSendPost({dispatch}, {path, row: {id }}){
+    return new Promise((resolve, reject) => {
+      $http.post('recommendingGift/recommendingStateUpdate.do', {id }, res => {
+        dispatch('getMarketStore', {path: '推荐有礼'})
+      })
+    })
+  }
 }
 
 const mutations = {
@@ -236,6 +268,8 @@ const getters = {
         return {...item, statusText: item.status === 1 ? '已领取' : '未领取'}
       }else if(path === '摇一摇活动'){
         return {...item, activeStateText: item.activeState === 1 ? '进行中' : '已结束'}
+      }else if(path === '推荐有礼'){
+        return {...item, typeText: item.type === 0 ? '保险' : '保养维护'}
       }else{
         return {...item}
       }

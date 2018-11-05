@@ -157,12 +157,10 @@ export default {
     },
     submit(){
       this.form = {...this.form, data: JSON.stringify(this.temp_list)}
-      this.$refs.myForm.vlidate(valid => {
+      this.$refs.myForm.validate(valid => {
         if(valid){
           this.marketShakePub({form: this.form}).then(res => {
-            res.status === 0 && (
-              this.cancel()
-            )
+            res.status === 0 && this.cancel()
           })
         }else {
           _g.toastMsg({
@@ -224,7 +222,7 @@ export default {
     }
   },
   created(){
-    this.marketShakeEdit({row: this.searchData})
+    this.marketShakeEdit({id: this.searchData && this.searchData.id})
   }
 }
 </script>

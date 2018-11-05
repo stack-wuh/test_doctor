@@ -414,3 +414,24 @@ export const handleSellingMemberChange = (params, text, row) => {
   let path = params.child || params.subMenu
   window.$store.dispatch('sellingMealMemberUpdate', {path, id: row.id})
 }
+
+
+/**
+ * 市场推广 -- 发布/领取/确认
+ */
+
+ export const handleMarketSenderPost = (params, text, row) => {
+   let path = params.child || params.subMenu
+   window.$confirm(`该操作将${text}该条内容, 请确认?`, '提示', {
+     confirmButtonText: '确认',
+     confirmCancelText: '取消',
+     type: 'warning'
+   }).then(res => {
+     window.$store.dispatch('marketSendPost', {path, row})
+   }).catch(err => {
+     _g.toastMsg({
+       type: 'error',
+       msg: '操作已取消或失败'
+     })
+   })
+ }

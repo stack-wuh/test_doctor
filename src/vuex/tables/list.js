@@ -58,6 +58,7 @@
    handleShakeState,
    serveActivePostAndFresh,
    handleSellingMemberChange,
+   handleMarketSenderPost,
   } from './click.js'
 const state = {
   data:[
@@ -2898,7 +2899,7 @@ const state = {
         {
           key:'推荐类型',
           type:'default',
-          prop:'type',
+          prop:'typeText',
         },
         {
           key:'推荐人',
@@ -2965,6 +2966,7 @@ const state = {
               text:'领取',
               type:'',
               size:'small',
+              click: handleMarketSenderPost
             },
           ]
         },
