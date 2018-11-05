@@ -3409,8 +3409,8 @@ const state = {
       name:'检修项目列表',
       path:'',
       params:['检修项配置'],
-      colType:'select',
-      colValue:'selection',
+      colType:'',
+      colValue:'',
       colTitle:'',
       list:[
         {

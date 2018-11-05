@@ -357,6 +357,9 @@ export const serveSettingState = (params, row) => {
 export const handleToggleStateForServeCar = (params, text, row) =>{
   window.$store.dispatch('serveSettingItemList', {row})
   window.$store.commit('serverCarStateToggle',{params, text, row})
+  if(text === '编辑'){
+    window.$store.dispatch('getServeCarSetting', {row})
+  }
 }
 
 /**

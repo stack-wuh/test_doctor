@@ -162,9 +162,9 @@ const actions = {
    * 客户服务 -- 车辆检测 -- 检修项配置
    * serverSetting: Array
    */
-  getServeCarSetting({commit}){
+  getServeCarSetting({commit}, {row: {id } }){
     return new Promise((resolve, reject) => {
-      $http.post('maintenanceItem/updatePage.do', {}, res => {
+      $http.post('maintenanceItem/updatePage.do', {id }, res => {
         commit('setServerCarSetting', {params: res.data})
         return resolve(res)
       })

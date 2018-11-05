@@ -39,8 +39,7 @@ const actions = {
         break;
       case '检修记录' : _url = 'repairRecord/init.do', search = {...rootState.search, currPageNo}
         break;
-      case '检修项配置' : _url = 'maintenanceItem/init.do', search = {...rootState.search, currPageNo},
-                    dispatch('getServeCarSetting')
+      case '检修项配置' : _url = 'maintenanceItem/init.do', search = {...rootState.search, currPageNo}
         break;
       case '专项检测配置' : _url = 'detection/init.do', search = {...rootState.search, currPageNo},
                     dispatch('getServeCarSettingOne')
@@ -137,6 +136,8 @@ const actions = {
       case '问卷调查' : _url = 'questionnaire/updateActivity.do'
         break;
       case '养车知识' : _url = 'raisingBackend/delRaising.do'
+        break;
+      case '活动抽奖' : _url = 'activitiesDraws/banActivitiesDraw.do'
         break;
     }
     return new Promise((resolve,reject) => {
@@ -255,9 +256,21 @@ const actions = {
   /**
    * 客户服务 -- 车辆检测 -- 检修项配置 -- 编辑/新增
    */
-  serverCarSettingPub({dispatch}, {form}){
+  serverCarSettingPub({dispatch}, {form: {
+    id, 
+    name, 
+    picture,
+    descInfo,
+    data
+  }}){
     return new Promise((resolve, reject) => {
-      $http.post('maintenanceItem/insertOrUpdate.do', form, res => {
+      $http.post('maintenanceItem/insertOrUpdate.do', {
+        id,
+        name,
+        picture,
+        descInfo,
+        data
+      }, res => {
         return resolve(res)
       })
     })
