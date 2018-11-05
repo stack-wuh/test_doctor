@@ -23,7 +23,8 @@ const state = {
     salesList:[],
     total: 0,
     currPageNo: 1,
-  }
+  },
+  sellingCouponList: [],
 }
 
 const mutations = {
@@ -121,6 +122,13 @@ const mutations = {
   setSellingGoodsOutList(state, {params}){
     state.sellingStore.SellingStoreGoods = params
   },
+
+  /**
+   * 进存销 -- 业务结算 -- 可用卡券 -- select
+   */
+  setSellingCouponList(state, {params}){
+    state.sellingCouponList = params
+  }
 }
 
 const actions = {
@@ -298,6 +306,22 @@ const actions = {
     return new Promise((resolve, reject) => {
       $http.post('outRepository/getGoodsList.do', {orderCode, repositoryId}, res => {
         commit('setSellingGoodsOutList', {params: res.data})
+        return resolve(res)
+      })
+    })
+  },
+
+  /**
+   * 进存销 -- 业务管理-- 业务结算 -- 结算
+   * 可用卡券列表 -- select
+   */
+  getSellingCouponList({commit}, {userId, totalMoney}){
+    return new Promise((resolve, reject) => {
+      $http.post('orderSettlememt/useCouponSelect.do', {
+        userId, 
+        totalMoney
+      }, res => {
+        commit('setSellingCouponList', {params: res.data})
         return resolve(res)
       })
     })

@@ -873,9 +873,11 @@ const actions = {
     OrderStatus,
     goodsData,
     outRepositoryId,
+    id, 
   }}){
+    let _url = id ? 'back/update.do' : 'back/save.do'
     return new Promise((resolve, reject) => {
-      $http.post('back/save.do', {
+      $http.post(_url, {
         status,
         outRepositoryCode,
         backDate,
@@ -899,15 +901,83 @@ const actions = {
     outRepositoryDate,
     remark,
     goodsData,
+    id, 
   }}){
+    let _url = id ? 'outRepository/update.do' : 'outRepository/save.do'
     return new Promise((resolve, reject) => {
-      $http.post('outRepository/save.do', {
+      $http.post(_url, {
         status,
         orderCode,
         repositoryId,
         outRepositoryDate,
         remark,
         goodsData,
+        id,
+      }, res => {
+        return resolve(res)
+      })
+    })
+  },
+
+  /**
+   * 进存销 -- 业务管理 -- 业务退货 -- 编辑
+   * 根据id获取编辑页的内容
+   */
+  sellingBusinessBackInfo({dispatch}, {id }){
+    return new Promise((resolve, reject) => {
+      $http.post('back/check.do', {id }, res => {
+        return resolve(res)
+      })
+    })
+  },
+
+  /**
+   * 进存销 -- 业务管理  -- 业务出库 -- 编辑
+   * 根据id获取编辑页内容
+   */
+  sellingBusinessOutInfo({dispatch}, {id }){
+    return new Promise((resolve, reject) => {
+      $http.post('outRepository/check.do', {id }, res => {
+        return resolve(res)
+      })
+    })
+  },
+
+  /**
+   * 进存销 -- 业务管理 -- 业务结算 -- 编辑
+   *  根据id获取编辑页详情
+   */
+  sellingBusinessAccount({dispatch}, {id }){
+    return new Promise((resolve, reject) => {
+      $http.post('orderSettlememt/getInfoBeforeBalance.do', {id}, res => {
+        return resolve(res)
+      })
+    })
+  },
+
+  /**
+   * 进存销 -- 业务管理 -- 业务结算 -- 结算
+   */
+  sellingBusinessAccountPost({dispatch}, {
+    orderId,
+    couponId,
+    isDiscount,
+    cardPay,
+    discountAmount,
+    isOnAccount,
+    payType,
+    payMoney,
+  }){
+    return new Promise((resolve, reject) => {
+      $http.post('orderSettlememt/balanceSave.do', {
+        orderId,
+        couponId,
+        isDiscount,
+        cardPay,
+        discountAmount,
+        isOnAccount,
+        payType,
+        payMoney,
       }, res => {
         return resolve(res)
       })

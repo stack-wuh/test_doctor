@@ -4,7 +4,7 @@
       <el-form class="my-form" label-width="100px" >
         <section class="my-form__item">
           <el-form-item label="销售订单">
-            <el-input disabled v-model="temp_form.userName" placeholder="占位符" ></el-input>
+            <el-input disabled v-model="temp_form.orderCode" placeholder="占位符" ></el-input>
           </el-form-item>
           <el-form-item label="手机">
             <el-input disabled v-model="temp_form.phone" placeholder="占位符" ></el-input>
@@ -18,13 +18,13 @@
         </section>
         <section class="my-form__item">
           <el-form-item label="客户名称">
-            <el-input disabled v-model="temp_form.memberName" placeholder="占位符" ></el-input>
+            <el-input disabled v-model="temp_form.realName" placeholder="占位符" ></el-input>
           </el-form-item>
           <el-form-item label="会员折扣">
             <el-input disabled v-model="temp_form.discountRatio" placeholder="占位符" ></el-input>
           </el-form-item>
           <el-form-item label="会员余额">
-            <el-input disabled v-model="temp_form.money" placeholder="占位符" ></el-input>
+            <el-input disabled v-model="temp_form.userMoney" placeholder="占位符" ></el-input>
           </el-form-item>
           <el-form-item label="推荐人">
             <el-input disabled v-model="temp_form.refereeName" placeholder="占位符" ></el-input>
@@ -32,13 +32,13 @@
         </section>
         <section class="my-form__item">
           <el-form-item label="会员等级">
-            <el-input disabled v-model="temp_form.historyMoney" placeholder="占位符" ></el-input>
+            <el-input disabled v-model="temp_form.memberId" placeholder="占位符" ></el-input>
           </el-form-item>
           <el-form-item label="历史单数">
-            <el-input disabled v-model="temp_form.accountNumber" placeholder="占位符" ></el-input>
+            <el-input disabled v-model="temp_form.historyAccountNum" placeholder="占位符" ></el-input>
           </el-form-item>
           <el-form-item label="未结算">
-            <el-input disabled v-model="temp_form.unPay" placeholder="占位符" ></el-input>
+            <el-input disabled v-model="temp_form.unCount" placeholder="占位符" ></el-input>
           </el-form-item>
           <el-form-item label="剩余挂账">
             <el-input disabled v-model="temp_form.surplusAccount" placeholder="占位符" ></el-input>
@@ -49,14 +49,14 @@
             <el-input disabled v-model="temp_form.historyMoney" placeholder="占位符" ></el-input>
           </el-form-item>
           <el-form-item label="开单日期">
-            <el-input disabled v-model="temp_form.accountNumber" placeholder="占位符" ></el-input>
+            <el-input disabled v-model="temp_form.orderDate" placeholder="占位符" ></el-input>
           </el-form-item>
           <el-form-item label="总金额">
-            <el-input disabled v-model="temp_form.unPay" placeholder="占位符" ></el-input>
+            <el-input disabled v-model="temp_form.totalMoney" placeholder="占位符" ></el-input>
           </el-form-item>
         </section>
         <el-form-item label="备注" prop="remark">
-          <el-input type="textarea" v-model="form.remark" :rows="3" style="width: 80%;"></el-input>
+          <el-input disabled type="textarea" v-model="form.remark" :rows="3" ></el-input>
         </el-form-item>
       </el-form>
     </section> 
@@ -66,13 +66,13 @@
         <span>商品列表</span>
       </p>
       <el-table :data="temp_list" border stripe>
-        <el-table-column align="center" label="商品名称"></el-table-column>
-        <el-table-column align="center" label="规格"></el-table-column>
-        <el-table-column align="center" label="单位"></el-table-column>
-        <el-table-column align="center" label="售价单位"></el-table-column>
-        <el-table-column align="center" label="销售数量"></el-table-column>
-        <el-table-column align="center" label="优惠金额"></el-table-column>
-        <el-table-column align="center" label="销售金额"></el-table-column>
+        <el-table-column align="center" prop="goodsName" label="商品名称"></el-table-column>
+        <el-table-column align="center" prop="carType" label="规格"></el-table-column>
+        <el-table-column align="center" prop="goodsUnit" label="单位"></el-table-column>
+        <el-table-column align="center" prop="num" label="销售数量"></el-table-column>
+        <el-table-column align="center" prop="salePrice" label="销售单价"></el-table-column>
+        <el-table-column align="center" prop="discount" label="优惠金额"></el-table-column>
+        <el-table-column align="center" prop="saleMoney" label="销售金额"></el-table-column>
       </el-table>
     </section>
 
@@ -80,41 +80,42 @@
       <p class="table__title">
         <span>项目列表</span>
       </p>
-      <el-table :data="temp_list" border stripe>
-        <el-table-column align="center" label="项目名称"></el-table-column>
-        <el-table-column align="center" label="工时"></el-table-column>
-        <el-table-column align="center" label="售价单位"></el-table-column>
-        <el-table-column align="center" label="销售数量"></el-table-column>
-        <el-table-column align="center" label="优惠金额"></el-table-column>
-        <el-table-column align="center" label="销售金额"></el-table-column>
+      <el-table :data="obj_list" border stripe>
+        <el-table-column align="center" prop="projectName" label="项目名称"></el-table-column>
+        <el-table-column align="center" prop="time" label="工时"></el-table-column>
+        <el-table-column align="center" prop="salePriceUnit" label="售价单价"></el-table-column>
+        <el-table-column align="center" prop="num" label="销售数量"></el-table-column>
+        <el-table-column align="center" prop="discount" label="优惠金额"></el-table-column>
+        <el-table-column align="center" prop="totalPrice" label="销售金额"></el-table-column>
       </el-table>
     </section>
 
     <section class="form-area">
       <el-form :rules="rules" class="my-form" ref="myForm" :model="form" label-width="100px" >
         <section class="my-form__item">
-          <el-form-item label="可用卡券" prop="">
-            <el-select v-model="form.startDates" value-format="yyyy-MM-dd">
-              <el-option label="aa" value="1" ></el-option>
+          <el-form-item label="可用卡券" prop="couponId">
+            <el-select v-model="form.couponId">
+              <el-option  v-for="(item, index) in sellingCouponList" :key="index" :label="item.label" :value="item.value" ></el-option>
             </el-select>
           </el-form-item>
-          <el-form-item label="使用折扣" >
-            <el-checkbox v-model="form.isSaled" >是否使用会员折扣</el-checkbox>
+          <el-form-item label="使用折扣" prop="isDiscount">
+            <el-checkbox v-model="form.isDiscount" >是否使用会员折扣</el-checkbox>
           </el-form-item>
-          <el-form-item label="卡余额支付" prop="">
-            <el-input v-model="form.packagePrice" placeholder="请编辑卡余额支付"></el-input>
+          <el-form-item label="卡余额支付" prop="cardPay">
+            <el-input v-model="form.cardPay" placeholder="请编辑卡余额支付"></el-input>
           </el-form-item>
         </section>
         <section class="my-form__item">
-          <el-form-item label="优惠金额" prop="">
-            <el-input v-model="price"></el-input>
+          <el-form-item label="优惠金额" prop="discountAmount">
+            <el-input v-model="form.discountAmount"></el-input>
           </el-form-item>
-          <el-form-item label="支付方式" prop="">
-            <el-select v-model="patType">
-              <el-option label="aa" value="1" ></el-option>
+          <el-form-item label="是否挂账" prop="isOnAccount">
+            <el-select v-model="form.isOnAccount">
+              <el-option label="是" :value="1" ></el-option>
+              <el-option label="否" :value='0' ></el-option>
             </el-select>
           </el-form-item>
-          <el-form-item label="是否挂账" prop="">
+          <el-form-item label="支付方式" prop="payType">
             <el-select v-model="form.payType" >
               <el-option v-for="(item, index) in payTypeList" :key="index" :label="item.label" :value="item.value"></el-option>
             </el-select>
@@ -127,33 +128,20 @@
       <section class="msg-area">
         <p class="margin-rg-15">
           <span>实收金额: </span>
-          <storage class="danger">111 </storage>(元)
+          <strong class="danger">{{this.form.payMoney}} </strong>(元)
         </p>
         <p class="margin-rg-15">
           <span>可用余额: </span>
-          <storage class="danger">123 </storage>(元)
+          <strong class="danger">{{this.temp_form.userMoney}} </strong>(元)
         </p>
       </section>
       <section class="btn-area">
-        <el-button @click="handleClickSubmit(1)" size="small" type="warning">打印结算单</el-button>
-        <el-button @click="handleClickSubmit(1)" size="small" type="primary">结算</el-button>
+        <el-button @click="handleClickPrint" size="small" type="warning">打印结算单</el-button>
+        <el-button @click="handleClickSubmit" size="small" type="primary">结算</el-button>
         <el-button @click="handleClickCancel" size="small" type="danger">返回</el-button>
       </section>
     </section>
 
-    <el-dialog title="套餐列表" :visible.sync="visibleDialog">
-      <el-table :data="sellingSaleList" border stripe @selection-change="handleSeletion" >
-        <el-table-column align="center" type="selection" width="90px"></el-table-column>
-        <el-table-column align="center" label="套餐名称" prop="name"></el-table-column>
-        <el-table-column align="center" label="单价" prop="packagePrice"></el-table-column>
-        <el-table-column align="center" label="备注" prop="remark"></el-table-column>
-      </el-table>
-      <pagination :total="total" @getCurrent="getCurrent" ></pagination>
-      <span slot="footer">
-        <el-button @click="handleDialogCancel" >取消</el-button>
-        <el-button type="primary" @click="handleDialogSubmit">确定</el-button>
-      </span>
-    </el-dialog>
   </section>
 </template>
 
@@ -164,11 +152,11 @@ import Pagination from '@/components/common/bottom'
 import {mapActions, mapState} from 'vuex'
 
 const rules = {
-  startDates: [{required: true, message: '请选择开始日期', trigger: 'change'}],
-  endDates: [{required: true, message: '请选择结束日期', trigger: 'change'}],
-  salerId: [{required: true, message: '请选择销售人员', trigger: 'change'}],
-  packagePrice: [{required: true, message: '请编辑套餐售价', trigger: 'blur'}],
-  takeMoney: [{required: true, message: '请编辑实收金额', trigger: 'blur'}],
+  couponId: [{required: true, message: '请选择可用卡券', trigger: 'change'}],
+  isDiscount: [{required: true, message: '请选择是否使用折扣', trigger: 'change'}],
+  cardPay: [{required: true, message: '请编辑支付金额', trigger: 'blur'}],
+  discountAmount: [{required: true, message: '请编辑优惠金额', trigger: 'blur'}],
+  isOnAccount: [{required: true, message: '请选择是否挂账', trigger: 'change'}],
   payType: [{required: true, message: '请选择结算方式', trigger: 'change'}],
 
 }
@@ -182,13 +170,13 @@ export default {
   data () {
     return {
       form:{
-        startDates: '',
-        endDates:'',
-        salerId: '',
-        takeMoney: '',
-        packagePrice: '',
-        takeMoney: '',
+        couponId: '',
+        isDiscount: false,
+        cardPay: '',
+        discountAmount: '',
+        isOnAccount: '',
         payType: '',
+        payMoney: 0,
 
       },
       condition: '',
@@ -196,6 +184,7 @@ export default {
       visibleDialog: false,
       temp_dialog: [],
       temp_list: [],
+      obj_list: [],
       rules,
     }
   },
@@ -205,11 +194,31 @@ export default {
       'total': state => state.Select.sellingSale && state.Select.sellingSale.total,
       'currPageNo': state => state.Select.sellingSale && state.Select.sellingSale.currPageNo,
       'payTypeList': state => state.Select.payTypeList,
-      'employeeList': state => state.Select.employeeList
+      'employeeList': state => state.Select.employeeList,
+      'sellingCouponList': state => state.Select.sellingCouponList,
     }),
     pathChange(){
       let path = this.$route.query
       return path.child || path.subMenu
+    },
+    query(){
+      let data = this.$route.query.data
+      data = data && JSON.parse(data)
+      return data
+    },
+    couponValue(){
+      let data = this.sellingCouponList.find(item => item.value === this.form.couponId)
+      return data
+    },
+    totalMoney(){
+      if(!this.form.cardPay) return
+      if(this.form.isDiscount){
+        let _total =  Number.parseFloat(this.form.isDiscount) * Number.parseFloat(this.form.cardPay) - Numer.parseFloat(this.form.discountAmount)
+        return _total.toFixed(2)
+      }else{
+        let _total = Number.parseFloat(this.form.cardPay) - Number.parseFloat(this.form.discountAmount)
+        return _total.toFixed(2)
+      }
     }
   },
   methods: {
@@ -218,82 +227,41 @@ export default {
       'getSalesList': 'getSalesList',
       'getPayTypeList': 'getPayTypeList',
       'getEmployeeList': 'getEmployeeList',
-      'sellingMealSalePost': 'sellingMealSalePost'
+      'sellingMealSalePost': 'sellingMealSalePost',
+      'sellingBusinessAccount': 'sellingBusinessAccount',
+      'getSellingCouponList' : 'getSellingCouponList'
     }),
-    /**
-     * 新增页 -- 获取用户的具体信息
-     */
-    handleSearch(){
-      if(!this.condition) return _g.toastMsg({type: 'error', msg: '请编辑车牌或手机号后搜索'})
-      this.getSellingMealSaleInfo({condition: this.condition}).then(res => {
-        this.temp_form = res.data
-      })
-    },
-    /**
-     * 显示dialog对话框 
-     * 选择套餐列表
-     */
-    handleOpenDialog(){
-      if(this.pathChange === '编辑套餐销售'){
-        this.getSalesList({currPageNo: 1}).then(res => {
-          this.visibleDialog = true
-        })
-      }
 
-    },
-    handleDialogCancel(){
-      this.visibleDialog = false
-      this.temp_dialog = []
-    },
-    /**
-     * 分页器
-     */
-    getCurrent(e){
-      if(this.pathChange === '编辑套餐销售'){
-        this.getSalesList({currPageNo: e})
-      }
-    },
-    /**
-     * dialog中选择的表格内容
-     */
-    handleSeletion(e){
-      if(this.pathChange === '编辑套餐销售'){
-        this.temp_dialog = e
-      }
-    },
-    handleDialogSubmit(){
-      setTimeout(() => {
-        this.visibleDialog = false
-        this.temp_list = this.temp_dialog
-      }, 500)
-    },
     handleClickCancel(){
+      this.$refs.myForm.resetFields()
       setTimeout(() => {
         this.$router.go(-2)
       }, 1000)
     },
-    handleClickSubmit(status){
-      let data = this.temp_list.map(item => {
-        return {packageId: item.id, saleNum: item.saleNum}
-      })
+    handleClickSubmit(){
       this.$refs.myForm.validate(valid => {
         if(valid){
-          let form = {...this.form, ids: JSON.stringify(data), status: status, userId: this.temp_form.userId}
-          this.sellingMealSalePost({form}).then(res => {
-            console.log(res)
-          })
+          console.log(this.form)
         }else{
           _g.toastMsg({
             type: 'error',
-            msg: '请编辑必填项之后提交'
+            msg: '请编辑必填项后提交'
           })
         }
       })
-    }
+    },
+    handleClickPrint(){},
   },
   created(){
     this.getPayTypeList()
     this.getEmployeeList()
+    this.sellingBusinessAccount({id: this.query.id}).then(res => {
+      this.temp_form = res.data['客户信息回显']
+      this.temp_list = res.data['商品列表']
+      this.obj_list = res.data['项目列表']
+      this.getSellingCouponList({userId: this.temp_form.userId, totalMoney: this.temp_form.totalMoney})
+      console.log(this.temp_form, this.temp_list, this.obj_list)
+    })
   }
 }
 </script>

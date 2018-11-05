@@ -400,13 +400,13 @@ const forms = [
         label: '商品出库单',
         field: 'outRepositoryCode',
         type: 'input',
-        rules:[{required: true, message: '请编辑商品出库单', trigger: 'input'}],
+        rules:[{required: false, message: '请编辑商品出库单', trigger: 'input'}],
       },
       {
         label: '仓库名称',
         field: 'repositoryId',
         type: 'select1',
-        rules:[{required: true, message: '请选择仓库', trigger: 'input'}],
+        rules:[{required: false, message: '请选择仓库', trigger: 'input'}],
       },
       {
         label: '退货日期',
@@ -1348,7 +1348,9 @@ export default {
       'getBusinessInfo': 'getBusinessInfo',
       'sellingBusinessBackPost':'sellingBusinessBackPost',
       'getBusinessOutInfo': 'getBusinessOutInfo',
-      'sellingBusinessOutPost': 'sellingBusinessOutPost'
+      'sellingBusinessOutPost': 'sellingBusinessOutPost',
+      'sellingBusinessBackInfo': 'sellingBusinessBackInfo',
+      'sellingBusinessOutInfo': 'sellingBusinessOutInfo'
     }),
     /**
      * select框change事件
@@ -1688,8 +1690,15 @@ export default {
           this.formList.form = {...this.formList.form, ...res.data.purchaseBack}
         })
       }else if(this.pathChange === '编辑业务退货'){
-        this.formList.form = {...this.formList.form, ...this.query, outRepositoryCode: this.query.backCode, OrderStatus: this.query.status}
-        // this.getBusinessInfo({outRepositoryCode: this.query.backCode})
+        this.sellingBusinessBackInfo({id: this.query.id}).then(res => {
+          this.formList.form = {...this.formList.form, ...res.data.backInfo}
+          this.list = res.data.backGoodsInfo
+        })
+      }else if(this.pathChange === '编辑业务出库'){
+        this.sellingBusinessOutInfo({id: this.query.id}).then(res => {
+          this.formList.form = {...this.formList.form, ...res.data.outRepositoryInfo}
+          this.list = res.data.goodInfo
+        })
       }
     }
   },
