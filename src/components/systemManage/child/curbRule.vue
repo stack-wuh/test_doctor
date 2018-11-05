@@ -161,7 +161,7 @@ export default {
               disabled: false
             },
             {
-              label: "分享活动",
+              label: "分享卡券",
               type: "input",
               value: "",
               prop: "sharingActivities",
@@ -177,7 +177,7 @@ export default {
               disabled: false
             },
             {
-              label: "抽奖活动",
+              label: "分享活动",
               type: "input",
               value: "",
               prop: "luckyDraw",

@@ -85,10 +85,22 @@ const actions = {
    * 养车知识
    * 编辑/新增
    */
-  carFeedTotalPut({dispatch}, {form, path, form:{id}} = {}){
+  carFeedTotalPut({dispatch}, {form: {
+    title,
+    typeId,
+    picture,
+    content,
+    id
+  }, path} = {}){
     let _url = id ? 'raisingBackend/updateRaising.do' : 'raisingBackend/addRaising.do'
     return new Promise((resolve, reject) => {
-      $http.post(_url, form, res => {
+      $http.post(_url, {
+        title,
+        typeId,
+        picture,
+        content,
+        id
+      }, res => {
         return resolve(res)
       })
     })
@@ -107,9 +119,12 @@ const actions = {
   /** 
    * 养车知识 -- 发布
   */
-  carFeedPunAndFresh({comit}, {id} = {}){
+  carFeedPunAndFresh({dispatch}, {id} = {}){
     return new Promise((resolve, reject) => {
       $http.post('raisingBackend/pubRaising.do', {id}, res => {
+        setTimeout(() => {
+          dispatch('getServerStore', {path: '养车知识'})
+        }, 1000)
         return resolve(res)
       })
     })

@@ -89,7 +89,7 @@
         <el-table-column align="center" prop="totalPrice" label="销售金额"></el-table-column>
       </el-table>
     </section>
-
+{{couponValue}}
     <section class="form-area">
       <el-form :rules="rules" class="my-form" ref="myForm" :model="form" label-width="100px" >
         <section class="my-form__item">

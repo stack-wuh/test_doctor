@@ -369,6 +369,7 @@ const getters = {
         case '积分管理' : return {...item, typeText: item.type == 1 ? '增加' : '减少'}
         case '会员列表' : return {...item, sexText: item.sex == 0 ? '女' : '男', attentionStateText: item.attentionState === 0 ? '未关注' : '已关注'}
         case '车辆管理' : return {...item, insuranceStateText: item.insuranceState == 1 ? '已到期' : '未到期',maintainStateText: item.maintainState == 1 ? '已到期' : '未到期'}
+        case '充值明细' : return {...item, rechargeTypeText: item.rechargeType === 0 ? '线上' : item.rechargeType === 1 ? '线下' : '分红转入', statusText: item.status === 0 ? '未支付' : '已支付'}
         default : return {...item}
       }
     })

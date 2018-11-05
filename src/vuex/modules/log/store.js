@@ -41,10 +41,6 @@ const actions = {
   },
 
   /**
-   * 
-   */
-
-  /**
    * 添加/编辑 版本更新日志
    */
   versionPubAndFresh({commit, dispatch}, {form, form:{id}, path} = {}){

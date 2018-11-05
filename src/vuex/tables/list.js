@@ -1648,12 +1648,12 @@ const state = {
         {
           key:'充值方式',
           type:'default',
-          prop:'rechargeType',
+          prop:'rechargeTypeText',
         },
         {
           key:'状态',
           type:'default',
-          prop:'status',
+          prop:'statusText',
         },
         {
           key:'操作人',

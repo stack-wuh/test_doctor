@@ -34,7 +34,7 @@ axios.interceptors.response.use(response =>{
 const checkStatus = response =>{
   if(response && (response.status === 200 || response.status === 304 || response.status === 400)){
     let type = response.data.status == 0 ? 'success' : response.data.status == 1 ? 'error' : 'info'
-    _g.toastMsg({type,msg:response.data.msg})
+    _g.toastMsg({type, msg: response.data.msg})
     return response.data
   }
   return {
