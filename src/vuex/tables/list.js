@@ -2821,12 +2821,13 @@ const state = {
               text:'推送',
               type:'',
               size:'small',
+              click: handleMarketSenderPost
             },
             {
               text:'发布',
               type:'',
               size:'small',
-              click:marketActivePub
+              click:handleMarketSenderPost
             },
             {
               text:'中奖查询',

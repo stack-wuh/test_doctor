@@ -108,16 +108,6 @@ const actions = {
     })
   },
 
-  /**
-   * 市场推广 -- 普通活动 -- 发布
-   */
-  marketActivePubAndFresh({dispatch}, {path, id} = {}){
-    $http.post('ordinaryActivities/releaseActivities.do', {id}, res => {
-      setTimeout(() => {
-        dispatch('getMarketStore', {path})
-      }, 1000)
-    })
-  },
 
   /**
    * 市场推广 -- 普通活动 -- 报名查询 -- 领取
@@ -236,6 +226,30 @@ const actions = {
       $http.post('recommendingGift/recommendingStateUpdate.do', {id }, res => {
         dispatch('getMarketStore', {path: '推荐有礼'})
       })
+    })
+  },
+
+  /**
+   * 市场推广 -- 活动抽奖 -- 发布
+   */
+  marketActivePost({dispatch}, {path, row: {id }}){
+    return new Promise((resolve, reject) => {
+      $http.post('ordinaryActivities/releaseActivities.do', {id}, res => {
+        setTimeout(() => {
+          dispatch('getMarketStore', {path })
+        }, 1000)
+      })
+    })
+  },
+
+  /**
+   * 市场推广 -- 活动抽奖 -- 推送
+   */
+  marketActiveSend({dispatch}, {path, row: {id }}){
+    $http.post('ordinaryActivities/releaseActivities.do', {id }, res => {
+      setTimeout(() => {
+        dispatch('getMarketStore', {path })
+      }, 1000)
     })
   }
 }

@@ -427,7 +427,14 @@ export const handleSellingMemberChange = (params, text, row) => {
      confirmCancelText: '取消',
      type: 'warning'
    }).then(res => {
-     window.$store.dispatch('marketSendPost', {path, row})
+     switch(path){
+      case '推荐有礼' : return window.$store.dispatch('marketSendPost', {path, row})
+      case '活动抽奖' : return text === '发布' ? window.$store.dispatch('marketActivePost', {path, row}) : ''
+      default : return _g.toastMsg({
+        type: 'error',
+        msg: '操作错误!'
+      })
+    } 
    }).catch(err => {
      _g.toastMsg({
        type: 'error',
