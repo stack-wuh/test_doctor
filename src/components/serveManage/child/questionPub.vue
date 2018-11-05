@@ -7,7 +7,9 @@
               <el-input v-model="form.questionnaireTitle" class="my-input-220"></el-input>
             </el-form-item>
             <el-form-item label="所属栏目">
-              <el-select v-model="form.columnType"> </el-select>
+              <el-select v-model="form.columnType">
+                <el-option :value="1" label="养车" ></el-option>
+              </el-select>
             </el-form-item>
             <el-form-item label="标题图片">
               <el-upload
@@ -23,10 +25,10 @@
             </el-form-item>
             <section>
               <el-form-item label="问卷开始日期">
-                <el-date-picker v-model="form.startDates"></el-date-picker>
+                <el-date-picker value-format="yyyy-MM-dd" v-model="form.startDates"></el-date-picker>
               </el-form-item>
               <el-form-item label="问卷结束日期">
-                <el-date-picker v-model="form.endDates"></el-date-picker>
+                <el-date-picker value-format="yyyy-MM-dd" v-model="form.endDates"></el-date-picker>
               </el-form-item>
             </section>
             <el-form-item label="主参对象">
@@ -144,7 +146,8 @@ export default {
 
   methods: {
     ...mapActions({
-      'serverQuestionPub':'serverQuestionPub'
+      'serverQuestionPub':'serverQuestionPub',
+      'getServerQuestionInfo': 'getServerQuestionInfo'
     }),
     /**
      * 处理上传的图片
@@ -177,7 +180,7 @@ export default {
       let arr = this.lists.map(item => {
         return {...item, whetherAnswer: ''}
       })
-      let data = {...JSON.parse(JSON.stringify(this.form)), ques_options:JSON.stringify(arr)}
+      let data = {...JSON.parse(JSON.stringify(this.form)), str:JSON.stringify(arr)}
       data.consumptionPush = data.consumptionPush && data.consumptionPush.toString()
       this.serverQuestionPub({form: data}).then(res => {
         setTimeout(() => {
@@ -195,6 +198,9 @@ export default {
   created(){
     let data = this.$route.query.data
     data && (data = JSON.parse(data))
+    this.getServerQuestionInfo({id: data.id}).then(res => {
+      this.form = {...this.form, ...res.data.survey}
+    })
   }
 }
 </script>

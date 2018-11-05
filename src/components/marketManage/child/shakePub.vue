@@ -67,7 +67,7 @@
           </el-table>
           <span slot="footer">
             <el-button @click="handleCancelChoose">取消</el-button>
-            <el-button @click="handleSubmitChoose">确定</el-button>
+            <el-button @click="handleSubmitChoose" type="primary">确定</el-button>
           </span>
         </el-dialog>
       </section>
@@ -210,8 +210,8 @@ export default {
     handleSubmitChoose(){
       let _list = ['一', '二', '三', '四', '五', '六', '七', '八', '九', '十']
       this.dialogVisible = false
-      this.temp_list = this.temp_data.map((item, index) => {
-        return {rank: _list[index] + '等奖', couponName: item.label, startPlace: index, endPlace: index}
+      this.temp_list = this.temp_data.concat(this.temp_data).map((item, index) => {
+        return {rank: _list[index] + '等奖', couponName: item.label, startPlace: item.startPlace ? startPlace : index, endPlace: item.endPlace ? endPlace : index}
       })
     },
     /**
@@ -222,7 +222,12 @@ export default {
     }
   },
   created(){
-    this.marketShakeEdit({id: this.searchData && this.searchData.id})
+    this.marketShakeEdit({id: this.searchData && this.searchData.id}).then(res => {
+      this.form = {...this.form, ...res.data.rockingActivity}
+      this.temp_list = res.data.rockingAwards.map(item => {
+        return {...item, rank: item.awards}
+      })
+    })
   }
 }
 </script>

@@ -2953,19 +2953,30 @@ const state = {
           prop:'confirmationTime',
         },
         {
-          key:'当前状态',
-          type:'default',
-          prop:'currentState',
-        },
-        {
           key:'操作',
           type:'button',
           fix:'right',
           width:'160px',
           list:[
             {
-              text:'领取',
-              type:'',
+              valid: 3,
+              rules: 'currentState',
+              value: [0, 1],
+              texts:['待确认', '待领取', '已领取', '已失效'],
+              styles:[
+                {
+                  color: STYLES['INFO']
+                },
+                {
+                  color: STYLES['PRIMARY']
+                },
+                {
+                  color: STYLES['WARNING']
+                },
+                {
+                  color: STYLES['SUCCESS']
+                },
+              ],
               size:'small',
               click: handleMarketSenderPost
             },

@@ -202,7 +202,7 @@ const actions = {
    */
   marketShakeEdit({dispatch}, {id }){
     return new Promise((resolve, reject) => {
-      $http.post('rockIngActivities/updateRockIngActivitiesInfo.do', {id}, res => {
+      $http.post('rockIngActivities/rockIngActivitiesInfo.do', {id }, res => {
         return resolve(res)
       })
     })
@@ -283,7 +283,7 @@ const getters = {
       }else if(path === '摇一摇活动'){
         return {...item, activeStateText: item.activeState === 1 ? '进行中' : '已结束'}
       }else if(path === '推荐有礼'){
-        return {...item, typeText: item.type === 0 ? '保险' : '保养维护'}
+        return {...item, typeText: item.type === 0 ? '保险' : '保养维护', currentStateText: item.currentState === 0 ? '待确认' : item.currentState === 1 ? '已确认' : item.currentState === 2 ? '已领取' : '已失效'}
       }else{
         return {...item}
       }

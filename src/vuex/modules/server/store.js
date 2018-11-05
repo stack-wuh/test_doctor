@@ -245,10 +245,36 @@ const actions = {
   /**
    * 客户服务 ---  问卷调查 --- 编辑问卷
    */
-  serverQuestionPub({commit}, {form}){
+  serverQuestionPub({commit}, {form: {
+    id, 
+    questionnaireTitle,
+    startDates,
+    endDates,
+    columnType,
+    str,
+  }}){
     return new Promise((resolve, reject) => {
-      $http.post('questionnaire/addQuestion.do', form, res => {
+      $http.post('questionnaire/addQuestion.do', {
+        id, 
+        questionnaireTitle,
+        startDates,
+        endDates,
+        columnType,
+        str,
+      }, res => {
           return resolve(res)
+      })
+    })
+  },
+
+  /**
+   * 客户服务 -- 问卷调查 -- 编辑
+   * 根据id获取编辑内容
+   */
+  getServerQuestionInfo({commit}, {id}){
+    return new Promise((resolve, reject) => {
+      $http.post('questionnaire/msgInfo.do', {id}, res => {
+        return resolve(res)
       })
     })
   },
