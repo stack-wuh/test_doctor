@@ -55,7 +55,7 @@
           </el-form-item>
         </section>
         <el-form-item label="备注" prop="remark">
-          <el-input type="textarea" v-model="form.remark" :rows="3" style="width: 80%;"></el-input>
+          <el-input disabled type="textarea" v-model="temp_form.remark" :rows="3" style="width: 80%;"></el-input>
         </el-form-item>
       </el-form>
     </section> 
@@ -63,7 +63,7 @@
     <section class="table-area">
       <p class="table__title">
         <span>商品列表</span>
-        <el-button @click="handleOpenDialog" type="primary">添加</el-button>
+        <el-button @click="handleOpenDialog(0)" type="primary">添加</el-button>
       </p>
       <el-table :data="temp_list" border stripe>
         <el-table-column align="center" type="selection" ></el-table-column>
@@ -78,13 +78,11 @@
     <section class="table-area">
       <p class="table__title">
         <span>项目列表</span>
-        <el-button @click="handleOpenDialog" type="primary">添加</el-button>
+        <el-button @click="handleOpenDialog(1)" type="primary">添加</el-button>
       </p>
       <el-table :data="temp_list" border stripe>
-        <el-table-column align="center" label="名称"></el-table-column>
-        <el-table-column align="center" label="数量"></el-table-column>
-        <el-table-column align="center" label="售价"></el-table-column>
-        <el-table-column align="center" label="备注"></el-table-column>
+        <el-table-column align="center" type="selection"></el-table-column>
+        <el-table-column align="center" v-for="(item, index) in projectTable" :key="index" :label="item.key" :prop="item.field"></el-table-column>
         <el-table-column align="center" label="操作">
           <el-button type="text">删除</el-button>
         </el-table-column>
@@ -94,12 +92,12 @@
 
     <section class="btm-area">
       <section class="msg-area">
-        <el-select placeholder="请选择消费类型" >
+        <el-select v-model="form.type" placeholder="请选择消费类型" >
           <el-option label="aa" value="1" ></el-option>
         </el-select>
         <p class="margin-lf-15">
           <span>合计消费: </span>
-          <storage class="danger">0</storage>元
+          <strong class="danger">0</strong>元
         </p>
       </section>
       <section class="btn-area">
@@ -109,20 +107,29 @@
       </section>
     </section>
 
-    <el-dialog title="套餐列表" :visible.sync="visibleDialog">
-      <el-table :data="sellingSaleList" border stripe @selection-change="handleSeletion" >
+    <el-dialog title="商品列表" :visible.sync="visibleDialogGoods">
+      <el-table @selection-change="e => {return handleSelection(0, e)}" :data="goodsList" border stripe>
         <el-table-column align="center" type="selection" width="90px"></el-table-column>
-        <el-table-column align="center" label="套餐名称" prop="name"></el-table-column>
-        <el-table-column align="center" label="单价" prop="packagePrice"></el-table-column>
-        <el-table-column align="center" label="备注" prop="remark"></el-table-column>
+        <el-table-column align="center" v-for="(item, index) in goodsDialogTable" :key="index" :label="item.key" :prop="item.field"></el-table-column>
       </el-table>
-      <pagination :total="total" @getCurrent="getCurrent" ></pagination>
+      <pagination :total="goodsTotal" @getCurrent="e => {return getCurrent(0, e)}" ></pagination>
       <span slot="footer">
         <el-button @click="handleDialogCancel" >取消</el-button>
         <el-button type="primary" @click="handleDialogSubmit">确定</el-button>
       </span>
     </el-dialog>
     
+    <el-dialog title="项目列表" :visible.sync="visibleDialogProject">
+      <el-table @selection-change="e => {return handleSelection(1, e)}" :data="projectList" border stripe>
+        <el-table-column align="center" type="selection" width="90px"></el-table-column>
+        <el-table-column align="center" v-for="(item, index) in projectDialogTable" :key="index" :label="item.key" :prop="item.field"></el-table-column>
+      </el-table>
+      <pagination :total="projectTotal" @getCurrent="getCurrent(1)" ></pagination>
+      <span slot="footer">
+        <el-button @click="handleDialogCancel" >取消</el-button>
+        <el-button type="primary" @click="handleDialogSubmit">确定</el-button>
+      </span>
+    </el-dialog>
   </section>
 </template>
 
@@ -194,35 +201,35 @@ const goodsTable = [
 const goodsDialogTable = [
   {
     key: '商品编码',
-    field: '',
+    field: 'goodsCode',
   },
   {
     key: '商品类名',
-    field: '',
+    field: 'goodsClassificationName',
   },
   {
     key: '商品名称',
-    field: '',
+    field: 'goodsName',
   },
   {
     key: '车品牌',
-    field: '',
+    field: 'carBrand',
   },
   {
     key: '车型',
-    field: '',
+    field: 'carType',
   },
   {
     key: '规格',
-    field: '',
+    field: 'carModel',
   },
   {
     key: '单位',
-    field: '',
+    field: 'goodsUnit',
   },
   {
     key: '备注',
-    field: '',
+    field: 'remark',
   },
 ]
 
@@ -267,23 +274,23 @@ const projectTable = [
 const projectDialogTable = [
   {
     key: '项目名称',
-    field: '',
+    field: 'projectName',
   },
   {
     key: '商品分类',
-    field: '',
+    field: 'typeName',
   },
   {
     key: '推荐工时',
-    field: '',
+    field: 'time',
   },
   {
     key: '单价',
-    field: '',
+    field: 'salePriceUnit',
   },
   {
     key: '备注',
-    field: '',
+    field: 'remark',
   },
 ]
 
@@ -307,8 +314,9 @@ export default {
       },
       condition: '',
       temp_form:{},
-      visibleDialog: false,
-      temp_dialog: [],
+      visibleDialogGoods: false,
+      visibleDialogProject: false,
+      temp_dialog: [[], []],
       temp_list: [],
       rules,
 
@@ -320,11 +328,14 @@ export default {
   },
   computed:{
     ...mapState({
-      'sellingSaleList': state => state.Select.sellingSale && state.Select.sellingSale.salesList,
-      'total': state => state.Select.sellingSale && state.Select.sellingSale.total,
-      'currPageNo': state => state.Select.sellingSale && state.Select.sellingSale.currPageNo,
       'payTypeList': state => state.Select.payTypeList,
-      'employeeList': state => state.Select.employeeList
+      'employeeList': state => state.Select.employeeList,
+      'goodsList': state => state.Select.sellingMealGoods.list,
+      'goodsTotal': state => state.Select.sellingMealGoods.total,
+      'goodsCurr': state => state.Select.sellingMealGoods.currPageNo,
+      'projectList': state => state.Select.sellingMealProject.list,
+      'projectTotal': state => state.Select.sellingMealProject.total,
+      'projectCurr': state => state.Select.sellingMealProject.currPageNo
     }),
     pathChange(){
       let path = this.$route.query
@@ -337,7 +348,9 @@ export default {
       'getSalesList': 'getSalesList',
       'getPayTypeList': 'getPayTypeList',
       'getEmployeeList': 'getEmployeeList',
-      'sellingMealSalePost': 'sellingMealSalePost'
+      'sellingMealSalePost': 'sellingMealSalePost',
+      'getSellingMealGoodsList': 'getSellingMealGoodsList',
+      'getSellingMealProject': 'getSellingMealProject'
     }),
     /**
      * 新增页 -- 获取用户的具体信息
@@ -352,33 +365,30 @@ export default {
      * 显示dialog对话框 
      * 选择套餐列表
      */
-    handleOpenDialog(){
-      if(this.pathChange === '编辑套餐销售'){
-        this.getSalesList({currPageNo: 1}).then(res => {
-          this.visibleDialog = true
+    handleOpenDialog(type){
+      if(type === 0){
+        this.getSellingMealGoodsList({currPageNo: 1}).then(res => {
+          this.visibleDialogGoods = true
+        })
+      }else{
+        this.getSellingMealProject({currPageNo: 1}).then(res => {
+          this.visibleDialogProject = true
         })
       }
-
     },
     handleDialogCancel(){
-      this.visibleDialog = false
-      this.temp_dialog = []
+      this.visibleDialogGoods = false
+      this.visibleDialogProject = false
+      this.temp_dialog = [[], []]
     },
     /**
      * 分页器
      */
-    getCurrent(e){
-      if(this.pathChange === '编辑套餐销售'){
-        this.getSalesList({currPageNo: e})
-      }
+    getCurrent(type, e){
+      console.log(type, e)
     },
-    /**
-     * dialog中选择的表格内容
-     */
-    handleSeletion(e){
-      if(this.pathChange === '编辑套餐销售'){
-        this.temp_dialog = e
-      }
+    handleSelection(type, e){
+
     },
     handleDialogSubmit(){
       setTimeout(() => {

@@ -55,7 +55,7 @@
           </el-form-item>
         </section>
         <el-form-item label="备注" prop="remark">
-          <el-input disabled type="textarea" v-model="form.remark" :rows="3" style="width: 80%;"></el-input>
+          <el-input disabled type="textarea" v-model="temp_form.remark" :rows="3" style="width: 80%;"></el-input>
         </el-form-item>
       </el-form>
     </section> 

@@ -397,7 +397,8 @@ const actions = {
         return resolve(res)
       })
     })
-  }
+  },
+
 }
 
 const getters = {
