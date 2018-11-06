@@ -49,7 +49,7 @@ const actions = {
         break;
       case '普通活动' : _url = 'ordinaryActivities/banActivities.do', search = {ids: id}
         break;
-      case '活动抽奖' : _url = 'ordinaryActivities/banActivities.do', search = {ids: id}
+      case '活动抽奖' : _url = 'activitiesDraws/banActivitiesDraw.do', search = {ids: id}
         break;
       case '推荐有礼' : _url = 'recommendingGift/recommendingStateDel.do', search = {id }
         break;
@@ -135,6 +135,7 @@ const actions = {
     lotteryTemplateId,
     date,
     registNum,
+    state
   }} = {}){
     return new Promise((resolve, reject) => {
       $http.post('activitiesDraws/addOrUpdateActivitiesDraws.do', {
@@ -150,8 +151,8 @@ const actions = {
         id,
         lotteryTemplateId,
         registNum,
+        state
       }, res => {
-        
         return resolve(res)
       })
     })
@@ -232,11 +233,12 @@ const actions = {
   /**
    * 市场推广 -- 活动抽奖 -- 发布
    */
-  marketActivePost({dispatch}, {path, row: {id }}){
+  marketActivePost({dispatch}, {path, row: {id }, text}){
+    let _url = text === '推送' ? 'activitiesDraws/updateStateActivitiesDraws.do' : 'ordinaryActivities/releaseActivities.do'
     return new Promise((resolve, reject) => {
-      $http.post('ordinaryActivities/releaseActivities.do', {id}, res => {
+      $http.post(_url , {id}, res => {
         setTimeout(() => {
-          dispatch('getMarketStore', {path })
+          res.status === 0 &&  dispatch('getMarketStore', {path })
         }, 1000)
       })
     })
@@ -246,12 +248,24 @@ const actions = {
    * 市场推广 -- 活动抽奖 -- 推送
    */
   marketActiveSend({dispatch}, {path, row: {id }}){
-    $http.post('ordinaryActivities/releaseActivities.do', {id }, res => {
+    $http.post('activitiesDraws/updateStateActivitiesDraws.do', {id }, res => {
       setTimeout(() => {
-        dispatch('getMarketStore', {path })
+        res.status === 0 && dispatch('getMarketStore', {path })
       }, 1000)
     })
-  }
+  },
+
+  /**
+   * 市场推广 -- 普通活动 -- 推送/发布
+   */
+  marketOtherActivePost({dispatch}, {path, text, id}){
+    let _url = text === '发布' ? 'ordinaryActivities/releaseActivities.do' : 'ordinaryActivities/push.do'
+    $http.post(_url, {id }, res => {
+      setTimeout(() => {
+        res.status === 0 && dispatch('getMarketStore', {path })
+      }, 1000)
+    })
+  },
 }
 
 const mutations = {

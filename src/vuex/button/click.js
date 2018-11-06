@@ -237,6 +237,7 @@ export const jump2Detail = params => {
       case '业务结算' : return location.href = window.rootPath + '/bussinessOrder/report.do' + _str
       case '业务开单' : return location.href = window.rootPath + '/bussinessOrder/report.do' + _str
       case '救援服务' : return location.href = window.rootPath + '/rescueBackend/outRescue.do' + _str
+      case '套餐销售' : return location.href = window.rootPath + '/packageSale/exportList.do' +_str
       default : return _g.toastMsg({type: 'error', msg: '导出失败'})
     }
    }else{

@@ -198,7 +198,7 @@ export default {
   created(){
     let data = this.$route.query.data
     data && (data = JSON.parse(data))
-    this.getServerQuestionInfo({id: data.id}).then(res => {
+    this.getServerQuestionInfo({id: data && data.id}).then(res => {
       this.form = {...this.form, ...res.data.survey}
     })
   }

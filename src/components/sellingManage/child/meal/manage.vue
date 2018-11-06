@@ -1,7 +1,7 @@
 <template>
   <section class="wrapper">
     <section class="form-area">
-      <el-form class="my-form" ref="myForm" :model="form" label-width="120px" >
+      <el-form class="my-form" ref="myForm" :model="form" :rules="rules" label-width="120px" >
         <section class="my-form__item">
           <el-form-item label="套餐名称" prop="packageName">
             <el-input v-model="form.packageName" placeholder="请选择套餐名称" ></el-input>
@@ -31,8 +31,8 @@
               <el-option label="否" :value="1" ></el-option>
             </el-select>
           </el-form-item>
-          <el-form-item label="销售奖励" prop="oldPrice">
-            <el-input v-model="form.oldPrice" placeholder="请编辑销售奖励" ></el-input>
+          <el-form-item label="销售奖励" prop="saleAward">
+            <el-input v-model="form.saleAward" placeholder="请编辑销售奖励" ></el-input>
           </el-form-item>
         </section>
         <el-form-item label="备注" prop="remark">
@@ -44,36 +44,141 @@
     <section class="table-area">
       <p class="table__title">
         <span>商品列表</span>
-        <el-button type="primary">添加</el-button>
+        <el-button @click="handleOpenDialogGoods" type="primary">添加</el-button>
       </p>
-      <el-table :data="[{}]" border stripe></el-table>
+      <el-table :data="temp_goods" border stripe>
+        <el-table-column align="center" v-for="(item, index) in goodsTable" :key="index" :label="item.key" :prop="item.field"></el-table-column>
+        <el-table-column label="操作" align="center" >
+          <template slot-scope="scope">
+              <el-button @click="handleDelItem(0, scope.$index)" type="text">删除</el-button>
+          </template>
+        </el-table-column>
+      </el-table> 
     </section>
 
     <section class="table-area">
       <p class="table__title">
         <span>项目列表</span>
-        <el-button type="primary">添加</el-button>
+        <el-button @click="handleOpenDialogProject" type="primary">添加</el-button>
       </p>
-      <el-table :data="[{}]" border stripe></el-table>
+      <el-table :data="temp_project" border stripe>
+        <el-table-column align="center" v-for="(item, index) in projectTable" :key="index" :label="item.key" :prop="item.field" ></el-table-column>
+        <el-table-column label="操作" align="center" >
+          <template slot-scope="scope">
+              <el-button @click="handleDelItem(1, scope.$index)" type="text">删除</el-button>
+          </template>
+        </el-table-column>
+      </el-table>
     </section>
 
     <section class="btm-area">
       <div class="margin-rg-15" >
         <span>数量合计: </span>
-        <strong class="danger">0</strong>
+        <strong class="danger">{{totalNum}} </strong>
       </div>
       <div>
         <span>总价合计: </span>
         <strong class="danger">0</strong>
       </div>
       <div class="empty-flex"></div>
-      <my-bottom></my-bottom>
+      <my-bottom @handleSubmit="handleSubmit" @handleCancel="handleCancel" ></my-bottom>
     </section>
+    
+    <el-dialog title="选择商品" :visible.sync="visibleDialogGoods">
+      <el-table @selection-change="e => {return handleTableChange(0, e)}" :data="goodsList" border stripe>
+        <el-table-column align="center" type="selection"></el-table-column>
+        <el-table-column align="center" v-for="(item, index) in goodsTable" :key="index" :label="item.key" :prop="item.field" ></el-table-column>
+      </el-table>
+      <span slot="footer">
+        <el-button @click="handleDialogCancel" size="small">取消</el-button>
+        <el-button @click="handleDialogSubmit(0)" size="small" type="primary">确认</el-button>
+      </span>
+    </el-dialog>
+
+    <el-dialog title="选择项目" :visible.sync="visibleDialogProject">
+      <el-table @selection-change="e => {return handleTableChange(1, e)}" :data="projectList" border stripe>
+        <el-table-column align="center" type="selection" ></el-table-column>
+        <el-table-column align="center" v-for="(item, index) in projectTable" :key="index" :label="item.key" :prop="item.field" ></el-table-column>
+      </el-table>
+      <span slot="footer">
+        <el-button @click="handleDialogCancel" size="small">取消</el-button>
+        <el-button @click="handleDialogSubmit(1)" size="small" type="primary">确认</el-button>
+      </span>
+    </el-dialog>
   </section>
 </template>
 
 <script>
 import MyBottom from '@/components/common/subButton';
+import {mapActions, mapState} from 'vuex'
+
+const rules = {
+  packageName: [{required: true, message: '请编辑套餐名称', trigger: 'blur'}],
+  packagePrice: [{required: true, message: '请编辑套餐售价', trigger: 'blur'}],
+  packageStatus: [{required: true, message: '请选择状态', trigger: 'change'}],
+  isShare: [{required: true, message: '请选择是否分红', trigger: 'change'}],
+  isEmployeeAward: [{required: true, message: '请选择是否员工奖励', trigger: 'change'}],
+  saleAward: [{required: true, message: '请编辑销售奖励', trigger: 'blur'}],
+  remark: [{required: false, message: '请编辑备注', trigger: 'blur'}],
+}
+const goodsTable = [
+  {
+    key: '商品编码',
+    field: 'goodsCode',
+  },
+  {
+    key: '商品类名',
+    field: 'goodsClassificationName',
+  },
+  {
+    key: '商品名称',
+    field: 'goodsName',
+  },
+  {
+    key: '车品牌',
+    field: 'carBrand',
+  },
+  {
+    key: '车型',
+    field: 'carModel',
+  },
+  {
+    key: '规格',
+    field: 'carType',
+  },
+  {
+    key: '单位',
+    field: 'goodsUnit',
+  },
+  {
+    key: '备注',
+    field: 'remark',
+  }
+]
+const projectTable = [
+  {
+    key: '项目分类',
+    field: 'projectName',
+  },
+  {
+    key: '商品分类',
+    field: 'typeName',
+  },
+  {
+    key: '推荐工时',
+    field: 'time',
+  },
+  {
+    key: '单价',
+    field: 'salePriceUnit',
+  },
+  {
+    key: '备注',
+    field: 'remark',
+  }
+]
+
+
 export default {
   name: '',
   components:{
@@ -90,11 +195,104 @@ export default {
         saleAward: '',
         remark: '',
         oldPrice: '',
-      }
+      },
+      rules,
+      visibleDialogGoods: false,
+      visibleDialogProject: false,
+      dialog_goods: [], // 商品列表 -- dialog
+      dialog_project: [], //项目列表 -- dialog
+      temp_arr: [[], []],
+      temp_goods: [],
+      temp_project: [],
+
+      goodsTable,
+      projectTable,
     }
   },
 
-  methods: {}
+  computed:{
+    ...mapState({
+      'goodsList': state => state.Select.sellingMealGoods.list,
+      'goodsTotal': state => state.Select.sellingMealGoods.total,
+      'goodsCurrPage': state => state.Select.sellingMealGoods.currPageNo,
+      'projectList': state => state.Select.sellingMealProject.list,
+      'projectTotal': state => state.Select.sellingMealProject.total,
+      'projectCurrPage': state => state.Select.sellingMealProject.currPageNo,
+    }),
+
+    totalNum(){
+      return this.temp_goods.length + this.temp_project.length
+    },
+    totalPrice(){
+      
+    }
+  },
+
+  methods: {
+    ...mapActions({
+      'sellingMealPost': 'sellingMealPost',
+      'getSellingMealGoodsList': 'getSellingMealGoodsList',
+      'getSellingMealProject': 'getSellingMealProject'
+    }),
+    handleOpenDialogGoods(){
+      this.getSellingMealGoodsList({currPageNo: 1}).then(res => {
+        this.visibleDialogGoods = true
+      })
+    },
+    handleOpenDialogProject(){
+      this.getSellingMealProject({currPageNo: 1}).then(res => {
+        this.visibleDialogProject = true
+      })
+    },
+    handleSubmit(){
+      let goodsids = this.temp_goods.map(item => item.id).toString()
+      let proIds = this.temp_project.map(item => item.id).toString()
+      this.$refs.myForm.validate(valid => {
+        if(valid){
+          let form = {...this.form, goodsids, proIds}
+          this.sellingMealPost({form}).then(res => {
+            res.status ===0 && this.handleCancel()
+          })
+        }else{
+          _g.toastMsg({
+            type: 'error',
+            msg: '请编辑必填项后提交!'
+          })
+        }
+      })
+    },
+    handleCancel(){
+      this.$refs.myForm.resetFields()
+      setTimeout(() => {
+        this.$router.go(-2)
+      }, 1000)
+    },
+    handleDialogSubmit(type){
+      if(type){
+        this.visibleDialogProject = false
+        this.temp_project = this.temp_project.concat(this.temp_arr[type])
+      }else{
+        this.visibleDialogGoods = false
+        this.temp_goods = this.temp_goods.concat(this.temp_arr[type])
+      }
+      this.temp_arr = [[], []]
+    },
+    handleTableChange(type, e){
+      this.temp_arr[type] = e
+    },
+    handleDialogCancel(type){
+      this.visibleDialogGoods = false
+      this.visibleDialogProject = false
+      this.temp_arr = [[], []]
+    },
+    handleDelItem(type, $index){
+      if(type){
+        this.temp_project.splice($index, 1)
+      }else{
+        this.temp_goods.splice($index, 1)
+      }
+    },
+  }
 }
 </script>
 

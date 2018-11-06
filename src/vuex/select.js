@@ -23,8 +23,24 @@ const state = {
     salesList:[],
     total: 0,
     currPageNo: 1,
+    form:{},
   },
   sellingCouponList: [],
+  sellingSaleList:{
+    list: [],
+    vo:{}
+  },
+
+  sellingMealGoods:{
+    list: [],
+    total: 0,
+    currPageNo: 1
+  },
+  sellingMealProject: {
+    list: [],
+    total: 0,
+    currPageNo: 1
+  }
 }
 
 const mutations = {
@@ -102,7 +118,7 @@ const mutations = {
     state.sellingSale = {
       salesList: params && params.list,
       total: params && params.total,
-      currPageNo: params && params.pageNo
+      currPageNo: params && params.pageNo,
     }
   },
 
@@ -128,6 +144,25 @@ const mutations = {
    */
   setSellingCouponList(state, {params}){
     state.sellingCouponList = params
+  },
+
+  /**
+   * 进存销 -- 业务管理 -- 业务管理 -- dialog
+   */
+  setSellingMealGoodsList(state, {params}){
+    state.sellingMealGoods = {
+      list: params && params.list,
+      total: params && params.total,
+      currPageNo: params && params.pageNo
+    }
+  },
+
+  setSellingMealProject(state, {params}){
+    state.sellingMealProject = {
+      list: params && params.list,
+      total: params && params.total,
+      currPageNo: params && params.pageNo
+    }
   }
 }
 
@@ -322,6 +357,43 @@ const actions = {
         totalMoney
       }, res => {
         commit('setSellingCouponList', {params: res.data})
+        return resolve(res)
+      })
+    })
+  },
+  /**
+   * 进存销 -- 套餐管理 -- 套餐销售 -- 获取套餐列表 
+   */
+  getSellingSaleLists({commit}, {currPageNo = 1 }){
+    return new Promise((resolve, reject) => {
+      $http.post('packageManage/init.do', {currPageNo }, res => {
+        commit('setSalesList', {params: res.data})
+        return resolve(res)
+      })
+    })
+  },
+
+  /**
+   * 进存销 -- 套餐管理 -- 套餐管理 -- 获取商品列表
+   * sellingMealGoods: Array
+   */
+  getSellingMealGoodsList({commit}, {currPageNo = 1}){
+    return new Promise((resolve, reject) => {
+      $http.post('purchaseOrder/getGoodList.do', {currPageNo}, res => {
+        commit('setSellingMealGoodsList', {params: res.data})
+        return resolve(res)
+      })
+    })
+  },
+
+  /**
+   * 进存销 -- 套餐管理 -- 套餐管理 -- 获取项目列表
+   * sellingMealProject: Array
+   */
+  getSellingMealProject({commit}, {currPageNo = 1}){
+    return new Promise((resolve, reject) => {
+      $http.post('packageManage/selectProjectsAll.do', {currPageNo }, res => {
+        commit('setSellingMealProject', {params: res.data})
         return resolve(res)
       })
     })

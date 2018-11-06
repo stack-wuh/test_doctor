@@ -89,7 +89,6 @@
         <el-table-column align="center" prop="totalPrice" label="销售金额"></el-table-column>
       </el-table>
     </section>
-{{couponValue}}
     <section class="form-area">
       <el-form :rules="rules" class="my-form" ref="myForm" :model="form" label-width="100px" >
         <section class="my-form__item">
@@ -107,7 +106,7 @@
         </section>
         <section class="my-form__item">
           <el-form-item label="优惠金额" prop="discountAmount">
-            <el-input v-model="form.discountAmount"></el-input>
+            <el-input disabled v-model="form.discountAmount"></el-input>
           </el-form-item>
           <el-form-item label="是否挂账" prop="isOnAccount">
             <el-select v-model="form.isOnAccount">
@@ -127,8 +126,12 @@
     <section class="btm-area">
       <section class="msg-area">
         <p class="margin-rg-15">
+          <span>应收金额: </span>
+          <strong class="danger">{{prevTotal}} </strong>(元)
+        </p>
+        <p class="margin-rg-15">
           <span>实收金额: </span>
-          <strong class="danger">{{this.form.payMoney}} </strong>(元)
+          <strong class="danger">{{totalMoney}} </strong>(元)
         </p>
         <p class="margin-rg-15">
           <span>可用余额: </span>
@@ -155,7 +158,7 @@ const rules = {
   couponId: [{required: true, message: '请选择可用卡券', trigger: 'change'}],
   isDiscount: [{required: true, message: '请选择是否使用折扣', trigger: 'change'}],
   cardPay: [{required: true, message: '请编辑支付金额', trigger: 'blur'}],
-  discountAmount: [{required: true, message: '请编辑优惠金额', trigger: 'blur'}],
+  discountAmount: [{required: false, message: '请编辑优惠金额', trigger: 'blur'}],
   isOnAccount: [{required: true, message: '请选择是否挂账', trigger: 'change'}],
   payType: [{required: true, message: '请选择结算方式', trigger: 'change'}],
 
@@ -173,11 +176,10 @@ export default {
         couponId: '',
         isDiscount: false,
         cardPay: '',
-        discountAmount: '',
+        discountAmount: 0,
         isOnAccount: '',
         payType: '',
         payMoney: 0,
-
       },
       condition: '',
       temp_form:{},
@@ -186,6 +188,8 @@ export default {
       temp_list: [],
       obj_list: [],
       rules,
+
+      prevTotal: 0, // 应收金额
     }
   },
   computed:{
@@ -208,18 +212,42 @@ export default {
     },
     couponValue(){
       let data = this.sellingCouponList.find(item => item.value === this.form.couponId)
-      return data
+      return data &&  Number.parseFloat(data.couponValue)
     },
     totalMoney(){
-      if(!this.form.cardPay) return
-      if(this.form.isDiscount){
-        let _total =  Number.parseFloat(this.form.isDiscount) * Number.parseFloat(this.form.cardPay) - Numer.parseFloat(this.form.discountAmount)
-        return _total.toFixed(2)
+      if(this.couponValue > this.prevTotal){
+        if(this.prevTotal > this.form.discountAmount){
+          if(this.form.isDiscount){
+            return ((this.prevTotal - this.form.discountAmount) * this.temp_form.discountRatio).toFixed(2)
+          }else {
+            return (this.prevTotal - this.form.discountAmount).toFixed(2)
+          }
+        }else {
+          if(this.form.isDiscount){
+            return (this.prevTotal * Number.parseFloat(this.temp_form.discountRatio)).toFixed(2)
+          }else{
+            return this.prevTotal.toFixed(2)
+          }
+        }
+      }else if(this.couponValue < this.prevTotal) {
+        let _prev = this.prevTotal - this.couponValue
+        if(_prev > this.form.discountAmount){
+          if(this.form.isDiscount){
+            return ((_prev - this.form.discountAmount) * this.temp_form.discountRatio).toFixed(2)
+          }else{
+            return (_prev - this.form.discountAmount).toFixed(2)
+          }
+        }else {
+          if(this.form.isDiscount){
+            return (_prev * Number.parseFloat(this.temp_form.discountRatio)).toFixed(2)
+          }else {
+            return _prev.toFixed(2)
+          }
+        }
       }else{
-        let _total = Number.parseFloat(this.form.cardPay) - Number.parseFloat(this.form.discountAmount)
-        return _total.toFixed(2)
+        return this.prevTotal
       }
-    }
+    },
   },
   methods: {
     ...mapActions({
@@ -229,8 +257,13 @@ export default {
       'getEmployeeList': 'getEmployeeList',
       'sellingMealSalePost': 'sellingMealSalePost',
       'sellingBusinessAccount': 'sellingBusinessAccount',
-      'getSellingCouponList' : 'getSellingCouponList'
+      'getSellingCouponList' : 'getSellingCouponList',
+      'sellingBusinessAccountPost': 'sellingBusinessAccountPost'
     }),
+
+    /**
+     * 处理可用卡券 减免额度
+     */
 
     handleClickCancel(){
       this.$refs.myForm.resetFields()
@@ -239,9 +272,12 @@ export default {
       }, 1000)
     },
     handleClickSubmit(){
+      let data = {...this.form, payMoney: this.totalMoney, orderId: this.temp_form.orderId}
       this.$refs.myForm.validate(valid => {
         if(valid){
-          console.log(this.form)
+          this.sellingBusinessAccountPost({form: data}).then(res => {
+            res.status === 0 && this.handleClickCancel()
+          })
         }else{
           _g.toastMsg({
             type: 'error',
@@ -259,6 +295,15 @@ export default {
       this.temp_form = res.data['客户信息回显']
       this.temp_list = res.data['商品列表']
       this.obj_list = res.data['项目列表']
+      this.temp_list.map(item => {
+        this.form.discountAmount += Number.parseInt(item.discount)
+        this.prevTotal += Number.parseInt(item.saleMoney)
+      })
+      this.obj_list.map(item => {
+        this.form.discountAmount += Number.parseInt(item.discount)
+        this.prevTotal += Number.parseInt(item.totalPrice)
+
+      })
       this.getSellingCouponList({userId: this.temp_form.userId, totalMoney: this.temp_form.totalMoney})
       console.log(this.temp_form, this.temp_list, this.obj_list)
     })

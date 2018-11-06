@@ -108,6 +108,8 @@ export const jump2Other = (params ,types ,row, index, query) => {
       break;
     case '业务结算' : rootPath = '/selling/account', child = '编辑业务结算', data = JSON.stringify(row)
       break;
+    case '套餐销售' : rootPath = '/selling/sale/pub', child = '编辑套餐销售', data = JSON.stringify(row)
+      break;
     default : rootPath = '/index'
   }
   window.$route.push({path:'/mid/container',query:Object.assign(params,{path:rootPath ,child , data})})
@@ -280,8 +282,20 @@ export const handleSwitchChange = (params, row) => {
   * 市场推广 -- 普通活动 -- 发布
   */
 export const marketActivePub = (params, text, row) => {
-  let {subMenu, child } = params, {id} = row
-  window.$store.dispatch('marketActivePubAndFresh', {path: child || subMenu, id})
+  let {subMenu, child } = params
+  let path = child || subMenu
+  window.$confirm(`该操作将${text}活动至前台, 请确认?`, '提示', {
+    confirmButtonText: '确认',
+    cancelButtonText: '取消',
+    type: 'warning'
+  }).then(res => {
+    window.$store.dispatch('marketOtherActivePost', {path, text, id: row.id})
+  }).catch(err => {
+    _g.toastMsg({
+      type: 'error',
+      msg: '操作已取消或错误'
+    })
+  })
 }
 
 /**
@@ -312,26 +326,6 @@ export const carFeedPubAndFresh = (params, status, row) => {
     type:'warning',
   }).then(()=> {
     window.$store.dispatch('carFeedPunAndFresh', {id: row.id})
-  }).catch(()=> {
-    _g.toastMsg({
-      type: 'error',
-      msg:'操作已取消'
-    })
-  })
-}
-
-/**
- * 市场推广 -- 普通活动 -- 发布
- */
-export const serveActivePostAndFresh = (params, status, row) => {
-  let {subMenu, child} = params
-  let path = child || subMenu
-  window.$confirm('该操作将活动推送到前台,请确认?', '提示', {
-    confirmButtonText:'确认',
-    cancelButtonText:'取消',
-    type:'warning',
-  }).then(()=> {
-    window.$store.dispatch('marketActivePubAndFresh', {path, id: row.id})
   }).catch(()=> {
     _g.toastMsg({
       type: 'error',
@@ -428,11 +422,11 @@ export const handleSellingMemberChange = (params, text, row) => {
      type: 'warning'
    }).then(res => {
      switch(path){
-      case '推荐有礼' : return window.$store.dispatch('marketSendPost', {path, row})
-      case '活动抽奖' : return text === '发布' ? window.$store.dispatch('marketActivePost', {path, row}) : ''
+      case '推荐有礼' : return window.$store.dispatch('marketSendPost', {path, row, text})
+      case '活动抽奖' : return window.$store.dispatch('marketActivePost', {path, row, text})
       default : return _g.toastMsg({
         type: 'error',
-        msg: '操作错误!'
+        msg: '操作错误或已取消'
       })
     } 
    }).catch(err => {

@@ -958,7 +958,7 @@ const actions = {
   /**
    * 进存销 -- 业务管理 -- 业务结算 -- 结算
    */
-  sellingBusinessAccountPost({dispatch}, {
+  sellingBusinessAccountPost({dispatch}, {form: {
     orderId,
     couponId,
     isDiscount,
@@ -967,17 +967,63 @@ const actions = {
     isOnAccount,
     payType,
     payMoney,
-  }){
+  }}){
     return new Promise((resolve, reject) => {
       $http.post('orderSettlememt/balanceSave.do', {
         orderId,
         couponId,
-        isDiscount,
+        isDiscount: isDiscount ? 1 : 0,
         cardPay,
         discountAmount,
         isOnAccount,
         payType,
         payMoney,
+      }, res => {
+        return resolve(res)
+      })
+    })
+  },
+
+  /**
+   * 进存销 -- 套餐管理 -- 套餐销售 -- 编辑
+   * 根据id获取编辑内容
+   */
+  getSellingSaleInfo({dispatch}, {saleNo}){
+    return new Promise((resolve, reject) => {
+      $http.post('packageSale/updatePage.do', {saleNo}, res =>{
+        return resolve(res)
+      })
+    })
+  },  
+
+  /**
+   * 进存销 -- 套餐管理 -- 套餐管理 -- 编辑
+   * 发布新增内容
+   */
+  sellingMealPost({dispatch}, {form: {
+    id,
+    packageName,
+    packagePrice,
+    packageStatus,
+    isShare,
+    isEmployeeAward,
+    saleAward,
+    remark,
+    goodsIds,
+    proIds,
+  }}){
+    return new Promise((resolve, reject) => {
+      $http.post('packageManage/insertOrUpdatePackages.do', {
+        id,
+        packageName,
+        packagePrice,
+        packageStatus,
+        isShare,
+        isEmployeeAward,
+        saleAward,
+        remark,
+        goodsIds,
+        proIds,
       }, res => {
         return resolve(res)
       })

@@ -56,7 +56,7 @@ const state = {
           type:'',
           size:'small',
           style:'',
-          click:jump2Detail,
+          click:export2Excel,
           isAuth:1,
         }
       ]

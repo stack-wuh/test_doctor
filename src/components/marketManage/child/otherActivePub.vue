@@ -112,7 +112,7 @@ export default {
         if(valid){
           this.handleSubmit({form: this.form}).then(res => {
            setTimeout(()=>{
-              res.status == 0 && this.cancel()
+              res.status === 0 && this.cancel()
            },1000)  
           })
         }else{

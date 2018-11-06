@@ -56,7 +56,6 @@
    handlerForSettingOne,
    handleQuesPub,
    handleShakeState,
-   serveActivePostAndFresh,
    handleSellingMemberChange,
    handleMarketSenderPost,
   } from './click.js'
@@ -800,8 +799,8 @@ const state = {
         {
           key:'首图',
           value:'',
-          prop:'',
-          type:'firstPicture',
+          prop:'firstPicture',
+          type:'image',
         },
         {
           key:'类别',
@@ -2592,6 +2591,7 @@ const state = {
               text:'推送',
               type:'',
               size:'small',
+              click: marketActivePub
             },
             {
               text:'精准获客',
@@ -2607,7 +2607,7 @@ const state = {
             },
             {
               text: '发布',
-              click: serveActivePostAndFresh
+              click: marketActivePub
             }
           ]
         },
@@ -4283,6 +4283,7 @@ const state = {
               text:'编辑',
               type:'',
               size:'small',
+              click: jump2Other
             },
           ]
         },

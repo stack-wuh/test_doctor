@@ -66,10 +66,8 @@
         <el-button @click="handleOpenDialog" type="primary">添加</el-button>
       </p>
       <el-table :data="temp_list" border stripe>
-        <el-table-column align="center" label="名称"></el-table-column>
-        <el-table-column align="center" label="数量"></el-table-column>
-        <el-table-column align="center" label="售价"></el-table-column>
-        <el-table-column align="center" label="备注"></el-table-column>
+        <el-table-column align="center" type="selection" ></el-table-column>
+        <el-table-column v-for="(item, index) in goodsTable" :key="index" align="center" :label="item.key" :prop="item.field"></el-table-column>
         <el-table-column align="center" label="操作">
           <el-button type="text">删除</el-button>
         </el-table-column>
@@ -124,6 +122,7 @@
         <el-button type="primary" @click="handleDialogSubmit">确定</el-button>
       </span>
     </el-dialog>
+    
   </section>
 </template>
 
@@ -141,6 +140,152 @@ const rules = {
   payType: [{required: true, message: '请选择结算方式', trigger: 'change'}],
 
 }
+
+const goodsTable = [
+  {
+    key: '商品编码',
+    field: '',
+  },
+  {
+    key: '商品名称',
+    field: '',
+  },
+  {
+    key: '规格',
+    field: '',
+  },
+  {
+    key: '单位',
+    field: '',
+  },
+  {
+    key: '销售数量',
+    field: '',
+  },
+  {
+    key: '销售单价',
+    field: '',
+  },
+  {
+    key: '优惠',
+    field: '',
+  },
+  {
+    key: '销售金额',
+    field: '',
+  },
+  {
+    key: '已出库数量',
+    field: '',
+  },
+  {
+    key: '销售人',
+    field: '',
+  },
+  {
+    key: '领料人',
+    field: '',
+  },
+  {
+    key: '实施人',
+    field: '',
+  },
+]
+const goodsDialogTable = [
+  {
+    key: '商品编码',
+    field: '',
+  },
+  {
+    key: '商品类名',
+    field: '',
+  },
+  {
+    key: '商品名称',
+    field: '',
+  },
+  {
+    key: '车品牌',
+    field: '',
+  },
+  {
+    key: '车型',
+    field: '',
+  },
+  {
+    key: '规格',
+    field: '',
+  },
+  {
+    key: '单位',
+    field: '',
+  },
+  {
+    key: '备注',
+    field: '',
+  },
+]
+
+const projectTable = [
+  {
+    key: '项目名称',
+    field: '',
+  },
+  {
+    key: '项目分类',
+    field: '',
+  },
+  {
+    key: '推荐工时',
+    field: '',
+  },
+  {
+    key: '单价',
+    field: '',
+  },
+  {
+    key: '数量',
+    field: '',
+  },
+  {
+    key: '优惠',
+    field: '',
+  },
+  {
+    key: '总价',
+    field: '',
+  },
+  {
+    key: '销售人',
+    field: '',
+  },
+  {
+    key: '实施人',
+    field: '',
+  },
+]
+const projectDialogTable = [
+  {
+    key: '项目名称',
+    field: '',
+  },
+  {
+    key: '商品分类',
+    field: '',
+  },
+  {
+    key: '推荐工时',
+    field: '',
+  },
+  {
+    key: '单价',
+    field: '',
+  },
+  {
+    key: '备注',
+    field: '',
+  },
+]
 
 export default {
   name: '',
@@ -166,6 +311,11 @@ export default {
       temp_dialog: [],
       temp_list: [],
       rules,
+
+      goodsTable,
+      goodsDialogTable,
+      projectTable,
+      projectDialogTable,
     }
   },
   computed:{

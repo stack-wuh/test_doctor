@@ -55,7 +55,7 @@
           </el-form-item>
         </section>
         <el-form-item label="备注" prop="remark">
-          <el-input type="textarea" v-model="form.remark" :rows="3" style="width: 80%;"></el-input>
+          <el-input disabled type="textarea" v-model="form.remark" :rows="3" style="width: 80%;"></el-input>
         </el-form-item>
       </el-form>
     </section> 
@@ -66,12 +66,14 @@
         <el-button @click="handleOpenDialog" type="primary">添加</el-button>
       </p>
       <el-table :data="temp_list" border stripe>
-        <el-table-column align="center" label="名称"></el-table-column>
-        <el-table-column align="center" label="数量"></el-table-column>
-        <el-table-column align="center" label="售价"></el-table-column>
-        <el-table-column align="center" label="备注"></el-table-column>
-        <el-table-column align="center" label="操作">
-          <el-button type="text">删除</el-button>
+        <el-table-column align="center" label="名称" prop="packageName"></el-table-column>
+        <el-table-column align="center" label="数量" prop="num"></el-table-column>
+        <el-table-column align="center" label="售价" prop="packagePrice"></el-table-column>
+        <el-table-column align="center" label="备注" prop="remark"></el-table-column>
+        <el-table-column align="center" label="操作" prop="">
+          <template slot-scope="scope">
+            <el-button @click="handleDelItem(scope.$index)" type="text">删除</el-button>
+          </template>
         </el-table-column>
       </el-table>
 
@@ -119,7 +121,7 @@
     <el-dialog title="套餐列表" :visible.sync="visibleDialog">
       <el-table :data="sellingSaleList" border stripe @selection-change="handleSeletion" >
         <el-table-column align="center" type="selection" width="90px"></el-table-column>
-        <el-table-column align="center" label="套餐名称" prop="name"></el-table-column>
+        <el-table-column align="center" label="套餐名称" prop="packageName"></el-table-column>
         <el-table-column align="center" label="单价" prop="packagePrice"></el-table-column>
         <el-table-column align="center" label="备注" prop="remark"></el-table-column>
       </el-table>
@@ -184,6 +186,11 @@ export default {
     pathChange(){
       let path = this.$route.query
       return path.child || path.subMenu
+    },
+    query(){
+      let data = this.$route.query.data
+      data = data && JSON.parse(data)
+      return data
     }
   },
   methods: {
@@ -192,8 +199,15 @@ export default {
       'getSalesList': 'getSalesList',
       'getPayTypeList': 'getPayTypeList',
       'getEmployeeList': 'getEmployeeList',
-      'sellingMealSalePost': 'sellingMealSalePost'
+      'sellingMealSalePost': 'sellingMealSalePost',
+      'getSellingSaleLists':'getSellingSaleLists',
+      'getSellingSaleInfo': 'getSellingSaleInfo'
     }),
+
+    handleDelItem($index){
+      this.temp_list.splice($index, 1)
+    },
+    
     /**
      * 新增页 -- 获取用户的具体信息
      */
@@ -209,7 +223,7 @@ export default {
      */
     handleOpenDialog(){
       if(this.pathChange === '编辑套餐销售'){
-        this.getSalesList({currPageNo: 1}).then(res => {
+        this.getSellingSaleLists({saleNo: this.query && this.query.saleNo}).then(res => {
           this.visibleDialog = true
         })
       }
@@ -224,7 +238,7 @@ export default {
      */
     getCurrent(e){
       if(this.pathChange === '编辑套餐销售'){
-        this.getSalesList({currPageNo: e})
+        this.getSellingSaleLists({currPageNo: e})
       }
     },
     /**
@@ -248,13 +262,13 @@ export default {
     },
     handleClickSubmit(status){
       let data = this.temp_list.map(item => {
-        return {packageId: item.id, saleNum: item.saleNum}
+        return {packageId: item.id, saleNum: item.num}
       })
       this.$refs.myForm.validate(valid => {
         if(valid){
           let form = {...this.form, ids: JSON.stringify(data), status: status, userId: this.temp_form.userId}
           this.sellingMealSalePost({form}).then(res => {
-            console.log(res)
+            res.status === 0 && this.handleClickCancel()
           })
         }else{
           _g.toastMsg({
@@ -268,6 +282,11 @@ export default {
   created(){
     this.getPayTypeList()
     this.getEmployeeList()
+    this.getSellingSaleInfo({saleNo: this.query && this.query.saleNo}).then(res => {
+      this.form = {...this.form, ...res.data.vo, startDates: res.data.vo.startDate, endDates: res.data.vo.endDate}
+      this.temp_list = res.data.list
+    })
+    console.log(this.query)
   }
 }
 </script>
