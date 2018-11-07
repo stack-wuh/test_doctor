@@ -234,7 +234,7 @@ const actions = {
    * 市场推广 -- 活动抽奖 -- 发布
    */
   marketActivePost({dispatch}, {path, row: {id }, text}){
-    let _url = text === '推送' ? 'activitiesDraws/updateStateActivitiesDraws.do' : 'ordinaryActivities/releaseActivities.do'
+    let _url = text === '推送' ? 'activitiesDraws/updateStateActivitiesDraws.do' : 'activitiesDraws/updateStateActivitiesDraws.do'
     return new Promise((resolve, reject) => {
       $http.post(_url , {id}, res => {
         setTimeout(() => {
