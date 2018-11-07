@@ -16,7 +16,7 @@
               <p v-if="item.tips"  class="c999" >{{item.tips}}</p>
             </el-form-item>
           </el-form>
-          {{list}} -- {{myForm}} --- {{formList}}
+          <!-- {{list}} -- {{myForm}} --- {{formList}} -->
           <div slot="footer">
             <el-button type="" @click="beforeClose">取消</el-button>
             <el-button type="primary" @click="handleSubmit" >确定</el-button>

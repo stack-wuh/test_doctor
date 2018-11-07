@@ -3774,7 +3774,7 @@ const state = {
         {
           key:'所属栏目',
           type:'default',
-          prop:'columnType',
+          prop:'columnTypeText',
         },
         {
           key:'有效期',
@@ -6156,22 +6156,22 @@ const state = {
         {
           key:'字段',
           type:'default',
-          prop:'',
+          prop:'item',
         },
         {
           key:'未填写',
           type:'default',
-          prop:'',
+          prop:'notFilled',
         },
         {
           key:'已填写',
           type:'default',
-          prop:'',
+          prop:'filled',
         },
         {
           key:'完整度',
           type:'default',
-          prop:'',
+          prop:'integrity',
         }
       ]
     },

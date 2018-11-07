@@ -1,13 +1,13 @@
 <template>
   <section class="line-wrapper">
-    <section class="lineChart" :class="'lineChart' + index"></section>
+    <section id="line" class="lineChart" :class="'lineChart' + index"></section>
   </section>
 </template>
 
 <script>
 const option = {
     title:{
-      text:'图标标题',
+      text:'这里是标题',
       top:'20',
       left:'20',
     },
@@ -21,16 +21,17 @@ const option = {
     },
     xAxis: {
         type: 'category',
-        data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+        data: []
     },
     yAxis: {
         type: 'value',
         minInterval: 1,
     },
     series: [{
-        data: [820, 932, 901, 934, 1290, 1330, 1320],
+        data: [],
         type: 'line',
-        smooth: true
+        smooth: true,
+        name: '直接访问'
     }]
 };
 
@@ -42,6 +43,18 @@ export default {
     index:{
       type:Number,
       default:1
+    },
+    xAxis:{
+        type: Array,
+        default: [],
+    },
+    series:{
+        type: Array,
+        default: []
+    },
+    title:{
+        type: String,
+        default: ''
     }
   },
   data () {
@@ -50,12 +63,42 @@ export default {
     }
   },
 
-  methods: {},
+  computed:{
+    path(){
+      let _path = this.$route.query
+      return _path.child || _path.subMenu
+    },
+    seriesName(){
+      switch(this.path){
+          case '客户资料完整度' : return '完整度'
+          default: return '标题'
+      }
+    },
+    mapTitle(){
+        if(this.title) return this.title
+        switch(this.path){
+            case '客户资料完整度' : return '客户资料完整度'
+            default: return '标题'
+        }
+    }
+  },
+
+  methods: {
+    /**
+     * init echarts
+     */
+    init(){
+      let myChart = echarts.init(document.getElementById('line'))
+      this.option.xAxis[0].data = this.xAxis
+      this.option.series[0].data = this.series
+      this.option.series[0].name = this.seriesName
+      this.option.title.text = this.mapTitle
+      myChart.setOption(this.option)
+    }
+  },
   created(){
     this.$nextTick(()=> {
-      let els = document.querySelectorAll('.lineChart' + this.index)
-      let chart = echarts.init(els[0])
-      chart.setOption(this.option)      
+      this.init()
     })
   }
 }

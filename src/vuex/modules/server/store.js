@@ -303,7 +303,7 @@ const actions = {
     picture,
     descInfo,
     data
-  }}){
+  }, path}){
     return new Promise((resolve, reject) => {
       $http.post('maintenanceItem/insertOrUpdate.do', {
         id,
@@ -312,6 +312,7 @@ const actions = {
         descInfo,
         data
       }, res => {
+        dispatch('getServerStore', {path})
         return resolve(res)
       })
     })
@@ -360,7 +361,7 @@ const getters = {
         return {...item, feedbackTypeText: item.feedbackType == 0 ? '保险' : item.feedbackType == 1 ? '续保' : item.feedbackType == 2 ? '保养' : '其他',
                           processingStateText: item.processingState == 0 ? '未回复' : '已回复'}
       }else if(path === '问卷调查'){
-        return {...item, validate: `${item.startDates}-${item.endDates}`, activeStateText: item.activeState == 0 ? '待发布' : item.activeState == 1 ? '进行中' : item.activeState == 2 ? '已结束' : '已关闭'}
+        return {...item, validate: `${item.startDates}-${item.endDates}`, activeStateText: item.activeState == 0 ? '待发布' : item.activeState == 1 ? '进行中' : item.activeState == 2 ? '已结束' : '已关闭', columnTypeText: item.columnType === 1 ? '养车' : '其他'}
       }else if(path === '养车知识'){
         return {...item, stateText: item.state == 0 ? '未发布' : '已发布'}
       }else if(path === '预约管理'){

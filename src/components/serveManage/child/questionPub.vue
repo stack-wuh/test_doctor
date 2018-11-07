@@ -40,17 +40,19 @@
             </el-form-item>
             <el-form-item label="消费推送">
               <el-checkbox-group v-model="form.consumptionPush">
-                <el-checkbox label="0">不推送</el-checkbox>
-                <el-checkbox label="1">爱车保养消费</el-checkbox>
-                <el-checkbox label="2">故障检查消费</el-checkbox>
-                <el-checkbox label="3">事故维修消费</el-checkbox>
-                <el-checkbox label="4">购买保险消费</el-checkbox>
-                <el-checkbox label="5">美容洗车消费</el-checkbox>
-                <el-checkbox label="6">其他消费</el-checkbox>
+                <el-checkbox :label="0">不推送</el-checkbox>
+                <el-checkbox :label="1">爱车保养消费</el-checkbox>
+                <el-checkbox :label="2">故障检查消费</el-checkbox>
+                <el-checkbox :label="3">事故维修消费</el-checkbox>
+                <el-checkbox :label="4">购买保险消费</el-checkbox>
+                <el-checkbox :label="5">美容洗车消费</el-checkbox>
+                <el-checkbox :label="6">其他消费</el-checkbox>
               </el-checkbox-group>
             </el-form-item>
             <el-form-item label="选择奖品">
-              <el-select v-model="form.lottory"></el-select>
+              <el-select v-model="form.lottory">
+                <el-option v-for="(item, index) in couponList" :key="index" :label="item.label" :value="item.value" ></el-option>
+              </el-select>
             </el-form-item>
           </el-form>
           <section class="list">
@@ -144,10 +146,16 @@ export default {
     }
   },
 
+  computed: {
+    ...mapState({
+      'couponList': state => state.couponList
+    })
+  },
   methods: {
     ...mapActions({
       'serverQuestionPub':'serverQuestionPub',
-      'getServerQuestionInfo': 'getServerQuestionInfo'
+      'getServerQuestionInfo': 'getServerQuestionInfo',
+      'getCouponList': 'getCouponList'
     }),
     /**
      * 处理上传的图片
@@ -198,9 +206,12 @@ export default {
   created(){
     let data = this.$route.query.data
     data && (data = JSON.parse(data))
-    this.getServerQuestionInfo({id: data && data.id}).then(res => {
-      this.form = {...this.form, ...res.data.survey}
-    })
+    if(data){
+      this.getServerQuestionInfo({id: data && data.id}).then(res => {
+        this.form = {...this.form, ...res.data.survey, lottery: res.data.survey && res.data.survey.lottery.split(',')}
+      })
+    }
+    this.getCouponList()
   }
 }
 </script>

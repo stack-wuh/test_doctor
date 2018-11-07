@@ -1,6 +1,6 @@
 <template>
   <section class="bar-wrapper">
-    <section class="barChart" :class="'barChart' + index"></section>
+    <section id="bar" class="barChart" :class="'barChart' + index"></section>
   </section>
 </template>
 
@@ -23,7 +23,8 @@ const option = {
     tooltip : {
         trigger: 'axis',
         axisPointer : {            // 坐标轴指示器，坐标轴触发有效
-            type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+            type : 'shadow',        // 默认为直线，可选为：'line' | 'shadow'
+            width: '20%'
         }
     },
     grid: {
@@ -35,7 +36,7 @@ const option = {
     xAxis : [
         {
             type : 'category',
-            data : ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+            data : [],
             axisTick: {
                 alignWithLabel: true
             }
@@ -51,8 +52,8 @@ const option = {
         {
             name:'直接访问',
             type:'bar',
-            barWidth: '60%',
-            data:[10, 52, 200, 334, 390, 330, 220]
+            barWidth: '20%',
+            data:[]
         }
     ],
     
@@ -65,6 +66,18 @@ export default {
     index:{
       type:Number,
       default:1
+    },
+    xAxis:{
+        type: Array,
+        default: [],
+    },
+    series:{
+        type: Array,
+        default: []
+    },
+    title:{
+        type: String,
+        default: ''
     }
   },
   data () {
@@ -72,14 +85,40 @@ export default {
       option,
     }
   },
-
-  methods: {},
+ 
+  computed: {
+      path(){
+        let _path = this.$route.query
+        return _path.child || _path.subMenu
+      },
+      seriesName(){
+        switch(this.path){
+            case '客户资料完整度' : return '完整度'
+            default: return '标题'
+        }
+      },
+      mapTitle(){
+          if(this.title) return this.title
+          switch(this.path){
+              case '客户资料完整度' : return '客户资料完整度'
+              default: return '标题'
+          }
+      }
+  },
+  methods: {
+    init(){
+        let myChart = echarts.init(document.getElementById('bar'))
+        this.option.xAxis[0].data = this.xAxis
+        this.option.series[0].data = this.series
+        this.option.series[0].name = this.seriesName
+        this.option.title.text = this.mapTitle
+        myChart.setOption(this.option)
+    }
+  },
   created(){
-    this.$nextTick(()=> {
-      let els = document.querySelectorAll('.barChart' + this.index)
-      let chart = echarts.init(els[0])
-      chart.setOption(this.option)      
-    })
+      setTimeout(() => {
+          this.init()
+      }, 1000)
   }
 }
 </script>

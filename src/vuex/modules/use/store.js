@@ -99,7 +99,14 @@ const actions = {
     * 所有表格删除事件的公共方法
     */
    useDelAndFresh({dispatch} ,{path ,row:{id}} = {}){
-      $http.post('quality/delParts.do' ,{ids:id} ,res => {
+    let _url = '' 
+    switch(path){
+      case '汽车精品管理' : _url = 'quality/delQuality.do'
+        break;
+      case '配件大类管理' : _url = 'quality/delParts.do'
+        break;
+     }
+      $http.post(_url ,{ids:id} ,res => {
         setTimeout(()=>{
           dispatch('getUseStore' ,{path})
         },1000)

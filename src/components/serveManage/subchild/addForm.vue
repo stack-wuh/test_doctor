@@ -186,7 +186,7 @@ export default {
             ...this.form,
             data: JSON.stringify(data)
           }
-          this.serverCarSettingPub({form}).then(res => {
+          this.serverCarSettingPub({form, path: '检修项配置'}).then(res => {
             res.status === 0 && (
               this.handleCancel()
             )

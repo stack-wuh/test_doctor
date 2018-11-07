@@ -1,6 +1,6 @@
 <template>
   <section class="wrapper">
-    {{RootPath}} -- {{RootName}}
+    <!-- {{RootPath}} -- {{RootName}} -->
     <header v-show="header" class="header">
       <div>
         <slot name="title"></slot>

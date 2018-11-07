@@ -158,7 +158,6 @@ export default {
     },
 
     jump2Other(item){
-      console.log(item)
       this.$router.push({path: item.path, query: item.query})
     },
     /**
@@ -181,7 +180,6 @@ export default {
       }, 1000)
     });
     this.clock()
-    // this.getLimits()
   }
 };
 </script>
