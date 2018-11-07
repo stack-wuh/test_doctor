@@ -65,11 +65,26 @@
         <span>商品列表</span>
         <el-button @click="handleOpenDialog(0)" type="primary">添加</el-button>
       </p>
-      <el-table :data="temp_list" border stripe>
+      <el-table :data="temp_goods" border stripe>
         <el-table-column align="center" type="selection" ></el-table-column>
-        <el-table-column v-for="(item, index) in goodsTable" :key="index" align="center" :label="item.key" :prop="item.field"></el-table-column>
-        <el-table-column align="center" label="操作">
-          <el-button type="text">删除</el-button>
+        <el-table-column width="120px" v-if="item.type === 'default' || item.type === undefined" v-for="(item, index) in goodsTable" :key="index" align="center" :label="item.key" :prop="item.field"></el-table-column>
+        <el-table-column width="120px" v-if="item.type === 'input'" v-for="(item, index) in goodsTable" :key="index" align="center" :label="item.key">
+          <template slot-scope="scope">
+            <el-input @change="e => {return handleChangeInputNum(0, e, scope)}" v-model="scope.row[item.field]" placeholder="请编辑" ></el-input>
+          </template>
+        </el-table-column>
+        <el-table-column width="120px" v-if="item.type === 'select'" v-for="(item, index) in goodsTable" :key="index" align="center" :label="item.key">
+          <template slot-scope="scope">
+            <el-select v-model="scope.row[item.field]">
+              <el-option v-for="(item, index) in employeeList" :key="index" :label="item.label" :value="item.value" ></el-option>
+            </el-select>
+          </template>
+        </el-table-column>
+  
+        <el-table-column fixed="right" align="center" label="操作">
+          <template slot-scope="scope">
+            <el-button @click="handleTableDel(0, scope.$index)" type="text">删除</el-button>
+          </template>
         </el-table-column>
       </el-table>
 
@@ -80,11 +95,25 @@
         <span>项目列表</span>
         <el-button @click="handleOpenDialog(1)" type="primary">添加</el-button>
       </p>
-      <el-table :data="temp_list" border stripe>
+      <el-table :data="temp_project" border stripe>
         <el-table-column align="center" type="selection"></el-table-column>
-        <el-table-column align="center" v-for="(item, index) in projectTable" :key="index" :label="item.key" :prop="item.field"></el-table-column>
-        <el-table-column align="center" label="操作">
-          <el-button type="text">删除</el-button>
+        <el-table-column width="120px" v-if="item.type === '' || item.type === undefined" align="center" v-for="(item, index) in projectTable" :key="index" :label="item.key" :prop="item.field"></el-table-column>
+        <el-table-column width="120px" v-if="item.type === 'input'" align="center" v-for="(item, index) in projectTable" :key="index" :label="item.key" :prop="item.field">
+          <template slot-scope="scope">
+            <el-input @change="e => {return handleChangeInputNum(1, e, scope)}" v-model="scope.row[item.field]" placeholder="请编辑" ></el-input>
+          </template>
+        </el-table-column>
+        <el-table-column width="120px" v-if="item.type === 'select'" v-for="(item, index) in projectTable" :key="index" align="center" :label="item.key">
+          <template slot-scope="scope">
+            <el-select v-model="scope.row[item.field]">
+              <el-option v-for="(item, index) in employeeList" :key="index" :label="item.label" :value="item.value" ></el-option>
+            </el-select>
+          </template>
+        </el-table-column>
+        <el-table-column fixed="right" align="center" label="操作">
+          <template slot-scope="scope" >
+            <el-button @click="handleTableDel(1, scope.$index)" type="text">删除</el-button>
+          </template>
         </el-table-column>
       </el-table>
 
@@ -92,12 +121,12 @@
 
     <section class="btm-area">
       <section class="msg-area">
-        <el-select v-model="form.type" placeholder="请选择消费类型" >
-          <el-option label="aa" value="1" ></el-option>
+        <el-select v-model="form.saleType" placeholder="请选择消费类型" >
+          <el-option v-for="(item, index) in typeList" :key="index" :label="item.label" :value="item.value" ></el-option>
         </el-select>
         <p class="margin-lf-15">
           <span>合计消费: </span>
-          <strong class="danger">0</strong>元
+          <strong class="danger">{{totalMoney}} </strong>元
         </p>
       </section>
       <section class="btn-area">
@@ -115,7 +144,7 @@
       <pagination :total="goodsTotal" @getCurrent="e => {return getCurrent(0, e)}" ></pagination>
       <span slot="footer">
         <el-button @click="handleDialogCancel" >取消</el-button>
-        <el-button type="primary" @click="handleDialogSubmit">确定</el-button>
+        <el-button type="primary" @click="handleDialogSubmit(0)">确定</el-button>
       </span>
     </el-dialog>
     
@@ -127,7 +156,7 @@
       <pagination :total="projectTotal" @getCurrent="getCurrent(1)" ></pagination>
       <span slot="footer">
         <el-button @click="handleDialogCancel" >取消</el-button>
-        <el-button type="primary" @click="handleDialogSubmit">确定</el-button>
+        <el-button type="primary" @click="handleDialogSubmit(1)">确定</el-button>
       </span>
     </el-dialog>
   </section>
@@ -151,51 +180,59 @@ const rules = {
 const goodsTable = [
   {
     key: '商品编码',
-    field: '',
+    field: 'goodsCode',
   },
   {
     key: '商品名称',
-    field: '',
+    field: 'goodsName',
   },
   {
     key: '规格',
-    field: '',
+    field: 'carModel',
   },
   {
     key: '单位',
-    field: '',
+    field: 'goodsUnit',
   },
   {
-    key: '销售数量',
-    field: '',
+    key: '数量',
+    field: 'num',
+    type: 'input',
   },
   {
-    key: '销售单价',
-    field: '',
+    key: '单价',
+    field: 'salePrice',
   },
   {
     key: '优惠',
-    field: '',
+    field: 'discount',
+    type: 'input',
   },
   {
-    key: '销售金额',
-    field: '',
+    key: '总价',
+    field: 'saleMoney',
   },
   {
     key: '已出库数量',
-    field: '',
+    field: 'outRepositoryNum',
   },
   {
     key: '销售人',
-    field: '',
+    field: 'saleEmployeeId',
+    type: 'select',
+    list: [],
   },
   {
     key: '领料人',
-    field: '',
+    field: 'takeEmployeeId',
+    type: 'select',
+    list: [],
   },
   {
     key: '实施人',
-    field: '',
+    field: 'workEmployeeId',
+    type: 'select',
+    list: [],
   },
 ]
 const goodsDialogTable = [
@@ -236,39 +273,43 @@ const goodsDialogTable = [
 const projectTable = [
   {
     key: '项目名称',
-    field: '',
+    field: 'projectName',
   },
   {
     key: '项目分类',
-    field: '',
+    field: 'typeName',
   },
   {
     key: '推荐工时',
-    field: '',
+    field: 'time',
   },
   {
     key: '单价',
-    field: '',
+    field: 'salePriceUnit',
   },
   {
     key: '数量',
-    field: '',
+    field: 'num',
+    type: 'input'
   },
   {
     key: '优惠',
-    field: '',
+    field: 'discount',
+    type: 'input',
   },
   {
     key: '总价',
-    field: '',
+    field: 'totalPrice',
   },
   {
     key: '销售人',
-    field: '',
+    field: 'saleEmployeeId',
+    type: "select",
   },
   {
     key: '实施人',
-    field: '',
+    field: 'workEmployeeId',
+    type: "select",
   },
 ]
 const projectDialogTable = [
@@ -294,6 +335,26 @@ const projectDialogTable = [
   },
 ]
 
+const typeList = [
+  {
+    label: '美容洗车',
+    value: 0,
+  },
+  {
+    label: '保险维修',
+    value: 1,
+  },
+  {
+    label: '保养维修',
+    value: 2,
+  },
+  {
+    label: '故障检查',
+    value: 3,
+  }
+]
+
+
 export default {
   name: '',
   components:{
@@ -303,32 +364,26 @@ export default {
   data () {
     return {
       form:{
-        startDates: '',
-        endDates:'',
-        salerId: '',
-        takeMoney: '',
-        packagePrice: '',
-        takeMoney: '',
-        payType: '',
-
+        saleType: '',
       },
       condition: '',
       temp_form:{},
       visibleDialogGoods: false,
       visibleDialogProject: false,
       temp_dialog: [[], []],
-      temp_list: [],
+      temp_goods: [],
+      temp_project: [],
       rules,
 
       goodsTable,
       goodsDialogTable,
       projectTable,
       projectDialogTable,
+      typeList,
     }
   },
   computed:{
     ...mapState({
-      'payTypeList': state => state.Select.payTypeList,
       'employeeList': state => state.Select.employeeList,
       'goodsList': state => state.Select.sellingMealGoods.list,
       'goodsTotal': state => state.Select.sellingMealGoods.total,
@@ -340,6 +395,21 @@ export default {
     pathChange(){
       let path = this.$route.query
       return path.child || path.subMenu
+    },
+    totalMoney(){
+      let _total = 0
+      this.temp_goods.map(item => {
+        _total += Number.parseFloat(item.salePrice ? item.salePrice : 0) * Number.parseInt(item.num ? item.num : 0)
+      })
+      this.temp_project.map(item => {
+        _total += Number.parseFloat(item.salePriceUnit ? item.salePriceUnit : 0) * Number.parseInt(item.num ? item.num : 0)
+      })
+      return _total
+    },
+    query(){
+      let data = this.$route.query.data
+      data = data && JSON.parse(data)
+      return data
     }
   },
   methods: {
@@ -348,9 +418,11 @@ export default {
       'getSalesList': 'getSalesList',
       'getPayTypeList': 'getPayTypeList',
       'getEmployeeList': 'getEmployeeList',
-      'sellingMealSalePost': 'sellingMealSalePost',
+      'sellingAccountOutPost': 'sellingAccountOutPost',
       'getSellingMealGoodsList': 'getSellingMealGoodsList',
-      'getSellingMealProject': 'getSellingMealProject'
+      'getSellingMealProject': 'getSellingMealProject',
+      'getSellingMealManList': 'getSellingMealManList',
+      'getSellingAccountInfo': 'getSellingAccountInfo'
     }),
     /**
      * 新增页 -- 获取用户的具体信息
@@ -388,13 +460,19 @@ export default {
       console.log(type, e)
     },
     handleSelection(type, e){
-
+      this.temp_dialog[type] = e
     },
-    handleDialogSubmit(){
+    handleDialogSubmit(type){
+      if(type === 0) {
+        this.visibleDialogGoods = false
+        this.temp_goods = this.temp_goods.concat(this.temp_dialog[type])
+      }else{
+        this.visibleDialogProject = false
+        this.temp_project = this.temp_project.concat(this.temp_dialog[type])
+      }
       setTimeout(() => {
-        this.visibleDialog = false
-        this.temp_list = this.temp_dialog
-      }, 500)
+        this.temp_dialog[type] = []
+      })
     },
     handleClickCancel(){
       setTimeout(() => {
@@ -402,27 +480,44 @@ export default {
       }, 1000)
     },
     handleClickSubmit(status){
-      let data = this.temp_list.map(item => {
-        return {packageId: item.id, saleNum: item.saleNum}
+      let goodsDate = this.temp_goods.map(item => {
+        return {goodId: item.id, num: item.num, discount: item.discount, saleMoney: item.saleMoney, saleEmployeeId: item.saleEmployeeId, takeEmployeeId: item.takeEmployeeId, workEmployeeId: item.workEmployeeId }
+        })
+      let projectDate = this.temp_project.map(item => {
+        return {projectId: item.id, num: item.num, discount: item.discount, totalPrice: item.totalPrice, saleEmployeeId: item.saleEmployeeId, workEmployeeId: item.workEmployeeId}
       })
-      this.$refs.myForm.validate(valid => {
-        if(valid){
-          let form = {...this.form, ids: JSON.stringify(data), status: status, userId: this.temp_form.userId}
-          this.sellingMealSalePost({form}).then(res => {
-            console.log(res)
-          })
-        }else{
-          _g.toastMsg({
-            type: 'error',
-            msg: '请编辑必填项之后提交'
-          })
-        }
+      
+
+      let form = {...this.form, status, userId: this.temp_form.userId, goodsDate: JSON.stringify(goodsDate), projectDate: JSON.stringify(projectDate), totalMoney: this.totalMoney}
+      this.sellingAccountOutPost({form}).then(res => {
+        res.status === 0 && this.handleClickCancel()
       })
+    },
+
+    handleTableDel(type, $index){
+      if(type === 0) {
+        this.temp_goods.splice($index, 1)
+      }else{
+        this.temp_project.splice($index, 1)
+      }
+    },
+
+    handleChangeInputNum(type, e, scope){
+      if(type === 0) {
+        scope.row.saleMoney = Number.parseFloat(scope.row.salePrice) * Number.parseInt(scope.row.num)
+      }else{
+        scope.row.totalPrice = Number.parseFloat(scope.row.salePriceUnit) * Number.parseInt(scope.row.num)
+      }
     }
   },
   created(){
-    this.getPayTypeList()
     this.getEmployeeList()
+    this.getSellingAccountInfo({id: this.query && this.query.id}).then(res => {
+      this.temp_form = res.data['用户信息']
+      this.temp_goods = res.data['商品列表']
+      this.temp_project = res.data['项目列表']
+      this.condition = res.data.phone
+    })
   }
 }
 </script>

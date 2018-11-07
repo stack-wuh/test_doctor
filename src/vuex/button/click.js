@@ -234,7 +234,7 @@ export const jump2Detail = params => {
       case '摇一摇中奖' : return location.href = window.rootPath + '/rockIngActivities/userRockingListReport.do' + _str
       case '业务退货' : return location.href = window.rootPath + '/back/report.do' + _str 
       case '业务出库' : return location.href = window.rootPath + '/outRepository/report.do' + _str
-      case '业务结算' : return location.href = window.rootPath + '/bussinessOrder/report.do' + _str
+      case '业务结算' : return location.href = window.rootPath + '/orderSettlememt/report.do' + _str
       case '业务开单' : return location.href = window.rootPath + '/bussinessOrder/report.do' + _str
       case '救援服务' : return location.href = window.rootPath + '/rescueBackend/outRescue.do' + _str
       case '套餐销售' : return location.href = window.rootPath + '/packageSale/exportList.do' +_str

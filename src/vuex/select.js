@@ -379,7 +379,7 @@ const actions = {
    */
   getSellingMealGoodsList({commit}, {currPageNo = 1}){
     return new Promise((resolve, reject) => {
-      $http.post('purchaseOrder/getGoodList.do', {currPageNo}, res => {
+      $http.post('good/getGoodList.do', {currPageNo}, res => {
         commit('setSellingMealGoodsList', {params: res.data})
         return resolve(res)
       })
@@ -398,7 +398,6 @@ const actions = {
       })
     })
   },
-
 }
 
 const getters = {

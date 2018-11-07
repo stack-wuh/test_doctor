@@ -47,7 +47,12 @@
         <el-button @click="handleOpenDialogGoods" type="primary">添加</el-button>
       </p>
       <el-table :data="temp_goods" border stripe>
-        <el-table-column align="center" v-for="(item, index) in goodsTable" :key="index" :label="item.key" :prop="item.field"></el-table-column>
+        <el-table-column align="center" v-if="!item.type" v-for="(item, index) in goodsTable" :key="index" :label="item.key" :prop="item.field"></el-table-column>
+        <el-table-column align="center" v-if="item.type === 'input'" v-for="(item, index) in goodsTable" :key="index" :label="item.key" :prop="item.field">
+          <template slot-scope="scope">
+            <el-input v-model="scope.row[item.field]" placeholder="请编辑" ></el-input>
+          </template>
+        </el-table-column>
         <el-table-column label="操作" align="center" >
           <template slot-scope="scope">
               <el-button @click="handleDelItem(0, scope.$index)" type="text">删除</el-button>
@@ -62,7 +67,12 @@
         <el-button @click="handleOpenDialogProject" type="primary">添加</el-button>
       </p>
       <el-table :data="temp_project" border stripe>
-        <el-table-column align="center" v-for="(item, index) in projectTable" :key="index" :label="item.key" :prop="item.field" ></el-table-column>
+        <el-table-column align="center" v-if="!item.type" v-for="(item, index) in projectTable" :key="index" :label="item.key" :prop="item.field" ></el-table-column>
+        <el-table-column align="center" v-if="item.type === 'input'" v-for="(item, index) in projectTable" :key="index" :label="item.key" :prop="item.field" >
+          <template slot-scope="scope">
+            <el-input v-model="scope.row[item.field]" placeholder="请编辑" ></el-input>
+          </template>
+        </el-table-column>
         <el-table-column label="操作" align="center" >
           <template slot-scope="scope">
               <el-button @click="handleDelItem(1, scope.$index)" type="text">删除</el-button>
@@ -78,7 +88,7 @@
       </div>
       <div>
         <span>总价合计: </span>
-        <strong class="danger">0</strong>
+        <strong class="danger">{{totalPrice}}</strong>
       </div>
       <div class="empty-flex"></div>
       <my-bottom @handleSubmit="handleSubmit" @handleCancel="handleCancel" ></my-bottom>
@@ -151,6 +161,15 @@ const goodsTable = [
     field: 'goodsUnit',
   },
   {
+    key: '单价',
+    field: 'salePrice'
+  },
+  {
+    key: '数量',
+    field: 'num',
+    type: 'input',
+  },
+  {
     key: '备注',
     field: 'remark',
   }
@@ -171,6 +190,11 @@ const projectTable = [
   {
     key: '单价',
     field: 'salePriceUnit',
+  },
+  {
+    key: '数量',
+    field: 'num',
+    type: 'input',
   },
   {
     key: '备注',
@@ -221,10 +245,29 @@ export default {
     }),
 
     totalNum(){
-      return this.temp_goods.length + this.temp_project.length
+      let _total = 0
+      this.temp_goods.map(item => {
+        _total += Number.parseFloat(item.num ? item.num : 0)
+      })
+      this.temp_project.map(item => {
+        _total += Number.parseFloat(item.num ? item.num : 0)
+      })
+      return _total
     },
     totalPrice(){
-      
+      let _total = 0
+      this.temp_goods.map(item => {
+        _total += Number.parseInt(item.num ? item.num : 0) * Number.parseFloat(item.salePrice ? item.salePrice : 0)
+      })
+      this.temp_project.map(item => {
+        _total += Number.parseInt(item.num ? item.num : 0) * Number.parseFloat(item.salePriceUnit ? item.salePriceUnit : 0)
+      })
+      return _total
+    },
+    query(){
+      let data = this.$route.query.data
+      data = data && JSON.parse(data)
+      return data
     }
   },
 
@@ -232,7 +275,8 @@ export default {
     ...mapActions({
       'sellingMealPost': 'sellingMealPost',
       'getSellingMealGoodsList': 'getSellingMealGoodsList',
-      'getSellingMealProject': 'getSellingMealProject'
+      'getSellingMealProject': 'getSellingMealProject',
+      'getSellingMealManageInfo': 'getSellingMealManageInfo'
     }),
     handleOpenDialogGoods(){
       this.getSellingMealGoodsList({currPageNo: 1}).then(res => {
@@ -245,11 +289,11 @@ export default {
       })
     },
     handleSubmit(){
-      let goodsids = this.temp_goods.map(item => item.id).toString()
-      let proIds = this.temp_project.map(item => item.id).toString()
+      let goodsids = this.temp_goods.map(item => {return {id: item.id, num: item.num} })
+      let proIds = this.temp_project.map(item => {return {id: item.id, num: item.num} })
       this.$refs.myForm.validate(valid => {
         if(valid){
-          let form = {...this.form, goodsids, proIds}
+          let form = {...this.form, goodsIds: JSON.stringify(goodsids), proIds: JSON.stringify(proIds), oldPrice: this.totalPrice}
           this.sellingMealPost({form}).then(res => {
             res.status ===0 && this.handleCancel()
           })
@@ -292,6 +336,14 @@ export default {
         this.temp_goods.splice($index, 1)
       }
     },
+  },
+  created(){
+    this.getSellingMealManageInfo({id: this.query && this.query.id}).then(res => {
+      console.log(res)
+      this.form = {...this.form, ...res.data.package}
+      this.temp_goods = res.data.goodsVoList
+      this.temp_project = res.data.proList
+    })
   }
 }
 </script>

@@ -67,8 +67,12 @@
       </p>
       <el-table :data="temp_list" border stripe>
         <el-table-column align="center" label="名称" prop="packageName"></el-table-column>
-        <el-table-column align="center" label="数量" prop="num"></el-table-column>
         <el-table-column align="center" label="售价" prop="packagePrice"></el-table-column>
+        <el-table-column align="center" label="数量" prop="saleNum">
+          <template slot-scope="scope"> 
+              <el-input v-model="scope.row.saleNum" placeholder="请编辑" ></el-input>
+          </template>
+        </el-table-column>
         <el-table-column align="center" label="备注" prop="remark"></el-table-column>
         <el-table-column align="center" label="操作" prop="">
           <template slot-scope="scope">
@@ -131,6 +135,7 @@
         <el-button type="primary" @click="handleDialogSubmit">确定</el-button>
       </span>
     </el-dialog>
+
   </section>
 </template>
 
@@ -284,7 +289,10 @@ export default {
     this.getEmployeeList()
     this.getSellingSaleInfo({saleNo: this.query && this.query.saleNo}).then(res => {
       this.form = {...this.form, ...res.data.vo, startDates: res.data.vo.startDate, endDates: res.data.vo.endDate}
-      this.temp_list = res.data.list
+      this.temp_list = res.data.list.map(item => {
+        return {...item, packageName: item.name, num: item.saleNum}
+      })
+      this.temp_form = res.data.user
     })
     console.log(this.query)
   }

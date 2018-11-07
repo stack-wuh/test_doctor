@@ -1028,6 +1028,55 @@ const actions = {
         return resolve(res)
       })
     })
+  },
+
+  /**
+   * 进存销 -- 业务管理 -- 业务开单 -- 新增
+   */
+  sellingAccountOutPost({dispatch}, {form: {
+    userId,
+    saleType,
+    totalMoney,
+    goodsDate,
+    projectDate,
+    status,
+  }}){
+    return new Promise((resolve, reject) => {
+      $http.post('bussinessOrder/save.do', {
+        userId,
+        saleType,
+        totalMoney,
+        goodsDate,
+        projectDate,
+        status,
+      }, res => {
+        return resolve(res)
+      })
+    })
+  },
+
+  /**
+   * 进存销 -- 业务管理 -- 业务开单 -- 编辑
+   * 根据id获取编辑内容
+   */
+  getSellingAccountInfo({commit}, {id }){
+    return new Promise((resolve, reject) => {
+      $http.post('bussinessOrder/getBeforeUpdate.do', {id }, res =>{
+        return resolve(res)
+      })
+    })
+  },
+
+  /**
+   * 进存销 -- 套餐管理 -- 套餐管理 -- 编辑
+   * 根据id获取编辑内容
+   */
+  getSellingMealManageInfo({commit}, {id }){
+    return new Promise((resolve, reject) => {
+      $http.post('packageManage/updatePage.do', {id }, res => {
+        return resolve(res)
+      })
+    })
   }
 }
 

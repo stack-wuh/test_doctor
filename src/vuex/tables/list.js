@@ -3891,21 +3891,25 @@ const state = {
           key:'业务单号',
           type:'default',
           prop:'orderCode',
+          width: '220px',
         },
         {
           key:'订单日期',
           type:'default',
           prop:'orderDate',
+          width: '180px',
         },
         {
           key:'会员名称',
           type:'default',
-          prop:'orderDate',
+          prop:'realName',
+          width: '120px',
         },
         {
           key:'会员电话',
           type:'default',
           prop:'phone',
+          width: '120px',
         },
         {
           key:'车型',
@@ -3916,6 +3920,7 @@ const state = {
           key:'车牌号',
           type:'default',
           prop:'plateNum',
+          width: '120px',
         },
         {
           key:'订单状态',
@@ -3940,11 +3945,13 @@ const state = {
         {
           key:'操作',
           type:'button',
+          fix:'right',
           list:[
             {
               text:'编辑',
               type:'',
               size:'small',
+              click: jump2Other
             },
           ]
         },
@@ -4202,6 +4209,7 @@ const state = {
               text:'编辑',
               type:'',
               size:'small',
+              click: jump2Other
             },
           ]
         },
@@ -4280,8 +4288,18 @@ const state = {
           type:'button',
           list:[
             {
-              text:'编辑',
-              type:'',
+              valid: 3,
+              value: [0, 1],
+              rules: 'state',
+              texts: ['编辑', '查看'],
+              styles:[
+                {
+                  color: STYLES['PRIAMRY']
+                },
+                {
+                  color: STYLES['PRIMARY']
+                }
+              ],
               size:'small',
               click: jump2Other
             },
