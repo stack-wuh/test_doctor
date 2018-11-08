@@ -273,11 +273,11 @@ const goodsDialogTable = [
 const projectTable = [
   {
     key: '项目名称',
-    field: 'projectName',
+    field: 'projectInfoName',
   },
   {
     key: '项目分类',
-    field: 'typeName',
+    field: 'projectName',
   },
   {
     key: '推荐工时',
@@ -465,6 +465,9 @@ export default {
     handleDialogSubmit(type){
       if(type === 0) {
         this.visibleDialogGoods = false
+        this.temp_dialog[type].map(item => {
+          item = Object.assign(item, {outRepositoryNum: 0})
+        })
         this.temp_goods = this.temp_goods.concat(this.temp_dialog[type])
       }else{
         this.visibleDialogProject = false
@@ -512,12 +515,14 @@ export default {
   },
   created(){
     this.getEmployeeList()
-    this.getSellingAccountInfo({id: this.query && this.query.id}).then(res => {
-      this.temp_form = res.data['用户信息']
-      this.temp_goods = res.data['商品列表']
-      this.temp_project = res.data['项目列表']
-      this.condition = res.data.phone
-    })
+    if(this.query && this.query.id){
+      this.getSellingAccountInfo({id: this.query && this.query.id}).then(res => {
+        this.temp_form = res.data['用户信息']
+        this.temp_goods = res.data['商品列表']
+        this.temp_project = res.data['项目列表']
+        this.condition = res.data.phone
+      })
+    }
   }
 }
 </script>

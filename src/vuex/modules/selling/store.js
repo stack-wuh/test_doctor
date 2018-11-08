@@ -1084,7 +1084,7 @@ const getters = {
   sellingStoreFormat: (state) => ({path}) => {
     return state.data && state.data.map(item => {
       if(path === '业务开单'){
-        return {...item, orderStatusText: item.orderStatus === 0 ? '未支付' : '已支付', payStatusText: item.payStatus === 0 ? '未结算' : '已结算', repositoryStatusText: item.repositoryStatus === 0 ? '未出库' : '已出库', accountPayStautsText: item.accountPayStauts === 0 ? '未出账' : '已出账'}
+        return {...item, orderStatusText: item.orderStatus == 0 ? '未支付' : '已支付', payStatusText: item.payStatus == 0 ? '未结算' : '已结算', repositoryStatusText: item.repositoryStatus == 0 ? '未出库' : '已出库', accountPayStautsText: item.accountPayStauts == 0 ? '未出账' : '已出账'}
       }else if(path === '业务结算'){
         return {...item, payStatusText: item.payStatus === 0 ? '未结算' : '已结算'}
       }else if(path === '套餐管理'){
