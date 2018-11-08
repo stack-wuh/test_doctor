@@ -13,7 +13,7 @@
             <span>{{ch.label}}:</span>
             <span>{{ch.value}}{{ch.tips}}</span>
           </p>
-          <p class="card-right__tips" v-if="!item.child">{{item.total}}{{item.tips}}</p>
+          <p class="card-right__tips" v-if="!item.child">{{params[item.field] || item.total}}{{item.tips}}</p>
         </section>
       </section>
     </section>
@@ -84,6 +84,7 @@ const cards = [
         label:'总车辆',
         total:100,
         tips:'(台)',
+        field: '',
         style:'background-color:#AB82FF;',
       },
       {
@@ -91,6 +92,7 @@ const cards = [
         label:'保养到期',
         total:20,
         tips:'(台)',
+        field: '',
         style:'background-color:#3CB371;',
       },
       {
@@ -98,6 +100,7 @@ const cards = [
         label:'保险到期',
         total:10,
         tips:'(台)',
+        field: '',
         style:'background-color:#6CA6CD;',
       },
     ]
@@ -108,17 +111,19 @@ const cards = [
     list:[
       {
         img:require('@/assets/img/icon-st-3.png'),
-        label:'余额剩余总额',
-        total:100,
+        label:'剩余总额',
+        total:0,
         tips:'(元)',
+        field: 'sumMoney',
         style:'background-color:#87CEFF;',
       },
       {
         img:require('@/assets/img/icon-st-3.png'),
-        label:'积分剩余总额',
-        total:20,
+        label:'剩余积分',
+        total:0,
         tips:'(个)',
         style:'background-color:#CD950C;',
+        field: 'sumIntegral'
       },
     ]
   },
@@ -127,7 +132,7 @@ export default {
   name: '',
   props:{
     params:{
-      type:String,
+      type:[Array, Object],
       default:'',
     }
   },

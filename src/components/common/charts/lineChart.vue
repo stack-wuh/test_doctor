@@ -11,6 +11,9 @@ const option = {
       top:'20',
       left:'20',
     },
+    tooltip:{
+      trigger: 'axis'
+    },
     toolbox: {
         show: true,
         feature: {
@@ -71,6 +74,7 @@ export default {
     seriesName(){
       switch(this.path){
           case '客户资料完整度' : return '完整度'
+          case '业务统计' : return '人次'
           default: return '标题'
       }
     },
@@ -83,13 +87,19 @@ export default {
     }
   },
 
+  watch:{
+    xAxis(){
+      this.init()
+    }
+  },
+
   methods: {
     /**
      * init echarts
      */
     init(){
       let myChart = echarts.init(document.getElementById('line'))
-      this.option.xAxis[0].data = this.xAxis
+      this.option.xAxis.data = this.xAxis
       this.option.series[0].data = this.series
       this.option.series[0].name = this.seriesName
       this.option.title.text = this.mapTitle
@@ -97,7 +107,7 @@ export default {
     }
   },
   created(){
-    this.$nextTick(()=> {
+    setTimeout(()=> {
       this.init()
     })
   }

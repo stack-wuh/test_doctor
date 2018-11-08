@@ -1,6 +1,5 @@
 <template>
   <section class="wrapper">
-    <!-- {{RootPath}} -- {{RootName}} -->
     <header v-show="header" class="header">
       <div>
         <slot name="title"></slot>
@@ -12,7 +11,7 @@
       <el-table-column v-if="tableList && tableList.colType == 'index'" :type="tableList.colValue || 'index'" :label="tableList.colTitle" align="center" width="60px"></el-table-column>
       <el-table-column v-if="item.type === 'image'" align="center" v-for="(item,index) in tableList.list" :key="index" :label="item.key" :prop="item.prop" :width="item.width || ''">
         <template slot-scope="scope">
-          <img :src="scope.row.picture" alt="logo" style="width:60px;height:60px;" >
+          <img :src="scope.row[item.prop]" alt="avatar" style="width:60px;height:60px;" >
         </template>
       </el-table-column>
       <el-table-column v-if="item.type === 'default'" align="center" v-for="(item,index) in tableList.list" :key="index" :label="item.key" :prop="item.prop" :width="item.width || '' " ></el-table-column>
@@ -41,7 +40,7 @@
 </template>
 
 <script>
-import {mapMutations} from 'vuex'
+import {mapMutations, mapState} from 'vuex'
 export default {
   props:['list','params','header'],
   name: 'table1',
@@ -55,6 +54,9 @@ export default {
     }
   },
   computed:{
+    ...mapState({
+      'rootState': state => state
+    }),
     RootPath(){
       return this.$route.path
     },
@@ -67,7 +69,7 @@ export default {
       return _data
     },
     tableList(){
-      return this.$store.getters.getTableListByparams({path:this.params || this.$route.query.child || this.$route.query.subMenu || this.$route.path })
+      return this.$store.getters.getTableListByparams({path:this.params || this.$route.query.child || this.$route.query.subMenu || this.$route.path, rootState: this.rootState })
     },
   },
   methods: {

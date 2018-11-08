@@ -94,6 +94,7 @@ export default {
       seriesName(){
         switch(this.path){
             case '客户资料完整度' : return '完整度'
+            case '业务统计' : return '人次'
             default: return '标题'
         }
       },
@@ -103,6 +104,11 @@ export default {
               case '客户资料完整度' : return '客户资料完整度'
               default: return '标题'
           }
+      }
+  },
+  watch: {
+      xAxis(){
+          this.init()
       }
   },
   methods: {

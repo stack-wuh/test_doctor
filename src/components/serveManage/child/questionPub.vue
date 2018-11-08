@@ -208,7 +208,7 @@ export default {
     data && (data = JSON.parse(data))
     if(data){
       this.getServerQuestionInfo({id: data && data.id}).then(res => {
-        this.form = {...this.form, ...res.data.survey, lottery: res.data.survey && res.data.survey.lottery.split(',')}
+        this.form = {...this.form, ...res.data.survey}
       })
     }
     this.getCouponList()

@@ -6,8 +6,8 @@
       <span v-if="$route.query.child">>{{$route.query.child}}</span>
     </header>
     <section>
-      <my-card v-if="canShowCards.includes(path)"></my-card>
-      <my-search v-if="isShow" ></my-search>
+      <my-card v-if="canShowCards.includes(path)" :params="info" ></my-card>
+      <my-search @inputChange="getInputChange" v-if="isShow" ></my-search>
       <bar-chart v-if="canShowTopMap.includes(path)" :xAxis="xAxis" :series="series"></bar-chart>
       <my-table v-if="isShow && showType === 3" :header="true" :list="list({path})" >
         <span slot="title">{{ $route.query.child || $route.query.subMenu}}列表</span>
@@ -16,8 +16,8 @@
           </div>
       </my-table>
       <my-bottom v-if="canShowBottom.includes(path)" :total="total" :currPageNo="currPageNo" ></my-bottom>
-      <bar-chart v-if="showType === 1" ></bar-chart>
-      <line-chart v-if="showType === 2" ></line-chart>
+      <bar-chart v-if="showType === 1" :xAxis="xAxis" :series="series" :title="title" ></bar-chart>
+      <line-chart v-if="showType === 2" :xAxis="xAxis" :series="series" :title="title" ></line-chart>
     </section>
   </section>
 </template>
@@ -64,10 +64,12 @@ export default {
       'total': state => state.Statistic.total,
       'currPageNo': state => state.Statistic.currPageNo,
       'showType': state => {
-        return state.search.showType ? state.search.showType : 3 
+        return state.search.dataType ? state.search.dataType : 3 
       },
       'xAxis': state => state.Statistic.xAxis,
-      'series': state => state.Statistic.series
+      'series': state => state.Statistic.series,
+      'title': state => state.Statistic.title,
+      'info': state => state.Statistic.info
     }),
     path(){
       return this.$route.query.child || this.$route.query.subMenu
@@ -85,13 +87,22 @@ export default {
         this.isShow = true
         this.getStore({path: this.path})
       })
+    },
+    xAxis(){
+      this.isShow = false
+      this.isShow = true
     }
   },
 
   methods: {
     ...mapActions({
       'getStore': 'getStatisticStore'
-    })
+    }),
+    getInputChange(e){
+      this.isShow = false
+      this.isShow = true
+      this.getStore({path: this.path})
+    }
   },
   created(){
     this.getStore({path: this.path})

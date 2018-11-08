@@ -1090,7 +1090,7 @@ const getters = {
       }else if(path === '套餐管理'){
         return {...item, packageStatusText: item.packageStatus === 0 ? '已停用' : '已启用', isShareText: item.isShare === 0 ? '否' : '是', isEmployeeAwardText: item.isEmployeeAward === 0 ? '否' :'是'}
       }else if(path === '业务出库'){
-        return {...item, backStatusText: item.backStatus === 0 ? '未退货' : item.backStatus === 1 ? '部分退货' : '全部退货', checkStatusText: item.checkStatus === 0 ? '未提交' : '已提交', statusText: item.status === 0 ? '未提交' : '已提交'}
+        return {...item, backStatusText: (item.backStatus == 0 || item.backStatus == null) ? '未退货' : item.backStatus === 1 ? '部分退货' : '全部退货', checkStatusText: item.checkStatus === 0 ? '未提交' : '已提交', statusText: item.status === 0 ? '未提交' : '已提交'}
       }else if(path === '业务退货'){
         return {...item, statusText: item.status === 0 ? '未提交' : '已提交', checkStatusText: item.checkStatus === 0 ? '未提交' : '已提交'}
       }else if(path === '会员套餐记录'){
@@ -1111,8 +1111,6 @@ const getters = {
         return {...item, checkStatusText: item.checkStatus === 0 ? '未通过' : item.checkStatus === 1 ? '已通过' : '待审核'}
       }else if(path === '日常盘点'){
         return {...item, statusText: item.status === 0 ? '未提交' : '已提交'}
-      }else if(path === '商品分类设置'){
-        return {...item}
       }else if(path === '商品设置'){
         return {...item, isFastOrderText: item.isFastOrder === 0 ? '否' : '是', isShowShopText: item.isShowShop === 0 ? '否' : '是', isShareMoneyText: item.isShareMoney === 0 ? '否' : '是', isEmployeeAwardText: item.isEmployeeAward === 0 ? '否' :' 是'}
       }else if(path === '项目设置'){

@@ -46,11 +46,6 @@ export const mutations = {
     let {menu, subMenu, child} = params
     state.dialogVisible = true
     state.tableRow = row && JSON.parse(JSON.stringify(row))
-    // if(menu === '客户服务'){
-    //   if(subMenu === '预约时间管理'){
-    //     state.tableRow = {...state.tableRow, startTime: '11:00', endTime: '12:00'}
-    //   }
-    // }
   },
   handlehideDialog(state){
     state.dialogVisible = false

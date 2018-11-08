@@ -3435,7 +3435,7 @@ const state = {
         {
           key:'正常状态图片',
           type:'image',
-          prop:'pictrue',
+          prop:'picture',
         },
         {
           key:'操作',
@@ -5976,17 +5976,17 @@ const state = {
         {
           key:'类型',
           type:'default',
-          prop:'',
+          prop:'typeName',
         },
         {
           key:'时间',
           type:'default',
-          prop:'',
+          prop:'date',
         },
         {
           key:'数量',
           type:'default',
-          prop:'',
+          prop:'num',
         }
       ]
     },
@@ -6041,12 +6041,12 @@ const state = {
         {
           key:'活动名称',
           type:'default',
-          prop:'',
+          prop:'activeName',
         },
         {
           key:'活动类型',
           type:'default',
-          prop:'',
+          prop:'typeText',
         },
         {
           key:'活动状态',
@@ -6056,27 +6056,27 @@ const state = {
         {
           key:'访问人数',
           type:'default',
-          prop:'',
+          prop:'visitNum',
         },
         {
           key:'报名人数',
           type:'default',
-          prop:'',
+          prop:'enrollNum',
         },
         {
           key:'报名率',
           type:'default',
-          prop:'',
+          prop:'visitPercent',
         },
         {
           key:'支付人数',
           type:'default',
-          prop:'',
+          prop:'payNum',
         },
         {
           key:'支付率',
           type:'default',
-          prop:'',
+          prop:'payPercent',
         }
       ]
     },
@@ -6091,57 +6091,57 @@ const state = {
         {
           key:'会员充值次数',
           type:'default',
-          prop:'',
+          prop:'rechargeCount',
         },
         {
           key:'会员充值金额',
           type:'default',
-          prop:'',
+          prop:'rechargeAmount',
         },
         {
           key:'会员消费次数',
           type:'default',
-          prop:'',
+          prop:'consumeCount',
         },
         {
           key:'会员消费金额',
           type:'default',
-          prop:'',
+          prop:'consumeAmount',
         },
         {
           key:'卡券发放总数',
           type:'default',
-          prop:'',
+          prop:'issuanceCount',
         },
         {
           key:'卡券使用总数',
           type:'default',
-          prop:'',
+          prop:'useTotal',
         },
         {
           key:'卡券过期总数',
           type:'default',
-          prop:'',
+          prop:'expiredTotal',
         },
         {
           key:'会员积分次数',
           type:'default',
-          prop:'',
+          prop:'integralCount',
         },
         {
           key:'会员积分总数',
           type:'default',
-          prop:'',
+          prop:'integralTotal',
         },
         {
           key:'积分兑换次数',
           type:'default',
-          prop:'',
+          prop:'exchangeCount',
         },
         {
           key:'积分兑换总数',
           type:'default',
-          prop:'',
+          prop:'exchangeTotal',
         },
       ]
     },
@@ -6228,21 +6228,126 @@ const actions = {
 }
 
 const getters = {
-  // /**
-  //  * 按路由地址筛选
-  //  */
-  // getTablesList: state => params => {
-  //   return state.data.find(item => item.path === params.path)
-  // },
-  // /**
-  //  * 按传入参数筛选
-  //  */
-  // getTablesListByParams:state => params => {
-  //   return state.data.find(item => item.type === params.path)
-  // },
   getTableListByparams: state => params =>{
-    // const arr = state.data.map(item => item.params && item.params.includes(params.path) ? item : [])
-    return state.data.filter(item => item.params && item.params.includes(params.path))[0]
+    let path = params.path, search = params.rootState.search
+    let _data =  state.data.filter(item => item.params && item.params.includes(params.path))[0]
+    if(path === '活动统计'){
+      if(!search.type || search.type === 1){
+        const list = [
+          {
+            key: '活动名称',
+            type: 'default',
+            prop:'activeName',
+          },
+          {
+            key: '活动类型',
+            type: 'default',
+            prop:'typeText',
+          },
+          {
+            key: '活动状态',
+            type: 'default',
+            prop:'statusText',
+          },
+          {
+            key: '访问人数',
+            type: 'default',
+            prop:'visitNum',
+          },
+          {
+            key: '报名人数',
+            type: 'default',
+            prop:'enrollNum',
+          },
+          {
+            key: '报名率',
+            type: 'default',
+            prop:'visitPercent',
+          },
+          {
+            key: '支付人数',
+            type: 'default',
+            prop:'payNum',
+          },
+          {
+            key: '支付率',
+            type: 'default',
+            prop:'payPercent',
+          },
+        ]
+        _data.list = list
+        return _data
+      }
+      if(search.type === 2){
+        const list = [
+          {
+            key:'活动名称',
+            type:'default',
+            prop:'activeName',
+          },
+          {
+            key:'活动类型',
+            type: 'default',
+            prop: 'typeText',
+          },
+          {
+            key:'活动状态',
+            type: 'default',
+            prop: 'statusText',
+          },
+          {
+            key:'抽奖次数',
+            type: 'default',
+            prop: 'lotteryNumber',
+          },
+          {
+            key:'参与人数',
+            type: 'default',
+            prop: 'enrollNum',
+          },
+          {
+            key:'参与率',
+            type: 'default',
+            prop: 'visitPercent',
+          },
+        ]
+        _data.list = list
+        return _data
+      }
+      if(search.type === 3){
+        const list = [
+          {
+            key:'推荐类型',
+            type: 'default',
+            prop: 'recommendStateText',
+          },
+          {
+            key:'活动类型',
+            type: 'default',
+            prop: 'typeText',
+          },
+          {
+            key:'参与人数',
+            type: 'default',
+            prop: 'enrollNum',
+          },
+          {
+            key:'推荐成功率',
+            type: 'default',
+            prop: 'visitPercent',
+          },
+        ]
+        _data.list = list
+        return _data
+      }
+      if(search.type === 4){
+        const list = []
+        _data.list = list
+        return _data
+      }
+    }else{
+      return _data
+    }
   }
 }
 
