@@ -367,7 +367,8 @@ const getters = {
       }else if(path === '预约管理'){
         return {...item, bookingSetIdText: item.bookingSetId === 1 ? '爱车保养' : item.bookingSetId === 2 ? '事故维修' : item.bookingSetId === 3 ? '故障检查' : item.bookingSetId === 4 ? '购买保险' : item.bookingSetId === 5 ? '爱车美容' : '其他', stateText: item.state === 0 ? '未确认' : item.state === 1 ? '未到店' : item.state === 2 ? '已确认' : '已取消'}
       }else if(path === '预约时间管理'){
-        return {...item, rankTime: `${item.startTime}至${item.endTime}`}
+        let rankTime = item.arrivalTimes && item.arrivalTimes.split('-')
+        return item = Object.assign(item, {startTime: rankTime[0], endTime: rankTime[1]})
       }else if(path === '保险服务'){
         return {...item, stateText: item.state === 0 ? '未确认' : '已确认'}
       }else if(path === '专项检测配置'){

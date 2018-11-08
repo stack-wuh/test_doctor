@@ -1119,25 +1119,25 @@ export const forms = [
       },
       {
         key:'开始时间',
-        type:'datetime',
+        type:'time',
         prop:'startTime',
         rules:[
           {
             required:true,
             message:'请选择开始时间',
-            trigger:['change','blur'],
+            trigger:['blur'],
           }
         ],
       },
       {
         key:'结束时间',
-        type:'datetime',
+        type:'time',
         prop:'endTime',
         rules:[
           {
             required:true,
             message:'请选择结束时间',
-            trigger:['change','blur'],
+            trigger:['blur'],
           }
         ],
       },

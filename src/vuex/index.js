@@ -1,4 +1,5 @@
 import $http from '../utils/axios'
+import { start } from 'pretty-error';
 export const state = {
   dialogVisible:false,
   visibleDialogWithImport:false,
@@ -45,12 +46,11 @@ export const mutations = {
     let {menu, subMenu, child} = params
     state.dialogVisible = true
     state.tableRow = row && JSON.parse(JSON.stringify(row))
-    if(menu === '' || menu === 'undefined') return
-    if(menu === '客户服务'){
-      if(subMenu === '预约时间管理'){
-        state.tableRow = {...state.tableRow, startTime: state.tableRow && state.tableRow.arrivalTimes && state.tableRow.arrivalTimes.slice(0,10), endTime: state.tableRow && state.tableRow.arrivalTimes && state.tableRow.arrivalTimes.slice(11)}
-      }
-    }
+    // if(menu === '客户服务'){
+    //   if(subMenu === '预约时间管理'){
+    //     state.tableRow = {...state.tableRow, startTime: '11:00', endTime: '12:00'}
+    //   }
+    // }
   },
   handlehideDialog(state){
     state.dialogVisible = false

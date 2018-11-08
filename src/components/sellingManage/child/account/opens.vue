@@ -457,7 +457,11 @@ export default {
      * 分页器
      */
     getCurrent(type, e){
-      console.log(type, e)
+      if(type){
+        this.getSellingMealProject({currPageNo: e})
+      }else{
+        this.getSellingMealGoodsList({currPageNo: e})
+      }
     },
     handleSelection(type, e){
       this.temp_dialog[type] = e

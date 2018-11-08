@@ -29,6 +29,7 @@ import {
   Carousel,
   CarouselItem,
   Progress,
+  TimeSelect
 } from 'element-ui'
 
 Vue.use(Button)
@@ -56,7 +57,7 @@ Vue.use(Switch)
 Vue.use(Carousel)
 Vue.use(CarouselItem)
 Vue.use(Progress)
-
+Vue.use(TimeSelect)
 
 Vue.prototype.$ELEMENT = {size:'small',zIndex:90000}
 Vue.prototype.$message = Message
