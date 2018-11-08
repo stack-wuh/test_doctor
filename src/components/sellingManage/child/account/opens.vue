@@ -399,10 +399,10 @@ export default {
     totalMoney(){
       let _total = 0
       this.temp_goods.map(item => {
-        _total += Number.parseFloat(item.salePrice ? item.salePrice : 0) * Number.parseInt(item.num ? item.num : 0)
+        _total += Number.parseFloat(item.salePrice ? item.salePrice : 0) * Number.parseInt(item.num ? item.num : 0) - Number.parseFloat(item.discount ? item.discount : 0)
       })
       this.temp_project.map(item => {
-        _total += Number.parseFloat(item.salePriceUnit ? item.salePriceUnit : 0) * Number.parseInt(item.num ? item.num : 0)
+        _total += Number.parseFloat(item.salePriceUnit ? item.salePriceUnit : 0) * Number.parseInt(item.num ? item.num : 0) - Number.parseFloat(item.discount ? item.discount : 0)
       })
       return _total
     },
