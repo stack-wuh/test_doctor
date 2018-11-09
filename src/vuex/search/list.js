@@ -3257,6 +3257,18 @@ const state = {
         }
       ]
     },
+    {
+      name: '配置员工提成',
+      params:['配置员工提成'],
+      type:'',
+      list:[
+        {
+          key:'手机号',
+          type:'default',
+          prop:'phone'
+        }
+      ]
+    }
   ],
   btnList:[
     {

@@ -6215,6 +6215,73 @@ const state = {
         }
       ]
     },
+    {
+      name:'配置项目提成',
+      path:'',
+      params:['配置项目提成'],
+      colType:'',
+      colValue:'',
+      colTitle:'',
+      list:[
+        {
+          key:'提成项目名称',
+          type:'default',
+          prop:'',
+        },
+        {
+          key:'提成系数',
+          type:'default',
+          prop:'',
+        },
+        {
+          key:'状态',
+          type:'default',
+          prop:'',
+        },
+        {
+          key:'操作',
+          type:'button',
+          list:[
+            {
+              text:'编辑',
+            },
+            {
+              text:'启用'
+            }
+          ]
+        }
+      ]
+    },
+    {
+      name:'配置员工提成',
+      path:'',
+      params:['配置员工提成'],
+      colType:'',
+      colValue:'',
+      colTitle:'',
+      list:[
+        {
+          key:'部门',
+          type:'default',
+          prop:'',
+        },
+        {
+          key:'员工',
+          type:'default',
+          prop:'',
+        },
+        {
+          key:'手机号',
+          type:'default',
+          prop:'',
+        },
+        {
+          key: '参与提成',
+          type: 'default',
+          prop:''
+        }
+      ]
+    },
   ],
 }
 

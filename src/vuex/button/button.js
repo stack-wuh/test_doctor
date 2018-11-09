@@ -79,7 +79,7 @@ const state = {
     {
       name:'新增',
       desc:'单独一个新增按钮,出现dialog对话框',
-      params:['部门管理','会员卡等级设置','分享与消费奖励规则'],
+      params:['部门管理','会员卡等级设置','分享与消费奖励规则', '配置项目提成'],
       btn:[
         {
           text:'新增',
@@ -362,6 +362,7 @@ const state = {
           style:'',
           click:'',
           isAuth:1,
+          click: jump2Add
         },
         {
           text:'配置提成员工',
@@ -370,6 +371,7 @@ const state = {
           style:'',
           click:'',
           isAuth:1,
+          click: jump2Add
         },
       ]
     },
