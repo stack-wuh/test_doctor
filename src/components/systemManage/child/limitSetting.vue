@@ -535,7 +535,7 @@ export default {
      * 低级权限管理
      */
     handleClickOneChose(index, lindex, val, id){
-       this.handleAccredit({form:{authorityId: id, roleId: this.roleId}})
+       this.handleAccredit({form:{authorityId: id, roleId: this.query.id}})
     },
 
     /**
@@ -576,7 +576,6 @@ export default {
           })
           return {id: item.id, menuName: item.menuName, subMenu: item.authorityMenuList}
         })
-        console.log(this.list)
       })
     }
   },
