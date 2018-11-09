@@ -15,7 +15,7 @@
             <my-button></my-button>
           </div>
       </my-table>
-      <my-bottom v-if="canShowBottom.includes(path)" :total="total" :currPageNo="currPageNo" ></my-bottom>
+      <my-bottom v-if="canShowBottom.includes(path)" @getCurrent="getCurrent" :total="total" :currPageNo="currPageNo" ></my-bottom>
       <bar-chart v-if="showType === 1" :xAxis="xAxis" :series="series" :title="title" ></bar-chart>
       <line-chart v-if="showType === 2" :xAxis="xAxis" :series="series" :title="title" ></line-chart>
     </section>
@@ -37,7 +37,7 @@ import {mapActions, mapState, mapGetters, mapMutations} from 'vuex'
 
 const canShowCards = ['用户统计', '车辆统计', '会员统计']
 const canShowTopMap = ['客户资料完整度']
-const canShowBottom = ['提成日报']
+const canShowBottom = ['配置项目提成', '配置员工提成']
 
 export default {
   name: 'store',
@@ -102,6 +102,9 @@ export default {
       this.isShow = false
       this.isShow = true
       this.getStore({path: this.path})
+    },
+    getCurrent(e){
+      this.getStore({currPageNo: e, path: this.path})
     }
   },
   created(){

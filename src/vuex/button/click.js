@@ -1,4 +1,4 @@
-import {_g, NotNull, getQueryString} from '../../../src/utils/global'
+import {_g, NotNull} from '../../../src/utils/global'
 
 export const jump2Other =  params => {
   window.$route.push('/index')
@@ -289,9 +289,10 @@ export const jump2Detail = params => {
  /**
   * 表格头部 -- select下拉框 change事件 -- 处理change值
   */
-export const handleSelectChangeForTable = ({params, text, value, key}) => {
+export const handleSelectChangeForTable = ({params, value, key}) => {
   switch(params.child || params.subMenu){
     case '用户卡券发放' : return window.$store.commit('setTableHeaderForm', {key,value})
+    default: return window.$store.commit('setTableHeaderForm', {key, value})
   }
 }
 
@@ -355,4 +356,19 @@ export const dialogToggleForServerCarForm = ({params, text} = {}) => {
  */
 export const serveDialogToggleForSetting = ({params, text} = {}) => {
   window.$store.commit('setSettingOneState')
+}
+
+/**
+ * 定制 -- 统计分析 -- 提成日报 -- 配置员工提成
+ * 保存事件
+ */
+export const statisticMember = ({params, text}) => {
+  window.$store.dispatch('statisticMemberPost')
+}
+
+/**
+ * 定制 -- 统计分析 -- 提成日报 -- 发放
+ */
+export const handleMemberDailySend = ({params}) => {
+  window.$store.dispatch('statisticMemberDailyPost')
 }

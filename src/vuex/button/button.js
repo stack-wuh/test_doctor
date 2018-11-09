@@ -11,7 +11,9 @@ import {
   handleSelectChangeForTable,
   serveDialogToggleForSetting,
   dialogToggleForServerCarForm,
-  DownAndFreshWithAll
+  DownAndFreshWithAll,
+  statisticMember,
+  handleMemberDailySend,
 } from './click'
 const state = {
   list:[
@@ -87,7 +89,6 @@ const state = {
           size:'small',
           style:'',
           click:jump2AddWithDialog,
-          isAuth:1,
         }
       ]
     },
@@ -342,8 +343,8 @@ const state = {
           type:'select',
           size:'small',
           style:'width:140px;',
-          prop:'couponList',
-          key:'couponID',
+          prop:'empList',
+          key:'empId',
           list:[],
           change:handleSelectChangeForTable
         },
@@ -352,7 +353,7 @@ const state = {
           type:'',
           size:'small',
           style:'',
-          click:'',
+          click:handleMemberDailySend,
           isAuth:1,
         },
         {
@@ -362,7 +363,7 @@ const state = {
           style:'',
           click:'',
           isAuth:1 ,
-          click: jump2Add,
+          click:jump2Add,
         },
         {
           text:'配置员工提成',
@@ -371,7 +372,7 @@ const state = {
           style:'',
           click:'',
           isAuth:1,
-          click: jump2Add,
+          click:jump2Add,
         },
       ]
     },
@@ -563,7 +564,21 @@ const state = {
           click:jump2Add
         },
       ]
-    }
+    },
+    {
+      name:'保存',
+      desc:'单独一个保存按钮',
+      params:['配置员工提成'],
+      btn:[
+        {
+          text:'保存',
+          type:'',
+          size:'small',
+          style:'',
+          click:statisticMember,
+        }
+      ]
+    },
   ]
 }
 
@@ -585,6 +600,8 @@ const getters = {
           sub.list = list.map(item => {return {label: item, value: item}})
         }else if(sub.prop === 'couponList'){
           sub.list = rootGetters.formatCouponList
+        }else if(sub.prop === 'empList'){
+          sub.list = rootGetters.formatStatisEmpList
         }
       })
     })

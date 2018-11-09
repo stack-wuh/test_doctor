@@ -7,7 +7,7 @@
             <el-input placeholder="请编辑精品名称" v-model="form.name" ></el-input>
           </el-form-item>
           <el-form-item label="库存数量" prop="stock">
-            <el-input placeholder="请编辑库存数量" v-model.number="form.stock" ></el-input>
+            <el-input placeholder="请编辑库存数量" v-model="form.stock" ></el-input>
           </el-form-item>
         </section>
         <section class="inline-box">
@@ -94,9 +94,11 @@
 import MyBottom from '@/components/common/bottom'
 import {mapState ,mapActions, mapGetters} from 'vuex'
 
+import {validNumber} from '@/utils/valid'
+
 const rules = {
   name:[{required:true,message:'请编辑精品名称',trigger:'blur'}],
-  stock:[{required:true,message:'请编辑库存数量',trigger:'blur'}, {type: 'number', message: '请编辑正确的数量', trigger: 'blur'}],
+  stock:[{required:true, validator: validNumber,trigger:'blur'}],
   originalPrice:[{required:true,message:'请编辑市场原价',trigger:'blur'}],
   price:[{required:true,message:'请编辑市场售价',trigger:'blur'}],
   categoryId:[{required:true,message:'请选择精品类别',trigger:['blur','change']}],

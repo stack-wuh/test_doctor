@@ -2258,4 +2258,39 @@ export const forms = [
       ranl:'',
     }
   },
+  {
+    name:'配置项目提成',
+    list:[
+      {
+        key:'项目名称',
+        type:'input',
+        prop:'name',
+        disabled: false,
+        rules:[
+          {
+            required:true,
+            message:'请编辑项目名称',
+            trigger:'blur',
+          }
+        ],
+      },
+      {
+        key:'提成系数',
+        type:'input',
+        prop:'coefficient',
+        disabled: false,
+        rules:[
+          {
+            required:true,
+            message:'请编辑提成系数',
+            trigger:'blur',
+          }
+        ],
+      },
+    ],
+    myForm:{
+      name:'',
+      coefficient:'',
+    }
+  },  
 ]

@@ -120,7 +120,8 @@ export default {
       'platformProjectTypePub':'platformProjectTypePub',
       'platformLogisiticPub':'platformLogisiticPub',
       'platformPayPub':'platformPayPub',
-      'platformProjectPub':'platformProjectPub'
+      'platformProjectPub':'platformProjectPub',
+      'statisticProjectPost': 'statisticProjectPost'
     }),
     /**
      * dialog对话框
@@ -128,7 +129,7 @@ export default {
      */
     beforeClose(){
       setTimeout(()=>{
-        this.$refs.myForm.resetFields()
+        this.$refs.myForm && this.$refs.myForm.resetFields()
       },500)
       this.myForm.couponId = []
       this.$store.commit('handlehideDialog')
@@ -191,6 +192,8 @@ export default {
           case '支付方式配置' : this.platformPayPub({path: this.rootPath, form: this.myForm})
             break;
           case '项目设置' : this.platformProjectPub({path: this.rootPath, form: this.myForm})
+            break;
+          case '配置项目提成' : this.statisticProjectPost({path: this.rootPath, form: this.myForm})
             break;
         }
         setTimeout(()=>{

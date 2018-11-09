@@ -440,3 +440,7 @@ export const handleSellingMemberChange = (params, text, row) => {
      })
    })
  }
+
+ export const handleForMemberSetting = (params, row, $index) => {
+   window.$store.dispatch('resetTableData', {params, row, $index})
+ }

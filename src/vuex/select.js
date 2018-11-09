@@ -40,7 +40,8 @@ const state = {
     list: [],
     total: 0,
     currPageNo: 1
-  }
+  },
+  memberEmpList: []
 }
 
 const mutations = {
@@ -163,6 +164,10 @@ const mutations = {
       total: params && params.total,
       currPageNo: params && params.pageNo
     }
+  },
+
+  setStatisticMemberList(state, {params}){
+    state.memberEmpList = params
   }
 }
 
@@ -398,10 +403,24 @@ const actions = {
       })
     })
   },
+
+  /**
+   * 统计分析 -- 提成日报 -- 员工下拉列表 -- select
+   */
+  getStatisticMemberList({commit}){
+    return new Promise((resolve, reject) => {
+      $http.post('commissionBack/empList.do', {}, res => {
+        commit('setStatisticMemberList', {params: res.data})
+        return resolve(res)
+      })
+    })
+  }
 }
 
 const getters = {
-
+  formatStatisEmpList(state){
+    return state.memberEmpList
+  }
 }
 
 export default {

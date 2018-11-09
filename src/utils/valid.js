@@ -150,3 +150,15 @@ export const MaxCouponNumber = (rule, value, callback) => {
       }
     },100)
   }
+
+  /**
+   * 验证表单内容为 Number类型
+   * 正确类型为: 100 / 100.00
+   */
+  export const validNumber = (rule, value, cb) => {
+    let reg = /^[0-9]+.?([0-9]{2})$/
+    if(!value) return cb(new Error('请编辑必填内容'))
+    setTimeout(() => {
+      reg.test(value) ? cb() : cb('请编辑正确的数字')
+    }, 100)
+  }

@@ -58,6 +58,7 @@
    handleShakeState,
    handleSellingMemberChange,
    handleMarketSenderPost,
+   handleForMemberSetting
   } from './click.js'
 const state = {
   data:[
@@ -6186,32 +6187,32 @@ const state = {
         {
           key:'日期',
           type:'default',
-          prop:'',
+          prop:'createDate',
         },
         {
           key:'施工工时',
           type:'default',
-          prop:'',
+          prop:'manhour',
         },
         {
           key:'施工提成',
           type:'default',
-          prop:'',
+          prop:'consCommission',
         },
         {
           key:'销售额',
           type:'default',
-          prop:'',
+          prop:'saleroom',
         },
         {
           key:'销售提成',
           type:'default',
-          prop:'',
+          prop:'salesCommissions',
         },
         {
-          key:'总提成',
+          key:'状态',
           type:'default',
-          prop:'',
+          prop:'statusText',
         }
       ]
     },
@@ -6226,17 +6227,18 @@ const state = {
         {
           key:'提成项目名称',
           type:'default',
-          prop:'',
+          prop:'name',
         },
         {
           key:'提成系数',
           type:'default',
-          prop:'',
+          prop:'coefficient',
         },
         {
           key:'状态',
-          type:'default',
-          prop:'',
+          type:'switch',
+          prop:'status',
+          change: handleSwitchChange
         },
         {
           key:'操作',
@@ -6244,9 +6246,7 @@ const state = {
           list:[
             {
               text:'编辑',
-            },
-            {
-              text:'启用'
+              click: openDialog
             }
           ]
         }
@@ -6263,22 +6263,23 @@ const state = {
         {
           key:'部门',
           type:'default',
-          prop:'',
+          prop:'depName',
         },
         {
           key:'员工',
           type:'default',
-          prop:'',
+          prop:'realName',
         },
         {
           key:'手机号',
           type:'default',
-          prop:'',
+          prop:'phone',
         },
         {
           key: '参与提成',
-          type: 'default',
-          prop:''
+          type: 'switch',
+          prop:'commission',
+          change: handleForMemberSetting
         }
       ]
     },

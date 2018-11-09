@@ -289,7 +289,7 @@ const getters = {
       }else if(path === '精准获客'){
         return {...item, accurateGuestsText: item.accurateGuests === 1 ? '是' : '否',whetherForwardingText: item.whetherForwarding === 1 ? '是' : '否'}
       }else if(path === '活动抽奖'){
-        return {...item,  columnTypeText: item.columnType === 0 ? '养车' : '养车', validate: `${item.startTimeForString} 至 ${item.endTimeForString}`, stateText: item.state === 0 ? '未开始' : item.state === 1 ? '进行中' : '已结束'}
+        return {...item,  columnTypeText: item.columnType === 0 ? '养车' : '养车', validate: `${item.startTimeForString} 至 ${item.endTimeForString}`, stateText: item.state === 0 ? '未开始' : item.state === 1 ? '进行中' : item.state === 2 ? '已结束' : '已关闭'}
       }else if(path === '活动中奖'){
         return  {...item, statusText: item.status === 0 ? '未领取' : '已领取', typeText: item.type === 0 ? '电子代金券' : '实物卡券'}
       }else if(path === '摇一摇中奖'){

@@ -316,7 +316,8 @@ const actions = {
         return resolve(res)
       })
     })
-  }
+  },
+
 }
 const mutations = {
   setServerStore(state, {params} = {}){

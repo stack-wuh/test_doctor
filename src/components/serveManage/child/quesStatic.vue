@@ -1,21 +1,16 @@
 <template>
   <section class="ques-wrapper">
     <section class="ques-content">
-      <p class="content__title">车辆保养/维修调查问卷(完成来电领取奖品)</p>
-      <p class="content__tips">参与问卷【6】</p>
+      <p class="content__title">{{questionnaireTitle}}</p>
+      <p class="content__tips">参与问卷【{{data && data.length}}】</p>
       <section class="content__list">
-        <section class="content__item">
-          <p class="content__item__title">问题标题问题标题 <span>(参与人数6)</span></p>
+        <section v-for="(item, index) in data" :key="index" class="content__item">
+          <p class="content__item__title">{{item.title}} <span>(参与人数{{item.count}})</span></p>
           <ul class="item__list">
-            <li class="item__content">
-              <strong class="item__title">是</strong>
-              <el-progress class="my-progress"></el-progress>
-              <strong class="item__total">(6)</strong>
-            </li>
-            <li class="item__content">
-              <strong class="item__title">否</strong>
-              <el-progress class="my-progress"></el-progress>
-              <strong class="item__total">(6)</strong>
+            <li v-for="(list, lid) in item.options" :key="lid" class="item__content">
+              <strong class="item__title">{{list.optionContent}}</strong>
+              <el-progress :percentage="list.rate" class="my-progress"></el-progress>
+              <strong class="item__total">({{list.count}})</strong>
             </li>
           </ul>
         </section>
@@ -34,6 +29,8 @@ export default {
 
   data () {
     return {
+      data: [],
+      questionnaireTitle: '',
     }
   },
 
@@ -48,7 +45,20 @@ export default {
   created(){
     let data = this.$route.query.data
     data && (data = JSON.parse(data))
-    this.getInfo({path:'问卷统计', search: {id: data.id}})
+    if(data){
+      this.getInfo({path:'问卷统计', search: {id: data.id}}).then(res => {
+        this.data = res.data.question.map(item => {
+          item.options = res.data.options.filter(ss => {
+            if(item.id === ss.id) {
+              ss.rate = ss.count == 0 ? 0 : ((Number.parseInt(ss.count) / item.count) * 100).toFixed(2)
+              return ss
+            }})
+          return item
+        })
+        this.questionnaireTitle = res.data.questionnaireTitle
+        console.log(this.data)
+      })
+    }
   }
 }
 </script>
