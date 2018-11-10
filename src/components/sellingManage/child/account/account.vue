@@ -1,7 +1,7 @@
 <template>
-  <section class="wrapper">
-    <section class="form-area">
-      <el-form class="my-form" label-width="100px" >
+  <section class="wrapper print-container" ref='myPrint'>
+    <section class="form-area my-form-area">
+      <el-form class="my-form" label-width="100px" style="width: 100%;" >
         <section class="my-form__item">
           <el-form-item label="销售订单">
             <el-input disabled v-model="temp_form.orderCode" placeholder="占位符" ></el-input>
@@ -12,36 +12,27 @@
           <el-form-item label="车牌" >
             <el-input disabled v-model="temp_form.plateNum" placeholder="占位符" ></el-input>
           </el-form-item>
+        </section>
+        <section class="my-form__item">
           <el-form-item label="车型" >
             <el-input disabled v-model="temp_form.carModel" placeholder="占位符" ></el-input>
           </el-form-item>
-        </section>
-        <section class="my-form__item">
           <el-form-item label="客户名称">
             <el-input disabled v-model="temp_form.realName" placeholder="占位符" ></el-input>
           </el-form-item>
           <el-form-item label="会员折扣">
             <el-input disabled v-model="temp_form.discountRatio" placeholder="占位符" ></el-input>
           </el-form-item>
-          <el-form-item label="会员余额">
-            <el-input disabled v-model="temp_form.userMoney" placeholder="占位符" ></el-input>
-          </el-form-item>
-          <el-form-item label="推荐人">
-            <el-input disabled v-model="temp_form.refereeName" placeholder="占位符" ></el-input>
-          </el-form-item>
         </section>
         <section class="my-form__item">
           <el-form-item label="会员等级">
             <el-input disabled v-model="temp_form.memberId" placeholder="占位符" ></el-input>
           </el-form-item>
-          <el-form-item label="历史单数">
-            <el-input disabled v-model="temp_form.historyAccountNum" placeholder="占位符" ></el-input>
+          <el-form-item label="会员余额">
+            <el-input disabled v-model="temp_form.userMoney" placeholder="占位符" ></el-input>
           </el-form-item>
-          <el-form-item label="未结算">
-            <el-input disabled v-model="temp_form.unCount" placeholder="占位符" ></el-input>
-          </el-form-item>
-          <el-form-item label="剩余挂账">
-            <el-input disabled v-model="temp_form.surplusAccount" placeholder="占位符" ></el-input>
+          <el-form-item label="推荐人">
+            <el-input disabled v-model="temp_form.refereeName" placeholder="占位符" ></el-input>
           </el-form-item>
         </section>
         <section class="my-form__item">
@@ -55,6 +46,17 @@
             <el-input disabled v-model="temp_form.totalMoney" placeholder="占位符" ></el-input>
           </el-form-item>
         </section>
+        <section class="my-form__item">
+          <el-form-item label="历史单数">
+            <el-input disabled v-model="temp_form.historyAccountNum" placeholder="占位符" ></el-input>
+          </el-form-item>
+          <el-form-item label="未结算">
+            <el-input disabled v-model="temp_form.unCount" placeholder="占位符" ></el-input>
+          </el-form-item>
+          <el-form-item label="剩余挂账">
+            <el-input disabled v-model="temp_form.surplusAccount" placeholder="占位符" ></el-input>
+          </el-form-item>
+        </section>
         <el-form-item label="备注" prop="remark">
           <el-input disabled type="textarea" v-model="form.remark" :rows="3" ></el-input>
         </el-form-item>
@@ -65,7 +67,7 @@
       <p class="table__title">
         <span>商品列表</span>
       </p>
-      <el-table :data="temp_list" border stripe>
+      <el-table class="my-print__table" :data="temp_list" border stripe>
         <el-table-column align="center" prop="goodsName" label="商品名称"></el-table-column>
         <el-table-column align="center" prop="carType" label="规格"></el-table-column>
         <el-table-column align="center" prop="goodsUnit" label="单位"></el-table-column>
@@ -80,7 +82,7 @@
       <p class="table__title">
         <span>项目列表</span>
       </p>
-      <el-table :data="obj_list" border stripe>
+      <el-table class="my-print__table" :data="obj_list" border stripe>
         <el-table-column align="center" prop="projectName" label="项目名称"></el-table-column>
         <el-table-column align="center" prop="time" label="工时"></el-table-column>
         <el-table-column align="center" prop="salePriceUnit" label="售价单价"></el-table-column>
@@ -154,6 +156,8 @@ import MyBottom from '@/components/common/subButton';
 import Pagination from '@/components/common/bottom'
 import {mapActions, mapState} from 'vuex'
 
+import VueEasyPrint from 'vue-easy-print'
+
 const rules = {
   couponId: [{required: true, message: '请选择可用卡券', trigger: 'change'}],
   isDiscount: [{required: true, message: '请选择是否使用折扣', trigger: 'change'}],
@@ -169,6 +173,7 @@ export default {
   components:{
     MyBottom,
     Pagination,
+    VueEasyPrint
   },
   data () {
     return {
@@ -286,7 +291,11 @@ export default {
         }
       })
     },
-    handleClickPrint(){},
+    handleClickPrint(){
+      setTimeout(() => {
+        this.$print(this.$refs.myPrint)
+      }, 1000)
+    },
   },
   created(){
     this.getPayTypeList()
@@ -310,6 +319,12 @@ export default {
   }
 }
 </script>
+
+
+<style type="text/css">
+  @import '../../../../assets/style/print.css' print;
+</style>
+
 
 <style scoped lang='scss' >
 @import '@/assets/style/mixin.scss';

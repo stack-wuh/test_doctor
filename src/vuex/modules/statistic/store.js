@@ -6,7 +6,7 @@ const state = {
   data: [],
   total: 0,
   currPageNo: 1,
-  info:{},
+  info:{}, // 顶部card的data
 
   xAxis: [], // 图表的x
   series: [], // 图表的 data
@@ -48,6 +48,17 @@ const mutations = {
 
   resetData(state, {params}){
     state.data = params
+  },
+
+  setUserInfo(state, {params}){
+    state.data = params && params.info
+    state.info = {
+      userTotal: params && params['车主总数'],
+      userNew: params && params['车主新增昨日'],
+      userNewTotal: params && params['车主新增月累计'],
+      userLose: params && params['车主流失昨日'],
+      userLoseTotal: params && params['车主流失月累计']
+    }
   }
 }
 
@@ -59,9 +70,9 @@ const actions = {
   getStatisticStore({commit, rootState, dispatch}, {path, search, currPageNo = 1}){
     let _url = ''
     switch(path){ 
-      case '用户统计' : _url = 'statistics/userStatistics.do', search = {...search, ...rootState.search}
+      case '用户统计' : _url = 'statistics/userStatistics.do', search = {...search, dataType: 3, type: 1, carType: 1, ...rootState.search}
         break;
-      case '车辆统计' : _url = 'statistics/carStatistics.do', search = {...search, ...rootState.search}
+      case '车辆统计' : _url = 'statistics/carStatistics.do', search = {...search, states: 0, ...rootState.search}
         break;
       case '业务统计' : _url = 'statistics/businessStatistics.do', search = {...search, type: 1, businessType: 1, dataType: 3, ...rootState.search}
         break;
@@ -90,6 +101,8 @@ const actions = {
           case '会员统计' : commit('setMemberInfo', {params: res.data})
             break;
           case '提成日报' : commit('setReportInfo', {params: res.data})
+            break;
+          case '用户统计' : (rootState.search.dataType === 3 || rootState.search.dataType === undefined) ? commit('setUserInfo', {params: res.data}) : commit('setChartsInfo', {params: res.data})
             break;
           default: commit('setStatisticStore',{params:res.data})
         }

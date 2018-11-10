@@ -11,7 +11,7 @@
           <p class="card-right__tips">{{item.label}}</p>
           <p class="card-right__tips" v-if="item.child" v-for="(ch, cd) in item.child" :key="cd" >
             <span>{{ch.label}}:</span>
-            <span>{{ch.value}}{{ch.tips}}</span>
+            <span>{{params[ch.field] || ch.value}}{{ch.tips}}</span>
           </p>
           <p class="card-right__tips" v-if="!item.child">{{params[item.field] || item.total}}{{item.tips}}</p>
         </section>
@@ -31,9 +31,10 @@ const cards = [
       {
         img:require('@/assets/img/icon-st-1.png'),
         label:'车主总数',
-        total:100,
+        total:0,
         tips:'(人)',
         style:'background-color:#CD950C;',
+        field: 'userTotal'
       },
       {
         img:require('@/assets/img/icon-st-1.png'),
@@ -41,14 +42,14 @@ const cards = [
         child:[
           {
             label:'昨日',
-            value:10,
-            field:'',
+            value:0,
+            field:'userNew',
             tips:"(人)",
           },
           {
             label:'月累计',
-            value:20,
-            field:'',
+            value:0,
+            field:'userNewTotal',
             tips:"(人)",
           }
         ],
@@ -60,14 +61,14 @@ const cards = [
         child:[
           {
             label:'昨日',
-            value:10,
-            field:'',
+            value:0,
+            field:'userLose',
             tips:"(人)",
           },
           {
             label:'月累计',
-            value:20,
-            field:'',
+            value:0,
+            field:'userLoseTotal',
             tips:"(人)",
           }
         ],

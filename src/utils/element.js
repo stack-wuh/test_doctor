@@ -1,5 +1,6 @@
 import Vue from 'vue'
-import '../assets/elem-base/index.css'
+import '@/assets/elem-base/index.css'
+// import '@/assets/style/print.scss'
 
 import {
   Button,
@@ -64,3 +65,7 @@ Vue.prototype.$message = Message
 Vue.prototype.$confirm = MessageBox.confirm
 window.$confirm = MessageBox.confirm
 window.$message = Message
+
+import Print from '@/plugins/print'
+Vue.use(Print)
+

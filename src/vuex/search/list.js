@@ -2997,7 +2997,7 @@ const state = {
         {
           key:'报表类型',
           type:'select',
-          prop:'',
+          prop:'type',
           list:[
             {
               label:'日报',
@@ -3016,7 +3016,7 @@ const state = {
         {
           key:'统计类型',
           type:'select',
-          prop:'',
+          prop:'carType',
           list:[
             {
               label:'全部',
@@ -3035,17 +3035,17 @@ const state = {
         {
           key:'开始时间',
           type:'date',
-          prop:'',
+          prop:'timeStart',
         },
         {
           key:'结束时间',
           type:'date',
-          prop:''
+          prop:'timeEnd'
         },
         {
           key:'统计方式',
           type:'select',
-          prop:'showType',
+          prop:'dataType',
           list:[
             {
               label:'柱状图',

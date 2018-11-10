@@ -74,7 +74,8 @@ export default {
     seriesName(){
       switch(this.path){
           case '客户资料完整度' : return '完整度'
-          case '业务统计' : return '人次'
+          case '业务统计' : 
+          case '用户统计' : return '人次'
           default: return '标题'
       }
     },

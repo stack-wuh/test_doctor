@@ -242,6 +242,8 @@ export const jump2Detail = params => {
       case '套餐销售' : return location.href = window.rootPath + '/packageSale/exportList.do' +_str
       case '活动统计' : return location.href = window.rootPath + '/statistics/exportActive.do' + _str
       case '业务统计' : return location.href = window.rootPath + '/statistics/exportBusiness.do' + _str
+      case '用户统计' : return location.href = window.rootPath + '/statistics/userStatisticsReport.do' + _str
+      case '车辆统计' : return location.href = window.rootPath + '/statistics/carStatisticsReport.do' + _str
       default : return _g.toastMsg({type: 'error', msg: '导出失败'})
     }
    }else{
