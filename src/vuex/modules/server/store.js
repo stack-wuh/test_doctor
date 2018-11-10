@@ -318,6 +318,18 @@ const actions = {
     })
   },
 
+  /**
+   * 客户服务 -- 预约管理 -- 确认/完成
+   */
+  serverCoustorPost({dispatch}, {path, row: {id, state}}){
+    return new Promise((resolve, reject) => {
+      $http.post('bookingBackend/updateState.do', {id, state}, res => {
+        setTimeout(() => {
+          dispatch('getServerStore', {path})
+        }, 1000)
+      })
+    })
+  }
 }
 const mutations = {
   setServerStore(state, {params} = {}){

@@ -1169,7 +1169,7 @@ const state = {
         {
           key:'操作类型',
           type:'default',
-          prop:'typeText',
+          prop:'methodName',
         },
         {
           key:'模块名称',
@@ -3108,13 +3108,6 @@ const state = {
           type:'default',
           prop:'statusText',
         },
-        // {
-        //   key:'操作',
-        //   type:'button',
-        //   fix:'right',
-        //   width:'160px',
-        //   list:[]
-        // },
       ]
     },
     {
@@ -3197,11 +3190,10 @@ const state = {
           width:'160px',
           list:[
             {
-              // text:'确认',
               valid:3,
               rules:'state',
               value:[0,1],
-              texts:['确认','确认','已确认','已取消'],
+              texts:['确认','完成','已完成'],
               styles:[
                 {
                   color:STYLES['PRIMARY']
@@ -3217,7 +3209,7 @@ const state = {
                 }
               ],
               type:'text',
-              size:'small',
+              click: handleMarketSenderPost
             },
           ]
         },

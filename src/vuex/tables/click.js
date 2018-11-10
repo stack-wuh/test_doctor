@@ -428,6 +428,7 @@ export const handleSellingMemberChange = (params, text, row) => {
      switch(path){
       case '推荐有礼' : return window.$store.dispatch('marketSendPost', {path, row, text})
       case '活动抽奖' : return window.$store.dispatch('marketActivePost', {path, row, text})
+      case '预约管理' : return window.$store.dispatch('serverCoustorPost', {path, row, text})
       default : return _g.toastMsg({
         type: 'error',
         msg: '操作错误或已取消'
