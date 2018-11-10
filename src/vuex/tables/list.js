@@ -3193,7 +3193,7 @@ const state = {
               valid:3,
               rules:'state',
               value:[0,1],
-              texts:['确认','完成','已完成'],
+              texts:['未确认','确认','完成','已完成'],
               styles:[
                 {
                   color:STYLES['PRIMARY']

@@ -14,7 +14,7 @@
   }
   
   .table-area{
-    max-width: 11in;
+    /* max-width: 11in; */
     padding: 15pt;
     margin-bottom: 15pt;
     box-sizing: border-box;
@@ -24,7 +24,7 @@
     border-bottom:1px solid #d3d3d3 !important;
   }
   .my-print__table{
-    width: 20in !important;
+    width: 30in;
     max-height: 3in;
     transform: scale3d(.9, .9, .9);
     -webkit-transform: scale3d(.9, .9, .9);
