@@ -1,49 +1,36 @@
 <template>
   <section class="wrapper">
     <section class="list">
-      <!-- <section class="list-item" v-for="(item,index) in limit" :key="index">
-        <section class="item">{{item.label}}</section>
-        <section class="item-nav" v-if="item.children" v-for="(list,lindex) in item.children" >
-          <div v-if="isFatherChange">
-            <span class="title"><el-checkbox :indeterminate="list.isIndeterminate" v-model="list.checkAll" @change="handleClickChangeForFirst(index,lindex,$event)" ></el-checkbox> {{list.label}} </span>
-              <el-checkbox-group class="nav-list" v-model="list.checks" @change="handleClickOneChose(index,lindex,$event)" >
-                <el-checkbox class="nav-item" v-for="(ll,ld) in list.child" :label="ll.name" :key="ld" ></el-checkbox>
-              </el-checkbox-group>
-          </div>
-          <section class="sub-item-nav" v-if="list.children" v-for="(sub,sid) in list.children" :key="sid">
-            <div v-if="isFatherChange" >
-              <span class="title"><el-checkbox :indeterminate="sub.isIndeterminate" v-model="sub.checkAll" @change="handleClickChangeForChild(index,lindex,sid,$event)" ></el-checkbox> {{sub.label}}</span>
-                <el-checkbox-group class="nav-list" v-model="sub.checks" @change="handleClickOneChoseForChild(index,lindex,sid,$event)"  >
-                  <el-checkbox class="nav-item" v-for="(ss,sd) in sub.child" :label="ss.name" :key="sd" ></el-checkbox>
-                </el-checkbox-group>
-            </div>
-          </section>
-        </section>
-      </section> -->
-      <!-- {{list}} -->
       <section v-if="isFatherChange" class="list-item" v-for="(item,index) in list" :key="index">
         <section class="item">{{item.menuName}}</section>
         <section class="item-nav" v-if="item.subMenu" v-for="(list,lindex) in item.subMenu" >
           <div>
             <span class="title">
-              <el-checkbox v-model="list.isAuthor" @change="handleTopChoose($event, list, index, lindex)" v-if="list.authorityList" ></el-checkbox>
-              {{list.menuName}} 
+              <el-checkbox v-model="list.isAuthor"
+                @change="handleTopChoose($event, list, index, lindex)"
+                v-if="list.authorityList"></el-checkbox>
+              {{list.menuName}}
             </span>
-              <el-checkbox  v-for="(ll, ld) in list.authorityList" :key="ld" :label="ll.name" @change="handleClickOneChose(index, ld, $event, ll.id)" v-model="ll.isAuth" ></el-checkbox>
+              <el-checkbox
+                v-for="(ll, ld) in list.authorityList"
+                :key="ld" :label="ll.name"
+                @change="handleClickOneChose(list, ll, ld)"
+                v-model="ll.isAuth">
+              </el-checkbox>
           </div>
           <section class="sub-item-nav" v-if="list.authorityMenuList" v-for="(sub,sid) in list.authorityMenuList" :key="sid">
             <div v-if="isFatherChange" >
               <span class="title">
-                <!-- <el-checkbox :indeterminate="sub.isIndeterminate" v-model="sub.checkAll" @change="handleClickTopChoose(index,lindex,sid,$event)" ></el-checkbox> -->
                 <el-checkbox v-model="sub.isAuthor" @change="handleTopChoose($event, sub, index, lindex)"  ></el-checkbox>
                 {{sub.menuName}}
               </span>
-                <el-checkbox v-for="(ll, ld) in sub.authorityList" @change="handleClickOneChose(index, ld, $event, ll.id)" :key="ld" :label="ll.name" v-model="ll.isAuth"></el-checkbox>
+                <el-checkbox v-for="(ll, ld) in sub.authorityList" @change="handleClickOneChose(sub, ll, ld)" :key="ld" :label="ll.name" v-model="ll.isAuth"></el-checkbox>
             </div>
           </section>
         </section>
       </section>
     </section>
+    <my-bottom @handleSubmit="handleSubmit" @handleCancel="handleCancel" style="padding: 20px 0;"></my-bottom>
   </section>
 </template>
 
@@ -68,7 +55,7 @@ export default {
         }
       ],
       limit ,
-      baseObj , 
+      baseObj ,
       isFatherChange:true,
       roleId:'',
       list:[
@@ -507,21 +494,28 @@ export default {
     ...mapActions({
       'getLimitStore':'getLimitStore',
       'handleAccredit':'handleAccredit',
-      'handleAccreditMore': 'handleAccreditMore'
+      'handleAccreditMore': 'handleAccreditMore',
     }),
 
-    /**
-     * 一级权限管理
-     */
-    handleTopChoose(val, list){
-      this.isFatherChange = false
-      this.isFatherChange = true
-      let authorityIds = list.authorityList.map(item => item.id).toString()
+    handleSubmit(){
       let form = {
         roleId: this.query.id,
-        authorityIds,
-        status: val ? 1 : 0
+        authorityIds: '',
+        status: 1
       }
+      let ids = [], lists = []
+      let temp_arrs = this.list.reduce((curr, next) => {
+        next.subMenu.map(ii => {
+          Array.isArray(ii.authorityList) && curr.push(...ii.authorityList)
+          if(Array.isArray(ii.authorityMenuList)){
+            ii.authorityMenuList.map(ss => {
+              Array.isArray(ss.authorityList) && curr.push(...ss.authorityList)
+            })
+          }
+        })
+        return curr
+      }, []).filter(ii => ii.isAuth).map(ii => ii.id).toString()
+      form.authorityIds = temp_arrs
       this.handleAccreditMore({form}).then(res => {
         if(res.status === 0){
           setTimeout(() => {
@@ -530,12 +524,29 @@ export default {
         }
       })
     },
+    handleCancel(){
+      this.$router.go(-2)
+    },
+
+    /**
+     * 一级权限管理
+     */
+    handleTopChoose(val, list){
+      this.isFatherChange = false
+      list.authorityList.forEach(ii => {
+        ii.isAuth = val
+      })
+      this.isFatherChange = true
+    },
 
     /**
      * 低级权限管理
      */
-    handleClickOneChose(index, lindex, val, id){
-       this.handleAccredit({form:{authorityId: id, roleId: this.query.id}})
+    handleClickOneChose(list, item, index){
+      this.isFatherChange = false
+      let result = list.authorityList.every(ii => ii.isAuth)
+      list.isAuthor = result
+      this.isFatherChange = true
     },
 
     /**
